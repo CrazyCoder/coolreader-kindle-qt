@@ -1,3 +1,3 @@
 [submodule "crengine"]
 	path = crengine
-	url = git://crengine.git.sourceforge.net/gitroot/crengine/crengine
+	url = https://github.com/CrazyCoder/crengine.git
