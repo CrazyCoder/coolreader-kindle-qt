@@ -76,6 +76,7 @@ private slots:
     void on_cbMarginSide_currentIndexChanged(int index);
     void on_sbMargin_valueChanged(int arg1);
     void on_cbFullUpdateEvery_currentIndexChanged(const QString &arg1);
+    void on_cbEmbolden_toggled(bool checked);
 };
 
 #endif // SETTINGSDLG_H

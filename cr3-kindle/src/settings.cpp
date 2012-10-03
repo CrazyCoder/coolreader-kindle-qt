@@ -30,6 +30,7 @@ SettingsDlg::SettingsDlg(QWidget *parent, CR3View * docView ) :
     optionToUi(PROP_FLOATING_PUNCTUATION, m_ui->FloatingPunctuation);
     optionToUi(PROP_STATUS_CHAPTER_MARKS, m_ui->ChapterMarks);
     optionToUi(PROP_SHOW_POS_PERCENT, m_ui->PositionPercent);
+    optionToUi(PROP_FONT_WEIGHT_EMBOLDEN, m_ui->cbEmbolden);
 
     int state1 = m_props->getIntDef(PROP_SHOW_PAGE_NUMBER, 1);
     int state2 = m_props->getIntDef(PROP_SHOW_PAGE_COUNT, 1);
@@ -318,6 +319,13 @@ void SettingsDlg::on_sbInterlineSpace_valueChanged(int arg1)
     updateStyleSample();
 }
 
+void SettingsDlg::on_cbEmbolden_toggled(bool checked)
+{
+    if(!initDone) return;
+    setCheck(PROP_FONT_WEIGHT_EMBOLDEN, checked);
+    updateStyleSample();
+}
+
 void SettingsDlg::on_TxtPreFormatted_toggled(bool checked)
 {
     if(!initDone) return;
@@ -452,3 +460,4 @@ void SettingsDlg::on_cbFullUpdateEvery_currentIndexChanged(const QString &arg1)
     if(!initDone) return;
     m_props->setInt(PROP_DISPLAY_FULL_UPDATE_INTERVAL, arg1.toInt());
 }
+

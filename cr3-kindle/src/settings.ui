@@ -32,7 +32,7 @@
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tabWindow">
       <property name="toolTip">
@@ -667,6 +667,13 @@
            </property>
           </widget>
          </item>
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="cbEmbolden">
+           <property name="text">
+            <string>Embolden font</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
@@ -765,11 +772,14 @@
   <tabstop>ShowBattery</tabstop>
   <tabstop>ShowBatteryInPercent</tabstop>
   <tabstop>cbTitleFontFace</tabstop>
+  <tabstop>sbTitleFontSize</tabstop>
+  <tabstop>cbFullUpdateEvery</tabstop>
   <tabstop>cbTextFontFace</tabstop>
   <tabstop>sbTextFontSize</tabstop>
   <tabstop>sbFontGamma</tabstop>
   <tabstop>cbHyphenation</tabstop>
   <tabstop>sbInterlineSpace</tabstop>
+  <tabstop>cbEmbolden</tabstop>
   <tabstop>TxtPreFormatted</tabstop>
   <tabstop>FloatingPunctuation</tabstop>
  </tabstops>
