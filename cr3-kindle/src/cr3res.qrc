@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/folder_sans_32.png</file>
+        <file>icons/book_text_32.png</file>
+        <file>icons/arrow_full_up_32.png</file>
+    </qresource>
+</RCC>

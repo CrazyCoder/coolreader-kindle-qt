@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindowClass</class>
+ <widget class="QMainWindow" name="MainWindowClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>824</width>
+    <height>1200</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>CoolReader</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="minimumSize">
+    <size>
+     <width>300</width>
+     <height>300</height>
+    </size>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="sizeConstraint">
+     <enum>QLayout::SetMinimumSize</enum>
+    </property>
+    <property name="margin">
+     <number>0</number>
+    </property>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="CR3View" name="view" native="true"/>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open...</string>
+   </property>
+   <property name="toolTip">
+    <string>Open file</string>
+   </property>
+   <property name="shortcut">
+    <string>O</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close</string>
+   </property>
+   <property name="toolTip">
+    <string>Close</string>
+   </property>
+  </action>
+  <action name="actionNextPage">
+   <property name="text">
+    <string>Page Down</string>
+   </property>
+   <property name="toolTip">
+    <string>Go to next page</string>
+   </property>
+   <property name="shortcut">
+    <string>PgDown</string>
+   </property>
+  </action>
+  <action name="actionPrevPage">
+   <property name="text">
+    <string>Page Up</string>
+   </property>
+   <property name="toolTip">
+    <string>Back by page</string>
+   </property>
+   <property name="shortcut">
+    <string>PgUp</string>
+   </property>
+  </action>
+  <action name="actionBack">
+   <property name="text">
+    <string>Back</string>
+   </property>
+   <property name="toolTip">
+    <string>Back in navigation history</string>
+   </property>
+  </action>
+  <action name="actionForward">
+   <property name="text">
+    <string>Forward</string>
+   </property>
+   <property name="toolTip">
+    <string>Go to the next position in navigation history</string>
+   </property>
+  </action>
+  <action name="actionTOC">
+   <property name="text">
+    <string>Table of Contents...</string>
+   </property>
+   <property name="toolTip">
+    <string>Show table of contents</string>
+   </property>
+   <property name="shortcut">
+    <string>C</string>
+   </property>
+  </action>
+  <action name="actionRecentBooks">
+   <property name="text">
+    <string>Recent Books</string>
+   </property>
+   <property name="toolTip">
+    <string>Show recent books list</string>
+   </property>
+   <property name="shortcut">
+    <string>L</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings...</string>
+   </property>
+   <property name="toolTip">
+    <string>Settings dialog</string>
+   </property>
+   <property name="shortcut">
+    <string>S</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="text">
+    <string>Copy</string>
+   </property>
+   <property name="toolTip">
+    <string>Copy selected text</string>
+   </property>
+  </action>
+  <action name="actionCopy2">
+   <property name="text">
+    <string>copy2</string>
+   </property>
+   <property name="toolTip">
+    <string>Copy alternative shortcut</string>
+   </property>
+  </action>
+  <action name="actionAddBookmark">
+   <property name="text">
+    <string>Add Bookmark</string>
+   </property>
+   <property name="toolTip">
+    <string>Add bookmark</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+B</string>
+   </property>
+  </action>
+  <action name="actionShowBookmarksList">
+   <property name="text">
+    <string>Bookmark List...</string>
+   </property>
+   <property name="toolTip">
+    <string>Show bookmarks list</string>
+   </property>
+   <property name="shortcut">
+    <string>B</string>
+   </property>
+  </action>
+  <action name="actionFileProperties">
+   <property name="text">
+    <string>File Properties...</string>
+   </property>
+   <property name="toolTip">
+    <string>Show file properties</string>
+   </property>
+   <property name="shortcut">
+    <string>I</string>
+   </property>
+  </action>
+  <action name="actionFindText">
+   <property name="text">
+    <string>Find text...</string>
+   </property>
+   <property name="toolTip">
+    <string>Find text</string>
+   </property>
+   <property name="shortcut">
+    <string>F</string>
+   </property>
+  </action>
+  <action name="actionToggleEditMode">
+   <property name="text">
+    <string>Toggle Edit Mode</string>
+   </property>
+   <property name="toolTip">
+    <string>Toggle edit mode</string>
+   </property>
+  </action>
+  <action name="actionShowMenu">
+   <property name="text">
+    <string>ShowMenu</string>
+   </property>
+  </action>
+  <action name="actionEmpty">
+   <property name="text">
+    <string>Empty</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>CR3View</class>
+   <extends>QWidget</extends>
+   <header>cr3widget.h</header>
+   <container>1</container>
+   <slots>
+    <signal>fileOpened()</signal>
+    <slot>open()</slot>
+    <slot>contextMenu(QPoint)</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+ <slots>
+  <slot>contextMenu(QPoint)</slot>
+ </slots>
+</ui>
