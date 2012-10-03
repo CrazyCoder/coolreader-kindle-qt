@@ -77,6 +77,10 @@ private slots:
     void on_sbMargin_valueChanged(int arg1);
     void on_cbFullUpdateEvery_currentIndexChanged(const QString &arg1);
     void on_cbEmbolden_toggled(bool checked);
+    void on_cbKerning_toggled(bool checked);
+    void on_cbAA_currentIndexChanged(int index);
+    void on_cbHinting_currentIndexChanged(int index);
+    void on_sbSpaceCond_valueChanged(int arg1);
 };
 
 #endif // SETTINGSDLG_H

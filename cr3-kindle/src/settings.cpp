@@ -31,6 +31,7 @@ SettingsDlg::SettingsDlg(QWidget *parent, CR3View * docView ) :
     optionToUi(PROP_STATUS_CHAPTER_MARKS, m_ui->ChapterMarks);
     optionToUi(PROP_SHOW_POS_PERCENT, m_ui->PositionPercent);
     optionToUi(PROP_FONT_WEIGHT_EMBOLDEN, m_ui->cbEmbolden);
+    optionToUi(PROP_FONT_KERNING_ENABLED, m_ui->cbKerning);
 
     int state1 = m_props->getIntDef(PROP_SHOW_PAGE_NUMBER, 1);
     int state2 = m_props->getIntDef(PROP_SHOW_PAGE_COUNT, 1);
@@ -70,6 +71,10 @@ SettingsDlg::SettingsDlg(QWidget *parent, CR3View * docView ) :
     fontToUi(PROP_STATUS_FONT_FACE, PROP_STATUS_FONT_SIZE, m_ui->cbTitleFontFace, m_ui->sbTitleFontSize, defFontFace);
 
     m_ui->sbInterlineSpace->setValue(m_props->getIntDef(PROP_INTERLINE_SPACE, 100));
+
+    m_ui->sbSpaceCond->setValue(m_props->getIntDef(PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT, DEF_MIN_SPACE_CONDENSING_PERCENT));
+    m_ui->cbAA->setCurrentIndex(m_props->getIntDef(PROP_FONT_ANTIALIASING, font_aa_all));
+    m_ui->cbHinting->setCurrentIndex(m_props->getIntDef(PROP_FONT_HINTING, HINTING_MODE_AUTOHINT));
 
     int updateEvery = m_props->getIntDef(PROP_DISPLAY_FULL_UPDATE_INTERVAL, 1);
     int upIndex = m_ui->cbFullUpdateEvery->findText(QString::number(updateEvery));
@@ -209,7 +214,6 @@ void SettingsDlg::updateStyleSample()
     dv->setShowCover(false);
     dv->setViewMode(DVM_SCROLL, 1);
     dv->getPageImage(0);
-
 }
 
 void SettingsDlg::on_cbTitleFontFace_currentIndexChanged(QString s)
@@ -323,6 +327,13 @@ void SettingsDlg::on_cbEmbolden_toggled(bool checked)
 {
     if(!initDone) return;
     setCheck(PROP_FONT_WEIGHT_EMBOLDEN, checked);
+    updateStyleSample();
+}
+
+void SettingsDlg::on_cbKerning_toggled(bool checked)
+{
+    if(!initDone) return;
+    setCheck(PROP_FONT_KERNING_ENABLED, checked);
     updateStyleSample();
 }
 
@@ -451,8 +462,6 @@ void SettingsDlg::on_sbMargin_valueChanged(int arg1)
             m_props->setInt(PROP_PAGE_MARGIN_RIGHT, newValue);
         }
     }
-
-
 }
 
 void SettingsDlg::on_cbFullUpdateEvery_currentIndexChanged(const QString &arg1)
@@ -461,3 +470,23 @@ void SettingsDlg::on_cbFullUpdateEvery_currentIndexChanged(const QString &arg1)
     m_props->setInt(PROP_DISPLAY_FULL_UPDATE_INTERVAL, arg1.toInt());
 }
 
+void SettingsDlg::on_cbAA_currentIndexChanged(int index)
+{
+    if(!initDone) return;
+    m_props->setInt(PROP_FONT_ANTIALIASING, index);
+    updateStyleSample();
+}
+
+void SettingsDlg::on_cbHinting_currentIndexChanged(int index)
+{
+    if(!initDone) return;
+    m_props->setInt(PROP_FONT_HINTING, index);
+    updateStyleSample();
+}
+
+void SettingsDlg::on_sbSpaceCond_valueChanged(int arg1)
+{
+    if(!initDone) return;
+    m_props->setInt(PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT, arg1);
+    updateStyleSample();
+}
