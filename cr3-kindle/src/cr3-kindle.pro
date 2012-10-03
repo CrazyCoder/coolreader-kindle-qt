@@ -16,7 +16,7 @@ debug:DEFINES += _DEBUG=1
 INCLUDEPATH += $$(QTDIR)/include \
                $$(QTDIR)/include/QtCore \
                $$(QTDIR)/include/QtGui \
-               /mnt/us/qt480/include/freetype2 \
+               $$(QTDIR)/include/freetype2 \
                ../../crengine/crengine/include \
                ../../crengine/thirdparty/antiword
 
