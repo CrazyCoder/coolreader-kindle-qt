@@ -46,3 +46,4 @@ Links
 =========================================
 -   [Russian discussion thread on the-ebook.org](http://www.the-ebook.org/forum/viewtopic.php?t=20811)
 -   [English discussion thread on mobileread.com](http://www.mobileread.com/forums/showthread.php?t=148850)
+-   [HackedUpReader for Kindle Touch](https://github.com/bhaak/HackedUpReader)
