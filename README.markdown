@@ -1,10 +1,12 @@
 CoolReader 3 port for Kindle 4NT/3/DX
 =========================================
-This project is a port of CoolReader application to Kindle devices with hardware keys (Touch devices are not supported).
+This project is a port of CoolReader 3 application (by **Vadim Lopatin** AKA **Buggins**) to Kindle devices with
+hardware keys (Touch devices are not supported).
 It supports epub (non-DRM), fb2, doc, txt, rtf, html, chm, tcr, pdb, prc, mobi (non-DRM), pml formats.
 
-Originally written by **Andy Wooden**, **fau** and **VladKi**, the project had no fixed home and its sources were
-distributed as tarballs, making it hard to maintain and provide updates. This site is the new project home.
+The port was originally created by **Andy Wooden**, **fau** and **VladKi**, the project had no fixed home and its
+sources were distributed as tarballs, making it hard to maintain and provide updates.
+This site is the **new project home**.
 
 The fronentd is Qt based (QWS) and has custom display and keyboard drivers. Up until October 2012 there was no good
 working graphics driver available for Kindle 4 (2011 and 2012 models), this caused a problem with poor eink contrast
@@ -44,6 +46,6 @@ Kindle 3/DX owners can use [launchpad](http://www.mobileread.com/forums/showthre
 
 Links
 =========================================
--   [Russian discussion thread on the-ebook.org](http://www.the-ebook.org/forum/viewtopic.php?t=20811)
--   [English discussion thread on mobileread.com](http://www.mobileread.com/forums/showthread.php?t=148850)
+-   Russian discussion thread on [the-ebook.org forum](http://www.the-ebook.org/forum/viewtopic.php?t=20811)
+-   English discussion thread on [mobileread.com forum](http://www.mobileread.com/forums/showthread.php?t=148850)
 -   [HackedUpReader for Kindle Touch](https://github.com/bhaak/HackedUpReader)
