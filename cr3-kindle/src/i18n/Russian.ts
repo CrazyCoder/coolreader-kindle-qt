@@ -1,62 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="ru_RU" sourcelanguage="en_US">
 <context>
     <name>AboutDialog</name>
     <message>
         <source>About CoolReader</source>
-        <translation type="obsolete">CoolReader - О программе</translation>
+        <translation>О программе</translation>
     </message>
     <message>
         <source>License</source>
-        <translation type="obsolete">Лицензия</translation>
+        <translation>Лицензия</translation>
     </message>
     <message>
         <source>Source Code</source>
-        <translation type="obsolete">Исходный код</translation>
+        <translation>Исходный код</translation>
     </message>
     <message>
         <source>(c) 1998-2009 Vadim Lopatin</source>
-        <translation type="obsolete">(c) 1998-2009 Вадим Лопатин</translation>
+        <translation>(c) 1998-2012 Вадим Лопатин</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="obsolete">О программе</translation>
+        <translation>О программе</translation>
     </message>
     <message>
         <source>About Cool Reader</source>
-        <translation type="obsolete">О программе CoolReader</translation>
+        <translation>О программе</translation>
     </message>
 </context>
 <context>
     <name>AddBookmarkDialog</name>
     <message>
         <source>Add bookmark</source>
-        <translation type="obsolete">Добавить закладку</translation>
+        <translation>Добавить закладку</translation>
     </message>
     <message>
         <source>Correction</source>
-        <translation type="obsolete">Исправление</translation>
+        <translation>Исправление</translation>
     </message>
     <message>
         <source>Bookmark type</source>
-        <translation type="obsolete">Тип закладки</translation>
+        <translation>Тип закладки</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="obsolete">Название</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>Position</source>
-        <translation type="obsolete">Позиция</translation>
+        <translation>Позиция</translation>
     </message>
     <message>
         <source>Position text</source>
-        <translation type="obsolete">Текст</translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="obsolete">Комментарии</translation>
+        <translation>Комментарии</translation>
     </message>
 </context>
 <context>
@@ -72,7 +72,7 @@
     <message>
         <source>Type</source>
         <comment>bookmark type</comment>
-        <translation type="obsolete">Тип</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <source>Text</source>
@@ -80,26 +80,26 @@
     </message>
     <message>
         <source>Comment</source>
-        <translation type="obsolete">Комментарии</translation>
+        <translation>Комментарии</translation>
     </message>
     <message>
         <source>P</source>
         <comment>Bookmark type first letter - Position</comment>
-        <translation type="obsolete">П</translation>
+        <translation>П</translation>
     </message>
     <message>
         <source>C</source>
         <comment>Bookmark type first letter - Comment</comment>
-        <translation type="obsolete">К</translation>
+        <translation>К</translation>
     </message>
     <message>
         <source>E</source>
         <comment>Bookmark type first letter - Correction/Edit</comment>
-        <translation type="obsolete">И</translation>
+        <translation>И</translation>
     </message>
     <message>
         <source>Go to Bookmark</source>
-        <translation type="obsolete">Перейти к закладке</translation>
+        <translation>Перейти к закладке</translation>
     </message>
     <message>
         <source>Remove Bookmark</source>
@@ -107,15 +107,15 @@
     </message>
     <message>
         <source>Remove ALL Bookmarks</source>
-        <translation type="obsolete">Удалить все закладки</translation>
+        <translation>Удалить все закладки</translation>
     </message>
     <message>
         <source>Edit Bookmark</source>
-        <translation type="obsolete">Редактировать закладку</translation>
+        <translation>Редактировать закладку</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="obsolete">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <source>Return</source>
@@ -127,7 +127,7 @@
     </message>
     <message>
         <source>Remove all bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить все закладки</translation>
     </message>
     <message>
         <source>Alt+Backspace</source>
@@ -142,11 +142,11 @@
     <name>CR3View</name>
     <message>
         <source>Error while opening document </source>
-        <translation>Ошибка открытия документа</translation>
+        <translation>Ошибка открытия документа </translation>
     </message>
     <message>
         <source>Loading: please wait...</source>
-        <translation>Файл загружается: подождите пожалуйста...</translation>
+        <translation>Подождите, файл загружается...</translation>
     </message>
 </context>
 <context>
@@ -157,35 +157,35 @@
     </message>
     <message>
         <source>Property</source>
-        <translation type="obsolete">Свойство</translation>
+        <translation>Свойство</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="obsolete">Значение</translation>
+        <translation>Значение</translation>
     </message>
     <message>
         <source>Current page</source>
-        <translation type="obsolete">Текущая страница</translation>
+        <translation>Текущая страница</translation>
     </message>
     <message>
         <source>Total pages</source>
-        <translation type="obsolete">Всего страниц</translation>
+        <translation>Всего страниц</translation>
     </message>
     <message>
         <source>Battery state</source>
-        <translation type="obsolete">Состояние батареи</translation>
+        <translation>Состояние батареи</translation>
     </message>
     <message>
         <source>Current Time</source>
-        <translation type="obsolete">Текущее время</translation>
+        <translation>Текущее время</translation>
     </message>
     <message>
         <source>Current chapter</source>
-        <translation type="obsolete">Глава</translation>
+        <translation>Глава</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="obsolete">Статус</translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <source>Archive name</source>
@@ -305,26 +305,26 @@
     </message>
     <message>
         <source>Dialog</source>
-        <translation type="obsolete">Диалог</translation>
+        <translation>Диалог</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Open book file</source>
-        <translation type="obsolete">Открыть книгу</translation>
+        <translation>Открыть книгу</translation>
     </message>
     <message>
         <source>All supported formats (*.fb2 *.txt *.tcr *.rtf *.epub *.html *.htm *.zip);;FB2 books (*.fb2 *.fb2.zip);;Text files (*.txt);;Rich text (*.rtf);;HTML files (*.htm *.html);;EPUB files (*.epub);;ZIP archives (*.zip)</source>
-        <translation type="obsolete">Все форматы (*.fb2 *.txt *.tcr *.rtf *.epub *.html *.htm *.zip);;Книги FB2 (*.fb2 *.fb2.zip);;Текстовые файлы (*.txt);;Текст RTF (*.rtf);;HTML (*.htm *.html);;EPUB (*.epub);;Архивы ZIP (*.zip)</translation>
+        <translation>Все форматы (*.fb2 *.txt *.tcr *.rtf *.epub *.html *.htm *.zip);;Книги FB2 (*.fb2 *.fb2.zip);;Текстовые файлы (*.txt);;Текст RTF (*.rtf);;HTML (*.htm *.html);;EPUB (*.epub);;Архивы ZIP (*.zip)</translation>
     </message>
     <message>
         <source>Not implemented</source>
-        <translation type="obsolete">Функция недоступна</translation>
+        <translation>Функция недоступна</translation>
     </message>
     <message>
         <source>Search is not implemented yet</source>
-        <translation type="obsolete">Извините, поиск по тексту пока не реализован.</translation>
+        <translation>Извините, поиск по тексту пока не реализован.</translation>
     </message>
     <message>
         <source>Close</source>
@@ -335,19 +335,19 @@
     <name>MainWindowClass</name>
     <message>
         <source>File</source>
-        <translation type="obsolete">Файл</translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="obsolete">Вид</translation>
+        <translation>Вид</translation>
     </message>
     <message>
         <source>Navigation</source>
-        <translation type="obsolete">Навигация</translation>
+        <translation>Навигация</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="obsolete">Справка</translation>
+        <translation>Справка</translation>
     </message>
     <message>
         <source>Open...</source>
@@ -359,7 +359,7 @@
     </message>
     <message>
         <source>Toggle Pages/Scroll</source>
-        <translation type="obsolete">Переключить Страница/Свиток</translation>
+        <translation>Переключить страница/свиток</translation>
     </message>
     <message>
         <source>Close</source>
@@ -367,7 +367,7 @@
     </message>
     <message>
         <source>Minimize</source>
-        <translation type="obsolete">Свернуть</translation>
+        <translation>Свернуть</translation>
     </message>
     <message>
         <source>Page Down</source>
@@ -379,27 +379,27 @@
     </message>
     <message>
         <source>Line Down</source>
-        <translation type="obsolete">На строку вниз</translation>
+        <translation>На строку вниз</translation>
     </message>
     <message>
         <source>Line Up</source>
-        <translation type="obsolete">На строку вверх</translation>
+        <translation>На строку вверх</translation>
     </message>
     <message>
         <source>First Page</source>
-        <translation type="obsolete">Первая страница</translation>
+        <translation>Первая страница</translation>
     </message>
     <message>
         <source>Go to first page</source>
-        <translation type="obsolete">Первая страница</translation>
+        <translation>Первая страница</translation>
     </message>
     <message>
         <source>Last Page</source>
-        <translation type="obsolete">Последняя страница</translation>
+        <translation>Последняя страница</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="obsolete">End</translation>
+        <translation>В конец</translation>
     </message>
     <message>
         <source>Back</source>
@@ -411,35 +411,35 @@
     </message>
     <message>
         <source>Next Chapter</source>
-        <translation type="obsolete">Следующая глава</translation>
+        <translation>Следующая глава</translation>
     </message>
     <message>
         <source>Previous Chapter</source>
-        <translation type="obsolete">Предыдущая глава</translation>
+        <translation>Предыдущая глава</translation>
     </message>
     <message>
         <source>Toggle Full Screen</source>
-        <translation type="obsolete">Полноэкранный режим</translation>
+        <translation>Полноэкранный режим</translation>
     </message>
     <message>
         <source>Toggle Full Screen mode</source>
-        <translation type="obsolete">Полноэкранный режим</translation>
+        <translation>Полноэкранный режим</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="obsolete">Увеличить шрифт</translation>
+        <translation>Увеличить шрифт</translation>
     </message>
     <message>
         <source>Increase font size</source>
-        <translation type="obsolete">Увеличить размер шрифта</translation>
+        <translation>Увеличить размер шрифта</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="obsolete">Уменьшить шрифт</translation>
+        <translation>Уменьшить шрифт</translation>
     </message>
     <message>
         <source>Decrease font size</source>
-        <translation type="obsolete">Уменьшить размер шрифта</translation>
+        <translation>Уменьшить размер шрифта</translation>
     </message>
     <message>
         <source>Table of Contents...</source>
@@ -475,11 +475,11 @@
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="obsolete">О Qt</translation>
+        <translation>О Qt</translation>
     </message>
     <message>
         <source>About CoolReader</source>
-        <translation type="obsolete">О программе CoolReader</translation>
+        <translation>О программе CoolReader</translation>
     </message>
     <message>
         <source>Add Bookmark</source>
@@ -507,7 +507,7 @@
     </message>
     <message>
         <source>Rotate</source>
-        <translation type="obsolete">Поворот страницы</translation>
+        <translation>Поворот страницы</translation>
     </message>
     <message>
         <source>Find text...</source>
@@ -519,11 +519,11 @@
     </message>
     <message>
         <source>CoolReader</source>
-        <translation type="unfinished"></translation>
+        <translation>CoolReader</translation>
     </message>
     <message>
         <source>Go to next page</source>
-        <translation type="unfinished"></translation>
+        <translation>След. страница</translation>
     </message>
     <message>
         <source>PgDown</source>
@@ -531,7 +531,7 @@
     </message>
     <message>
         <source>Back by page</source>
-        <translation type="unfinished"></translation>
+        <translation>Пред. страница</translation>
     </message>
     <message>
         <source>PgUp</source>
@@ -539,11 +539,11 @@
     </message>
     <message>
         <source>Back in navigation history</source>
-        <translation type="unfinished"></translation>
+        <translation>Назад по истории навигации</translation>
     </message>
     <message>
         <source>Go to the next position in navigation history</source>
-        <translation type="unfinished"></translation>
+        <translation>Далее по истории навигации</translation>
     </message>
     <message>
         <source>copy2</source>
@@ -551,15 +551,15 @@
     </message>
     <message>
         <source>Copy alternative shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Альтернативный ярлык</translation>
     </message>
     <message>
         <source>Toggle Edit Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключить режим правки</translation>
     </message>
     <message>
         <source>Toggle edit mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключить режим правки</translation>
     </message>
     <message>
         <source>O</source>
@@ -646,7 +646,7 @@
     </message>
     <message>
         <source>Other File with such FilePath in history</source>
-        <translation type="unfinished">Другой файл находится по такому пути (на месте предыдущего) из истории открытых книг</translation>
+        <translation>Другой файл находится по такому пути в истории открытых книг</translation>
     </message>
     <message>
         <source>You can't remove last book that you are reading now. Please, choose other active book then try to remove file again.</source>
@@ -705,15 +705,15 @@
     <name>RecentBooksDlg</name>
     <message>
         <source>Author</source>
-        <translation type="obsolete">Автор</translation>
+        <translation>Автор</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="obsolete">Название</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation type="obsolete">Имя файла</translation>
+        <translation>Имя файла</translation>
     </message>
     <message>
         <source>Remove all history items</source>
@@ -721,19 +721,19 @@
     </message>
     <message>
         <source>Do you really want to remove all history records?</source>
-        <translation>Вы действительно хотите удалить все записи из списка последних открытых книг?</translation>
+        <translation>Вы действительно хотите удалить все записи из списка последних книг?</translation>
     </message>
     <message>
         <source>Recent Books</source>
-        <translation type="unfinished">Последние книги</translation>
+        <translation>Последние книги</translation>
     </message>
     <message>
         <source>Remove Item</source>
-        <translation type="obsolete">Удалить запись</translation>
+        <translation>Удалить запись</translation>
     </message>
     <message>
         <source>Clear All</source>
-        <translation type="obsolete">Очистить весь список</translation>
+        <translation>Очистить весь список</translation>
     </message>
     <message>
         <source>RemoveAll</source>
@@ -804,7 +804,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="obsolete">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <source>Not found</source>
@@ -823,23 +823,23 @@
     </message>
     <message>
         <source>[Algorythmic hyphenation]</source>
-        <translation>[Алгоритмические переносы]</translation>
+        <translation>[Алгоритмические]</translation>
     </message>
     <message>
         <source>The quick brown fox jumps over the lazy dog. </source>
-        <translation type="unfinished">Съешь ещё этих мягких французских булочек! </translation>
+        <translation>Съешь ещё этих мягких французских булок, да выпей чаю. 1234567890 </translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="obsolete">Цвет текста</translation>
+        <translation>Цвет текста</translation>
     </message>
     <message>
         <source>Background color</source>
-        <translation type="obsolete">Цвет фона</translation>
+        <translation>Цвет фона</translation>
     </message>
     <message>
         <source>Page header text color</source>
-        <translation type="obsolete">Цвет колонтитула</translation>
+        <translation>Цвет колонтитула</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -851,15 +851,15 @@
     </message>
     <message>
         <source>Window</source>
-        <translation>Окно</translation>
+        <translation>Общие</translation>
     </message>
     <message>
         <source>Look &amp; feel</source>
-        <translation type="obsolete">Стиль интерфеса</translation>
+        <translation>Стиль интерфеса</translation>
     </message>
     <message>
         <source>Startup action</source>
-        <translation>Действие при старте</translation>
+        <translation>При старте </translation>
     </message>
     <message>
         <source>Open recent book</source>
@@ -879,27 +879,27 @@
     </message>
     <message>
         <source>Controls</source>
-        <translation type="obsolete">Инструменты</translation>
+        <translation>Инструменты</translation>
     </message>
     <message>
         <source>Show toolbar</source>
-        <translation type="obsolete">Панель инструментов</translation>
+        <translation>Панель инструментов</translation>
     </message>
     <message>
         <source>Show menu</source>
-        <translation type="obsolete">Меню</translation>
+        <translation>Меню</translation>
     </message>
     <message>
         <source>Show scroll bar</source>
-        <translation type="obsolete">Полоса прокрутки</translation>
+        <translation>Полоса прокрутки</translation>
     </message>
     <message>
         <source>Show status bar</source>
-        <translation type="obsolete">Строка состояния</translation>
+        <translation>Строка состояния</translation>
     </message>
     <message>
         <source>Fullscreen display</source>
-        <translation type="obsolete">Полноэкранный режим</translation>
+        <translation>Полноэкранный режим</translation>
     </message>
     <message>
         <source>Page</source>
@@ -915,19 +915,23 @@
     </message>
     <message>
         <source>Scroll View</source>
-        <translation type="obsolete">Свиток</translation>
+        <translation>Свиток</translation>
     </message>
     <message>
         <source>Vew Mode</source>
-        <translation type="obsolete">Режим просмотра</translation>
+        <translation>Режим просмотра</translation>
     </message>
     <message>
         <source>Page margins</source>
-        <translation>Отступы страницы</translation>
+        <translation>Поля страницы</translation>
+    </message>
+    <message>
+        <source>Full screen update interval</source>
+        <translation>Интервал полного обновления экрана </translation>
     </message>
     <message>
         <source>Show page header</source>
-        <translation>Показывать колонтитул</translation>
+        <translation>Показывать колонтитул:</translation>
     </message>
     <message>
         <source>Book name</source>
@@ -943,15 +947,15 @@
     </message>
     <message>
         <source>Header font</source>
-        <translation>Шрифт колонтитула</translation>
+        <translation>Шрифт колонтитула </translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="obsolete">Изменить</translation>
+        <translation>Изменить</translation>
     </message>
     <message>
         <source>Show footnotes at bottom of page</source>
-        <translation>Сноски внизу страницы</translation>
+        <translation>Показывать сноски внизу страницы</translation>
     </message>
     <message>
         <source>Styles</source>
@@ -967,23 +971,23 @@
     </message>
     <message>
         <source>Interline spacing</source>
-        <translation type="obsolete">Межстрочный интервал</translation>
+        <translation>Межстрочный интервал</translation>
     </message>
     <message>
         <source>Page skin</source>
-        <translation type="obsolete">Стиль фона</translation>
+        <translation>Стиль фона</translation>
     </message>
     <message>
         <source>Sample</source>
-        <translation>Образец</translation>
+        <translation>Образец:</translation>
     </message>
     <message>
         <source>.TXT files</source>
-        <translation type="obsolete">.TXT файлы</translation>
+        <translation>.TXT файлы</translation>
     </message>
     <message>
         <source>Disable automatic formatting</source>
-        <translation type="obsolete">Отключить автоформатирование</translation>
+        <translation>Отключить автоформатирование</translation>
     </message>
     <message>
         <source>Language</source>
@@ -991,19 +995,19 @@
     </message>
     <message>
         <source>Top</source>
-        <translation>Верх</translation>
+        <translation>Сверху</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation>Низ</translation>
+        <translation>Снизу</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation>Лево</translation>
+        <translation>Слева</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Право</translation>
+        <translation>Справа</translation>
     </message>
     <message>
         <source>All</source>
@@ -1019,19 +1023,59 @@
     </message>
     <message>
         <source>Page number/count</source>
-        <translation>Номер страницы/количество страниц</translation>
+        <translation>Номер/количество страниц</translation>
     </message>
     <message>
         <source>Font gamma correction</source>
         <translation>Гамма-коррекция шрифта</translation>
     </message>
     <message>
+        <source>Font antialiasing</source>
+        <translation>Сглаживание шрифта</translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <translation>Отключить</translation>
+    </message>
+    <message>
+        <source>On for large fonts</source>
+        <translation>Для больших шрифтов</translation>
+    </message>
+    <message>
+        <source>On for all fonts</source>
+        <translation>Для всех шрифтов</translation>
+    </message>
+    <message>
+        <source>Font hinting</source>
+        <translation>Хинтинг шрифта</translation>
+    </message>
+    <message>
+        <source>Bytecode</source>
+        <translation>Байткод</translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation>Автоматически</translation>
+    </message>
+    <message>
         <source>Interline spacing (%)</source>
         <translation>Межстрочный интервал (%)</translation>
     </message>
     <message>
+        <source>Min space width (%)</source>
+        <translation>Мин. ширина пробела (%)</translation>
+    </message>
+    <message>
+        <source>Embolden font</source>
+        <translation>Жирный шрифт</translation>
+    </message>
+    <message>
+        <source>Font kerning</source>
+        <translation>Кернинг шрифта</translation>
+    </message>
+    <message>
         <source>Disable automatic formatting of txt format files</source>
-        <translation>Отключить автоформатирование txt файлов</translation>
+        <translation>Отключить автоформатирование txt-файлов</translation>
     </message>
     <message>
         <source>Floating punctuation</source>
@@ -1063,22 +1107,22 @@
     </message>
     <message>
         <source>View Mode</source>
-        <translation>Режим просмотра</translation>
+        <translation>Режим просмотра </translation>
     </message>
     <message>
         <source>In percent</source>
-        <translation>в процентах</translation>
+        <translation>В процентах</translation>
     </message>
 </context>
 <context>
     <name>TocDlg</name>
     <message>
         <source>Title</source>
-        <translation type="obsolete">Название</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>Page</source>
-        <translation type="obsolete">Страница</translation>
+        <translation>Страница</translation>
     </message>
     <message>
         <source>Table of Contents</source>
@@ -1086,7 +1130,7 @@
     </message>
     <message>
         <source>Type page number:</source>
-        <translation>Введите номер страницы или процент:</translation>
+        <translation>Укажите номер страницы (можно в %):</translation>
     </message>
     <message>
         <source>GotoPage</source>
