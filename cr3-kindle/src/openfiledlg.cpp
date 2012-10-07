@@ -2,6 +2,7 @@
 #include "ui_openfiledlg.h"
 
 #include <QDir>
+#include <QShortcut>
 
 OpenFileDlg::OpenFileDlg(QWidget *parent, CR3View * docView):
     QDialog(parent),
@@ -17,7 +18,8 @@ OpenFileDlg::OpenFileDlg(QWidget *parent, CR3View * docView):
     addAction(m_ui->actionGoToLastPage);
 
     QAction *actionRemoveFile = m_ui->actionRemoveFile;
-    actionRemoveFile->setShortcut(Qt::Key_AltGr); // quick hack to delete files on K4NT with KBD key
+    QShortcut* kbd = new QShortcut(Qt::Key_AltGr, this); // quick hack to delete files on K4NT with KBD key
+    connect(kbd, SIGNAL(activated()), actionRemoveFile, SLOT(trigger()));
     addAction(actionRemoveFile);
 
     QAction *actionSelect = m_ui->actionSelectFile;
