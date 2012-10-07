@@ -3,6 +3,7 @@
 
 #include <QDir>
 #include <QKeyEvent>
+#include <QShortcut>
 
 RecentBooksDlg::RecentBooksDlg(QWidget *parent, CR3View * docView ) :
     QDialog(parent),
@@ -13,7 +14,11 @@ RecentBooksDlg::RecentBooksDlg(QWidget *parent, CR3View * docView ) :
 
     m_ui->tableWidget->setItemDelegate(new RecentBooksListDelegate());
 
-    addAction(m_ui->actionRemoveBook);
+    QAction *actionRemoveBook = m_ui->actionRemoveBook;
+    QShortcut* kbd = new QShortcut(Qt::Key_AltGr, this); // quick hack to delete recent books on K4NT with KBD key
+    connect(kbd, SIGNAL(activated()), actionRemoveBook, SLOT(trigger()));
+    addAction(actionRemoveBook);
+
     addAction(m_ui->actionRemoveAll);
     QAction *actionSelect = m_ui->actionSelectBook;
     actionSelect->setShortcut(Qt::Key_Select);
