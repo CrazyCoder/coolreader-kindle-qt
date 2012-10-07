@@ -5,7 +5,7 @@
 #define ENABLE_BOOKMARKS_DIR 1
 
 MainWindow::MainWindow(QWidget *parent)
-        : QMainWindow(parent), ui(new Ui::MainWindowClass)
+    : QMainWindow(parent), ui(new Ui::MainWindowClass)
 {
     ui->setupUi(this);
 
@@ -17,14 +17,14 @@ MainWindow::MainWindow(QWidget *parent)
     addAction(ui->actionShowBookmarksList);
     addAction(ui->actionFindText);
     addAction(ui->actionFileProperties);
-//	addAction(ui->actionCopy);
+    //	addAction(ui->actionCopy);
 
     QAction *actionShowMenu = ui->actionShowMenu;
-    #ifdef i386
+#ifdef i386
     actionShowMenu->setShortcut(Qt::Key_M);
-    #else
+#else
     actionShowMenu->setShortcut(Qt::Key_Menu);
-    #endif
+#endif
     addAction(actionShowMenu);
 
     QAction *actionClose = ui->actionClose;
@@ -76,7 +76,7 @@ MainWindow::MainWindow(QWidget *parent)
                     connect(newAct, SIGNAL(triggered()), this, SLOT(on_actionEmpty_triggered()));
                     addAction(newAct);
                 }
-//				qDebug("cmd %i param %i key %i keyflag %i", cmd, param, key, keyFlags);
+                //				qDebug("cmd %i param %i key %i keyflag %i", cmd, param, key, keyFlags);
             }
             const CRGUIAccelerator *acc1 = wndkeys->findKeyAccelerator(Qt::Key_PageDown, 0);
             const CRGUIAccelerator *acc2 = wndkeys->findKeyAccelerator(Qt::Key_PageUp, 0);
@@ -90,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent)
         addAction(ui->actionPrevPage);
     }
     ui->view->getDocView()->setBatteryState(100);
-    #ifndef i386
+#ifndef i386
     QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.powerd", "battLevelChanged", this, SLOT(battLevelChanged(int)));
 
     QStringList list;
@@ -103,21 +103,21 @@ MainWindow::MainWindow(QWidget *parent)
         array.truncate(array.indexOf("\n"));
         ui->view->getDocView()->setBatteryState(array.toInt());
     }
-    #endif
+#endif
 }
 
 void MainWindow::battLevelChanged(int fparam)
 {
-    #ifndef i386
+#ifndef i386
     ui->view->getDocView()->setBatteryState(fparam);
-    #endif
+#endif
 }
 
 MainWindow::~MainWindow()
 {
-    #ifndef i386
+#ifndef i386
     QDBusConnection::systemBus().disconnect(QString(), QString(), "com.lab126.powerd", "battLevelChanged", this, SLOT(battLevelChanged(int)));
-    #endif
+#endif
     delete ui;
 }
 

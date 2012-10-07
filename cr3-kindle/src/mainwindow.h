@@ -122,16 +122,16 @@ public:
         setEventFilter(myEventFilter);
     }
     void connectPowerDaemon() {
-        #ifndef i386
+#ifndef i386
         QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.powerd", "outOfScreenSaver", this, SLOT(quitscreensaver()));
-//		QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.powerd", "goingToScreenSaver", this, SLOT(screensaver()));
-        #endif
+        //		QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.powerd", "goingToScreenSaver", this, SLOT(screensaver()));
+#endif
     }
     void disconnectPowerDaemon() {
-        #ifndef i386
+#ifndef i386
         QDBusConnection::systemBus().disconnect(QString(), QString(), "com.lab126.powerd", "outOfScreenSaver", this, SLOT(quitscreensaver()));
-//		QDBusConnection::systemBus().disconnect(QString(), QString(), "com.lab126.powerd", "goingToScreenSaver", this, SLOT(MainWindow::screensaver()));
-        #endif
+        //		QDBusConnection::systemBus().disconnect(QString(), QString(), "com.lab126.powerd", "goingToScreenSaver", this, SLOT(MainWindow::screensaver()));
+#endif
     }
 private slots:
     void quitscreensaver() {
@@ -145,7 +145,7 @@ private slots:
 };
 
 namespace Ui {
-    class MainWindowClass;
+class MainWindowClass;
 }
 
 class MainWindow : public QMainWindow, public PropsChangeCallback

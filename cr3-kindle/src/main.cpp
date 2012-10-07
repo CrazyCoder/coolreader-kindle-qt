@@ -18,10 +18,10 @@ int main(int argc, char *argv[])
 
         lString16Collection fontDirs;
         fontDirs.add(exefontpath);
-        #ifndef i386
+#ifndef i386
         fontDirs.add(lString16(L"/usr/java/lib/fonts"));
         fontDirs.add(lString16(L"/mnt/us/fonts"));
-        #endif
+#endif
         CRPropRef props = LVCreatePropsContainer();
         {
             LVStreamRef cfg = LVOpenFileStream(UnicodeToUtf8(datadir + L"cr3.ini").data(), LVOM_READ);
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         }
 
         lString16 lang = props->getStringDef(PROP_WINDOW_LANG, "");
-//		InitCREngineLog("./data/cr3.ini");
+        //		InitCREngineLog("./data/cr3.ini");
         InitCREngineLog(props);
         CRLog::info("main()");
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
             printf("Cannot init CREngine - exiting\n");
             return 2;
         }
-        #ifndef i386
+#ifndef i386
         PrintString(1, 1, "crengine version: " + QString(CR_ENGINE_VERSION), "-c");
         // open framebuffer device and read out info
         int fd = open("/dev/fb0", O_RDONLY);
@@ -49,16 +49,16 @@ int main(int argc, char *argv[])
         int xpos = ((width/12-1)-message.length())/2;
         int ypos = (height/20-2)/2;
         PrintString(xpos, ypos, message);
-        #endif
+#endif
 
         // set row count
         int rc = props->getIntDef(PROP_WINDOW_ROW_COUNT, 0);
         if(!rc) {
-            #ifndef i386
+#ifndef i386
             props->setInt(PROP_WINDOW_ROW_COUNT, height==800 ? 10 : 16);
-            #else
+#else
             props->setInt(PROP_WINDOW_ROW_COUNT, 10);
-            #endif
+#endif
             LVStreamRef cfg = LVOpenFileStream(UnicodeToUtf8(datadir + L"cr3.ini").data(), LVOM_WRITE);
             props->saveToStream(cfg.get());
         }
@@ -68,14 +68,14 @@ int main(int argc, char *argv[])
         MyApplication a(argc, argv);
         pMyApp = &a;
         // set app stylesheet
-        #ifndef i386
+#ifndef i386
         QFile qss(QDir::toNativeSeparators(cr2qt(datadir)) + (width==600 ? "stylesheet_k3.qss" : "stylesheet_dx.qss"));
         // set up full update interval for the graphics driver
         QKindleFb *pscreen = static_cast<QKindleFb*>(QScreen::instance());
         pscreen->setFullUpdateEvery(props->getIntDef(PROP_DISPLAY_FULL_UPDATE_INTERVAL, 1));
-        #else
+#else
         QFile qss(QDir::toNativeSeparators(cr2qt(datadir)) + "stylesheet.qss");
-        #endif
+#endif
         qss.open(QFile::ReadOnly);
         if(qss.error() == QFile::NoError) {
             a.setStyleSheet(qss.readAll());
@@ -177,12 +177,12 @@ void InitCREngineLog(CRPropRef props)
         return;
     }
     lString16 logfname = props->getStringDef(PROP_LOG_FILENAME, "stdout");
-    #ifdef _DEBUG
-//	lString16 loglevelstr = props->getStringDef(PROP_LOG_LEVEL, "DEBUG");
+#ifdef _DEBUG
+    //	lString16 loglevelstr = props->getStringDef(PROP_LOG_LEVEL, "DEBUG");
     lString16 loglevelstr = props->getStringDef(PROP_LOG_LEVEL, "OFF");
-    #else
+#else
     lString16 loglevelstr = props->getStringDef(PROP_LOG_LEVEL, "OFF");
-    #endif
+#endif
     bool autoFlush = props->getBoolDef(PROP_LOG_AUTOFLUSH, false);
 
     CRLog::log_level level = CRLog::LL_INFO;
@@ -226,13 +226,13 @@ bool myEventFilter(void *message, long *)
         active = qApp->activeWindow();
         modal = qApp->activeModalWidget();
         popup = qApp->activePopupWidget();
-//		qDebug("act=%d, modal=%d, pup=%d", (int)active, (int)modal, (int)popup);
-        #ifdef i386
+        //		qDebug("act=%d, modal=%d, pup=%d", (int)active, (int)modal, (int)popup);
+#ifdef i386
         if(pke->simpleData.keycode == Qt::Key_Return) {
             pke->simpleData.keycode = Qt::Key_Select;
             return false;
         }
-        #endif
+#endif
         if(pke->simpleData.keycode == Qt::Key_Sleep) {
             pMyApp->disconnectPowerDaemon();
             return true;
@@ -246,7 +246,7 @@ bool myEventFilter(void *message, long *)
             pMyApp->connectPowerDaemon();
             return true;
         }
-//		qDebug("QWS key: key=%x, press=%x, uni=%x", pke->simpleData.keycode, pke->simpleData.is_press, pke->simpleData.unicode);
+        //		qDebug("QWS key: key=%x, press=%x, uni=%x", pke->simpleData.keycode, pke->simpleData.is_press, pke->simpleData.unicode);
         return false;
     }
     return false;

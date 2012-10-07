@@ -128,9 +128,9 @@ void TocDlg::on_actionGotoPage_triggered()
     } else {
         // code added 28.11.2011
         qDebug(focusWidget()->objectName().toAscii().data());
-            QString s = m_ui->treeWidget->currentIndex().data(Qt::UserRole).toString();
-            m_docview->goToXPointer(s);
-            close();
+        QString s = m_ui->treeWidget->currentIndex().data(Qt::UserRole).toString();
+        m_docview->goToXPointer(s);
+        close();
     }
 }
 

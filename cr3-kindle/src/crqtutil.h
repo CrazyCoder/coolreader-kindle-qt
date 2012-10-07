@@ -16,24 +16,24 @@ class Props
 {
 
 public:
-	static PropsRef create();
-	static PropsRef clone( PropsRef v );
-	virtual int count() = 0;
-	virtual const char * name( int index ) = 0;
-	virtual QString value( int index ) = 0;
-	virtual bool getString( const char * prop, QString & result ) = 0;
-	virtual QString getStringDef( const char * prop, const char * defValue ) = 0;
-	virtual void setString( const char * prop, const QString & value ) = 0;
-	virtual void setInt( const char * prop, int value ) = 0;
-	virtual bool getInt( const char * prop, int & result ) = 0;
-	virtual int  getIntDef( const char * prop, int defValue ) = 0;
-	virtual void setHex( const char * propName, int value ) = 0;
-	virtual bool hasProperty( const char * propName ) const = 0;
-	virtual const CRPropRef & accessor() = 0;
-	virtual ~Props() { }
-	// fau+
-	virtual double getDoubleDef(const char * prop, const char * defValue) = 0;
-	virtual void setDouble(const char * prop, const double value) = 0;
+    static PropsRef create();
+    static PropsRef clone( PropsRef v );
+    virtual int count() = 0;
+    virtual const char * name( int index ) = 0;
+    virtual QString value( int index ) = 0;
+    virtual bool getString( const char * prop, QString & result ) = 0;
+    virtual QString getStringDef( const char * prop, const char * defValue ) = 0;
+    virtual void setString( const char * prop, const QString & value ) = 0;
+    virtual void setInt( const char * prop, int value ) = 0;
+    virtual bool getInt( const char * prop, int & result ) = 0;
+    virtual int  getIntDef( const char * prop, int defValue ) = 0;
+    virtual void setHex( const char * propName, int value ) = 0;
+    virtual bool hasProperty( const char * propName ) const = 0;
+    virtual const CRPropRef & accessor() = 0;
+    virtual ~Props() { }
+    // fau+
+    virtual double getDoubleDef(const char * prop, const char * defValue) = 0;
+    virtual void setDouble(const char * prop, const double value) = 0;
 };
 
 /// returns common items from props1 not containing in props2

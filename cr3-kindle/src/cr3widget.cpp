@@ -47,13 +47,13 @@ static LVRefVec<LVImageSource> getBatteryIcons( lUInt32 color )
     static char color2[] = "X c #80000000";
     static char color3[] = "o c #80AAAAAA";
     static char color4[] = ". c #80FFFFFF";
-    #define BATTERY_HEADER \
-            "28 15 5 1", \
-            color1, \
-            color2, \
-            color3, \
-            color4, \
-            "  c None",
+#define BATTERY_HEADER \
+    "28 15 5 1", \
+    color1, \
+    color2, \
+    color3, \
+    color4, \
+    "  c None",
 
     static const char * battery8[] = {
         BATTERY_HEADER
@@ -219,7 +219,7 @@ static LVRefVec<LVImageSource> getBatteryIcons( lUInt32 color )
         "   .00000000000000000000000.",
         "   .........................",
     };
-//#endif
+    //#endif
 
     static const char * battery_charge[] = {
         BATTERY_HEADER
@@ -288,10 +288,10 @@ static LVRefVec<LVImageSource> getBatteryIcons( lUInt32 color )
 //DECL_DEF_CR_FONT_SIZES
 
 CR3View::CR3View( QWidget *parent)
-        : QWidget( parent, Qt::WindowFlags() ), _scroll(NULL), _propsCallback(NULL)
-        , _normalCursor(Qt::ArrowCursor), _linkCursor(Qt::PointingHandCursor)
-        , _selCursor(Qt::IBeamCursor), _waitCursor(Qt::WaitCursor)
-        , _selecting(false), _selected(false), _editMode(false), _lastBatteryState(CR_BATTERY_STATE_NO_BATTERY)
+    : QWidget( parent, Qt::WindowFlags() ), _scroll(NULL), _propsCallback(NULL)
+    , _normalCursor(Qt::ArrowCursor), _linkCursor(Qt::PointingHandCursor)
+    , _selCursor(Qt::IBeamCursor), _waitCursor(Qt::WaitCursor)
+    , _selecting(false), _selected(false), _editMode(false), _lastBatteryState(CR_BATTERY_STATE_NO_BATTERY)
 {
 #if WORD_SELECTOR_ENABLED==1
     _wordSelector = NULL;
@@ -315,11 +315,11 @@ CR3View::CR3View( QWidget *parent)
     _docview->setFontSizes(sizes, false);
 
     _docview->setBatteryIcons( getBatteryIcons(0x000000) );
-//	_docview->setBatteryState(CR_BATTERY_STATE_NO_BATTERY); // don't show battery
+    //	_docview->setBatteryState(CR_BATTERY_STATE_NO_BATTERY); // don't show battery
     updateDefProps();
-//	setMouseTracking(true);
+    //	setMouseTracking(true);
     setFocusPolicy(Qt::NoFocus);
-//	setFocusPolicy(Qt::StrongFocus);
+    //	setFocusPolicy(Qt::StrongFocus);
 }
 
 void CR3View::updateDefProps()
@@ -553,7 +553,7 @@ void CR3View::zoomFont(int param)
 {
     if(param>0)
         doCommand(DCMD_ZOOM_IN, 1);
-     else
+    else
         doCommand(DCMD_ZOOM_OUT, 1);
     refreshPropFromView(PROP_FONT_SIZE);
 }
@@ -639,7 +639,7 @@ void CR3View::toggleProperty( const char * name )
 /// set new option values
 void CR3View::propsApply(PropsRef props)
 {
-//	CRPropRef changed = _data->_props ^ qt2cr(props);
+    //	CRPropRef changed = _data->_props ^ qt2cr(props);
     CRPropRef newProps = qt2cr(props);
     _docview->propsApply(newProps);
     update();
@@ -854,8 +854,8 @@ void CR3View::goToBookmark( CRBookmark * bm )
         return;
     if ( end.isNull() )
         end = start;
-//	startSelection(start);
-//	endSelection(end);
+    //	startSelection(start);
+    //	endSelection(end);
     goToXPointer( cr2qt(bm->getStartPos()));
     update();
 }
@@ -975,27 +975,27 @@ void CR3View::keyPressEvent(QKeyEvent * event)
         case Qt::Key_Q:
         case Qt::Key_Enter:
         case Qt::Key_Escape:
-            {
-                QString text = endWordSelection();
-                event->setAccepted(true);
-                CRLog::debug("Word selected: %s", LCSTR(qt2cr(text)));
-            }
+        {
+            QString text = endWordSelection();
+            event->setAccepted(true);
+            CRLog::debug("Word selected: %s", LCSTR(qt2cr(text)));
+        }
             return;
         case Qt::Key_Backspace:
             _wordSelector->reducePattern();
             update();
             break;
         default:
-            {
-                int key = event->key();
-                if ( key>=Qt::Key_A && key<=Qt::Key_Z ) {
-                    QString text = event->text();
-                    if ( text.length()==1 ) {
-                        _wordSelector->appendPattern(qt2cr(text));
-                        update();
-                    }
+        {
+            int key = event->key();
+            if ( key>=Qt::Key_A && key<=Qt::Key_Z ) {
+                QString text = event->text();
+                if ( text.length()==1 ) {
+                    _wordSelector->appendPattern(qt2cr(text));
+                    update();
                 }
             }
+        }
             event->setAccepted(true);
             return;
         }

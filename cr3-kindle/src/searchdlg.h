@@ -16,33 +16,33 @@
 #include "virtualkeysdlg.h"
 
 namespace Ui {
-	class SearchDialog;
+class SearchDialog;
 }
 
 class CR3View;
 
 class SearchDialog : public QDialog {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	SearchDialog(QWidget *parent, CR3View * docView);
-	~SearchDialog();
+    SearchDialog(QWidget *parent, CR3View * docView);
+    ~SearchDialog();
 
-	static bool showDlg( QWidget * parent, CR3View * docView );
-	bool findText( lString16 pattern, int origin, bool reverse, bool caseInsensitive );
+    static bool showDlg( QWidget * parent, CR3View * docView );
+    bool findText( lString16 pattern, int origin, bool reverse, bool caseInsensitive );
 protected:
-	void changeEvent(QEvent *e);
-	virtual void paintEvent (QPaintEvent * event);
-	bool eventFilter(QObject *obj, QEvent *event);
+    void changeEvent(QEvent *e);
+    virtual void paintEvent (QPaintEvent * event);
+    bool eventFilter(QObject *obj, QEvent *event);
 private:
-	Ui::SearchDialog *ui;
-	CR3View * _docview;
-	lString16 _lastPattern;
-	bool isKeyboardAlt;
+    Ui::SearchDialog *ui;
+    CR3View * _docview;
+    lString16 _lastPattern;
+    bool isKeyboardAlt;
 private slots:
-	void on_btnFindNext_clicked();
-	void on_rbForward_toggled(bool checked);
-	void on_rbBackward_toggled(bool checked);
-	void on_actionVirtualKeys_triggered();
+    void on_btnFindNext_clicked();
+    void on_rbForward_toggled(bool checked);
+    void on_rbBackward_toggled(bool checked);
+    void on_actionVirtualKeys_triggered();
 };
 
 #endif // SEARCHDLG_H

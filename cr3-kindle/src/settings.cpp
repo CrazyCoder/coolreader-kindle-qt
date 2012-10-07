@@ -269,10 +269,10 @@ void SettingsDlg::on_sbFontGamma_valueChanged(double arg1)
 
 void SettingsDlg::on_actionSaveSettings_triggered()
 {
-    #ifndef i386
+#ifndef i386
     QKindleFb *pscreen = static_cast<QKindleFb*>(QScreen::instance());
     pscreen->setFullUpdateEvery(m_props->getIntDef(PROP_DISPLAY_FULL_UPDATE_INTERVAL, 1));
-    #endif
+#endif
 
     m_docview->setOptions(m_props);
     close();
@@ -456,11 +456,11 @@ void SettingsDlg::on_sbMargin_valueChanged(int arg1)
         m_props->setInt(PROP_PAGE_MARGIN_RIGHT, newValue);
         break;
     case 4: {
-            m_props->setInt(PROP_PAGE_MARGIN_TOP, newValue);
-            m_props->setInt(PROP_PAGE_MARGIN_BOTTOM, newValue);
-            m_props->setInt(PROP_PAGE_MARGIN_LEFT, newValue);
-            m_props->setInt(PROP_PAGE_MARGIN_RIGHT, newValue);
-        }
+        m_props->setInt(PROP_PAGE_MARGIN_TOP, newValue);
+        m_props->setInt(PROP_PAGE_MARGIN_BOTTOM, newValue);
+        m_props->setInt(PROP_PAGE_MARGIN_LEFT, newValue);
+        m_props->setInt(PROP_PAGE_MARGIN_RIGHT, newValue);
+    }
     }
 }
 

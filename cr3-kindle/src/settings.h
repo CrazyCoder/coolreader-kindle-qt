@@ -16,7 +16,7 @@
 #include "cr3widget.h"
 
 namespace Ui {
-    class SettingsDlg;
+class SettingsDlg;
 }
 
 #define PROP_APP_START_ACTION			"cr3.app.start.action"

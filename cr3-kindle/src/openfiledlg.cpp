@@ -35,11 +35,11 @@ OpenFileDlg::OpenFileDlg(QWidget *parent, CR3View * docView):
     QString lastPathName;
     QString lastName;
     if(!docView->GetLastPathName(&lastPathName))
-        #ifdef i386
+#ifdef i386
         CurrentDir = "/home/";
-        #else
+#else
         CurrentDir = "/mnt/us/documents/";
-        #endif
+#endif
     else {
         int pos = lastPathName.lastIndexOf("/");
         CurrentDir = lastPathName.mid(0, pos+1);
@@ -97,11 +97,11 @@ void OpenFileDlg::FillFileList()
 
     QDir::Filters filters;
 
-    #ifdef i386
+#ifdef i386
     if(CurrentDir=="/") filters = QDir::AllDirs|QDir::NoDotAndDotDot;
-    #else
+#else
     if(CurrentDir=="/mnt/us/") filters = QDir::AllDirs|QDir::NoDotAndDotDot;
-    #endif
+#endif
     else filters = QDir::AllDirs|QDir::NoDot;
     QDir Dir(CurrentDir);
     curFileList=Dir.entryList(filters, QDir::Name);
@@ -178,26 +178,26 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
         if(FileInfo.isDir()) {
             QDir::Filters filters;
             filters = QDir::AllDirs|QDir::NoDotAndDotDot;
-                QDir Dir(fileName);
-                QStringList curFileList1 = Dir.entryList(filters, QDir::Name);
-                QStringList Filter;
-                Filter << "*.fb2" << "*.zip" << "*.epub" << "*.rtf" << "*.txt" \
-                       << "*.html" << "*.htm" << "*.tcr" << "*.pdb" << "*.chm" << "*.mobi" << "*.doc" << "*.azw" << "*.*";
+            QDir Dir(fileName);
+            QStringList curFileList1 = Dir.entryList(filters, QDir::Name);
+            QStringList Filter;
+            Filter << "*.fb2" << "*.zip" << "*.epub" << "*.rtf" << "*.txt" \
+                   << "*.html" << "*.htm" << "*.tcr" << "*.pdb" << "*.chm" << "*.mobi" << "*.doc" << "*.azw" << "*.*";
 
-                curFileList1 += Dir.entryList(Filter, QDir::Files, QDir::Name);
-                if(curFileList1.count()>0) {
-                    QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Info"), tr("Directory ")+ItemText+tr(" is not empty."), QMessageBox::Close, this );
-                    mb->setButtonText(QMessageBox::Close,tr("Close"));
-                    mb->exec();
-                } else {
-                    QMessageBox * mb = new QMessageBox(QMessageBox::Information,"","", QMessageBox::Yes | QMessageBox::No, this);
-                    mb->setButtonText(QMessageBox::No,tr("No"));
-                    mb->setButtonText(QMessageBox::Yes,tr("Yes"));
-                    if(mb->question(this, tr("Remove directory"), tr("Do you really want to remove directory ")+ItemText+"?", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes) {
-                        QDir Dir_file(QDir::toNativeSeparators(CurrentDir));
-                        isFileRemoved = Dir_file.rmdir(ItemText);
-                    }
+            curFileList1 += Dir.entryList(Filter, QDir::Files, QDir::Name);
+            if(curFileList1.count()>0) {
+                QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Info"), tr("Directory ")+ItemText+tr(" is not empty."), QMessageBox::Close, this );
+                mb->setButtonText(QMessageBox::Close,tr("Close"));
+                mb->exec();
+            } else {
+                QMessageBox * mb = new QMessageBox(QMessageBox::Information,"","", QMessageBox::Yes | QMessageBox::No, this);
+                mb->setButtonText(QMessageBox::No,tr("No"));
+                mb->setButtonText(QMessageBox::Yes,tr("Yes"));
+                if(mb->question(this, tr("Remove directory"), tr("Do you really want to remove directory ")+ItemText+"?", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes) {
+                    QDir Dir_file(QDir::toNativeSeparators(CurrentDir));
+                    isFileRemoved = Dir_file.rmdir(ItemText);
                 }
+            }
         } else {
             // Remove file dialog
             if(QMessageBox::question(this, tr("Remove file"), tr("Do you really want to remove file ")+ItemText+"?", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes) {

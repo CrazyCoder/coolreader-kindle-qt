@@ -14,7 +14,7 @@
 #include "crqtutil.h"
 
 namespace Ui {
-    class TocDlg;
+class TocDlg;
 }
 
 class CR3View;
