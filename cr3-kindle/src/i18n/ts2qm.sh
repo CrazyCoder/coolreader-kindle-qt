@@ -1,2 +1,7 @@
-#lrelease -removeidentical -compress Russian.ts -qm Russian.qm
-lrelease -verbose Russian.ts -qm Russian.qm
+#!/bin/sh
+for f in *.ts
+do
+  echo "$f"
+  lrelease -compress -silent -nounfinished $f
+done
+
