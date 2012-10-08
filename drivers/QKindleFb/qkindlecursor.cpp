@@ -84,7 +84,7 @@ QKindleCursor::QKindleCursor(int fd, unsigned char *bufp, int w, int h)
 
     curx = cury = 0 ;
     curw = 16 ; curh = 16;   // try how narrow and bold 'underline' will be looking...
-    visible = 0 ;    
+    visible = 0 ;
 }
 
 
@@ -106,50 +106,50 @@ void QKindleCursor::move(int x, int y)
 
 void QKindleCursor::hide()
 {
-        if (visible)
+    if (visible)
+    {
+        unsigned char *p = pfb ;
+        unsigned char *pend ;
+        unsigned char *ptmp ;
+        int i ;
+        int bperline = dw/2 ;
+
+        ptmp = (unsigned char *) (new unsigned char[(curw/2) * curh]) ;
+
+        update_area_t ua;
+
+        ua.buffer = ptmp  ;
+
+        ua.x1 = curx ;
+        ua.y1 = cury ;
+        ua.x2 = curx + curw + 1 ;
+        ua.y2 = cury + curh + 1 ;
+        ua.which_fx = fx_update_partial ;
+
+        //
+        p += (cury * bperline) + curx/2 ;
+
+        for (i=0; i < curh; i++)
         {
-            unsigned char *p = pfb ;
-            unsigned char *pend ;
-            unsigned char *ptmp ;
-            int i ;
-            int bperline = dw/2 ;
-
-            ptmp = (unsigned char *) (new unsigned char[(curw/2) * curh]) ;
-
-            update_area_t ua;
-
-            ua.buffer = ptmp  ;
-
-            ua.x1 = curx ;
-            ua.y1 = cury ;
-            ua.x2 = curx + curw + 1 ;
-            ua.y2 = cury + curh + 1 ;
-            ua.which_fx = fx_update_partial ;
-
-            //
-            p += (cury * bperline) + curx/2 ;
-
-            for (i=0; i < curh; i++)
+            pend = p + (curw/2) ;
+            while (p < pend)
             {
-                pend = p + (curw/2) ;
-                while (p < pend)
-                {
-                    *ptmp = ~(*p) ;
-                    ++p ;
-                    ++ptmp ;
-                }
-                p += (bperline - (curw/2)) ;
+                *ptmp = ~(*p) ;
+                ++p ;
+                ++ptmp ;
             }
-
-            qDebug("hiding visible cursor @ %d %d %d %d", curx, cury, curw, curh) ;
-
-            ioctl(screen_fbd, FBIO_EINK_UPDATE_DISPLAY_AREA, &ua);
-            visible = false;
-            delete ptmp ;
+            p += (bperline - (curw/2)) ;
         }
 
-        if (enable) {
-            enable = false;
+        qDebug("hiding visible cursor @ %d %d %d %d", curx, cury, curw, curh) ;
+
+        ioctl(screen_fbd, FBIO_EINK_UPDATE_DISPLAY_AREA, &ua);
+        visible = false;
+        delete ptmp ;
+    }
+
+    if (enable) {
+        enable = false;
 
     }
 }

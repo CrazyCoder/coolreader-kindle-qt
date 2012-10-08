@@ -33,9 +33,9 @@
 struct raw_image_t
 {
     int xres,		// image's width, in pixels
-        yres,		// image's height
-        bpp;		// image's pixel (bit) depth
-    
+    yres,		// image's height
+    bpp;		// image's pixel (bit) depth
+
     u8  start[]; 	// actual start of image
 };
 typedef struct raw_image_t raw_image_t;
@@ -43,10 +43,10 @@ typedef struct raw_image_t raw_image_t;
 struct image_t
 {
     int xres,       // image's visual width, in pixels
-        xlen,       // image's actual width, used for rowbyte & memory size calculations
-        yres,       // image's height
-        bpp;        // image's pixel (bit) depth
-        
+    xlen,       // image's actual width, used for rowbyte & memory size calculations
+    yres,       // image's height
+    bpp;        // image's pixel (bit) depth
+
     u8  *start;     // pointer to start of image
 };
 typedef struct image_t image_t;
@@ -62,17 +62,17 @@ enum splash_screen_type
 
     //splash_screen_powering_off_wireless,   // Deprecated.
     //splash_screen_powering_on_wireless,    // Deprecated.
-    
+
     //splash_screen_exit,                    // Deprecated.
     splash_screen_logo = 5,
-    
+
     //splash_screen_usb_internal,            // Deprecated.
     //splash_screen_usb_external,            // Deprecated.
     //splash_screen_usb,                     // Deprecated.
-    
+
     //splash_screen_sleep,                   // Deprecated.
     //splash_screen_update,                  // Deprecated.
-    
+
     //num_splash_screens,                    // Deprecated.
 
     // Composite splash screens & messages.
@@ -81,22 +81,22 @@ enum splash_screen_type
     //splash_screen_drivemode_1,              // Deprecated.
     //splash_screen_drivemode_2,              // Deprecated.
     //splash_screen_drivemode_3,              // Deprecated.
-    
+
     splash_screen_power_off_clear_screen = 16,// Message: clear screen and power down controller.
     //splash_screen_screen_saver_picture,     // Deprecated.
-    
+
     splash_screen_shim_picture = 18,          // Message: shim wants a picture displayed.
 
     splash_screen_lowbatt,                    // Picture: Not composite, post-legacy ordering (Mario only).
     splash_screen_reboot,                     // Picture: Composite (not used on Fiona).
-    
-    splash_screen_update_initial,             // Composite software-update screens. 
+
+    splash_screen_update_initial,             // Composite software-update screens.
     splash_screen_update_success,             //
     splash_screen_update_failure,             //
     splash_screen_update_failure_no_wait,     //
-    
+
     splash_screen_repair_needed,              // More composite screens.
-    splash_screen_boot,                       // 
+    splash_screen_boot,                       //
 
     splash_screen_invalid = -1
 };
@@ -119,14 +119,14 @@ enum fx_type
     //
     fx_mask = 11,                           // Only for use with update_area_t's non-NULL buffer which_fx.
     fx_buf_is_mask = 14,                    // Same as fx_mask, but doesn't require a doubling (i.e., the buffer & mask are the same).
-    
+
     fx_none = -1,                           // No legacy-FX to apply.
-    
+
     // Screen-update FX, supported by HAL.
     //
     fx_flash = 20,                          // Only for use with update_area_t (for faking a flashing update).
     fx_invert = 21,                         // Only for use with update_area_t (only inverts output data).
-    
+
     fx_update_partial = 0,                  // eInk GU/PU/MU-style (non-flashing) update.
     fx_update_full = 1                      // eInk GC-style (slower, flashing) update.
 };
@@ -136,22 +136,22 @@ typedef enum fx_type fx_type;
 //
 #define UPDATE_AREA_FX(f)                   \
     ((fx_mask == (f))                   ||  \
-     (fx_buf_is_mask == (f)))
+    (fx_buf_is_mask == (f)))
 
 // The default ("none") for area updates is partial (non-flashing); full (flashing) updates
 // are for FX and such (i.e., explicit completion is desired).
 //
 #define UPDATE_AREA_PART(f)                 \
     ((fx_none == (f))           ||          \
-     (fx_update_partial == (f)))
-     
+    (fx_update_partial == (f)))
+
 #define UPDATE_AREA_FULL(f)                 \
     (UPDATE_AREA_FX(f)          ||          \
-     (fx_update_full == (f)))
+    (fx_update_full == (f)))
 
 #define UPDATE_AREA_MODE(f)                 \
     (UPDATE_AREA_FULL(f) ? fx_update_full   \
-                         : fx_update_partial)
+    : fx_update_partial)
 
 // For use with the FBIO_EINK_UPDATE_DISPLAY ioctl.
 //
@@ -161,7 +161,7 @@ typedef enum fx_type fx_type;
     (fx_update_full == (f))
 #define UPDATE_MODE(f)                      \
     (UPDATE_FULL(f) ? fx_update_full        \
-                    : fx_update_partial)
+    : fx_update_partial)
 
 struct rect_t
 {
@@ -179,23 +179,23 @@ typedef struct rect_t rect_t;
 struct fx_t
 {
     fx_type     update_mode,                // Screen-update FX:  fx_update_full | fx_update_partial.
-                which_fx;                   // Shim (legacy) FX.
-    
+    which_fx;                   // Shim (legacy) FX.
+
     int         num_exclude_rects;          // 0..MAX_EXCLUDE_RECTS.
     rect_t      exclude_rects[MAX_EXCLUDE_RECTS];
 };
 typedef struct fx_t fx_t;
 
 #define INIT_FX_T()                     \
-    { fx_update_partial, fx_none, 0, {  \
-      INIT_RECT_T(),                    \
-      INIT_RECT_T(),                    \
-      INIT_RECT_T(),                    \
-      INIT_RECT_T(),                    \
-      INIT_RECT_T(),                    \
-      INIT_RECT_T(),                    \
-      INIT_RECT_T(),                    \
-      INIT_RECT_T()} }
+{ fx_update_partial, fx_none, 0, {  \
+    INIT_RECT_T(),                    \
+    INIT_RECT_T(),                    \
+    INIT_RECT_T(),                    \
+    INIT_RECT_T(),                    \
+    INIT_RECT_T(),                    \
+    INIT_RECT_T(),                    \
+    INIT_RECT_T(),                    \
+    INIT_RECT_T()} }
 
 struct update_area_t
 {
@@ -204,10 +204,10 @@ struct update_area_t
     //        (x2 - x1) + 1 and (y2 - y1) + 1, respectively.
     //
     int         x1, y1,                     // Top-left...
-                x2, y2;                     // ...bottom-right.
-    
+    x2, y2;                     // ...bottom-right.
+
     fx_type     which_fx;                   // FX to use.
-        
+
     __u8        *buffer;                    // If NULL, extract from framebuffer, top-left to bottom-right, by rowbytes.
 };
 typedef struct update_area_t update_area_t;
@@ -240,22 +240,22 @@ typedef enum orientation_t orientation_t;
 
 #define ORIENTATION_PORTRAIT(o)     \
     ((orientation_portrait == (o))  || (orientation_portrait_upside_down == (o)))
-    
+
 #define ORIENTATION_LANDSCAPE(o)    \
     ((orientation_landscape == (o)) || (orientation_landscape_upside_down == (o)))
-    
+
 #define ORIENTATION_SAME(o1, o2)    \
     ((ORIENTATION_PORTRAIT(o1)  && ORIENTATION_PORTRAIT(o2)) || \
-     (ORIENTATION_LANDSCAPE(o1) && ORIENTATION_LANDSCAPE(o2)))
+    (ORIENTATION_LANDSCAPE(o1) && ORIENTATION_LANDSCAPE(o2)))
 
 enum einkfb_events_t
 {
     einkfb_event_update_display = 0,        // FBIO_EINK_UPDATE_DISPLAY
     einkfb_event_update_display_area,       // FBIO_EINK_UPDATE_DISPLAY_AREA
-    
+
     einkfb_event_blank_display,             // FBIOBLANK (fb.h)
     einkfb_event_rotate_display,            // FBIO_EINK_SET_DISPLAY_ORIENTATION
-    
+
     einkfb_event_null = -1
 };
 typedef enum einkfb_events_t einkfb_events_t;
@@ -263,16 +263,16 @@ typedef enum einkfb_events_t einkfb_events_t;
 struct einkfb_event_t
 {
     einkfb_events_t event;                  // Not all einkfb_events_t use all of the einkfb_event_t fields.
-    
+
     fx_type         update_mode;            // Screen-update FX:  fx_update_full | fx_update_partial.
-    
+
     // Note:  The bottom-right (x2, y2) coordinate is actually such that (x2 - x1) and (y2 - y1)
     //        are xres and yres, respectively, when normally xres and yres would be
     //        (x2 - x1) + 1 and (y2 - y1) + 1, respectively.
     //
     int             x1, y1,                 // Top-left...
-                    x2, y2;                 // ...bottom-right.
-                    
+    x2, y2;                 // ...bottom-right.
+
     orientation_t   orientation;            // Display rotated into this orientation.
 };
 typedef struct einkfb_event_t einkfb_event_t;
@@ -289,7 +289,7 @@ enum progressbar_badge_t
 {
     progressbar_badge_success,
     progressbar_badge_failure,
-    
+
     progressbar_badge_none
 };
 typedef enum progressbar_badge_t progressbar_badge_t;
@@ -395,6 +395,6 @@ typedef enum sleep_behavior_t sleep_behavior_t;
 extern int fiona_eink_ioctl_stub(unsigned int cmd, unsigned long arg);
 
 #define eink_sys_ioctl(cmd, arg)            (get_fb_ioctl() ? (*get_fb_ioctl())((unsigned int)cmd, (unsigned long)arg)      \
-                                                            : fiona_eink_ioctl_stub((unsigned int)cmd, (unsigned long)arg))
+    : fiona_eink_ioctl_stub((unsigned int)cmd, (unsigned long)arg))
 
 #endif // _EINKFB_H

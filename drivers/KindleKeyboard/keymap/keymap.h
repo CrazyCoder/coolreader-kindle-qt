@@ -33,23 +33,23 @@
 
 struct input_key
 {
-	int input_key_code ;
-	char input_key_name[MAXNAME] ;
+    int input_key_code ;
+    char input_key_name[MAXNAME] ;
 } ;
 
 struct input_key_alias
 {
-	int input_key_code ;
-	int substitute_code ;
+    int input_key_code ;
+    int substitute_code ;
 } ;
 
 struct action
 {
-	int type ;
-	int len ;	/* number of key codes in sequence */
-	short sequence[MAXSEQ] ;
-	char command[MAXPATH] ;
-	char dispname[MAXNAME] ;
+    int type ;
+    int len ;	/* number of key codes in sequence */
+    short sequence[MAXSEQ] ;
+    char command[MAXPATH] ;
+    char dispname[MAXNAME] ;
 };
 
 

@@ -152,7 +152,7 @@ QKindleFb::QKindleFb(int display_id)
 
 QKindleFb::~QKindleFb()
 {
-/*
+    /*
     if (QKindleFbPrivate::instance == this)
         QKindleFbPrivate::instance = 0 ;
 */
@@ -176,63 +176,63 @@ QKindleFb::~QKindleFb()
 #ifdef DEBUG_VINFO
 static void show_info(struct fb_fix_screeninfo *pfinfo, struct fb_var_screeninfo *pvinfo)
 {
-        struct fb_var_screeninfo vinfo = *pvinfo;
-        struct fb_fix_screeninfo finfo = *pfinfo;
+    struct fb_var_screeninfo vinfo = *pvinfo;
+    struct fb_fix_screeninfo finfo = *pfinfo;
 
-        qDebug("finfo: ") ;
-        qDebug("   id=%s", (char *)&finfo.id) ;
-        qDebug("   smem_start=%08x", (int)finfo.smem_start) ;
-        qDebug("   smem_len=%d", finfo.smem_len) ;
-        qDebug("   type=%d", finfo.type) ;
-        qDebug("   type_aux=%d", finfo.type_aux) ;
-        qDebug("   visual=%d", finfo.visual) ;
-        qDebug("   xpanstep=%d", finfo.xpanstep) ;
-        qDebug("   ypanstep=%d", finfo.ypanstep) ;
-        qDebug("   ywrapstep=%d", finfo.ywrapstep) ;
-        qDebug("   line_length=%d", finfo.line_length) ;
-        qDebug("   mmio_start=%08x", (int)finfo.mmio_start) ;
-        qDebug("   mmio_len=%d", finfo.mmio_len) ;
-        qDebug("   accel=%d", finfo.accel) ;
+    qDebug("finfo: ") ;
+    qDebug("   id=%s", (char *)&finfo.id) ;
+    qDebug("   smem_start=%08x", (int)finfo.smem_start) ;
+    qDebug("   smem_len=%d", finfo.smem_len) ;
+    qDebug("   type=%d", finfo.type) ;
+    qDebug("   type_aux=%d", finfo.type_aux) ;
+    qDebug("   visual=%d", finfo.visual) ;
+    qDebug("   xpanstep=%d", finfo.xpanstep) ;
+    qDebug("   ypanstep=%d", finfo.ypanstep) ;
+    qDebug("   ywrapstep=%d", finfo.ywrapstep) ;
+    qDebug("   line_length=%d", finfo.line_length) ;
+    qDebug("   mmio_start=%08x", (int)finfo.mmio_start) ;
+    qDebug("   mmio_len=%d", finfo.mmio_len) ;
+    qDebug("   accel=%d", finfo.accel) ;
 
-        qDebug("vinfo: ") ;
-        qDebug("   xres=%d", vinfo.xres) ;
-        qDebug("   yres=%d", vinfo.yres) ;
-        qDebug("   xres_virt=%d", vinfo.xres_virtual) ;
-        qDebug("   yres_virt=%d", vinfo.yres_virtual) ;
-        qDebug("   xoffset=%d", vinfo.xoffset) ;
-        qDebug("   yoffset=%d", vinfo.yoffset) ;
+    qDebug("vinfo: ") ;
+    qDebug("   xres=%d", vinfo.xres) ;
+    qDebug("   yres=%d", vinfo.yres) ;
+    qDebug("   xres_virt=%d", vinfo.xres_virtual) ;
+    qDebug("   yres_virt=%d", vinfo.yres_virtual) ;
+    qDebug("   xoffset=%d", vinfo.xoffset) ;
+    qDebug("   yoffset=%d", vinfo.yoffset) ;
 
-        qDebug("   bitsperpixel=%d", vinfo.bits_per_pixel) ;
-        qDebug("   grayscale=%d", vinfo.grayscale) ;
+    qDebug("   bitsperpixel=%d", vinfo.bits_per_pixel) ;
+    qDebug("   grayscale=%d", vinfo.grayscale) ;
 
-        qDebug("   nonstd=%d", vinfo.nonstd) ;
-        qDebug("   activate=%d", vinfo.activate) ;
+    qDebug("   nonstd=%d", vinfo.nonstd) ;
+    qDebug("   activate=%d", vinfo.activate) ;
 
-        qDebug("   height=%d", vinfo.height) ;
-        qDebug("   width=%d", vinfo.width) ;
+    qDebug("   height=%d", vinfo.height) ;
+    qDebug("   width=%d", vinfo.width) ;
 
-        qDebug("   flags=%d", vinfo.accel_flags) ;
+    qDebug("   flags=%d", vinfo.accel_flags) ;
 
-        /* Timing: All values in pixclocks, except pixclock (of course) */
-        qDebug("   pixclk=%d", vinfo.pixclock) ;
-        qDebug("   lmargin=%d", vinfo.left_margin) ;
-        qDebug("   rmargin=%d", vinfo.right_margin) ;
-        qDebug("   umargin=%d", vinfo.upper_margin) ;
-        qDebug("   bmargin=%d", vinfo.lower_margin) ;
-        qDebug("   hsync_len=%d", vinfo.hsync_len) ;
-        qDebug("   vsync_len=%d", vinfo.vsync_len) ;
-        qDebug("   sync=%d", vinfo.sync) ;
-        qDebug("   vmode=%d", vinfo.vmode) ;
-        qDebug("   rotate=%d", vinfo.rotate) ;
+    /* Timing: All values in pixclocks, except pixclock (of course) */
+    qDebug("   pixclk=%d", vinfo.pixclock) ;
+    qDebug("   lmargin=%d", vinfo.left_margin) ;
+    qDebug("   rmargin=%d", vinfo.right_margin) ;
+    qDebug("   umargin=%d", vinfo.upper_margin) ;
+    qDebug("   bmargin=%d", vinfo.lower_margin) ;
+    qDebug("   hsync_len=%d", vinfo.hsync_len) ;
+    qDebug("   vsync_len=%d", vinfo.vsync_len) ;
+    qDebug("   sync=%d", vinfo.sync) ;
+    qDebug("   vmode=%d", vinfo.vmode) ;
+    qDebug("   rotate=%d", vinfo.rotate) ;
 
-        qDebug("Red %d %d %d",vinfo.red.offset,vinfo.red.length,
-               vinfo.red.msb_right);
-        qDebug("Green %d %d %d",vinfo.green.offset,vinfo.green.length,
-               vinfo.green.msb_right);
-        qDebug("Blue %d %d %d",vinfo.blue.offset,vinfo.blue.length,
-               vinfo.blue.msb_right);
-        qDebug("Transparent %d %d %d",vinfo.transp.offset,vinfo.transp.length,
-               vinfo.transp.msb_right);
+    qDebug("Red %d %d %d",vinfo.red.offset,vinfo.red.length,
+           vinfo.red.msb_right);
+    qDebug("Green %d %d %d",vinfo.green.offset,vinfo.green.length,
+           vinfo.green.msb_right);
+    qDebug("Blue %d %d %d",vinfo.blue.offset,vinfo.blue.length,
+           vinfo.blue.msb_right);
+    qDebug("Transparent %d %d %d",vinfo.transp.offset,vinfo.transp.length,
+           vinfo.transp.msb_right);
 }
 #endif
 
@@ -382,7 +382,7 @@ bool QKindleFb::connect(const QString &displaySpec)
     }
     if (dimIdxW < 0 && dimIdxH < 0) {
         if (vinfo.width != 0 && vinfo.height != 0
-            && vinfo.width != UINT_MAX && vinfo.height != UINT_MAX) {
+                && vinfo.width != UINT_MAX && vinfo.height != UINT_MAX) {
             physWidth = vinfo.width;
             physHeight = vinfo.height;
         } else {
@@ -432,13 +432,13 @@ bool QKindleFb::connect(const QString &displaySpec)
         startcmap.start=0;
         startcmap.len=screencols;
         startcmap.red=(unsigned short int *)
-                 malloc(sizeof(unsigned short int)*screencols);
+                malloc(sizeof(unsigned short int)*screencols);
         startcmap.green=(unsigned short int *)
-                   malloc(sizeof(unsigned short int)*screencols);
+                malloc(sizeof(unsigned short int)*screencols);
         startcmap.blue=(unsigned short int *)
-                  malloc(sizeof(unsigned short int)*screencols);
+                malloc(sizeof(unsigned short int)*screencols);
         startcmap.transp=(unsigned short int *)
-                    malloc(sizeof(unsigned short int)*screencols);
+                malloc(sizeof(unsigned short int)*screencols);
 
         createPalette(startcmap, vinfo, finfo);
 
@@ -448,8 +448,8 @@ bool QKindleFb::connect(const QString &displaySpec)
                                    startcmap.green[loopc] >> 8,
                                    startcmap.blue[loopc] >> 8);
             bits_used |= startcmap.red[loopc]
-                         | startcmap.green[loopc]
-                         | startcmap.blue[loopc];
+                    | startcmap.green[loopc]
+                    | startcmap.blue[loopc];
         }
         // WORKAROUND: Some framebuffer drivers only return 8 bit
         // color values, so we need to not bit shift them..
@@ -502,13 +502,13 @@ void QKindleFb::createPalette(fb_cmap &cmap, fb_var_screeninfo &vinfo, fb_fix_sc
         cmap.start=0;
         cmap.len=screencols;
         cmap.red=(unsigned short int *)
-                 malloc(sizeof(unsigned short int)*screencols);
+                malloc(sizeof(unsigned short int)*screencols);
         cmap.green=(unsigned short int *)
-                   malloc(sizeof(unsigned short int)*screencols);
+                malloc(sizeof(unsigned short int)*screencols);
         cmap.blue=(unsigned short int *)
-                  malloc(sizeof(unsigned short int)*screencols);
+                malloc(sizeof(unsigned short int)*screencols);
         cmap.transp=(unsigned short int *)
-                    malloc(sizeof(unsigned short int)*screencols);
+                malloc(sizeof(unsigned short int)*screencols);
 
         if (screencols==16) {
             if (finfo.type == FB_TYPE_PACKED_PIXELS) {
@@ -597,9 +597,9 @@ bool QKindleFb::initDevice()
     if (hasCursor)
     {
 #ifdef USE_KINDLE_CURSOR
-    qt_screencursor = new QKindleCursor(d_ptr->fd, data, dw, dh) ;
+        qt_screencursor = new QKindleCursor(d_ptr->fd, data, dw, dh) ;
 #else
-   QScreenCursor::initSoftwareCursor();
+        QScreenCursor::initSoftwareCursor();
 #endif
     }
 #endif
@@ -792,8 +792,8 @@ void QKindleFb::blank(bool on)
 
     if (d_ptr->fd == -1)
         return;
-// Some old kernel versions don't have this.  These defines should go
-// away eventually
+    // Some old kernel versions don't have this.  These defines should go
+    // away eventually
 #if defined(FBIOBLANK)
 #if defined(VESA_POWERDOWN) && defined(VESA_NO_BLANKING)
     ioctl(d_ptr->fd, FBIOBLANK, on ? VESA_POWERDOWN : VESA_NO_BLANKING);
@@ -826,7 +826,7 @@ void QKindleFb::solidFill(const QColor &color, const QRegion &reg)
 }
 
 void QKindleFb::blit16To4(const QImage &image,
-                              const QPoint &topLeft, const QRegion &region)
+                          const QPoint &topLeft, const QRegion &region)
 {
     const int imageStride = image.bytesPerLine() / 2;
     const QVector<QRect> rects = region.rects();
@@ -859,7 +859,7 @@ void QKindleFb::blit16To4(const QImage &image,
 }
 
 void QKindleFb::blit12To4(const QImage &image,
-                              const QPoint &topLeft, const QRegion &region)
+                          const QPoint &topLeft, const QRegion &region)
 {
     const int imageStride = image.bytesPerLine() / 2;
     const QVector<QRect> rects = region.rects();
@@ -893,7 +893,7 @@ void QKindleFb::blit12To4(const QImage &image,
 
 
 void QKindleFb::blit32To4(const QImage &image,
-                              const QPoint &topLeft, const QRegion &region)
+                          const QPoint &topLeft, const QRegion &region)
 {
     const int imageStride = image.bytesPerLine() / 4;
     const QVector<QRect> rects = region.rects();
@@ -946,26 +946,26 @@ void QKindleFb::blit(const QImage& image, const QPoint& topLeft, const QRegion& 
 }
 
 void QKindleFb::blit_K4(const QImage &img, const QPoint &topLeft,
-                         const QRegion &reg)
+                        const QRegion &reg)
 {
 
-        switch (img.format()) {
-        case QImage::Format_RGB16:
-            blit16To4(img, topLeft, reg);
-            return;
-        case QImage::Format_RGB32:
-        case QImage::Format_ARGB32:
-        case QImage::Format_ARGB32_Premultiplied:
-            blit32To4(img, topLeft, reg);
-            return;
-        case QImage::Format_RGB444:
-            blit12To4(img, topLeft, reg);
-            return;
-        default:
-            break;
-        }
+    switch (img.format()) {
+    case QImage::Format_RGB16:
+        blit16To4(img, topLeft, reg);
+        return;
+    case QImage::Format_RGB32:
+    case QImage::Format_ARGB32:
+    case QImage::Format_ARGB32_Premultiplied:
+        blit32To4(img, topLeft, reg);
+        return;
+    case QImage::Format_RGB444:
+        blit12To4(img, topLeft, reg);
+        return;
+    default:
+        break;
+    }
 
-        QScreen::blit(img, topLeft, reg);
+    QScreen::blit(img, topLeft, reg);
 }
 
 void QKindleFb::k4_hline(int x1, int y, int x2, int c)

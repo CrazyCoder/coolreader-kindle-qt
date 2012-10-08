@@ -16,7 +16,7 @@
 
 FiveWayPlugin::FiveWayPlugin(QObject* parent) : QMouseDriverPlugin(parent)
 {
-//    qDebug("FiveWayPlugin()");
+    //    qDebug("FiveWayPlugin()");
 }
 
 QStringList FiveWayPlugin::keys() const

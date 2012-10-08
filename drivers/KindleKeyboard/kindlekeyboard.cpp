@@ -45,73 +45,73 @@ static int resume_cvm(int is_kindle3)
 
 void KindleKeyboard::capture_input(void)
 {
-        int on = 1 ;
+    int on = 1 ;
 
 
-        if (!input_captured )
+    if (!input_captured )
+    {
+        if (_debug)
+            qDebug("attempting to capture input...");
+
+        if (_fd != -1)
         {
-            if (_debug)
-                qDebug("attempting to capture input...");
-
-            if (_fd != -1)
-            {
-                    if (ioctl(_fd, EVIOCGRAB, on)) {
-                        if (_debug)
-                            qDebug("Capture kbd input: error");
-                    }
+            if (ioctl(_fd, EVIOCGRAB, on)) {
+                if (_debug)
+                    qDebug("Capture kbd input: error");
             }
-            if (fiveway_fd != -1)
-            {
-                    if (ioctl(fiveway_fd, EVIOCGRAB, on)) {
-                        if (_debug)
-                            qDebug("Capture fw input: error");
-                    }
-            }
-            if (k3_fd != -1)
-            {
-                if (ioctl(k3_fd, EVIOCGRAB, on)) {
-                    if (_debug)
-                        qDebug("Capture k3_vol input: error");
-                }
-            }
-
-            input_captured = true ;
         }
+        if (fiveway_fd != -1)
+        {
+            if (ioctl(fiveway_fd, EVIOCGRAB, on)) {
+                if (_debug)
+                    qDebug("Capture fw input: error");
+            }
+        }
+        if (k3_fd != -1)
+        {
+            if (ioctl(k3_fd, EVIOCGRAB, on)) {
+                if (_debug)
+                    qDebug("Capture k3_vol input: error");
+            }
+        }
+
+        input_captured = true ;
+    }
 }
 
 void KindleKeyboard::release_input(void)
 {
-        int off = 0 ;
+    int off = 0 ;
 
-        if (input_captured )
+    if (input_captured )
+    {
+        if (_debug)
+            qDebug("attempting to release input...");
+
+        if (_fd != -1)
         {
-            if (_debug)
-                qDebug("attempting to release input...");
-
-                if (_fd != -1)
-                {
-                        if (ioctl(_fd, EVIOCGRAB, off)) {
-                            if (_debug)
-                                qDebug("Release kbd input: error");
-                        }
-                }
-                if (fiveway_fd != -1)
-                {
-                        if (ioctl(fiveway_fd, EVIOCGRAB, off)) {
-                            if (_debug)
-                                qDebug("Release fw input: error");
-                        }
-                }
-                if (k3_fd != -1)
-                {
-                        if (ioctl(k3_fd, EVIOCGRAB, off)) {
-                            if (_debug)
-                                qDebug("Release k3_vol input: error");
-                        }
-                }
-
-                input_captured = false ;
+            if (ioctl(_fd, EVIOCGRAB, off)) {
+                if (_debug)
+                    qDebug("Release kbd input: error");
+            }
         }
+        if (fiveway_fd != -1)
+        {
+            if (ioctl(fiveway_fd, EVIOCGRAB, off)) {
+                if (_debug)
+                    qDebug("Release fw input: error");
+            }
+        }
+        if (k3_fd != -1)
+        {
+            if (ioctl(k3_fd, EVIOCGRAB, off)) {
+                if (_debug)
+                    qDebug("Release k3_vol input: error");
+            }
+        }
+
+        input_captured = false ;
+    }
 }
 
 
@@ -241,7 +241,7 @@ void KindleKeyboard::fiveway_activity(int)
 
     if (in.type == 1)
     {
-       switch(in.code)
+        switch(in.code)
         {
         case KDX_KEY_5WPRESS:
         case K3_KEY_5WPRESS:
@@ -328,29 +328,29 @@ void KindleKeyboard::k3_activity(int)
 
         switch(in.code)
         {
-            case K3_KEY_VPLUS: // Vol+
-                unicode = '+' ;
-                keycode = Qt::Key_Plus ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case K3_KEY_VMINUS: // Vol-
-                unicode = '-' ;
-                keycode = Qt::Key_Minus ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            default:
-                unicode = -1 ;
-                keycode = -1 ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                if (_debug)
-                {
-                    QString debugText = QString("***Unknown: type %1, code %2, value %3").arg(in.type).arg(in.code).arg(in.value);
-                    qDebug("%s", (const char*)debugText.toAscii());
-                    //logKey(debugText);
-                }
-                break;
+        case K3_KEY_VPLUS: // Vol+
+            unicode = '+' ;
+            keycode = Qt::Key_Plus ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case K3_KEY_VMINUS: // Vol-
+            unicode = '-' ;
+            keycode = Qt::Key_Minus ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        default:
+            unicode = -1 ;
+            keycode = -1 ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            if (_debug)
+            {
+                QString debugText = QString("***Unknown: type %1, code %2, value %3").arg(in.type).arg(in.code).arg(in.value);
+                qDebug("%s", (const char*)debugText.toAscii());
+                //logKey(debugText);
+            }
+            break;
         }
 
         if ((is_qt_app_frozen == false) && (unicode != -1))
@@ -505,322 +505,322 @@ void KindleKeyboard::activity(int)
 
         switch(in.code)
         {
-            // Alt+Row1
-            case KDX_KEY_1:
-            case KDX_KEY_2:
-            case KDX_KEY_3:
-            case KDX_KEY_4:
-            case KDX_KEY_5:
-            case KDX_KEY_6:
-            case KDX_KEY_7:
-            case KDX_KEY_8:
-            case KDX_KEY_9:
-                unicode = '0' - 1 + in.code ;
-                keycode =  Qt::Key_0 - 1 + in.code ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_0:
-                unicode = '0';
-                keycode =  Qt::Key_0 ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+        // Alt+Row1
+        case KDX_KEY_1:
+        case KDX_KEY_2:
+        case KDX_KEY_3:
+        case KDX_KEY_4:
+        case KDX_KEY_5:
+        case KDX_KEY_6:
+        case KDX_KEY_7:
+        case KDX_KEY_8:
+        case KDX_KEY_9:
+            unicode = '0' - 1 + in.code ;
+            keycode =  Qt::Key_0 - 1 + in.code ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_0:
+            unicode = '0';
+            keycode =  Qt::Key_0 ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
             break;
 
             // Row1
-            case KDX_KEY_Q:
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'Q' : 'q' ;
-                keycode = Qt::Key_Q ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_W:
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'W' : 'w' ;
-                keycode = Qt::Key_W ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_E:
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'E' : 'e' ;
-                keycode = Qt::Key_E ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_R:
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'R' : 'r' ;
-                keycode = Qt::Key_R ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_T:
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'T' : 't' ;
-                keycode = Qt::Key_T ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_Y:
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'Y' : 'y' ;
-                keycode = Qt::Key_Y ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_U:
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'U' : 'u' ;
-                keycode = Qt::Key_U ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_I:
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'I' : 'i' ;
-                keycode = Qt::Key_I ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_O:
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'O' : 'o' ;
-                keycode = Qt::Key_O ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_P:
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'P' : 'p' ;
-                keycode = Qt::Key_P ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
+        case KDX_KEY_Q:
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'Q' : 'q' ;
+            keycode = Qt::Key_Q ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_W:
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'W' : 'w' ;
+            keycode = Qt::Key_W ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_E:
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'E' : 'e' ;
+            keycode = Qt::Key_E ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_R:
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'R' : 'r' ;
+            keycode = Qt::Key_R ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_T:
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'T' : 't' ;
+            keycode = Qt::Key_T ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_Y:
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'Y' : 'y' ;
+            keycode = Qt::Key_Y ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_U:
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'U' : 'u' ;
+            keycode = Qt::Key_U ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_I:
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'I' : 'i' ;
+            keycode = Qt::Key_I ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_O:
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'O' : 'o' ;
+            keycode = Qt::Key_O ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_P:
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'P' : 'p' ;
+            keycode = Qt::Key_P ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
 
             // Row2
-            case KDX_KEY_A: // row 2
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'A' : 'a' ;
-                keycode = Qt::Key_A ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_S: // row 2
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'S' : 's' ;
-                keycode = Qt::Key_S ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_D: // row 2
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'D' : 'd' ;
-                keycode = Qt::Key_D ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_F: // row 2
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'F' : 'f' ;
-                keycode = Qt::Key_F ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_G: // row 2
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'G' : 'g' ;
-                keycode = Qt::Key_G ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_H: // row 2
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'H' : 'h' ;
-                keycode = Qt::Key_H ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_J: // row 2
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'J' : 'j' ;
-                keycode = Qt::Key_J ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_K: // row 2
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'K' : 'k' ;
-                keycode = Qt::Key_K ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_L: // row 2
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'L' : 'l' ;
-                keycode = Qt::Key_L ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_DEL: // row 2
-                unicode = 0 ;
-                keycode = Qt::Key_Backspace ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
+        case KDX_KEY_A: // row 2
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'A' : 'a' ;
+            keycode = Qt::Key_A ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_S: // row 2
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'S' : 's' ;
+            keycode = Qt::Key_S ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_D: // row 2
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'D' : 'd' ;
+            keycode = Qt::Key_D ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_F: // row 2
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'F' : 'f' ;
+            keycode = Qt::Key_F ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_G: // row 2
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'G' : 'g' ;
+            keycode = Qt::Key_G ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_H: // row 2
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'H' : 'h' ;
+            keycode = Qt::Key_H ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_J: // row 2
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'J' : 'j' ;
+            keycode = Qt::Key_J ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_K: // row 2
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'K' : 'k' ;
+            keycode = Qt::Key_K ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_L: // row 2
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'L' : 'l' ;
+            keycode = Qt::Key_L ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_DEL: // row 2
+            unicode = 0 ;
+            keycode = Qt::Key_Backspace ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
 
             // Row3
-            case KDX_KEY_Z: // row 3
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'Z' : 'z' ;
-                keycode = Qt::Key_Z ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_X: // row 3
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'X' : 'x' ;
-                keycode = Qt::Key_X ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_C: // row 3
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'C' : 'c' ;
-                keycode = Qt::Key_C ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_V: // row 3
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'V' : 'v' ;
-                keycode = Qt::Key_V ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_B: // row 3
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'B' : 'b' ;
-                keycode = Qt::Key_B ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_N: // row 3
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'N' : 'n' ;
-                keycode = Qt::Key_N ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_M: // row 3
-                unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'M' : 'm' ;
-                keycode = Qt::Key_M ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_DOT: // row 3
-                unicode = '.' ;
-                keycode = Qt::Key_Period ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_SLASH: // row 3
-                unicode = '/' ;
-                keycode = Qt::Key_Slash ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_ENTER: // row 3
-                unicode = '\n' ;
-                keycode = Qt::Key_Return ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
+        case KDX_KEY_Z: // row 3
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'Z' : 'z' ;
+            keycode = Qt::Key_Z ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_X: // row 3
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'X' : 'x' ;
+            keycode = Qt::Key_X ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_C: // row 3
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'C' : 'c' ;
+            keycode = Qt::Key_C ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_V: // row 3
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'V' : 'v' ;
+            keycode = Qt::Key_V ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_B: // row 3
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'B' : 'b' ;
+            keycode = Qt::Key_B ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_N: // row 3
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'N' : 'n' ;
+            keycode = Qt::Key_N ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_M: // row 3
+            unicode = ((_shift==TRUE) || (_alt==TRUE)) ? 'M' : 'm' ;
+            keycode = Qt::Key_M ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_DOT: // row 3
+            unicode = '.' ;
+            keycode = Qt::Key_Period ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_SLASH: // row 3
+            unicode = '/' ;
+            keycode = Qt::Key_Slash ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_ENTER: // row 3
+            unicode = '\n' ;
+            keycode = Qt::Key_Return ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
 
             // Row4
-            case KDX_KEY_SHIFT:
-                ++_nshifts ;
-                unicode = 0 ;
-                keycode = Qt::Key_Shift ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+        case KDX_KEY_SHIFT:
+            ++_nshifts ;
+            unicode = 0 ;
+            keycode = Qt::Key_Shift ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
 
-                if (_nshifts >= 3 )
-                {
-                    do_screenshot((char *) "/mnt/us/screenshot.bmp") ;
-                    _nshifts = 0 ;
-                    _shift = false ;
-                    break ;
-                }
-                _shift = (in.value != 0) ;
-                mods = GetCurModifiers() ;
-                //processKeyEvent(0, Qt::Key_Shift, _alt ? Qt::AltModifier : Qt::NoModifier, in.value != 0, in.value == 2);
-                break;
-            case KDX_KEY_ALT:
-                _alt = (in.value != 0);
-                unicode = 0 ;
-                keycode = Qt::Key_Alt ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_SPACE: // space
-                unicode = ' ' ;
-                keycode = Qt::Key_Space ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_AA: // Aa -- might be used to switch between charsets...
-            case K3_KEY_AA:
-                unicode = 0 ;
-                keycode = Qt::Key_Mode_switch;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_SYM: // SYM
-            case K3_KEY_SYM:
-            case K4_KEY_KBD:
-                _altgray = (in.value != 0);
-                unicode = 0 ;
-                keycode = Qt::Key_AltGr ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            if (_nshifts >= 3 )
+            {
+                do_screenshot((char *) "/mnt/us/screenshot.bmp") ;
+                _nshifts = 0 ;
+                _shift = false ;
+                break ;
+            }
+            _shift = (in.value != 0) ;
+            mods = GetCurModifiers() ;
+            //processKeyEvent(0, Qt::Key_Shift, _alt ? Qt::AltModifier : Qt::NoModifier, in.value != 0, in.value == 2);
+            break;
+        case KDX_KEY_ALT:
+            _alt = (in.value != 0);
+            unicode = 0 ;
+            keycode = Qt::Key_Alt ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_SPACE: // space
+            unicode = ' ' ;
+            keycode = Qt::Key_Space ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_AA: // Aa -- might be used to switch between charsets...
+        case K3_KEY_AA:
+            unicode = 0 ;
+            keycode = Qt::Key_Mode_switch;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_SYM: // SYM
+        case K3_KEY_SYM:
+        case K4_KEY_KBD:
+            _altgray = (in.value != 0);
+            unicode = 0 ;
+            keycode = Qt::Key_AltGr ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
             break;
 
             // Edge
-            case KDX_KEY_VPLUS: // Vol+
-                unicode = '+' ;
-                keycode = Qt::Key_Plus ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_VMINUS: // Vol-
-                unicode = '-' ;
-                keycode = Qt::Key_Minus ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_HOME: // home
-            case K3_KEY_HOME:
-                unicode = 0 ;
-                keycode = Qt::Key_Home ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_PAGEUP: // prev
-            case K3_KEY_LPAGEUP:
-                unicode = 0 ;
-                keycode = Qt::Key_PageUp ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_PAGEDN: // next
-            case K3_KEY_PAGEDN:
-            case K3_KEY_LPAGEDN: // next on left side of kindle 2
-                unicode = 0 ;
-                keycode = Qt::Key_PageDown ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_MENU: // menu
-                unicode = 0 ;
-                keycode = Qt::Key_Menu ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
-            case KDX_KEY_BACK: // back
-            case K3_KEY_BACK:
-                unicode = 0 ;
-                keycode = Qt::Key_Escape ;
-                mods = GetCurModifiers() ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                break;
+        case KDX_KEY_VPLUS: // Vol+
+            unicode = '+' ;
+            keycode = Qt::Key_Plus ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_VMINUS: // Vol-
+            unicode = '-' ;
+            keycode = Qt::Key_Minus ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_HOME: // home
+        case K3_KEY_HOME:
+            unicode = 0 ;
+            keycode = Qt::Key_Home ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_PAGEUP: // prev
+        case K3_KEY_LPAGEUP:
+            unicode = 0 ;
+            keycode = Qt::Key_PageUp ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_PAGEDN: // next
+        case K3_KEY_PAGEDN:
+        case K3_KEY_LPAGEDN: // next on left side of kindle 2
+            unicode = 0 ;
+            keycode = Qt::Key_PageDown ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_MENU: // menu
+            unicode = 0 ;
+            keycode = Qt::Key_Menu ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
+        case KDX_KEY_BACK: // back
+        case K3_KEY_BACK:
+            unicode = 0 ;
+            keycode = Qt::Key_Escape ;
+            mods = GetCurModifiers() ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            break;
 
-            default:
-                unicode = -1 ;
-                keycode = -1 ;
-                ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
-                if (_debug)
-                {
-                    QString debugText = QString("***Unknown: type %1, code %2, value %3").arg(in.type).arg(in.code).arg(in.value);
-                    qDebug("%s", (const char*)debugText.toAscii());
-                    //logKey(debugText);
-                }
-                break;
+        default:
+            unicode = -1 ;
+            keycode = -1 ;
+            ispressed = (in.value !=  0) ; isautorpt = (in.value == 2) ;
+            if (_debug)
+            {
+                QString debugText = QString("***Unknown: type %1, code %2, value %3").arg(in.type).arg(in.code).arg(in.value);
+                qDebug("%s", (const char*)debugText.toAscii());
+                //logKey(debugText);
+            }
+            break;
         }
 
         if ((is_qt_app_frozen == false) && (unicode != -1))
@@ -851,7 +851,7 @@ void KindleKeyboard::activity(int)
         {
             ////qDebug("Shift, Alt or unknown key.. not sent downstream") ;
         }
-/***
+        /***
         {
         }
 ***/

@@ -20,7 +20,7 @@
 
 KeyboardPlugin::KeyboardPlugin(QObject* parent) : QKbdDriverPlugin(parent)
 {
-//    qDebug("KeyboardPlugin()");
+    //    qDebug("KeyboardPlugin()");
 }
 
 QStringList KeyboardPlugin::keys() const
