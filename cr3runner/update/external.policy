@@ -1,0 +1,87 @@
+/*
+  Kindlet permissions
+ */
+keystore "kindlet.keystore", "JKS";
+
+// Permissions all Kindlets should have
+grant signedBy "Kindlet" {
+  permission java.util.PropertyPermission "java.home", "read";
+  permission java.util.PropertyPermission "runtime_exec", "read";
+  permission java.util.PropertyPermission "kindlet.home", "read";
+
+  /* Standard Java properties.  This list only covers properties that do not unnecessarily leak
+   * information.  user.dir, user.home and user.name are explicitly not permitted.
+   * See http://java.sun.com/javame/reference/apis/jsr217/java/lang/System.html#getProperties()
+   */
+  // Information about the version of Java the application is running on
+  permission java.util.PropertyPermission "java.version", "read";
+  permission java.util.PropertyPermission "java.vendor", "read";
+  permission java.util.PropertyPermission "java.vm.specification.version", "read";
+  permission java.util.PropertyPermission "java.vm.specification.vendor", "read";
+  permission java.util.PropertyPermission "java.vm.specification.name", "read";
+  permission java.util.PropertyPermission "java.vm.version", "read";
+  permission java.util.PropertyPermission "java.vm.vendor", "read";
+  permission java.util.PropertyPermission "java.vm.name", "read";
+  permission java.util.PropertyPermission "java.specification.version", "read";
+  permission java.util.PropertyPermission "java.specification.vendor", "read";
+  permission java.util.PropertyPermission "java.specification.name", "read";
+  permission java.util.PropertyPermission "java.verbose", "read";
+
+  // For code that behaves differently under Windows.  The version of Linux is already available
+  // externally due to open source licenses.
+  permission java.util.PropertyPermission "os.name", "read";
+  permission java.util.PropertyPermission "os.arch", "read";
+  permission java.util.PropertyPermission "os.version", "read";
+
+  // File, path and line separators
+  permission java.util.PropertyPermission "file.separator", "read";
+  permission java.util.PropertyPermission "path.separator", "read";
+  permission java.util.PropertyPermission "line.separator", "read";
+};
+
+// Permissions needed by Kindlets that can use the network
+grant signedBy "KindletNetworkSupport" {
+  // Network access by Kindlets must be controlled
+  permission com.amazon.kindle.kindlet.internal.net.security.NetworkAccessPermission "createConnection";
+};
+
+// Permissions needed by the Java framework &/or Kindlets that have a UI
+grant signedBy "KindletInteractionSupport" {
+  /* Required by Component#frameBufferSync */
+  permission java.util.PropertyPermission "awt_fb_enable", "read";
+
+  /* E-ink framebuffer specific properties. */
+  permission java.util.PropertyPermission "fiona_fb_flag", "read";
+  permission java.util.PropertyPermission "fiona_fb_command", "read";
+
+  permission java.util.PropertyPermission "fiona_partial_update_upper_x", "read";
+  permission java.util.PropertyPermission "fiona_partial_update_lower_x", "read";
+  permission java.util.PropertyPermission "fiona_partial_update_upper_y", "read";
+  permission java.util.PropertyPermission "fiona_partial_update_lower_y", "read";
+
+  permission java.util.PropertyPermission "fiona_screen_effect", "read";
+
+  /* The event queue that Kindlet has access to is in its own AppContext. */
+  permission java.awt.AWTPermission "accessEventQueue";
+
+  /* Properties provided by the PBP. See
+   * http://java.sun.com/javame/reference/apis/jsr217/doc-files/properties.html
+   */
+  permission java.util.PropertyPermission "java.awt.AlphaComposite.SRC_OVER_.isRestricted", "read";
+  permission java.util.PropertyPermission "java.awt.Graphics2D.setStroke.BasicStroke.isRestricted", "read";
+  permission java.util.PropertyPermission "java.awt.event.MouseEvent.isRestricted", "read";
+  permission java.util.PropertyPermission "java.awt.event.MouseEvent.supportLevel", "read";
+  permission java.util.PropertyPermission "java.awt.event.KeyEvent.isRestricted", "read";
+  permission java.util.PropertyPermission "java.awt.event.KeyEvent.supportMask", "read";
+  permission java.util.PropertyPermission "java.awt.Component.setCursor.isRestricted", "read";
+  /* The optional permissions for java.awt.Frame are not granted since Frame is not whitelisted. */
+};
+
+// Permissions needed by 3rd party libs provided with the SDK
+grant codeBase "file:///opt/amazon/ebook/sdk/lib/-" {
+  permission java.util.PropertyPermission "org.w3c.dom.DOMImplementationSourceList", "read";
+};
+
+grant {
+  permission java.io.FilePermission "/mnt/us/-", "read,write,execute";
+};
