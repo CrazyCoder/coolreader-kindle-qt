@@ -100,3 +100,7 @@ QDoubleSpinBox {
     selection-color: white;
     selection-background-color: black;
 }
+
+QDialog{
+    border: 2px solid black;
+}
