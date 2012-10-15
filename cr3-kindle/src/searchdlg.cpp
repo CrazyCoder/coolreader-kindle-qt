@@ -58,7 +58,7 @@ bool SearchDialog::eventFilter(QObject *obj, QEvent *event)
         QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
         QString text;
         bool isSHIFT = (keyEvent->modifiers()==Qt::ShiftModifier);
-        bool isALT = (keyEvent->modifiers()==Qt::AltModifier);
+        // bool isALT = (keyEvent->modifiers()==Qt::AltModifier);
         switch(keyEvent->key()) {
         case Qt::Key_Space:
             if(isSHIFT) {

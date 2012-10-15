@@ -123,7 +123,7 @@ PropsRef operator ^ ( PropsRef props1, PropsRef props2 )
 void cr2qt( QStringList & dst, const lString16Collection & src )
 {
     dst.clear();
-    for ( unsigned i=0; i<src.length(); i++ ) {
+    for ( int i=0; i<src.length(); i++ ) {
         dst.append( cr2qt( src[i] ) );
     }
 }
@@ -145,7 +145,7 @@ void crGetFontFaceList(QStringList & dst)
 
 QString crpercent(int p)
 {
-    return QString().sprintf("%.2f %", (double)p/100);
+    return QString().sprintf("%.2f%%", (double)p/100);
 }
 
 QString crFileSize(int fsize)

@@ -26,10 +26,10 @@ private slots:
     void on_actionPrevTab_triggered();
 
 private:
+    Ui::VirtualKeysDialog *ui;
     CR3View * _docview;
     QLineEdit * _editline;
     lString16 _lastPattern;
-    Ui::VirtualKeysDialog *ui;
 };
 
 #endif // VIRTUALKEYSDLG_H
