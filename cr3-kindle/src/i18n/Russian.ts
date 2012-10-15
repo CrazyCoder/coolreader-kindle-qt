@@ -788,7 +788,7 @@
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation>Чувствительность к регистру</translation>
+        <translation>Учитывать регистр</translation>
     </message>
     <message>
         <source>Search forward</source>

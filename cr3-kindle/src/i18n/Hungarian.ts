@@ -1149,4 +1149,103 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>QDialogButtonBox</name>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Mentés</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>Menté&amp;s</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Megnyitás</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Mégsem</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Mégsem</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Bezárás</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation>&amp;Bezárás</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>Alkalmaz</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation>Törlés</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Súgó</translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation>Nincs mentés</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation>Elvetés</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>&amp;Igen</translation>
+    </message>
+    <message>
+        <source>Yes to &amp;All</source>
+        <translation>&amp;Mindent elfogad</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation>&amp;Nem</translation>
+    </message>
+    <message>
+        <source>N&amp;o to All</source>
+        <translation>Mindent &amp;kihagy</translation>
+    </message>
+    <message>
+        <source>Save All</source>
+        <translation>Mindet menti</translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation>Megszakítás</translation>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation>Újra</translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation>Kihagyás</translation>
+    </message>
+    <message>
+        <source>Restore Defaults</source>
+        <translation>Alapértelmezések visszaállítása</translation>
+    </message>
+    <message>
+        <source>Close without Saving</source>
+        <translation>Bezárás mentés nélkül</translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
+    </message>
+</context>
 </TS>
