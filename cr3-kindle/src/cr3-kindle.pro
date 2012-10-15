@@ -13,6 +13,9 @@ TARGET_KINDLE:DEFINES += QT_KEYPAD_NAVIGATION
 
 debug:DEFINES += _DEBUG=1
 
+QMAKE_CFLAGS_WARN_ON = -Wall -Wno-unused-parameter
+QMAKE_CXXFLAGS_WARN_ON = -Wall -Wno-unused-parameter
+
 INCLUDEPATH += $$(QTDIR)/include \
                $$(QTDIR)/include/QtCore \
                $$(QTDIR)/include/QtGui \

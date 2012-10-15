@@ -16,6 +16,8 @@
 #include <QFileInfo>
 #include <QDesktopServices>
 
+static int cr_interline_spaces[] = { 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150 };
+
 /// to hide non-qt implementation, place all crengine-related fields here
 class CR3View::DocViewData
 {
@@ -309,7 +311,7 @@ CR3View::CR3View( QWidget *parent)
     _selRange.setEnd(p2);
 
     int cr_font_sizes[MAX_CR_FONT_SIZE - MIN_CR_FONT_SIZE + 1];
-    for(int i = 0; i < sizeof(cr_font_sizes)/sizeof(int); i++)
+    for(unsigned int i = 0; i < sizeof(cr_font_sizes)/sizeof(int); i++)
         cr_font_sizes[i] = MIN_CR_FONT_SIZE + i;
     LVArray<int> sizes(cr_font_sizes, sizeof(cr_font_sizes)/sizeof(int));
     _docview->setFontSizes(sizes, false);

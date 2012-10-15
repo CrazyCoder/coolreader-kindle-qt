@@ -13,9 +13,6 @@
 #define DEF_HEADER_FONT_SIZE	22
 #define DEF_FONT_SIZE			32
 
-static int cr_interline_spaces[] = { 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150 };
-static int def_margin[] = { 0, 1, 2, 3, 4, 5, 8, 10, 12, 14, 15, 16, 20, 25, 30 };
-
 #define PROP_WINDOW_ROW_COUNT		"window.row.count"
 
 class LVDocView;
