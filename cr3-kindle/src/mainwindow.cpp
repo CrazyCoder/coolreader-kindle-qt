@@ -150,7 +150,6 @@ void MainWindow::goingToScreenSaver()
 #ifndef i386
     if (!usbDriveMode && !screenSaverMode) {
         qDebug("screensaver on");
-        QWSServer::instance()->enablePainting(false);
         QProcess::execute("killall -cont cvm");
     }
     screenSaverMode = true;
@@ -164,7 +163,6 @@ void MainWindow::outOfScreenSaver()
         qDebug("screensaver off");
         sleep(1);
         QProcess::execute("killall -stop cvm");
-        QWSServer::instance()->enablePainting(true);
         QWSServer::instance()->refresh();
     }
     screenSaverMode = false;
@@ -177,7 +175,6 @@ void MainWindow::usbDriveConnected()
     screenSaverMode = false; // screensaver is disabled automatically when USB is connected
     if (!usbDriveMode) {
         qDebug("usb drive on");
-        QWSServer::instance()->enablePainting(false);
         QWSServer::instance()->closeKeyboard();
         sleep(1);
         QProcess::execute("killall -cont cvm");
@@ -193,7 +190,6 @@ void MainWindow::usbDriveDisconnected()
         qDebug("usb drive off");
         sleep(1);
         QProcess::execute("killall -stop cvm");
-        QWSServer::instance()->enablePainting(true);
         QWSServer::instance()->openKeyboard();
         QWSServer::instance()->refresh();
     }
