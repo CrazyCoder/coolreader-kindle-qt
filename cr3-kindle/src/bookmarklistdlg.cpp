@@ -1,6 +1,8 @@
 #include "bookmarklistdlg.h"
 #include "ui_bookmarklistdlg.h"
 
+#include <QShortcut>
+
 #define MAX_ITEM_LEN 50
 
 static QString limit(QString s)
@@ -17,7 +19,11 @@ BookmarkListDialog::BookmarkListDialog(QWidget *parent, CR3View * docView ) :
 {
     m_ui->setupUi(this);
 
-    addAction(m_ui->actionRemoveBookmark);
+    QAction *actionRemoveBookmark = m_ui->actionRemoveBookmark;
+    QShortcut* kbd = new QShortcut(Qt::Key_AltGr, this); // quick hack to delete bookmarks on K4NT with KBD key
+    connect(kbd, SIGNAL(activated()), actionRemoveBookmark, SLOT(trigger()));
+    addAction(actionRemoveBookmark);
+
     addAction(m_ui->actionRemoveAllBookmarks);
     QAction *actionSelect = m_ui->actionSelectBookmark;
     actionSelect->setShortcut(Qt::Key_Select);
