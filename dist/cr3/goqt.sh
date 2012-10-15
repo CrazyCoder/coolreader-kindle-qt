@@ -25,8 +25,12 @@ then
       exit 1
 fi
 
-##/etc/init.d/framework stop
-##kill -STOP `pidof cvm`
+# uncomment to shut down the Amazon framework
+# /etc/init.d/framework stop
+
+# stop cvm
+killall -stop cvm
+
 export LD_LIBRARY_PATH=/mnt/us/qtKindle/lib:`pwd`/lib
 export QT_PLUGIN_PATH=/mnt/us/qtKindle/plugins
 export QT_QWS_FONTDIR=/mnt/us/qtKindle/lib/fonts
@@ -34,11 +38,10 @@ export QT_QWS_FONTDIR=/mnt/us/qtKindle/lib/fonts
 export QWS_MOUSE_PROTO=none
 export QWS_KEYBOARD=KindleKeyboard
 export QWS_DISPLAY=QKindleFb
-##/etc/rc.d/keep_awake &
+
 echo "./$1 -qws"
 ./"$1" -qws
-#
-##killall keep_awake
+
 cd $SAVE_DIR
-##/etc/init.d/framework start
-##kill -CONT `pidof cvm`
+# always try to continue cvm
+killall -cont cvm || /etc/init.d/framework start
