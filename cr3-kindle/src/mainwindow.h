@@ -14,6 +14,7 @@
 #include <QTranslator>
 #include <QTextCodec>
 #include <QClipboard>
+#include <QWSServer>
 
 #include "cr3widget.h"
 #include "crqtutil.h"
@@ -97,12 +98,60 @@ public:
     }
 };
 
+namespace Ui {
+class MainWindowClass;
+}
+
+class MainWindow : public QMainWindow, public PropsChangeCallback
+{
+    Q_OBJECT
+public:
+    MainWindow(QWidget *parent = 0);
+    ~MainWindow();
+
+    virtual void onPropsChange(PropsRef props);
+    void doStartupActions();
+
+    void connectSystemBus();
+    void disconnectSystemBus();
+private:
+    Ui::MainWindowClass *ui;
+    QString _filenameToOpen;
+    CRGUIAcceleratorTableRef wndkeys;
+    bool loadKeymaps(CRGUIWindowManager & winman, const char * locations[]);
+    void doCommand(int cmd, int param = 0);
+    bool isReservedKey(int key);
+
+    bool usbDriveMode;
+    bool screenSaverMode;
+public slots:
+    void contextMenu( QPoint pos );
+    void on_actionFindText_triggered();
+private slots:
+    void on_actionFileProperties_triggered();
+    void on_actionShowBookmarksList_triggered();
+    void on_actionAddBookmark_triggered();
+    void on_actionSettings_triggered();
+    void on_actionRecentBooks_triggered();
+    void on_actionTOC_triggered();
+    void on_actionPrevPage_triggered();
+    void on_actionNextPage_triggered();
+    void on_actionClose_triggered();
+    void on_actionOpen_triggered();
+    void on_actionShowMenu_triggered();
+    void on_actionEmpty_triggered();
+
+    void battLevelChanged(int fparam);
+    void goingToScreenSaver();
+    void outOfScreenSaver();
+    void usbDriveConnected();
+    void usbDriveDisconnected();
+};
+
 class MyApplication : public QApplication {
     Q_OBJECT
 public:
     MyApplication(int &argc, char **argv) : QApplication(argc, argv) {
-        connectPowerDaemon();
-
         QPalette palette;
         palette.setColor(QPalette::Window, Qt::white);
         palette.setColor(QPalette::WindowText, Qt::black);
@@ -121,68 +170,23 @@ public:
         setNavigationMode(Qt::NavigationModeKeypadTabOrder);
         setEventFilter(myEventFilter);
     }
-    void connectPowerDaemon() {
+
+    void setMainWindow(MainWindow *w) {
+        mainWindow = w;
+    }
+
+    void connectSystemBus() {
 #ifndef i386
-        QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.powerd", "outOfScreenSaver", this, SLOT(quitscreensaver()));
-        //		QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.powerd", "goingToScreenSaver", this, SLOT(screensaver()));
+        if (mainWindow) mainWindow->connectSystemBus();
 #endif
     }
-    void disconnectPowerDaemon() {
+    void disconnectSystemBus() {
 #ifndef i386
-        QDBusConnection::systemBus().disconnect(QString(), QString(), "com.lab126.powerd", "outOfScreenSaver", this, SLOT(quitscreensaver()));
-        //		QDBusConnection::systemBus().disconnect(QString(), QString(), "com.lab126.powerd", "goingToScreenSaver", this, SLOT(MainWindow::screensaver()));
+        if (mainWindow) mainWindow->disconnectSystemBus();
 #endif
     }
-private slots:
-    void quitscreensaver() {
-        sleep(3);
-        if(!activeWindow()->isFullScreen() && !activeWindow()->isMaximized()) {
-            QWidget *mainwnd = widgetAt(0,0);
-            mainwnd->repaint();
-        }
-        activeWindow()->repaint();
-    }
-};
-
-namespace Ui {
-class MainWindowClass;
-}
-
-class MainWindow : public QMainWindow, public PropsChangeCallback
-{
-    Q_OBJECT
-
-public:
-    virtual void onPropsChange(PropsRef props);
-    MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-    void doStartupActions();
 private:
-    Ui::MainWindowClass *ui;
-    QString _filenameToOpen;
-    CRGUIAcceleratorTableRef wndkeys;
-    bool loadKeymaps(CRGUIWindowManager & winman, const char * locations[]);
-    void doCommand(int cmd, int param = 0);
-    bool isReservedKey(int key);
-protected:
-public slots:
-    void contextMenu( QPoint pos );
-    void on_actionFindText_triggered();
-private slots:
-    void on_actionFileProperties_triggered();
-    void on_actionShowBookmarksList_triggered();
-    void on_actionAddBookmark_triggered();
-    void on_actionSettings_triggered();
-    void on_actionRecentBooks_triggered();
-    void on_actionTOC_triggered();
-    void on_actionPrevPage_triggered();
-    void on_actionNextPage_triggered();
-    void on_actionClose_triggered();
-    void on_actionOpen_triggered();
-    void on_actionShowMenu_triggered();
-    void on_actionEmpty_triggered();
-private slots:
-    void battLevelChanged(int fparam);
+    MainWindow *mainWindow;
 };
 
 #endif // MAINWINDOW_H

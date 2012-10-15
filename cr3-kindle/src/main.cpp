@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         }
 
         lString16 lang = props->getStringDef(PROP_WINDOW_LANG, "");
-        //		InitCREngineLog("./data/cr3.ini");
+        // InitCREngineLog("./data/cr3.ini");
         InitCREngineLog(props);
         CRLog::info("main()");
 
@@ -63,7 +63,6 @@ int main(int argc, char *argv[])
             props->saveToStream(cfg.get());
         }
 
-
         QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
         MyApplication a(argc, argv);
         pMyApp = &a;
@@ -91,6 +90,7 @@ int main(int argc, char *argv[])
         }
 
         MainWindow mainWin;
+        a.setMainWindow(&mainWin);
         mainWin.showFullScreen();
         mainWin.doStartupActions();
         res = a.exec();
@@ -110,7 +110,7 @@ bool getDirectoryFonts( lString16Collection & pathList, lString16 ext, lString16
 {
     int foundCount = 0;
     lString16 path;
-    for (unsigned di=0; di<pathList.length();di++ ) {
+    for (int di=0; di<pathList.length();di++ ) {
         path = pathList[di];
         LVContainerRef dir = LVOpenDirectory(path.c_str());
         if(!dir.isNull()) {
@@ -152,7 +152,7 @@ bool InitCREngine( const char * exename, lString16Collection & fontDirs)
     // load fonts from file
     CRLog::debug("%d font files found", fonts.length());
     if (!fontMan->GetFontCount()) {
-        for ( unsigned fi=0; fi<fonts.length(); fi++ ) {
+        for (int fi=0; fi<fonts.length(); fi++ ) {
             lString8 fn = UnicodeToLocal(fonts[fi]);
             CRLog::trace("loading font: %s", fn.c_str());
             if ( !fontMan->RegisterFont(fn) )
@@ -226,7 +226,7 @@ bool myEventFilter(void *message, long *)
         active = qApp->activeWindow();
         modal = qApp->activeModalWidget();
         popup = qApp->activePopupWidget();
-        //		qDebug("act=%d, modal=%d, pup=%d", (int)active, (int)modal, (int)popup);
+        // qDebug("act=%d, modal=%d, pup=%d", (int)active, (int)modal, (int)popup);
 #ifdef i386
         if(pke->simpleData.keycode == Qt::Key_Return) {
             pke->simpleData.keycode = Qt::Key_Select;
@@ -234,19 +234,20 @@ bool myEventFilter(void *message, long *)
         }
 #endif
         if(pke->simpleData.keycode == Qt::Key_Sleep) {
-            pMyApp->disconnectPowerDaemon();
+            pMyApp->disconnectSystemBus();
             return true;
         }
         if(pke->simpleData.keycode == Qt::Key_WakeUp) {
+            QProcess::execute("killall -stop cvm");
             if(!active->isFullScreen() && !active->isMaximized()) {
                 QWidget *mainwnd = qApp->widgetAt(0,0);
                 mainwnd->repaint();
             }
             active->repaint();
-            pMyApp->connectPowerDaemon();
+            pMyApp->connectSystemBus();
             return true;
         }
-        //		qDebug("QWS key: key=%x, press=%x, uni=%x", pke->simpleData.keycode, pke->simpleData.is_press, pke->simpleData.unicode);
+        // qDebug("QWS key: key=%x, press=%x, uni=%x", pke->simpleData.keycode, pke->simpleData.is_press, pke->simpleData.unicode);
         return false;
     }
     return false;
@@ -259,4 +260,5 @@ void PrintString(int x, int y, const QString message, const QString opt) {
     if(!opt.isEmpty()) list << opt;
     list << QString().number(x) << QString().number(y) << message;
     myProcess->start("/usr/sbin/eips", list);
+    usleep(250000);
 }

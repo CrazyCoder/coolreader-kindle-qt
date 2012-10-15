@@ -7,6 +7,9 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindowClass)
 {
+    usbDriveMode = false;
+    screenSaverMode = false;
+
     ui->setupUi(this);
 
     addAction(ui->actionOpen);
@@ -17,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     addAction(ui->actionShowBookmarksList);
     addAction(ui->actionFindText);
     addAction(ui->actionFileProperties);
-    //	addAction(ui->actionCopy);
+    // addAction(ui->actionCopy);
 
     QAction *actionShowMenu = ui->actionShowMenu;
 #ifdef i386
@@ -57,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     if(tables.openFromFile(def.toAscii(), map.toAscii())) {
         wndkeys = tables.get(lString16("mainwindow"));
         if(wndkeys->length()>0) {
-            for(unsigned i=0; i<wndkeys->length(); i++) {
+            for(int i=0; i<wndkeys->length(); i++) {
                 const CRGUIAccelerator * acc = wndkeys->get(i);
                 int cmd = acc->commandId;
                 int param = acc->commandParam;
@@ -76,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent)
                     connect(newAct, SIGNAL(triggered()), this, SLOT(on_actionEmpty_triggered()));
                     addAction(newAct);
                 }
-                //				qDebug("cmd %i param %i key %i keyflag %i", cmd, param, key, keyFlags);
+                // qDebug("cmd %i param %i key %i keyflag %i", cmd, param, key, keyFlags);
             }
             const CRGUIAccelerator *acc1 = wndkeys->findKeyAccelerator(Qt::Key_PageDown, 0);
             const CRGUIAccelerator *acc2 = wndkeys->findKeyAccelerator(Qt::Key_PageUp, 0);
@@ -91,7 +94,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
     ui->view->getDocView()->setBatteryState(100);
 #ifndef i386
-    QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.powerd", "battLevelChanged", this, SLOT(battLevelChanged(int)));
+    connectSystemBus();
 
     QStringList list;
     QProcess *myProcess = new QProcess();
@@ -106,6 +109,35 @@ MainWindow::MainWindow(QWidget *parent)
 #endif
 }
 
+MainWindow::~MainWindow()
+{
+#ifndef i386
+    disconnectSystemBus();
+#endif
+    delete ui;
+}
+
+void MainWindow::connectSystemBus() {
+#ifndef i386
+    qDebug("+++ connect system bus");
+    QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.powerd", "battLevelChanged", this, SLOT(battLevelChanged(int)));
+    QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.powerd", "goingToScreenSaver", this, SLOT(goingToScreenSaver()));
+    QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.powerd", "outOfScreenSaver", this, SLOT(outOfScreenSaver()));
+    QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.hal", "usbConfigured", this, SLOT(usbDriveConnected()));
+    QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.hal", "usbUnconfigured",this, SLOT(usbDriveDisconnected()));
+#endif
+}
+void MainWindow::disconnectSystemBus() {
+#ifndef i386
+    qDebug("--- disconnect system bus");
+    QDBusConnection::systemBus().disconnect(QString(), QString(), "com.lab126.powerd", "battLevelChanged", this, SLOT(battLevelChanged(int)));
+    QDBusConnection::systemBus().disconnect(QString(), QString(), "com.lab126.powerd", "goingToScreenSaver", this, SLOT(goingToScreenSaver()));
+    QDBusConnection::systemBus().disconnect(QString(), QString(), "com.lab126.powerd", "outOfScreenSaver", this, SLOT(outOfScreenSaver()));
+    QDBusConnection::systemBus().disconnect(QString(), QString(), "com.lab126.hal", "usbConfigured", this, SLOT(usbDriveConnected()));
+    QDBusConnection::systemBus().disconnect(QString(), QString(), "com.lab126.hal", "usbUnconfigured", this, SLOT(usbDriveDisconnected()));
+#endif
+}
+
 void MainWindow::battLevelChanged(int fparam)
 {
 #ifndef i386
@@ -113,12 +145,60 @@ void MainWindow::battLevelChanged(int fparam)
 #endif
 }
 
-MainWindow::~MainWindow()
+void MainWindow::goingToScreenSaver()
 {
 #ifndef i386
-    QDBusConnection::systemBus().disconnect(QString(), QString(), "com.lab126.powerd", "battLevelChanged", this, SLOT(battLevelChanged(int)));
+    if (!usbDriveMode && !screenSaverMode) {
+        qDebug("screensaver on");
+        QWSServer::instance()->enablePainting(false);
+        QProcess::execute("killall -cont cvm");
+    }
+    screenSaverMode = true;
 #endif
-    delete ui;
+}
+
+void MainWindow::outOfScreenSaver()
+{
+#ifndef i386
+    if (screenSaverMode && !usbDriveMode) {
+        qDebug("screensaver off");
+        sleep(1);
+        QProcess::execute("killall -stop cvm");
+        QWSServer::instance()->enablePainting(true);
+        QWSServer::instance()->refresh();
+    }
+    screenSaverMode = false;
+#endif
+}
+
+void MainWindow::usbDriveConnected()
+{
+#ifndef i386
+    screenSaverMode = false; // screensaver is disabled automatically when USB is connected
+    if (!usbDriveMode) {
+        qDebug("usb drive on");
+        QWSServer::instance()->enablePainting(false);
+        QWSServer::instance()->closeKeyboard();
+        sleep(1);
+        QProcess::execute("killall -cont cvm");
+    }
+    usbDriveMode = true;
+#endif
+}
+
+void MainWindow::usbDriveDisconnected()
+{
+#ifndef i386
+    if (!screenSaverMode && usbDriveMode) {
+        qDebug("usb drive off");
+        sleep(1);
+        QProcess::execute("killall -stop cvm");
+        QWSServer::instance()->enablePainting(true);
+        QWSServer::instance()->openKeyboard();
+        QWSServer::instance()->refresh();
+    }
+    usbDriveMode = false;
+#endif
 }
 
 void MainWindow::on_actionOpen_triggered()
@@ -130,11 +210,6 @@ void MainWindow::on_actionClose_triggered()
 {
     close();
 }
-
-//void elemwalker(ldomXPointerEx & node)
-//{
-//    qDebug("  word: %d", node.isText()) ;
-//}
 
 void MainWindow::on_actionNextPage_triggered()
 {
@@ -182,7 +257,6 @@ void MainWindow::contextMenu( QPoint pos )
     menu->exec(ui->view->mapToGlobal(pos));
 }
 
-
 void MainWindow::doStartupActions()
 {
     switch(ui->view->getOptions()->getIntDef(PROP_APP_START_ACTION, 0)) {
@@ -219,7 +293,6 @@ void MainWindow::on_actionFindText_triggered()
 {
     SearchDialog::showDlg(this, ui->view);
 }
-
 
 void MainWindow::on_actionShowMenu_triggered()
 {
