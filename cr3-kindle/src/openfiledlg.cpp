@@ -187,12 +187,9 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
             curFileList1 += Dir.entryList(Filter, QDir::Files, QDir::Name);
             if(curFileList1.count()>0) {
                 QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Info"), tr("Directory ")+ItemText+tr(" is not empty."), QMessageBox::Close, this );
-                mb->setButtonText(QMessageBox::Close,tr("Close"));
                 mb->exec();
             } else {
                 QMessageBox * mb = new QMessageBox(QMessageBox::Information,"","", QMessageBox::Yes | QMessageBox::No, this);
-                mb->setButtonText(QMessageBox::No,tr("No"));
-                mb->setButtonText(QMessageBox::Yes,tr("Yes"));
                 if(mb->question(this, tr("Remove directory"), tr("Do you really want to remove directory ")+ItemText+"?", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes) {
                     QDir Dir_file(QDir::toNativeSeparators(CurrentDir));
                     isFileRemoved = Dir_file.rmdir(ItemText);
@@ -227,7 +224,6 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
                         m_docview->loadDocument(cr2qt(files[1]->getFilePathName()));
                     } else {
                         QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Info"), tr("You can't remove last book that you are reading now. Please, choose other active book then try to remove file again."), QMessageBox::Close, this );
-                        mb->setButtonText(QMessageBox::Close,tr("Close"));
                         mb->exec();
                         return;
                     }
@@ -394,7 +390,6 @@ void OpenFileDlg::on_actionSelectFile_triggered()
                             // Удаление записи истории
                             if (file_size1 != file_size2) {
                                 QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Info"), tr("Other File with such FilePath in history"), QMessageBox::Close, this );
-                                mb->setButtonText(QMessageBox::Close,tr("Close"));
                                 mb->exec();
                                 files1.remove(num+1);
                             }
