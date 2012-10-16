@@ -138,7 +138,7 @@
     <name>CR3View</name>
     <message>
         <source>Error while opening document </source>
-        <translation>Hiba a könyv megnyitása során</translation>
+        <translation>Hiba a könyv megnyitása során </translation>
     </message>
     <message>
         <source>Loading: please wait...</source>
@@ -197,23 +197,23 @@
     </message>
     <message>
         <source>File name</source>
-        <translation>File neve</translation>
+        <translation>Név</translation>
     </message>
     <message>
         <source>File path</source>
-        <translation>File elérhetősége</translation>
+        <translation>Elérhetőség</translation>
     </message>
     <message>
         <source>File size</source>
-        <translation>File mérete</translation>
+        <translation>Méret</translation>
     </message>
     <message>
         <source>File format</source>
-        <translation>File formátuma</translation>
+        <translation>Formátum</translation>
     </message>
     <message>
         <source>File info</source>
-        <translation>Információ a file-ról</translation>
+        <translation>Fájl információ</translation>
     </message>
     <message>
         <source>Title</source>
@@ -245,19 +245,19 @@
     </message>
     <message>
         <source>Book info</source>
-        <translation>Információ a könyvről</translation>
+        <translation>Könyv információ</translation>
     </message>
     <message>
         <source>Document author</source>
-        <translation>A dokumentum készítője</translation>
+        <translation>Készítő</translation>
     </message>
     <message>
         <source>Document date</source>
-        <translation>Dokumentum dátuma</translation>
+        <translation>Dátum</translation>
     </message>
     <message>
         <source>Document source URL</source>
-        <translation>Dokumentum forrása</translation>
+        <translation>Forrás</translation>
     </message>
     <message>
         <source>OCR by</source>
@@ -265,15 +265,15 @@
     </message>
     <message>
         <source>Document version</source>
-        <translation>Dokumentum verziója</translation>
+        <translation>Verzió</translation>
     </message>
     <message>
         <source>Document info</source>
-        <translation>Információ a dokumentumról</translation>
+        <translation>Dokumentum információ</translation>
     </message>
     <message>
         <source>Publication name</source>
-        <translation>A kiadás neve</translation>
+        <translation>A kiadás címe</translation>
     </message>
     <message>
         <source>Publisher</source>
@@ -320,7 +320,7 @@
     </message>
     <message>
         <source>Search is not implemented yet</source>
-        <translation type="obsolete">Sajnálom a keresés még nem működik.</translation>
+        <translation type="obsolete">Sajnálom, a keresés még nem működik.</translation>
     </message>
     <message>
         <source>Close</source>
@@ -331,7 +331,7 @@
     <name>MainWindowClass</name>
     <message>
         <source>File</source>
-        <translation type="obsolete">File</translation>
+        <translation type="obsolete">Fájl</translation>
     </message>
     <message>
         <source>View</source>
@@ -347,11 +347,11 @@
     </message>
     <message>
         <source>Open...</source>
-        <translation>Megnyitás...</translation>
+        <translation>Megnyitás</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation>File megnyitása</translation>
+        <translation>Fájl megnyitása</translation>
     </message>
     <message>
         <source>Toggle Pages/Scroll</source>
@@ -435,11 +435,11 @@
     </message>
     <message>
         <source>Table of Contents...</source>
-        <translation>Tartalomjegyzék...</translation>
+        <translation>Tartalomjegyzék</translation>
     </message>
     <message>
         <source>Show table of contents</source>
-        <translation>Tartalomjegyzés mutatása</translation>
+        <translation>Tartalomjegyzék mutatása</translation>
     </message>
     <message>
         <source>Recent Books</source>
@@ -451,7 +451,7 @@
     </message>
     <message>
         <source>Settings...</source>
-        <translation>Beállítások...</translation>
+        <translation>Beállítások</translation>
     </message>
     <message>
         <source>Settings dialog</source>
@@ -463,7 +463,7 @@
     </message>
     <message>
         <source>Copy selected text</source>
-        <translation>Kiválaszot szöveg másolása</translation>
+        <translation>Kiválasztott szöveg másolása</translation>
     </message>
     <message>
         <source>About Qt</source>
@@ -483,7 +483,7 @@
     </message>
     <message>
         <source>Bookmark List...</source>
-        <translation>Könyvjelzők listája...</translation>
+        <translation>Könyvjelzők listája</translation>
     </message>
     <message>
         <source>Show bookmarks list</source>
@@ -491,7 +491,7 @@
     </message>
     <message>
         <source>File Properties...</source>
-        <translation>Könyv tulajdonságai...</translation>
+        <translation>Könyv tulajdonságai</translation>
     </message>
     <message>
         <source>Show file properties</source>
@@ -503,7 +503,7 @@
     </message>
     <message>
         <source>Find text...</source>
-        <translation>Keresés...</translation>
+        <translation>Keresés</translation>
     </message>
     <message>
         <source>Find text</source>
@@ -606,7 +606,7 @@
     </message>
     <message>
         <source>Open file</source>
-        <translation>File megnyitása</translation>
+        <translation>Fájl megnyitása</translation>
     </message>
     <message>
         <source>Info</source>
@@ -614,11 +614,11 @@
     </message>
     <message>
         <source>Directory </source>
-        <translation>Könyvtár </translation>
+        <translation>A könyvtár: </translation>
     </message>
     <message>
         <source> is not empty.</source>
-        <translation> nem üres.</translation>
+        <translation> nem üres!</translation>
     </message>
     <message>
         <source>Remove directory</source>
@@ -626,23 +626,23 @@
     </message>
     <message>
         <source>Do you really want to remove directory </source>
-        <translation>Valóban törölni akarja a könyvtárat </translation>
+        <translation>Valóban törölni akarja a könyvtárat: </translation>
     </message>
     <message>
         <source>Remove file</source>
-        <translation>File törlése</translation>
+        <translation>Fájl törlése</translation>
     </message>
     <message>
         <source>Do you really want to remove file </source>
-        <translation>Valóban törölni akarja a file-t </translation>
+        <translation>Valóban törölni akarja a fájlt: </translation>
     </message>
     <message>
         <source>Other File with such FilePath in history</source>
-        <translation type="unfinished">Ilyen file már létezik az előzményekben</translation>
+        <translation type="unfinished">Ilyen fájl már létezik az előzményekben</translation>
     </message>
     <message>
         <source>You can't remove last book that you are reading now. Please, choose other active book then try to remove file again.</source>
-        <translation>A jelenleg olvasott könyv nem törölhető. Kérem válasszon egy másik könyvet, majd próbálkozzon ismét a jelenlegi file törlésével.</translation>
+        <translation>A jelenleg olvasott könyv nem törölhető. Kérem válasszon egy másik könyvet, majd próbálkozzon ismét a jelenlegi fájl törlésével.</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -772,7 +772,7 @@
     <name>SearchDialog</name>
     <message>
         <source>Search</source>
-        <translation>Keresls</translation>
+        <translation>Keresés</translation>
     </message>
     <message>
         <source>Text</source>
@@ -780,7 +780,7 @@
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation>Kis- és nagybetű különbözik</translation>
+        <translation>Kis/nagybetű különbözik</translation>
     </message>
     <message>
         <source>Search forward</source>
@@ -859,7 +859,7 @@
     </message>
     <message>
         <source>Show File Open dialog</source>
-        <translation>File megnyitás ablak</translation>
+        <translation>Fájl megnyitás ablak</translation>
     </message>
     <message>
         <source>Do nothing</source>
@@ -907,7 +907,7 @@
     </message>
     <message>
         <source>Vew Mode</source>
-        <translation type="obsolete">Megjelenítás módja</translation>
+        <translation type="obsolete">Megjelenítés módja</translation>
     </message>
     <message>
         <source>Page margins</source>
@@ -967,7 +967,7 @@
     </message>
     <message>
         <source>.TXT files</source>
-        <translation type="obsolete">.TXT file-ok</translation>
+        <translation type="obsolete">.TXT fájlok</translation>
     </message>
     <message>
         <source>Disable automatic formatting</source>
@@ -1063,7 +1063,7 @@
     </message>
     <message>
         <source>Disable automatic formatting of txt format files</source>
-        <translation>Txt file-ok automatikus formázásanak tiltása</translation>
+        <translation>Txt fájlok automatikus formázásának tiltása</translation>
     </message>
     <message>
         <source>Floating punctuation</source>
@@ -1161,7 +1161,7 @@
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Menté&amp;s</translation>
+        <translation>&amp;Mentés</translation>
     </message>
     <message>
         <source>Open</source>
@@ -1189,7 +1189,7 @@
     </message>
     <message>
         <source>Reset</source>
-        <translation>Törlés</translation>
+        <translation>Visszaállítás</translation>
     </message>
     <message>
         <source>Help</source>
