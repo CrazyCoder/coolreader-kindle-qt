@@ -327,6 +327,10 @@
         <translation>Извините, поиск по тексту пока не реализован.</translation>
     </message>
     <message>
+        <source>Minimize</source>
+        <translation>Свернуть</translation>
+    </message>
+    <message>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
@@ -544,14 +548,6 @@
     <message>
         <source>Go to the next position in navigation history</source>
         <translation>Далее по истории навигации</translation>
-    </message>
-    <message>
-        <source>copy2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy alternative shortcut</source>
-        <translation>Альтернативный ярлык</translation>
     </message>
     <message>
         <source>Toggle Edit Mode</source>
