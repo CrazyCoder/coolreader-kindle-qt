@@ -3,11 +3,17 @@ VERSION = 0.1.4
 TEMPLATE = app
 
 CONFIG += TARGET_KINDLE
+
+UI_DIR = .ui
+MOC_DIR = .moc
+OBJECTS_DIR = .obj
+RCC_DIR = .rc
+
 DEFINES += USE_FREETYPE=1 \
-            LDOM_USE_OWN_MEM_MAN=1 \
-            COLOR_BACKBUFFER=1 \
-            USE_DOM_UTF8_STORAGE=1 \
-            NDEBUG=1
+           LDOM_USE_OWN_MEM_MAN=1 \
+           COLOR_BACKBUFFER=1 \
+           USE_DOM_UTF8_STORAGE=1 \
+           NDEBUG=1
 
 TARGET_KINDLE:DEFINES += QT_KEYPAD_NAVIGATION
 
@@ -34,7 +40,8 @@ SOURCES +=  main.cpp \
             bookmarklistdlg.cpp \
             filepropsdlg.cpp \
             openfiledlg.cpp \
-            virtualkeysdlg.cpp
+            virtualkeysdlg.cpp \
+            device.cpp
 
 HEADERS +=  mainwindow.h \
             cr3widget.h \
@@ -46,7 +53,8 @@ HEADERS +=  mainwindow.h \
             searchdlg.h \
             filepropsdlg.h \
             openfiledlg.h \
-            virtualkeysdlg.h
+            virtualkeysdlg.h \
+            device.h
 
 FORMS +=    mainwindow.ui \
             tocdlg.ui \
@@ -61,7 +69,8 @@ FORMS +=    mainwindow.ui \
 TRANSLATIONS += i18n/Russian.ts \
                 i18n/Ukrainian.ts \
                 i18n/French.ts \
-                i18n/Italian.ts
+                i18n/Italian.ts \
+                i18n/Hungarian.ts
 
 RESOURCES += cr3res.qrc
 
