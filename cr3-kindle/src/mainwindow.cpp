@@ -30,6 +30,10 @@ MainWindow::MainWindow(QWidget *parent)
 #endif
     addAction(actionShowMenu);
 
+    QAction *actionHide = ui->actionHide;
+    actionHide->setText(tr("Minimize") + "\tAlt+Shift");
+    addAction(actionHide);
+
     QAction *actionClose = ui->actionClose;
     actionClose->setShortcut(Qt::ALT + Qt::Key_Escape);
     actionClose->setText(tr("Close") + "\tAlt+Back");
@@ -248,6 +252,7 @@ void MainWindow::contextMenu( QPoint pos )
     menu->addAction(ui->actionFileProperties);
     menu->addAction(ui->actionShowBookmarksList);
     menu->addAction(ui->actionAddBookmark);
+    menu->addAction(ui->actionHide);
     menu->addAction(ui->actionClose);
 
     menu->exec(ui->view->mapToGlobal(pos));
@@ -379,4 +384,24 @@ void MainWindow::doCommand(int cmd, int param)
     case DCMD_TOGGLE_BOLD:
         ui->view->doCommand(cmd, param);
     }
+}
+
+// small hack to make minimize work on both keyboard and K4NT devices
+// - emulate Alt+Shift on KDX/K3 (the rest is handled by keyboard driver)
+// - on K4NT we need to disconnect system bus, close keyboard, resume cvm and emulate HOME button press
+void MainWindow::on_actionHide_triggered()
+{
+#ifndef i386
+    if (Device::hasKeyboard()) {
+        system("echo sendalt 42>/proc/keypad"); // Alt+Shift works only on keyboard devices
+    } else {
+        gotoSleep();
+        QWSServer::instance()->closeKeyboard();
+        if (Device::getModel() != Device::KDX) { // HOME key code depends on the model
+            system("killall -cont cvm;echo send 102 >/proc/keypad");
+        } else {
+            system("killall -cont cvm;echo send 98 >/proc/keypad");
+        }
+    }
+#endif
 }

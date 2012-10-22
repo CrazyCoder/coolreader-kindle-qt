@@ -11,6 +11,8 @@ int main(int argc, char *argv[])
 {
     int res = 0;
     {
+        Device::getInstance(); // initialize device
+
         lString16 exedir = LVExtractPath(LocalToUnicode(lString8(argv[0])));
         LVAppendPathDelimiter(exedir);
         lString16 datadir = exedir + L"data/";
@@ -29,7 +31,6 @@ int main(int argc, char *argv[])
         }
 
         lString16 lang = props->getStringDef(PROP_WINDOW_LANG, "");
-        // InitCREngineLog("./data/cr3.ini");
         InitCREngineLog(props);
         CRLog::info("main()");
 
@@ -39,15 +40,10 @@ int main(int argc, char *argv[])
         }
 #ifndef i386
         PrintString(1, 1, "crengine version: " + QString(CR_ENGINE_VERSION), "-c");
-        // open framebuffer device and read out info
-        int fd = open("/dev/fb0", O_RDONLY);
-        struct fb_var_screeninfo screeninfo;
-        ioctl(fd, FBIOGET_VSCREENINFO, &screeninfo);
-        int width = screeninfo.xres;
-        int height = screeninfo.yres;
+        PrintString(1, 2, QString("buid date: %1 %2").arg(__DATE__).arg(__TIME__));
         QString message = "Please wait while application is loading...";
-        int xpos = ((width/12-1)-message.length())/2;
-        int ypos = (height/20-2)/2;
+        int xpos = ((Device::getWidth()/12-1)-message.length())/2;
+        int ypos = (Device::getHeight()/20-2)/2;
         PrintString(xpos, ypos, message);
 #endif
 
@@ -55,7 +51,7 @@ int main(int argc, char *argv[])
         int rc = props->getIntDef(PROP_WINDOW_ROW_COUNT, 0);
         if(!rc) {
 #ifndef i386
-            props->setInt(PROP_WINDOW_ROW_COUNT, height==800 ? 10 : 16);
+            props->setInt(PROP_WINDOW_ROW_COUNT, Device::getModel() != Device::KDX ? 10 : 16);
 #else
             props->setInt(PROP_WINDOW_ROW_COUNT, 10);
 #endif
@@ -68,12 +64,12 @@ int main(int argc, char *argv[])
         pMyApp = &a;
         // set app stylesheet
 #ifndef i386
-        QFile qss(QDir::toNativeSeparators(cr2qt(datadir)) + (width==600 ? "stylesheet_k3.qss" : "stylesheet_dx.qss"));
+        QFile qss(QDir::toNativeSeparators(cr2qt(datadir)) + (Device::getModel() != Device::KDX ? "stylesheet_k3.qss" : "stylesheet_dx.qss"));
         // set up full update interval for the graphics driver
         QKindleFb *pscreen = static_cast<QKindleFb*>(QScreen::instance());
         pscreen->setFullUpdateEvery(props->getIntDef(PROP_DISPLAY_FULL_UPDATE_INTERVAL, 1));
 #else
-        QFile qss(QDir::toNativeSeparators(cr2qt(datadir)) + "stylesheet.qss");
+        QFile qss(QDir::toNativeSeparators(cr2qt(datadir)) + "stylesheet_k3.qss");
 #endif
         qss.open(QFile::ReadOnly);
         if(qss.error() == QFile::NoError) {
@@ -88,6 +84,8 @@ int main(int argc, char *argv[])
             else
                 qDebug("Can`t load translation file %s from dir %s", UnicodeToUtf8(lang).c_str(), UnicodeToUtf8(qt2cr(translations)).c_str());
         }
+
+        (void) signal(SIGUSR1, sigCatcher);
 
         MainWindow mainWin;
         a.setMainWindow(&mainWin);
@@ -214,19 +212,33 @@ void InitCREngineLog(CRPropRef props)
     CRLog::trace("Log initialization done.");
 }
 
+void wakeUp()
+{
+    QWidget *active;
+
+    active = qApp->activeWindow();
+
+    QProcess::execute("killall -stop cvm");
+    if(!active->isFullScreen() && !active->isMaximized()) {
+        QWidget *mainwnd = qApp->widgetAt(0,0);
+        mainwnd->repaint();
+    }
+
+    active->repaint();
+    pMyApp->connectSystemBus();
+}
+
+void gotoSleep() {
+    pMyApp->disconnectSystemBus();
+}
+
 bool myEventFilter(void *message, long *)
 {
     QWSEvent * pev = (QWSEvent *) message;
+    QWSKeyEvent *pke = (QWSKeyEvent *) message;
 
     if(pev->type == QWSEvent::Key)
     {
-        QWSKeyEvent *pke = (QWSKeyEvent *) message;
-        QWidget *active, *modal, *popup;
-
-        active = qApp->activeWindow();
-        modal = qApp->activeModalWidget();
-        popup = qApp->activePopupWidget();
-        // qDebug("act=%d, modal=%d, pup=%d", (int)active, (int)modal, (int)popup);
 #ifdef i386
         if(pke->simpleData.keycode == Qt::Key_Return) {
             pke->simpleData.keycode = Qt::Key_Select;
@@ -234,17 +246,11 @@ bool myEventFilter(void *message, long *)
         }
 #endif
         if(pke->simpleData.keycode == Qt::Key_Sleep) {
-            pMyApp->disconnectSystemBus();
+            gotoSleep();
             return true;
         }
         if(pke->simpleData.keycode == Qt::Key_WakeUp) {
-            QProcess::execute("killall -stop cvm");
-            if(!active->isFullScreen() && !active->isMaximized()) {
-                QWidget *mainwnd = qApp->widgetAt(0,0);
-                mainwnd->repaint();
-            }
-            active->repaint();
-            pMyApp->connectSystemBus();
+            wakeUp();
             return true;
         }
         // qDebug("QWS key: key=%x, press=%x, uni=%x", pke->simpleData.keycode, pke->simpleData.is_press, pke->simpleData.unicode);
@@ -254,11 +260,14 @@ bool myEventFilter(void *message, long *)
 }
 
 void PrintString(int x, int y, const QString message, const QString opt) {
-    QStringList list;
-    QProcess *myProcess = new QProcess();
-
-    if(!opt.isEmpty()) list << opt;
-    list << QString().number(x) << QString().number(y) << message;
-    myProcess->start("/usr/sbin/eips", list);
+    QString cmd = QString("/usr/sbin/eips %1 %2 %3 \"%4\"").arg(opt).arg(QString().number(x)).arg(QString().number(y)).arg(message);
+    system(cmd.toAscii());
     usleep(250000);
+}
+
+void sigCatcher(int sig) {
+  if(sig == SIGUSR1) {
+      QWSServer::instance()->openKeyboard();
+      wakeUp();
+  }
 }

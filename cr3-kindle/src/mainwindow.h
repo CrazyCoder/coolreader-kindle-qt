@@ -4,6 +4,7 @@
 #include <sys/ioctl.h>
 #include <fcntl.h>
 #include <linux/fb.h>
+#include <signal.h>
 
 #include <QApplication>
 #include <QMainWindow>
@@ -32,6 +33,8 @@
 #include "bookmarklistdlg.h"
 #include "filepropsdlg.h"
 
+#include "device.h"
+
 #define CMD_REFRESH					1001
 #define CMD_ZOOM_FONT				1002
 #define CMD_ZOOM_HEADER_FONT		1003
@@ -51,6 +54,9 @@ bool myEventFilter(void *message, long *result);
 #ifndef i386
 void PrintString(int x, int y, const QString message, const QString opt = "");
 #endif
+void sigCatcher(int sig);
+void wakeUp();
+void gotoSleep();
 
 class MyDecoration : public QDecorationDefault
 {
@@ -146,6 +152,7 @@ private slots:
     void outOfScreenSaver();
     void usbDriveConnected();
     void usbDriveDisconnected();
+    void on_actionHide_triggered();
 };
 
 class MyApplication : public QApplication {

@@ -146,14 +146,6 @@
     <string>Copy selected text</string>
    </property>
   </action>
-  <action name="actionCopy2">
-   <property name="text">
-    <string>copy2</string>
-   </property>
-   <property name="toolTip">
-    <string>Copy alternative shortcut</string>
-   </property>
-  </action>
   <action name="actionAddBookmark">
    <property name="text">
     <string>Add Bookmark</string>
@@ -214,6 +206,14 @@
   <action name="actionEmpty">
    <property name="text">
     <string>Empty</string>
+   </property>
+  </action>
+  <action name="actionHide">
+   <property name="text">
+    <string>Hide</string>
+   </property>
+   <property name="toolTip">
+    <string>Hide</string>
    </property>
   </action>
  </widget>
