@@ -823,7 +823,7 @@
     </message>
     <message>
         <source>The quick brown fox jumps over the lazy dog. </source>
-        <translation>Съешь ещё этих мягких французских булок, да выпей чаю. 1234567890 </translation>
+        <translation>Съешь ещё этих мягких французских булок, да выпей чаю. 1234567890 -~=+_.,:;?!`' @#$%^*()\|/ </translation>
     </message>
     <message>
         <source>Text color</source>
@@ -1107,7 +1107,7 @@
     </message>
     <message>
         <source>In percent</source>
-        <translation>В процентах</translation>
+        <translation>...в процентах</translation>
     </message>
 </context>
 <context>
@@ -1245,7 +1245,7 @@
     </message>
     <message>
         <source>Restore Defaults</source>
-        <translation>Восстановить значения</translation>
+        <translation>По умолчанию</translation>
     </message>
     <message>
         <source>Close without Saving</source>
