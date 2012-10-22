@@ -97,10 +97,10 @@ void RecentBooksDlg::SetPageCount()
 void RecentBooksDlg::ShowPage(int updown, int selectRow)
 {
     if(updown>0) {
-        if(curPage+1>pageCount) return;
+        if(curPage+1>pageCount) curPage=0;
         curPage+=1;
     } else {
-        if(curPage-1<=0) return;
+        if(curPage-1<=0) curPage=pageCount+1;
         curPage-=1;
     }
     setWindowTitle(titleMask + " (" + QString::number(curPage) + "/" + QString::number(pageCount) + ")");

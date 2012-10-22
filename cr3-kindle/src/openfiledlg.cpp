@@ -124,10 +124,10 @@ void OpenFileDlg::FillFileList()
 void OpenFileDlg::ShowPage(int updown)
 {
     if(updown>0) {
-        if(curPage+1>pageCount) return;
+        if(curPage+1>pageCount) curPage=0;
         curPage+=1;
     } else {
-        if(curPage-1<=0) return;
+        if(curPage-1<=0) curPage=pageCount+1;
         curPage-=1;
     }
     m_ui->FileList->clear();
