@@ -397,11 +397,7 @@ void MainWindow::on_actionHide_triggered()
     } else {
         gotoSleep();
         QWSServer::instance()->closeKeyboard();
-        if (Device::getModel() != Device::KDX) { // HOME key code depends on the model
-            system("killall -cont cvm;echo send 102 >/proc/keypad");
-        } else {
-            system("killall -cont cvm;echo send 98 >/proc/keypad");
-        }
+        system("killall -cont cvm;echo send 102 >/proc/keypad");
     }
 #endif
 }
