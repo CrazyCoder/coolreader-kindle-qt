@@ -1,4 +1,4 @@
 /Makefile
-/*.pro.user
+/*.pro.user*
 /*.o
 /moc_*.cpp
