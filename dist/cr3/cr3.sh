@@ -11,7 +11,7 @@ cd /mnt/us/cr3
 if [ ! -f "$1" ]      # Check if file exists and it is a regular one
 then
    echo "goqt: "$1" -- regular file does not exist." ;
-     exit 1
+   exit 1
 fi
 if [ ! -x "$1" ]
 then
@@ -22,7 +22,9 @@ fi
 if [ ! -z `pidof $1` ]
 then
    echo "goqt: "$1" -- already running." ;
-      exit 1
+   # wake up, Neo
+   kill -SIGUSR1 `pidof $1`
+   exit 0
 fi
 
 # uncomment to shut down the Amazon framework
