@@ -1,12 +1,12 @@
 #include "device.h"
 
-//                                    EMU   K2    KDX   K3    K4NT   K4NTB  KT     KPW
-const int  Device::WIDTH[]         = {600,  600,  824,  600,  600,   600,   600,   758};
-const int  Device::HEIGHT[]        = {800,  800,  1200, 800,  800,   800,   800,   1024};
-const bool Device::KEYBOARD[]      = {true, true, true, true, false, false, false, false};
-const bool Device::FIVE_WAY[]      = {true, true, true, true, true,  true,  false, false};
+//                                    ???    EMU   K2    KDX   K3    K4NT   K4NTB  KT     KPW
+const int  Device::WIDTH[]         = {600,   600,  600,  824,  600,  600,   600,   600,   758};
+const int  Device::HEIGHT[]        = {800,   800,  800,  1200, 800,  800,   800,   800,   1024};
+const bool Device::KEYBOARD[]      = {false, true, true, true, true, false, false, false, false};
+const bool Device::FIVE_WAY[]      = {false, true, true, true, true, true,  true,  false, false};
 
-Device::Model Device::m_model = EMULATOR;
+Device::Model Device::m_model = UNKNOWN;
 
 Device::Device()
 {
@@ -14,8 +14,6 @@ Device::Device()
     m_model = EMULATOR;
     return;
 #endif
-    m_model = K2; // fall back to K2 model (cpuinfo for K2 and older doesn't return serial)
-
     QStringList list;
     QProcess *myProcess = new QProcess();
 
@@ -30,13 +28,17 @@ Device::Device()
             qDebug("serial: %X", sn);
         }
         switch(sn) {
+        case 0xB002:
+        case 0xB003:
+            m_model = K2; // may not work as K2 doesn't print SN in cpuinfo
+            break;
         case 0xB004:
         case 0xB005:
         case 0xB009:
             m_model = KDX;
             break;
-        case 0xB008:
         case 0xB006:
+        case 0xB008:
         case 0xB00A:
             m_model = K3;
             break;
@@ -52,8 +54,8 @@ Device::Device()
         case 0xB023:
             m_model = K4NTB;
             break;
-        case 0xB024:
         case 0xB01B:
+        case 0xB024:
             m_model = KPW;
             break;
         default:

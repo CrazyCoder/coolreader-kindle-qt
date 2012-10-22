@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 {
     int res = 0;
     {
-        Device::getInstance(); // initialize device
+        Device::instance(); // initialize device
 
         lString16 exedir = LVExtractPath(LocalToUnicode(lString8(argv[0])));
         LVAppendPathDelimiter(exedir);

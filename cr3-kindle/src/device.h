@@ -7,14 +7,15 @@
 class Device
 {
 public:
-    static Device& getInstance()
+    static Device& instance()
     {
         static Device instance;
         return instance;
     }
 
     typedef enum MODEL {
-        EMULATOR = 0, // qvfb qws environment
+        UNKNOWN = 0,
+        EMULATOR, // qvfb qws environment
         K2,       // Kindle 2
         KDX,      // Kindle DX(G)
         K3,       // Kindle Keyboard
