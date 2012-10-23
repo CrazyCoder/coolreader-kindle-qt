@@ -356,7 +356,7 @@ bool QKindleFb::connect(const QString &displaySpec)
             yoff += (vinfo.yres - h)/2;
         }
     } else {
-        dw=w=/*vinfo.xres*/ vinfo.xres_virtual ;
+        dw=w=vinfo.xres;
         dh=h=vinfo.yres;
         if (debugMode)
         {
@@ -402,8 +402,8 @@ bool QKindleFb::connect(const QString &displaySpec)
         physHeight = qRound(dh*mmperinch/dpi) ;
     }
 
-    //if (debugMode)
-    //    qDebug("physW=%d, physH=%d", physWidth, physHeight) ;
+    if (debugMode)
+        qDebug("physW=%d, physH=%d", physWidth, physHeight) ;
 
     dataoffset = yoff * lstep + xoff * d / 8;
 
@@ -766,10 +766,10 @@ void QKindleFb::exposeRegion(QRegion region, int changing)
             ud.update_region.width = dirtyRect.width();
             ud.update_region.height = dirtyRect.height();
 
-            ud.waveform_mode = WAVEFORM_MODE_GC16 ;    // 0x0002 = WAVEFORM_MODE_GC16
+            ud.waveform_mode = WAVEFORM_MODE_GC16 ;
             ud.update_mode = (doFullUpdate == false) ? UPDATE_MODE_PARTIAL : UPDATE_MODE_FULL ;
-            ud.temp = TEMP_USE_PAPYRUS;      // 0x1001 = TEMP_USE_PAPYRUS
-            ud.flags = 0;             // 0x0000
+            ud.temp = TEMP_USE_PAPYRUS;
+            ud.flags = 0;
 
             ioctl(d_ptr->fd, MXCFB_SEND_UPDATE, &ud);
         }
