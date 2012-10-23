@@ -13,6 +13,7 @@ SOURCES += qkindlefbplugin.cpp \
 
 HEADERS += qkindlefb.h \
     linux/einkfb.h \
+    linux/mxcfb.h \
     qkindlecursor.h
 
 INCLUDEPATH += $$(QTDIR)/mkspecs/qws/linux-arm-g++

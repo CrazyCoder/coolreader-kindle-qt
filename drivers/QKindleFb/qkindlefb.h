@@ -107,6 +107,7 @@ private:
     QKindleFbPrivate *d_ptr;
 
     bool isKindle4 ;
+    bool isKindle5 ;
     bool flashingUpdates ;
     bool isDirty ;
     QRect dirtyRect ;

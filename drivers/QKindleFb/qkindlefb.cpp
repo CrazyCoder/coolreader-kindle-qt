@@ -61,6 +61,7 @@ typedef __u8 u8;
 
 #include "linux/fb.h"
 #include "linux/einkfb.h"
+#include "linux/mxcfb.h"
 
 #include "qkindlecursor.h"
 
@@ -317,16 +318,20 @@ bool QKindleFb::connect(const QString &displaySpec)
     grayscale = vinfo.grayscale;
     d = vinfo.bits_per_pixel;
 
+    lstep = finfo.line_length;
+
+    isKindle5 = false ;
     if (d == 8)
     {
         isKindle4 = true ;
+        if (lstep > 600)
+            isKindle5 = true ;
     }
     else
     {
         isKindle4 = false ;
     }
 
-    lstep = finfo.line_length;
 
     int xoff = vinfo.xoffset;
     int yoff = vinfo.yoffset;
@@ -351,8 +356,13 @@ bool QKindleFb::connect(const QString &displaySpec)
             yoff += (vinfo.yres - h)/2;
         }
     } else {
-        dw=w=vinfo.xres;
+        dw=w=/*vinfo.xres*/ vinfo.xres_virtual ;
         dh=h=vinfo.yres;
+        if (debugMode)
+        {
+            qDebug(".. dw=%d, dh=%d, lstep=%d", dw, dh, lstep) ;
+        }
+
     }
 
     if (w == 0 || h == 0) {
@@ -363,34 +373,37 @@ bool QKindleFb::connect(const QString &displaySpec)
     }
 
     // Handle display physical size spec.
-    QStringList displayArgs = displaySpec.split(QLatin1Char(':'));
-    QRegExp mmWidthRx(QLatin1String("mmWidth=?(\\d+)"));
-    int dimIdxW = displayArgs.indexOf(mmWidthRx);
-    QRegExp mmHeightRx(QLatin1String("mmHeight=?(\\d+)"));
-    int dimIdxH = displayArgs.indexOf(mmHeightRx);
-    if (dimIdxW >= 0) {
-        mmWidthRx.exactMatch(displayArgs.at(dimIdxW));
-        physWidth = mmWidthRx.cap(1).toInt();
-        if (dimIdxH < 0)
-            physHeight = dh*physWidth/dw;
-    }
-    if (dimIdxH >= 0) {
-        mmHeightRx.exactMatch(displayArgs.at(dimIdxH));
-        physHeight = mmHeightRx.cap(1).toInt();
-        if (dimIdxW < 0)
-            physWidth = dw*physHeight/dh;
-    }
-    if (dimIdxW < 0 && dimIdxH < 0) {
-        if (vinfo.width != 0 && vinfo.height != 0
-                && vinfo.width != UINT_MAX && vinfo.height != UINT_MAX) {
-            physWidth = vinfo.width;
-            physHeight = vinfo.height;
-        } else {
-            const int dpi = 72;
-            physWidth = qRound(dw * 25.4 / dpi);
-            physHeight = qRound(dh * 25.4 / dpi);
+    if (vinfo.width != 0 && vinfo.height != 0
+            && vinfo.width != UINT_MAX && vinfo.height != UINT_MAX) {
+        physWidth = vinfo.width;
+        physHeight = vinfo.height;
+    } else {
+        // the controller didn't report screen physical
+        // dimensions. Set them manually:
+
+        double dpi ;
+        double mmperinch = 25.4 ;
+        if (isKindle5)  // Kindle PaperWhite - 758x1024 @ 212dpi
+        {
+            dpi = 212 ;
         }
+        else if (isKindle4) // Kindle 4 NT & Touch - 600x800 @ 167dpi
+        {
+            dpi = 167 ;
+        }
+        else if (lstep == 824)  // Kindle DX - 824x1200 @
+        {
+            dpi = 152 ;
+        }
+        else
+            dpi = 167 ;         // all others.. (?)
+
+        physWidth = qRound(dw*mmperinch/dpi) ;
+        physHeight = qRound(dh*mmperinch/dpi) ;
     }
+
+    //if (debugMode)
+    //    qDebug("physW=%d, physH=%d", physWidth, physHeight) ;
 
     dataoffset = yoff * lstep + xoff * d / 8;
 
@@ -574,7 +587,7 @@ bool QKindleFb::initDevice()
         return true;
     }
 
-    d_ptr->startupw=vinfo.xres;
+    d_ptr->startupw=/*vinfo.xres*/ vinfo.xres_virtual ;
     d_ptr->startuph=vinfo.yres;
     d_ptr->startupd=vinfo.bits_per_pixel;
     grayscale = vinfo.grayscale;
@@ -744,15 +757,34 @@ void QKindleFb::exposeRegion(QRegion region, int changing)
         // it takes an argument describing the updated screen area and
         // specifying whether or not to flash the screen while updating.
 
-        update_area_t ua;
-        ua.x1 = dirtyRect.left();
-        ua.y1 = dirtyRect.top();
-        ua.x2 = dirtyRect.right() + 1;
-        ua.y2 = dirtyRect.bottom() + 1;
-        ua.which_fx = (doFullUpdate == false) ? fx_update_partial : fx_update_full; //fx_invert
-        ua.buffer = NULL;
+        if (isKindle5)
+        {
+            mxcfb_update_data ud ;
 
-        ioctl(d_ptr->fd, FBIO_EINK_UPDATE_DISPLAY_AREA, &ua);
+            ud.update_region.left = dirtyRect.left();
+            ud.update_region.top = dirtyRect.top();
+            ud.update_region.width = dirtyRect.width();
+            ud.update_region.height = dirtyRect.height();
+
+            ud.waveform_mode = WAVEFORM_MODE_GC16 ;    // 0x0002 = WAVEFORM_MODE_GC16
+            ud.update_mode = (doFullUpdate == false) ? UPDATE_MODE_PARTIAL : UPDATE_MODE_FULL ;
+            ud.temp = TEMP_USE_PAPYRUS;      // 0x1001 = TEMP_USE_PAPYRUS
+            ud.flags = 0;             // 0x0000
+
+            ioctl(d_ptr->fd, MXCFB_SEND_UPDATE, &ud);
+        }
+        else
+        {
+            update_area_t ua;
+            ua.x1 = dirtyRect.left();
+            ua.y1 = dirtyRect.top();
+            ua.x2 = dirtyRect.right() + 1;
+            ua.y2 = dirtyRect.bottom() + 1;
+            ua.which_fx = (doFullUpdate == false) ? fx_update_partial : fx_update_full; //fx_invert
+            ua.buffer = NULL;
+
+            ioctl(d_ptr->fd, FBIO_EINK_UPDATE_DISPLAY_AREA, &ua);
+        }
 
         dirtyRect.setRect(-1,-1, 0, 0);
         isDirty = false ;
@@ -928,14 +960,16 @@ void QKindleFb::blit32To4(const QImage &image,
 void QKindleFb::blit(const QImage& image, const QPoint& topLeft, const QRegion& region)
 {
     QImage imageInverted = image;
-    imageInverted.invertPixels();
+
+    if (!isKindle5)
+        imageInverted.invertPixels();
 
 #ifdef DEBUG_OUTPUT
     if (debugMode)
-        qDebug(">>>> blit image %dx%dx%d type=%d", image.width(),image.height(), image.depth() ,image.format()) ;
+        qDebug(">>>>%s%s blit image %dx%dx%d type=%d", (isKindle4)? "K4":"", (isKindle5)? "K5":"",image.width(),image.height(), image.depth() ,image.format()) ;
 #endif
 
-    if (isKindle4)
+    if ((isKindle4) || (isKindle5))
     {
         blit_K4( imageInverted, topLeft, region);
     }
