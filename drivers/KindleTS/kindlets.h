@@ -30,6 +30,8 @@ private:
     bool newtouch ;
     bool newdoubletap ;
 
+    int oldX, oldY;
+
     QPoint p ;
 
     bool input_captured ;

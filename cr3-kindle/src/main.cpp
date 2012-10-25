@@ -2,6 +2,8 @@
 // main.cpp - entry point
 #include "mainwindow.h"
 
+#undef i386 // uncomment when building for desktop, it's for Qt Creator
+
 #ifndef i386
 #include "../../drivers/QKindleFb/qkindlefb.h"
 
@@ -248,6 +250,13 @@ void gotoSleep() {
 
 int buttonState = 0;
 int newButtonState = 0;
+int lastEvent = 0;
+bool focusInReader = true;
+int oldX = 0;
+int oldY = 0;
+
+#define LONG_TAP 500
+#define MIN_SWIPE_PIXELS 200
 
 bool myEventFilter(void *message, long *)
 {
@@ -277,13 +286,65 @@ bool myEventFilter(void *message, long *)
 #ifndef i386
     else if (pev->type == QWSEvent::Mouse) {
         newButtonState = pme->simpleData.state;
-        qDebug("mouse: x: %d, y: %d, state: %d", pme->simpleData.x_root, pme->simpleData.y_root, pme->simpleData.state);
-        if (newButtonState == 0) {
+
+        // save focus state when button was pressed
+        if (newButtonState > 0) {
+            focusInReader = pMyApp->getMainWindow() && pMyApp->getMainWindow()->isFocusInReader();
+            oldX = pme->simpleData.x_root;
+            oldY = pme->simpleData.y_root;
+        }
+
+        qDebug("mouse: x: %d, y: %d, state: %d, time: %d, %d", pme->simpleData.x_root, pme->simpleData.y_root, pme->simpleData.state, pme->simpleData.time - lastEvent, focusInReader);
+
+        // touch released
+        if (newButtonState == 0 && buttonState != 0) {
+            int x = pme->simpleData.x_root;
+            int y = pme->simpleData.y_root;
+
+            bool isGesture = false;
+            if (abs(oldX - x) > MIN_SWIPE_PIXELS || abs(oldY - y) > MIN_SWIPE_PIXELS) isGesture = true;
+
             TouchScreen::TouchType t = TouchScreen::SINGLE_TAP;
             if (buttonState == Qt::RightButton) t = TouchScreen::DOUBLE_TAP;
 
-            // single tap actions work only when in reader
-            if (t == TouchScreen::SINGLE_TAP && pMyApp->getMainWindow() && !pMyApp->getMainWindow()->isFocusInReader()) {
+            if (t == TouchScreen::SINGLE_TAP && lastEvent != 0 && pme->simpleData.time - lastEvent > LONG_TAP && !isGesture) {
+                qDebug("long tap");
+                if (focusInReader) {
+                    QWSServer::sendKeyEvent(-1, Qt::Key_Menu, Qt::NoModifier, true, false);
+                    QWSServer::sendKeyEvent(-1, Qt::Key_Menu, Qt::NoModifier, false, false);
+                } else {
+                    QWSServer::sendKeyEvent(-1, Qt::Key_Select, Qt::NoModifier, true, false);
+                    QWSServer::sendKeyEvent(-1, Qt::Key_Select, Qt::NoModifier, false, false);
+                }
+                return true;
+            }
+
+            // handle custom single tap actions only when in reader
+            if (t == TouchScreen::SINGLE_TAP && !focusInReader && !isGesture) {
+                return false;
+            }
+
+            if (t == TouchScreen::SINGLE_TAP && isGesture) {
+                // up - down
+                if (y - oldY > MIN_SWIPE_PIXELS) {
+                    qDebug("* down swipe");
+                    QWSServer::sendKeyEvent(-1, Qt::Key_PageDown, Qt::NoModifier, true, false);
+                    QWSServer::sendKeyEvent(-1, Qt::Key_PageDown, Qt::NoModifier, false, false);
+                    return true;
+                }
+                // down - up
+                else if (oldY - y > MIN_SWIPE_PIXELS) {
+                    qDebug("* up swipe");
+                    QWSServer::sendKeyEvent(-1, Qt::Key_PageUp, Qt::NoModifier, true, false);
+                    QWSServer::sendKeyEvent(-1, Qt::Key_PageUp, Qt::NoModifier, false, false);
+                    return true;
+                }
+                // right - left
+                else if (oldX - x > MIN_SWIPE_PIXELS) {
+                    qDebug("* left swipe");
+                    QWSServer::sendKeyEvent(-1, Qt::Key_Escape, Qt::NoModifier, true, false);
+                    QWSServer::sendKeyEvent(-1, Qt::Key_Escape, Qt::NoModifier, false, false);
+                }
                 return false;
             }
 
@@ -298,6 +359,7 @@ bool myEventFilter(void *message, long *)
                 qDebug("-- area action not defined");
             }
         }
+        lastEvent = pme->simpleData.time;
         buttonState = newButtonState;
     }
 #endif

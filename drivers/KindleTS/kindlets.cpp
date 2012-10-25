@@ -31,6 +31,8 @@ KindleTS::KindleTS(const QString & driver, const QString & device, QObject* pare
     touch = newtouch = false ;
     doubletap = newdoubletap = false ;
 
+    oldX=0; oldY=0;
+
     capture_input() ;
 }
 
@@ -51,6 +53,8 @@ void KindleTS::resume()
     _sn->setEnabled(true);
 }
 
+#define POS_TH 10
+
 typedef struct input_event input_event_t;
 
 void KindleTS::activity(int)
@@ -67,15 +71,19 @@ void KindleTS::activity(int)
     switch(in.type)
     {
     case EV_ABS:
-        if (in.code == ABS_MT_POSITION_X)
+        if (in.code == ABS_MT_POSITION_X && abs(oldX - in.value) > POS_TH) {
             p.setX(in.value);
-        else if (in.code == ABS_MT_POSITION_Y)
+            oldX = in.value;
+        }  else if (in.code == ABS_MT_POSITION_Y && abs(oldY - in.value) > POS_TH) {
             p.setY(in.value);
+            oldY = in.value;
+        }
         break ;
     case EV_KEY:
         if (in.code == BTN_TOUCH)
         {
             newtouch = (in.value == 0) ? false : true ;
+            mouseChanged(p, (newtouch) ? Qt::LeftButton : 0, 0);
         }
         else if (in.code == BTN_TOOL_DOUBLETAP)
         {
@@ -84,7 +92,6 @@ void KindleTS::activity(int)
         }
         break ;
     case EV_SYN:
-        if (!doubletap && !newdoubletap) mouseChanged(p, (newtouch) ? Qt::LeftButton : 0, 0);
         touch = newtouch ;
         doubletap = newdoubletap ;
         break ;
