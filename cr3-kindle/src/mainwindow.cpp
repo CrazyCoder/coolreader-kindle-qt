@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     usbDriveMode = false;
     screenSaverMode = false;
+    menuActive = false;
 
     ui->setupUi(this);
 
@@ -154,7 +155,7 @@ void MainWindow::goingToScreenSaver()
 #ifndef i386
     if (!usbDriveMode && !screenSaverMode) {
         qDebug("screensaver on");
-        QProcess::execute("killall -cont cvm");
+        Device::resumeFramework();
     }
     screenSaverMode = true;
 #endif
@@ -166,7 +167,7 @@ void MainWindow::outOfScreenSaver()
     if (screenSaverMode && !usbDriveMode) {
         qDebug("screensaver off");
         sleep(1);
-        QProcess::execute("killall -stop cvm");
+        Device::suspendFramework();
         QWSServer::instance()->refresh();
     }
     screenSaverMode = false;
@@ -181,7 +182,7 @@ void MainWindow::usbDriveConnected()
         qDebug("usb drive on");
         QWSServer::instance()->closeKeyboard();
         sleep(1);
-        QProcess::execute("killall -cont cvm");
+        Device::resumeFramework();
     }
     usbDriveMode = true;
 #endif
@@ -193,7 +194,7 @@ void MainWindow::usbDriveDisconnected()
     if (!screenSaverMode && usbDriveMode) {
         qDebug("usb drive off");
         sleep(1);
-        QProcess::execute("killall -stop cvm");
+        Device::suspendFramework();
         QWSServer::instance()->openKeyboard();
         QWSServer::instance()->refresh();
     }
@@ -254,8 +255,9 @@ void MainWindow::contextMenu( QPoint pos )
     menu->addAction(ui->actionAddBookmark);
     menu->addAction(ui->actionHide);
     menu->addAction(ui->actionClose);
-
+    menuActive = true;
     menu->exec(ui->view->mapToGlobal(pos));
+    menuActive = false;
 }
 
 void MainWindow::doStartupActions()
@@ -336,6 +338,11 @@ bool MainWindow::isReservedKey(int key)
     }
 }
 
+bool MainWindow::isFocusInReader()
+{
+    return hasFocus() && !menuActive;
+}
+
 void MainWindow::doCommand(int cmd, int param)
 {
     switch(cmd) {
@@ -396,8 +403,16 @@ void MainWindow::on_actionHide_triggered()
         system("echo sendalt 42>/proc/keypad"); // Alt+Shift works only on keyboard devices
     } else {
         gotoSleep();
-        QWSServer::instance()->closeKeyboard();
-        system("killall -cont cvm;echo send 102 >/proc/keypad");
+        if (!Device::isTouch()) {
+            QWSServer::instance()->closeKeyboard();
+            Device::resumeFramework();
+            system("echo send 102 >/proc/keypad");
+        } else {
+            QWSServer::instance()->closeMouse();
+            system("lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home");
+            QWSServer::instance()->enablePainting(false);
+            Device::resumeFramework();
+        }
     }
 #endif
 }

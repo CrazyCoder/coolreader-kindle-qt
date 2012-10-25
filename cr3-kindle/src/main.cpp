@@ -1,9 +1,15 @@
 // CoolReader3 / Qt
 // main.cpp - entry point
 #include "mainwindow.h"
+
 #ifndef i386
 #include "../../drivers/QKindleFb/qkindlefb.h"
+
+#include "touchscreen.h"
+TouchScreen *pTouch;
+
 #endif
+
 
 MyApplication *pMyApp;
 
@@ -12,7 +18,9 @@ int main(int argc, char *argv[])
     int res = 0;
     {
         Device::instance(); // initialize device
-
+#ifndef i386
+        pTouch = new TouchScreen();
+#endif
         lString16 exedir = LVExtractPath(LocalToUnicode(lString8(argv[0])));
         LVAppendPathDelimiter(exedir);
         lString16 datadir = exedir + L"data/";
@@ -39,12 +47,14 @@ int main(int argc, char *argv[])
             return 2;
         }
 #ifndef i386
-        PrintString(1, 1, "crengine version: " + QString(CR_ENGINE_VERSION), "-c");
-        PrintString(1, 2, QString("buid date: %1 %2").arg(__DATE__).arg(__TIME__));
-        QString message = "Please wait while application is loading...";
-        int xpos = ((Device::getWidth()/12-1)-message.length())/2;
-        int ypos = (Device::getHeight()/20-2)/2;
-        PrintString(xpos, ypos, message);
+        if (!Device::isTouch()) {
+            PrintString(1, 1, "crengine version: " + QString(CR_ENGINE_VERSION), "-c");
+            PrintString(1, 2, QString("buid date: %1 %2").arg(__DATE__).arg(__TIME__));
+            QString message = "Please wait while application is loading...";
+            int xpos = ((Device::getWidth()/12-1)-message.length())/2;
+            int ypos = (Device::getHeight()/20-2)/2;
+            PrintString(xpos, ypos, message);
+        }
 #endif
 
         // set row count
@@ -64,7 +74,9 @@ int main(int argc, char *argv[])
         pMyApp = &a;
         // set app stylesheet
 #ifndef i386
-        QFile qss(QDir::toNativeSeparators(cr2qt(datadir)) + (Device::getModel() != Device::KDX ? "stylesheet_k3.qss" : "stylesheet_dx.qss"));
+        QString style = (Device::getModel() != Device::KDX ? "stylesheet_k3.qss" : "stylesheet_dx.qss");
+        if (Device::getModel() == Device::KPW) style = "stylesheet_pw.qss";
+        QFile qss(QDir::toNativeSeparators(cr2qt(datadir)) + style);
         // set up full update interval for the graphics driver
         QKindleFb *pscreen = static_cast<QKindleFb*>(QScreen::instance());
         pscreen->setFullUpdateEvery(props->getIntDef(PROP_DISPLAY_FULL_UPDATE_INTERVAL, 1));
@@ -218,11 +230,13 @@ void wakeUp()
 
     active = qApp->activeWindow();
 
-    QProcess::execute("killall -stop cvm");
+    Device::suspendFramework();
     if(!active->isFullScreen() && !active->isMaximized()) {
         QWidget *mainwnd = qApp->widgetAt(0,0);
         mainwnd->repaint();
     }
+
+    if (Device::isTouch()) QWSServer::instance()->enablePainting(true);
 
     active->repaint();
     pMyApp->connectSystemBus();
@@ -232,10 +246,14 @@ void gotoSleep() {
     pMyApp->disconnectSystemBus();
 }
 
+int buttonState = 0;
+int newButtonState = 0;
+
 bool myEventFilter(void *message, long *)
 {
-    QWSEvent * pev = (QWSEvent *) message;
-    QWSKeyEvent *pke = (QWSKeyEvent *) message;
+    QWSEvent* pev = static_cast<QWSEvent*>(message);
+    QWSKeyEvent* pke = static_cast<QWSKeyEvent*>(message);
+    QWSMouseEvent* pme = pev->asMouse();
 
     if(pev->type == QWSEvent::Key)
     {
@@ -256,18 +274,44 @@ bool myEventFilter(void *message, long *)
         // qDebug("QWS key: key=%x, press=%x, uni=%x", pke->simpleData.keycode, pke->simpleData.is_press, pke->simpleData.unicode);
         return false;
     }
+#ifndef i386
+    else if (pev->type == QWSEvent::Mouse) {
+        newButtonState = pme->simpleData.state;
+        qDebug("mouse: x: %d, y: %d, state: %d", pme->simpleData.x_root, pme->simpleData.y_root, pme->simpleData.state);
+        if (newButtonState == 0) {
+            TouchScreen::TouchType t = TouchScreen::SINGLE_TAP;
+            if (buttonState == Qt::RightButton) t = TouchScreen::DOUBLE_TAP;
+
+            // single tap actions work only when in reader
+            if (t == TouchScreen::SINGLE_TAP && pMyApp->getMainWindow() && !pMyApp->getMainWindow()->isFocusInReader()) {
+                return false;
+            }
+
+            Qt::Key key = pTouch->getAreaAction(pme->simpleData.x_root, pme->simpleData.y_root, t);
+
+            if (key != Qt::Key_unknown) {
+                QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, true, false);
+                QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, false, false);
+                buttonState = newButtonState;
+                return true;
+            } else {
+                qDebug("-- area action not defined");
+            }
+        }
+        buttonState = newButtonState;
+    }
+#endif
     return false;
 }
 
 void PrintString(int x, int y, const QString message, const QString opt) {
-    QString cmd = QString("/usr/sbin/eips %1 %2 %3 \"%4\"").arg(opt).arg(QString().number(x)).arg(QString().number(y)).arg(message);
+    QString cmd = QString("/usr/sbin/eips %1 %2 \"%3\" %4").arg(QString().number(x)).arg(QString().number(y)).arg(message).arg(opt);
     system(cmd.toAscii());
-    usleep(250000);
 }
 
 void sigCatcher(int sig) {
   if(sig == SIGUSR1) {
-      QWSServer::instance()->openKeyboard();
+      Device::isTouch() ? QWSServer::instance()->openMouse() : QWSServer::instance()->openKeyboard();
       wakeUp();
   }
 }

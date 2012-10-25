@@ -41,7 +41,8 @@ SOURCES +=  main.cpp \
             filepropsdlg.cpp \
             openfiledlg.cpp \
             virtualkeysdlg.cpp \
-            device.cpp
+            device.cpp \
+            touchscreen.cpp
 
 HEADERS +=  mainwindow.h \
             cr3widget.h \
@@ -54,7 +55,8 @@ HEADERS +=  mainwindow.h \
             filepropsdlg.h \
             openfiledlg.h \
             virtualkeysdlg.h \
-            device.h
+            device.h \
+            touchscreen.h
 
 FORMS +=    mainwindow.ui \
             tocdlg.ui \

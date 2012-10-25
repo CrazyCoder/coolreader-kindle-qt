@@ -120,6 +120,7 @@ public:
 
     void connectSystemBus();
     void disconnectSystemBus();
+    bool isFocusInReader();
 private:
     Ui::MainWindowClass *ui;
     QString _filenameToOpen;
@@ -130,6 +131,7 @@ private:
 
     bool usbDriveMode;
     bool screenSaverMode;
+    bool menuActive;
 public slots:
     void contextMenu( QPoint pos );
     void on_actionFindText_triggered();
@@ -191,6 +193,9 @@ public:
 #ifndef i386
         if (mainWindow) mainWindow->disconnectSystemBus();
 #endif
+    }
+    MainWindow* getMainWindow() {
+        return mainWindow;
     }
 private:
     MainWindow *mainWindow;
