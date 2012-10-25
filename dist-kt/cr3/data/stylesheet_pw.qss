@@ -1,0 +1,106 @@
+* {
+    font-size: 9pt;
+    background: white;
+    background-color: white;
+    color: black;
+    selection-background-color: white;
+    selection-color: black;
+}
+
+QMenu {
+    font-size: 10pt;
+    border: 3px solid grey;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 4px;
+    spacing: 2px;
+    padding: 11px 14px 12px 14px;
+    font: bold;
+    font-family: "Helvetica Neue LT 65 Kindle Medium"
+}
+
+QMenu::item {
+    font-size: 10pt;
+    spacing: 6px;
+    padding: 1px 4px 2px 4px;
+    border-bottom: 1px solid gray;
+    margin-bottom: 10px;
+}
+
+QMenu::item:selected {
+    font-size: 10pt;
+    spacing: 6px;
+    padding: 1px 4px 2px 4px;
+    border-bottom: 4px solid black;
+    margin-bottom: 7px;
+    background-color: transparent;
+}
+
+QMenu::item:disabled {
+    font-size: 10pt;
+    color: grey;
+}
+
+QListView {
+    font-size: 8pt;
+}
+
+QTableWidget {
+    font-size: 10pt;
+}
+
+QTableWidget::item {
+    font-size: 10pt;
+    border-bottom: 1px solid transparent;
+}
+
+QTableWidget::item:selected {
+    font-size: 10pt;
+    border-bottom: 1px solid black;
+}
+
+QTreeView {
+    border-bottom: 2px dotted grey;
+    font-size: 9pt;
+}
+
+QTreeView::item {
+    border-bottom: 2px dotted grey;
+    font-size: 9pt;
+}
+
+QTreeView::item:selected {
+    border-bottom: 2px solid black;
+    font-size: 9pt;
+}
+
+QLabel {
+    font-size: 9pt;
+    margin-right: 2px;
+}
+
+QCheckBox {
+    font-size: 9pt;
+}
+
+QComboBox {
+    font-size: 9pt;
+    selection-color: white;
+    selection-background-color: black;
+}
+
+QSpinBox {
+    font-size: 9pt;
+    selection-color: white;
+    selection-background-color: black;
+}
+
+QDoubleSpinBox {
+    font-size: 9pt;
+    selection-color: white;
+    selection-background-color: black;
+}
+
+QDialog{
+    border: 2px solid black;
+} 
