@@ -344,6 +344,7 @@ bool myEventFilter(void *message, long *)
                     qDebug("* left swipe");
                     QWSServer::sendKeyEvent(-1, Qt::Key_Escape, Qt::NoModifier, true, false);
                     QWSServer::sendKeyEvent(-1, Qt::Key_Escape, Qt::NoModifier, false, false);
+                    return true;
                 }
                 return false;
             }

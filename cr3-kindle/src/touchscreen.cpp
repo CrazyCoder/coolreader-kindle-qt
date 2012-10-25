@@ -9,7 +9,7 @@ const Qt::Key TouchScreen::DOUBLE_TAP_ACTIONS[] = {
 const Qt::Key TouchScreen::SINGLE_TAP_ACTIONS[] = {
     Qt::Key_unknown, Qt::Key_unknown, Qt::Key_unknown,
     Qt::Key_PageUp, Qt::Key_PageDown, Qt::Key_PageDown,
-                    Qt::Key_unknown
+                    Qt::Key_PageDown
 };
 
 TouchScreen::TouchScreen()
