@@ -45,7 +45,24 @@ public:
         return FIVE_WAY[m_model];
     }
 
+    static bool isTouch() {
+        return !FIVE_WAY[m_model] && !KEYBOARD[m_model];
+    }
+
     static bool isEmulator() { return m_model == EMULATOR; }
+
+    static void suspendFramework() {
+        if (!isTouch()) QProcess::execute("killall -STOP cvm");
+        else {
+            system("./ktsuspend.sh");
+        }
+    }
+
+    static void resumeFramework() {
+        if (!isTouch()) QProcess::execute("killall -CONT cvm"); else {
+            system("./ktresume.sh");
+        }
+    }
 
 private:
     static const int WIDTH[], HEIGHT[];

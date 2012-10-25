@@ -22,11 +22,17 @@ Device::Device()
     if (myProcess->waitForReadyRead(10000)) {
         QByteArray array = myProcess->readAll();
         array.truncate(array.indexOf("\n"));
+
         bool ok;
         int sn = QString(array).toInt(&ok, 16);
+
         if (ok) {
             qDebug("serial: %X", sn);
+        } else {
+            qDebug() << "unexpected output: " << QString(array);
+            return;
         }
+
         switch(sn) {
         case 0xB002:
         case 0xB003:
