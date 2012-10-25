@@ -766,7 +766,7 @@ void QKindleFb::exposeRegion(QRegion region, int changing)
             ud.update_region.width = dirtyRect.width();
             ud.update_region.height = dirtyRect.height();
 
-            ud.waveform_mode = WAVEFORM_MODE_GC16 ;
+            ud.waveform_mode = WAVEFORM_MODE_GC16_FAST ;
             ud.update_mode = (doFullUpdate == false) ? UPDATE_MODE_PARTIAL : UPDATE_MODE_FULL ;
             ud.temp = TEMP_USE_PAPYRUS;
             ud.flags = 0;
