@@ -76,20 +76,15 @@ void KindleTS::activity(int)
         if (in.code == BTN_TOUCH)
         {
             newtouch = (in.value == 0) ? false : true ;
-            mouseChanged(p, (newtouch == true)? Qt::LeftButton : 0, 0);
         }
         else if (in.code == BTN_TOOL_DOUBLETAP)
         {
             newdoubletap = (in.value == 0) ? false : true ;
-            if  ((newdoubletap == false) && (doubletap == true))
-            {
-                QWSServer::sendKeyEvent(-1, Qt::Key_Menu, Qt::NoModifier, true, false);
-                QWSServer::sendKeyEvent(-1, Qt::Key_Menu, Qt::NoModifier, false, false);
-            }
+            mouseChanged(p, (newdoubletap) ? Qt::RightButton : 0, 0);
         }
-
         break ;
     case EV_SYN:
+        if (!doubletap && !newdoubletap) mouseChanged(p, (newtouch) ? Qt::LeftButton : 0, 0);
         touch = newtouch ;
         doubletap = newdoubletap ;
         break ;
