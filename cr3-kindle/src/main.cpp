@@ -251,12 +251,11 @@ void gotoSleep() {
 int buttonState = 0;
 int newButtonState = 0;
 int lastEvent = 0;
-bool focusInReader = true;
+bool isFocusInReader = true;
 int oldX = 0;
 int oldY = 0;
 
-#define LONG_TAP 500
-#define MIN_SWIPE_PIXELS 200
+#define LONG_TAP_INTERVAL 500
 
 bool myEventFilter(void *message, long *)
 {
@@ -289,67 +288,38 @@ bool myEventFilter(void *message, long *)
 
         // save focus state when button was pressed
         if (newButtonState > 0) {
-            focusInReader = pMyApp->getMainWindow() && pMyApp->getMainWindow()->isFocusInReader();
+            isFocusInReader = pMyApp->getMainWindow() && pMyApp->getMainWindow()->isFocusInReader();
             oldX = pme->simpleData.x_root;
             oldY = pme->simpleData.y_root;
         }
 
-        qDebug("mouse: x: %d, y: %d, state: %d, time: %d, %d", pme->simpleData.x_root, pme->simpleData.y_root, pme->simpleData.state, pme->simpleData.time - lastEvent, focusInReader);
+        qDebug("mouse: x: %d, y: %d, state: %d, time: %d, %d", pme->simpleData.x_root, pme->simpleData.y_root, pme->simpleData.state, pme->simpleData.time - lastEvent, isFocusInReader);
 
         // touch released
         if (newButtonState == 0 && buttonState != 0) {
             int x = pme->simpleData.x_root;
             int y = pme->simpleData.y_root;
 
-            bool isGesture = false;
-            if (abs(oldX - x) > MIN_SWIPE_PIXELS || abs(oldY - y) > MIN_SWIPE_PIXELS) isGesture = true;
-
-            TouchScreen::TouchType t = TouchScreen::SINGLE_TAP;
-            if (buttonState == Qt::RightButton) t = TouchScreen::DOUBLE_TAP;
-
-            if (t == TouchScreen::SINGLE_TAP && lastEvent != 0 && pme->simpleData.time - lastEvent > LONG_TAP && !isGesture) {
-                qDebug("long tap");
-                if (focusInReader) {
-                    QWSServer::sendKeyEvent(-1, Qt::Key_Menu, Qt::NoModifier, true, false);
-                    QWSServer::sendKeyEvent(-1, Qt::Key_Menu, Qt::NoModifier, false, false);
-                } else {
-                    QWSServer::sendKeyEvent(-1, Qt::Key_Select, Qt::NoModifier, true, false);
-                    QWSServer::sendKeyEvent(-1, Qt::Key_Select, Qt::NoModifier, false, false);
-                }
-                return true;
+            TouchScreen::TouchType t = TouchScreen::TAP_SINGLE;
+            if (buttonState == Qt::RightButton) {
+                t = isFocusInReader ? TouchScreen::TAP_TWO_READER : TouchScreen::TAP_TWO;
             }
 
-            // handle custom single tap actions only when in reader
-            if (t == TouchScreen::SINGLE_TAP && !focusInReader && !isGesture) {
-                return false;
-            }
+            bool isSingleFinger = buttonState == Qt::LeftButton;
+            bool isGesture = (abs(oldX - x) > MIN_SWIPE_PIXELS || abs(oldY - y) > MIN_SWIPE_PIXELS) && isSingleFinger;
+            bool isLongTap = lastEvent != 0 && pme->simpleData.time - lastEvent > LONG_TAP_INTERVAL && !isGesture && isSingleFinger;
 
-            if (t == TouchScreen::SINGLE_TAP && isGesture) {
-                // up - down
-                if (y - oldY > MIN_SWIPE_PIXELS) {
-                    qDebug("* down swipe");
-                    QWSServer::sendKeyEvent(-1, Qt::Key_PageDown, Qt::NoModifier, true, false);
-                    QWSServer::sendKeyEvent(-1, Qt::Key_PageDown, Qt::NoModifier, false, false);
-                    return true;
-                }
-                // down - up
-                else if (oldY - y > MIN_SWIPE_PIXELS) {
-                    qDebug("* up swipe");
-                    QWSServer::sendKeyEvent(-1, Qt::Key_PageUp, Qt::NoModifier, true, false);
-                    QWSServer::sendKeyEvent(-1, Qt::Key_PageUp, Qt::NoModifier, false, false);
-                    return true;
-                }
-                // right - left
-                else if (oldX - x > MIN_SWIPE_PIXELS) {
-                    qDebug("* left swipe");
-                    QWSServer::sendKeyEvent(-1, Qt::Key_Escape, Qt::NoModifier, true, false);
-                    QWSServer::sendKeyEvent(-1, Qt::Key_Escape, Qt::NoModifier, false, false);
-                    return true;
-                }
-                return false;
-            }
+            if (isSingleFinger && !isGesture && !isLongTap && !isFocusInReader) return false; // handle custom single tap actions only when in reader
 
-            Qt::Key key = pTouch->getAreaAction(pme->simpleData.x_root, pme->simpleData.y_root, t);
+            Qt::Key key = Qt::Key_unknown;
+
+            if (isGesture) {
+                TouchScreen::SwipeType st = isFocusInReader ? TouchScreen::SWIPE_ONE_READER : TouchScreen::SWIPE_ONE;
+                key = pTouch->getSwipeAction(pme->simpleData.x_root, pme->simpleData.y_root, oldX, oldY, st);
+            } else {
+                if (isLongTap) t = isFocusInReader ? TouchScreen::TAP_LONG_READER : TouchScreen::TAP_LONG;
+                key = pTouch->getAreaAction(pme->simpleData.x_root, pme->simpleData.y_root, t);
+            }
 
             if (key != Qt::Key_unknown) {
                 QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, true, false);

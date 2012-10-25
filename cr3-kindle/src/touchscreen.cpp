@@ -1,15 +1,40 @@
 #include "touchscreen.h"
 
-const Qt::Key TouchScreen::DOUBLE_TAP_ACTIONS[] = {
-    Qt::Key_Escape, Qt::Key_Home, Qt::Key_Select,
-    Qt::Key_Up, Qt::Key_O, Qt::Key_Down,
-                 Qt::Key_Menu
+const Qt::Key TouchScreen::TAP_ACTIONS[][7] = {
+    { // single tap
+      Qt::Key_unknown, Qt::Key_unknown, Qt::Key_unknown,
+      Qt::Key_PageUp, Qt::Key_PageDown, Qt::Key_PageDown,
+      Qt::Key_PageDown
+    },
+    { // two finger tap
+      Qt::Key_Escape, Qt::Key_Home, Qt::Key_Select,
+      Qt::Key_Up, Qt::Key_O, Qt::Key_Down,
+      Qt::Key_Menu
+    },
+    { // two finger tap while reading
+      Qt::Key_Escape, Qt::Key_Home, Qt::Key_Select,
+      Qt::Key_Up, Qt::Key_O, Qt::Key_Down,
+      Qt::Key_Menu
+    },
+    { // long tap
+      Qt::Key_Select, Qt::Key_Select, Qt::Key_Select,
+      Qt::Key_Select, Qt::Key_Select, Qt::Key_Select,
+      Qt::Key_Select
+    },
+    { // long tap while reading
+      Qt::Key_Minus, Qt::Key_Select, Qt::Key_Plus,
+      Qt::Key_unknown, Qt::Key_O, Qt::Key_unknown,
+      Qt::Key_Menu
+    }
 };
 
-const Qt::Key TouchScreen::SINGLE_TAP_ACTIONS[] = {
-    Qt::Key_unknown, Qt::Key_unknown, Qt::Key_unknown,
-    Qt::Key_PageUp, Qt::Key_PageDown, Qt::Key_PageDown,
-                    Qt::Key_PageDown
+const Qt::Key TouchScreen::SWIPE_ACTIONS[][4] = {
+    { // swipe while not in reader
+      Qt::Key_PageDown, Qt::Key_Home, Qt::Key_PageUp, Qt::Key_Escape
+    },
+    { // swipe when in reader
+      Qt::Key_PageDown, Qt::Key_PageUp, Qt::Key_PageUp, Qt::Key_PageDown
+    }
 };
 
 TouchScreen::TouchScreen()
@@ -48,11 +73,22 @@ TouchScreen::Area TouchScreen::getPointArea(int x, int y)
 
 Qt::Key TouchScreen::getAreaAction(int x, int y, TouchScreen::TouchType t)
 {
-    switch(t) {
-    case SINGLE_TAP:
-        return SINGLE_TAP_ACTIONS[getPointArea(x, y)];
-    case DOUBLE_TAP:
-        return DOUBLE_TAP_ACTIONS[getPointArea(x, y)];
+    return TAP_ACTIONS[t][getPointArea(x, y)];
+}
+
+Qt::Key TouchScreen::getSwipeAction(int x, int y, int oldX, int oldY, TouchScreen::SwipeType t)
+{
+    SwipeGesture g = SWIPE_UP;
+
+    if (y - oldY > MIN_SWIPE_PIXELS) {
+        g = SWIPE_DOWN;
+    } else if (oldY - y > MIN_SWIPE_PIXELS) {
+        g = SWIPE_UP;
+    } else if (oldX - x > MIN_SWIPE_PIXELS) {
+        g = SWIPE_LEFT;
+    } else if (x - oldX > MIN_SWIPE_PIXELS) {
+        g = SWIPE_RIGHT;
     }
-    return Qt::Key_unknown;
+
+    return SWIPE_ACTIONS[t][g];
 }
