@@ -9,31 +9,31 @@
 
 QMenu {
     font-size: 10pt;
-    border: 3px solid grey;
+    border: 3px solid black;
     border-radius: 10px;
     margin: 10px;
     padding: 4px;
     spacing: 2px;
-    padding: 11px 14px 12px 14px;
-    font: bold;
+    padding: 17px 14px 18px 14px;
+    font: bold 30px;
     font-family: "Helvetica Neue LT 65 Kindle Medium"
 }
 
 QMenu::item {
     font-size: 10pt;
     spacing: 6px;
-    padding: 1px 4px 2px 4px;
-    border-bottom: 1px solid gray;
+    padding: 7px 4px 18px 4px;
     margin-bottom: 10px;
+    border-bottom: 1px solid black;
 }
 
 QMenu::item:selected {
     font-size: 10pt;
     spacing: 6px;
-    padding: 1px 4px 2px 4px;
-    border-bottom: 4px solid black;
+    padding: 7px 4px 18px 4px;
     margin-bottom: 7px;
     background-color: transparent;
+    border-bottom: 4px solid black;
 }
 
 QMenu::item:disabled {
@@ -43,6 +43,7 @@ QMenu::item:disabled {
 
 QListView {
     font-size: 8pt;
+    border-bottom: 2px solid black;
 }
 
 QTableWidget {
@@ -51,27 +52,29 @@ QTableWidget {
 
 QTableWidget::item {
     font-size: 10pt;
-    border-bottom: 1px solid transparent;
+    border-bottom: 2px solid transparent;
 }
 
 QTableWidget::item:selected {
     font-size: 10pt;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
 }
 
 QTreeView {
-    border-bottom: 2px dotted grey;
-    font-size: 9pt;
+    font-size: 10pt;
+    border-bottom: 1px dotted grey;
 }
 
 QTreeView::item {
-    border-bottom: 2px dotted grey;
-    font-size: 9pt;
+    padding-top: 9px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted grey;
 }
 
 QTreeView::item:selected {
+    padding-top: 9px;
+    padding-bottom: 10px;
     border-bottom: 2px solid black;
-    font-size: 9pt;
 }
 
 QLabel {
@@ -101,6 +104,6 @@ QDoubleSpinBox {
     selection-background-color: black;
 }
 
-QDialog{
+QDialog {
     border: 2px solid black;
-} 
+}
