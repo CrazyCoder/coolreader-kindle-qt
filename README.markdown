@@ -1,7 +1,6 @@
-CoolReader 3 port for Kindle 4NT/3/DX
+CoolReader 3 port for Kindle Paperwhite, 4NT, 3, DX
 =========================================
-This project is a port of CoolReader 3 application (by **Vadim Lopatin** AKA **Buggins**) to Kindle devices with
-hardware keys (Touch devices are not supported).
+This project is a port of CoolReader 3 application (by **Vadim Lopatin** AKA **Buggins**) to Kindle.
 It supports epub (non-DRM), fb2, doc, txt, rtf, html, chm, tcr, pdb, prc, mobi (non-DRM), pml formats.
 
 The port was originally created by **Andy Wooden**, **fau** and **VladKi**, the project had no fixed home and its
@@ -32,6 +31,12 @@ one place!
 
 Feel free to fork and send me pull requests/patches.
 
+Kindle Paperwhite Support
+=========================================
+-   [Installation instructions](http://www.mobileread.com/forums/showpost.php?p=2278589&postcount=147) (eng)
+-   [Installation instructions](http://www.the-ebook.org/forum/viewtopic.php?p=973382#973382) (rus)
+
+
 Quick Installation Guide for K4NT
 =========================================
 1.  [Jailbreak](http://wiki.mobileread.com/wiki/Kindle4NTHacking) your Kindle
@@ -48,4 +53,3 @@ Links
 =========================================
 -   Russian discussion thread on [the-ebook.org forum](http://www.the-ebook.org/forum/viewtopic.php?t=20811)
 -   English discussion thread on [mobileread.com forum](http://www.mobileread.com/forums/showthread.php?t=148850)
--   [HackedUpReader for Kindle Touch](https://github.com/bhaak/HackedUpReader)
