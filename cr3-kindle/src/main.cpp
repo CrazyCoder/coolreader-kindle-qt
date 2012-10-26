@@ -56,6 +56,8 @@ int main(int argc, char *argv[])
             int xpos = ((Device::getWidth()/12-1)-message.length())/2;
             int ypos = (Device::getHeight()/20-2)/2;
             PrintString(xpos, ypos, message);
+        } else {
+            system("eips -c");
         }
 #endif
 

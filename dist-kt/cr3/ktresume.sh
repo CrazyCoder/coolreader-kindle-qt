@@ -10,5 +10,3 @@ else
     ./xdotool windowmap `xwininfo -tree -root | grep "$name" | awk '{ print $1 }'`
   done
 fi
-
-lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home

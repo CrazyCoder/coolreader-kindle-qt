@@ -29,12 +29,8 @@ fi
 
 export LD_LIBRARY_PATH=/mnt/us/qtKindle/lib:`pwd`/lib
 
-# uncomment to shut down the Amazon framework
-# /etc/init.d/framework stop
+# Close Xorg windows
 ./ktsuspend.sh
-
-# stop cvm
-# killall -STOP cvm
 
 export QT_PLUGIN_PATH=/mnt/us/qtKindle/plugins
 export QT_QWS_FONTDIR=/mnt/us/qtKindle/lib/fonts
@@ -47,7 +43,8 @@ echo "./$1 -qws"
 ./"$1" -qws
 
 cd $SAVE_DIR
-# always try to continue cvm
-# killall -CONT cvm || /etc/init.d/framework start
+
+# restore Xorg windows
 ./ktresume.sh
+# return to home, comment for returning back to runner if you have other commands there
 lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home
