@@ -306,7 +306,7 @@ bool myEventFilter(void *message, long *)
             }
 
             bool isSingleFinger = buttonState == Qt::LeftButton;
-            bool isGesture = (abs(oldX - x) > MIN_SWIPE_PIXELS || abs(oldY - y) > MIN_SWIPE_PIXELS) && isSingleFinger;
+            bool isGesture = pTouch->isGesture(x, y, oldX, oldY) && isSingleFinger;
             bool isLongTap = lastEvent != 0 && pme->simpleData.time - lastEvent > LONG_TAP_INTERVAL && !isGesture && isSingleFinger;
 
             if (isSingleFinger && !isGesture && !isLongTap && !isFocusInReader) return false; // handle custom single tap actions only when in reader
@@ -314,6 +314,7 @@ bool myEventFilter(void *message, long *)
             Qt::Key key = Qt::Key_unknown;
 
             if (isGesture) {
+                qDebug("* gesture detected");
                 TouchScreen::SwipeType st = isFocusInReader ? TouchScreen::SWIPE_ONE_READER : TouchScreen::SWIPE_ONE;
                 key = pTouch->getSwipeAction(pme->simpleData.x_root, pme->simpleData.y_root, oldX, oldY, st);
             } else {

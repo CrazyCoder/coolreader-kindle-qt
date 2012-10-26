@@ -3,7 +3,7 @@
 
 #include "device.h"
 
-#define MIN_SWIPE_PIXELS 200
+#define MIN_SWIPE_PIXELS 150
 
 class TouchScreen
 {
@@ -27,7 +27,8 @@ public:
         SWIPE_UP = 0,
         SWIPE_RIGHT,
         SWIPE_DOWN,
-        SWIPE_LEFT
+        SWIPE_LEFT,
+        SWIPE_UNRECOGNIZED = 0x01ffffff
     } SwipeGesture;
 
     typedef enum AREA { // left to right, top to bootom
@@ -43,6 +44,7 @@ public:
     Area getPointArea(int x, int y);
     Qt::Key getAreaAction(int x, int y, TouchType t);
     Qt::Key getSwipeAction(int x, int y, int oldX, int oldY, SwipeType t);
+    bool isGesture(int x, int y, int oldX, int oldY);
 private:
     int rightMargin, rpx;
     int leftMargin, lpx;

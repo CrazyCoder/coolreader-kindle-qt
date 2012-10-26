@@ -28,7 +28,7 @@ const Qt::Key TouchScreen::TAP_ACTIONS[][7] = {
     }
 };
 
-const Qt::Key TouchScreen::SWIPE_ACTIONS[][4] = {
+const Qt::Key TouchScreen::SWIPE_ACTIONS[][4] = { // UP / RIGHT / DOWN / LEFT
     { // swipe while not in reader
       Qt::Key_PageDown, Qt::Key_Home, Qt::Key_PageUp, Qt::Key_Escape
     },
@@ -78,17 +78,32 @@ Qt::Key TouchScreen::getAreaAction(int x, int y, TouchScreen::TouchType t)
 
 Qt::Key TouchScreen::getSwipeAction(int x, int y, int oldX, int oldY, TouchScreen::SwipeType t)
 {
-    SwipeGesture g = SWIPE_UP;
-
-    if (y - oldY > MIN_SWIPE_PIXELS) {
-        g = SWIPE_DOWN;
-    } else if (oldY - y > MIN_SWIPE_PIXELS) {
-        g = SWIPE_UP;
-    } else if (oldX - x > MIN_SWIPE_PIXELS) {
-        g = SWIPE_LEFT;
-    } else if (x - oldX > MIN_SWIPE_PIXELS) {
-        g = SWIPE_RIGHT;
+    if (!isGesture(x, y, oldX, oldY)) {
+        return Qt::Key_unknown; // too short swipe
     }
 
-    return SWIPE_ACTIONS[t][g];
+    SwipeGesture g = SWIPE_UNRECOGNIZED;
+
+    bool isHorizontal = abs(x - oldX) > abs(y - oldY);
+
+    if (isHorizontal) {
+        if (oldX > x) {
+            g = SWIPE_LEFT;
+        } else {
+            g = SWIPE_RIGHT;
+        }
+    } else { // vertical
+        if (y > oldY) {
+            g = SWIPE_DOWN;
+        } else {
+            g = SWIPE_UP;
+        }
+    }
+
+    return g == SWIPE_UNRECOGNIZED ? Qt::Key_unknown : SWIPE_ACTIONS[t][g];
+}
+
+bool TouchScreen::isGesture(int x, int y, int oldX, int oldY)
+{
+    return (abs(y - oldY) > MIN_SWIPE_PIXELS || abs(x - oldX) > MIN_SWIPE_PIXELS);
 }
