@@ -44,7 +44,7 @@ echo "./$1 -qws"
 
 cd $SAVE_DIR
 
-# restore Xorg windows
-./ktresume.sh
 # return to home, comment for returning back to runner if you have other commands there
 lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home
+# restore Xorg windows
+./ktresume.sh
