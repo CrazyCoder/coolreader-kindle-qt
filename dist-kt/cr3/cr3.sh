@@ -29,6 +29,12 @@ fi
 
 export LD_LIBRARY_PATH=/mnt/us/qtKindle/lib:`pwd`/lib
 
+source /etc/upstart/functions
+source /etc/upstart/blanket_functions
+f_blanket_unload_module ad_screensaver
+f_blanket_unload_module ad_screensaver_active
+f_blanket_load_module screensaver
+
 # Close Xorg windows
 ./ktsuspend.sh
 
