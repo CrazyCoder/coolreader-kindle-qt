@@ -4,6 +4,7 @@
 #include "device.h"
 
 #define MIN_SWIPE_PIXELS 150
+#define LONG_TAP_INTERVAL 500
 
 class TouchScreen
 {
@@ -45,11 +46,19 @@ public:
     Qt::Key getAreaAction(int x, int y, TouchType t);
     Qt::Key getSwipeAction(int x, int y, int oldX, int oldY, SwipeType t);
     bool isGesture(int x, int y, int oldX, int oldY);
+    bool filter(QWSMouseEvent* pme, bool focusInReader);
 private:
     int rightMargin, rpx;
     int leftMargin, lpx;
     int topMargin, tpx;
     int bottomMargin, bpx;
+
+    int buttonState;
+    int newButtonState;
+    int lastEvent;
+    bool isFocusInReader;
+    int oldX;
+    int oldY;
 
     int w;
     int h;

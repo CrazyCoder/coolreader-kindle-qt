@@ -2,8 +2,6 @@
 // main.cpp - entry point
 #include "mainwindow.h"
 
-#undef i386 // uncomment when building for desktop, it's for Qt Creator
-
 #ifndef i386
 #include "../../drivers/QKindleFb/qkindlefb.h"
 
@@ -49,15 +47,14 @@ int main(int argc, char *argv[])
             return 2;
         }
 #ifndef i386
+        system("eips -c");
         if (!Device::isTouch()) {
-            PrintString(1, 1, "crengine version: " + QString(CR_ENGINE_VERSION), "-c");
+            PrintString(1, 1, "crengine version: " + QString(CR_ENGINE_VERSION));
             PrintString(1, 2, QString("buid date: %1 %2").arg(__DATE__).arg(__TIME__));
             QString message = "Please wait while application is loading...";
             int xpos = ((Device::getWidth()/12-1)-message.length())/2;
             int ypos = (Device::getHeight()/20-2)/2;
             PrintString(xpos, ypos, message);
-        } else {
-            system("eips -c");
         }
 #endif
 
@@ -250,15 +247,6 @@ void gotoSleep() {
     pMyApp->disconnectSystemBus();
 }
 
-int buttonState = 0;
-int newButtonState = 0;
-int lastEvent = 0;
-bool isFocusInReader = true;
-int oldX = 0;
-int oldY = 0;
-
-#define LONG_TAP_INTERVAL 500
-
 bool myEventFilter(void *message, long *)
 {
     QWSEvent* pev = static_cast<QWSEvent*>(message);
@@ -286,62 +274,15 @@ bool myEventFilter(void *message, long *)
     }
 #ifndef i386
     else if (pev->type == QWSEvent::Mouse) {
-        newButtonState = pme->simpleData.state;
-
-        // save focus state when button was pressed
-        if (newButtonState > 0) {
-            isFocusInReader = pMyApp->getMainWindow() && pMyApp->getMainWindow()->isFocusInReader();
-            oldX = pme->simpleData.x_root;
-            oldY = pme->simpleData.y_root;
-        }
-
-        qDebug("mouse: x: %d, y: %d, state: %d, time: %d, %d", pme->simpleData.x_root, pme->simpleData.y_root, pme->simpleData.state, pme->simpleData.time - lastEvent, isFocusInReader);
-
-        // touch released
-        if (newButtonState == 0 && buttonState != 0) {
-            int x = pme->simpleData.x_root;
-            int y = pme->simpleData.y_root;
-
-            TouchScreen::TouchType t = TouchScreen::TAP_SINGLE;
-            if (buttonState == Qt::RightButton) {
-                t = isFocusInReader ? TouchScreen::TAP_TWO_READER : TouchScreen::TAP_TWO;
-            }
-
-            bool isSingleFinger = buttonState == Qt::LeftButton;
-            bool isGesture = pTouch->isGesture(x, y, oldX, oldY) && isSingleFinger;
-            bool isLongTap = lastEvent != 0 && pme->simpleData.time - lastEvent > LONG_TAP_INTERVAL && !isGesture && isSingleFinger;
-
-            if (isSingleFinger && !isGesture && !isLongTap && !isFocusInReader) return false; // handle custom single tap actions only when in reader
-
-            Qt::Key key = Qt::Key_unknown;
-
-            if (isGesture) {
-                qDebug("* gesture detected");
-                TouchScreen::SwipeType st = isFocusInReader ? TouchScreen::SWIPE_ONE_READER : TouchScreen::SWIPE_ONE;
-                key = pTouch->getSwipeAction(pme->simpleData.x_root, pme->simpleData.y_root, oldX, oldY, st);
-            } else {
-                if (isLongTap) t = isFocusInReader ? TouchScreen::TAP_LONG_READER : TouchScreen::TAP_LONG;
-                key = pTouch->getAreaAction(pme->simpleData.x_root, pme->simpleData.y_root, t);
-            }
-
-            if (key != Qt::Key_unknown) {
-                QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, true, false);
-                QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, false, false);
-                buttonState = newButtonState;
-                return true;
-            } else {
-                qDebug("-- area action not defined");
-            }
-        }
-        lastEvent = pme->simpleData.time;
-        buttonState = newButtonState;
+        bool isFocusInReader = pMyApp->getMainWindow() && pMyApp->getMainWindow()->isFocusInReader();
+        return pTouch->filter(pme, isFocusInReader);
     }
 #endif
     return false;
 }
 
-void PrintString(int x, int y, const QString message, const QString opt) {
-    QString cmd = QString("/usr/sbin/eips %1 %2 \"%3\" %4").arg(QString().number(x)).arg(QString().number(y)).arg(message).arg(opt);
+void PrintString(int x, int y, const QString message) {
+    QString cmd = QString("/usr/sbin/eips %1 %2 \"%3\"").arg(QString().number(x)).arg(QString().number(y)).arg(message);
     system(cmd.toAscii());
 }
 
