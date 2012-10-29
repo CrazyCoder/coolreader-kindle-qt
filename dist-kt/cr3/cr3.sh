@@ -18,7 +18,6 @@ then
    echo "goqt: "$1" -- not an executable file." ;
    exit 1
 fi
-
 if [ ! -z `pidof $1` ]
 then
    echo "goqt: "$1" -- already running." ;

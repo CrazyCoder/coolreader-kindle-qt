@@ -3,6 +3,7 @@ export LD_LIBRARY_PATH=/mnt/us/cr3/lib
 
 if [ -s ".unmapped" ]
 then
+  eips -c
   cat .unmapped | while read id ; do echo $id >> .unmapped; ./xdotool windowmap $id ; done
   rm -f .unmapped
 else
