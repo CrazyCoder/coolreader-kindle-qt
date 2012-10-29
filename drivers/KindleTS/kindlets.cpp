@@ -4,6 +4,10 @@
 #include <QWSServer>
 #include <QScreenCursor>
 
+qint64 tv2ms(struct timeval *tv) {
+    return static_cast<qint64>(tv->tv_sec) * 1000 + (tv->tv_usec + 500) / 1000;
+}
+
 KindleTS::KindleTS(const QString & driver, const QString & device, QObject* parent) : QObject(parent), QWSMouseHandler(driver, device)
 {
     _debug = device.contains("debug", Qt::CaseInsensitive);
@@ -34,6 +38,7 @@ KindleTS::KindleTS(const QString & driver, const QString & device, QObject* pare
     oldX=0; oldY=0;
 
     capture_input() ;
+    trackingStartedAt = QDateTime::currentMSecsSinceEpoch();
 }
 
 KindleTS::~KindleTS()
@@ -50,6 +55,7 @@ void KindleTS::suspend()
 
 void KindleTS::resume()
 {
+    trackingStartedAt = QDateTime::currentMSecsSinceEpoch();
     _sn->setEnabled(true);
 }
 
@@ -64,6 +70,12 @@ void KindleTS::activity(int)
     input_event_t in; ssize_t size ;
 
     size = read(_fd, &in, sizeof(input_event_t));
+
+    // drop old events that were received when input was suspended
+    if (tv2ms(&in.time) < trackingStartedAt) {
+        _sn->setEnabled(true);
+        return;
+    }
 
     if (_debug)
         qDebug("TS data: type %X, code %X, value %d", in.type, in.code, in.value);

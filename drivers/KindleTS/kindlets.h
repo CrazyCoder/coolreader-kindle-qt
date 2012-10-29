@@ -36,6 +36,8 @@ private:
 
     bool input_captured ;
 
+    qint64 trackingStartedAt ;
+
     void capture_input(void) ;
     void release_input(void) ;
 };
