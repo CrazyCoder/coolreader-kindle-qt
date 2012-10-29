@@ -40,6 +40,12 @@ MainWindow::MainWindow(QWidget *parent)
     actionClose->setText(tr("Close") + "\tAlt+Back");
     addAction(actionClose);
 
+    if (Device::hasLight()) {
+        QAction *actionAdjustBrightness = ui->actionAdjustBrightness;
+        actionAdjustBrightness->setShortcut(Qt::Key_BrightnessAdjust);
+        addAction(actionAdjustBrightness);
+    }
+
     QString dataDir = qApp->applicationDirPath() + QDir::toNativeSeparators(QString("/data/"));
 
     QString cacheDir = dataDir + "cache";
@@ -415,4 +421,13 @@ void MainWindow::on_actionHide_triggered()
         }
     }
 #endif
+}
+
+void MainWindow::on_actionAdjustBrightness_triggered()
+{
+    qDebug("brightness control");
+    QWSServer::instance()->suspendMouse();
+    QProcess::execute("/usr/bin/light.sh");
+    QWSServer::instance()->refresh();
+    QWSServer::instance()->resumeMouse();
 }

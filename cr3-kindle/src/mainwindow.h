@@ -35,6 +35,8 @@
 
 #include "device.h"
 
+#undef i386 // uncomment when building for desktop, it's for Qt Creator
+
 #define CMD_REFRESH					1001
 #define CMD_ZOOM_FONT				1002
 #define CMD_ZOOM_HEADER_FONT		1003
@@ -52,7 +54,7 @@ void ShutdownCREngine();
 bool getDirectoryFonts( lString16Collection & pathList, lString16 ext, lString16Collection & fonts, bool absPath );
 bool myEventFilter(void *message, long *result);
 #ifndef i386
-void PrintString(int x, int y, const QString message, const QString opt = "");
+void PrintString(int x, int y, const QString message);
 #endif
 void sigCatcher(int sig);
 void wakeUp();
@@ -155,6 +157,7 @@ private slots:
     void usbDriveConnected();
     void usbDriveDisconnected();
     void on_actionHide_triggered();
+    void on_actionAdjustBrightness_triggered();
 };
 
 class MyApplication : public QApplication {
