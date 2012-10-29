@@ -1,106 +1,110 @@
 * {
     font-size: 9pt;
+    color: black;
     background: white;
     background-color: white;
-    color: black;
-    selection-background-color: white;
     selection-color: black;
+    selection-background-color: white;
 }
 
 QMenu {
-    font-size: 10pt;
-    border: 3px solid grey;
+    font: bold;
+    border: 4px solid #222222;
     border-radius: 10px;
     margin: 10px;
-    padding: 4px;
     spacing: 2px;
     padding: 11px 14px 12px 14px;
-    font: bold 22px;
-    font-family: "Helvetica Neue LT 65 Kindle Medium"
+    font-family: "Helvetica Neue LT 65 Kindle Medium";
 }
 
 QMenu::item {
-    font-size: 10pt;
     spacing: 6px;
-    padding: 1px 4px 2px 4px;
-    border-bottom: 1px solid gray;
+    padding: 1px 4px 12px 4px;
     margin-bottom: 10px;
+    border-bottom: 1px solid black;
 }
 
 QMenu::item:selected {
-    font-size: 10pt;
     spacing: 6px;
-    padding: 1px 4px 2px 4px;
-    border-bottom: 4px solid black;
+    padding: 1px 4px 12px 4px;
     margin-bottom: 7px;
+    border-bottom: 4px solid black;
     background-color: transparent;
 }
 
 QMenu::item:disabled {
-    font-size: 10pt;
     color: grey;
+}
+
+QTabWidget::pane {
+    border: 1px solid grey;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+QTabWidget::tab-bar {
+    left: 0px;
+}
+
+QTabBar {
+    font: bold;
+}
+
+QTabBar::tab:selected {
+    padding: 5px;
+    color: white;
+    background-color: black;
+    border: 1px solid black;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+QTabBar::tab:!selected {
+    padding: 5px;
+    color: #444444;
+    background-color: white;
+    border: 1px solid grey;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
 QListView {
     font-size: 8pt;
-}
-
-QTableWidget {
-    font-size: 10pt;
+    border-bottom: 2px solid black;
 }
 
 QTableWidget::item {
-    font-size: 10pt;
-    border-bottom: 1px solid transparent;
+    border-bottom: 2px solid transparent;
 }
 
 QTableWidget::item:selected {
-    font-size: 10pt;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
 }
 
 QTreeView {
-    border-bottom: 2px dotted grey;
-    font-size: 9pt;
+    font-size: 8pt;
+    border-bottom: 1px dotted grey;
 }
 
 QTreeView::item {
-    border-bottom: 2px dotted grey;
-    font-size: 9pt;
+    font-size: 8pt;
+    border-bottom: 1px dotted grey;
 }
 
 QTreeView::item:selected {
+    font-size: 8pt;
     border-bottom: 2px solid black;
-    font-size: 9pt;
 }
 
 QLabel {
-    font-size: 9pt;
     margin-right: 2px;
 }
 
-QCheckBox {
-    font-size: 9pt;
-}
-
-QComboBox {
-    font-size: 9pt;
+QComboBox, QSpinBox, QDoubleSpinBox {
     selection-color: white;
     selection-background-color: black;
 }
 
-QSpinBox {
-    font-size: 9pt;
-    selection-color: white;
-    selection-background-color: black;
-}
-
-QDoubleSpinBox {
-    font-size: 9pt;
-    selection-color: white;
-    selection-background-color: black;
-}
-
-QDialog{
+QDialog {
     border: 2px solid black;
 }
