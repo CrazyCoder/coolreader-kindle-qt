@@ -3,6 +3,7 @@
 
 #include <QProcess>
 #include <QDebug>
+#include <QWSServer>
 
 class Device
 {
@@ -49,6 +50,10 @@ public:
         return !FIVE_WAY[m_model] && !KEYBOARD[m_model];
     }
 
+    static bool hasLight() {
+        return m_model == KPW;
+    }
+
     static bool isEmulator() { return m_model == EMULATOR; }
 
     static void suspendFramework() {
@@ -56,9 +61,11 @@ public:
         else {
             system("./ktsuspend.sh");
         }
+        QWSServer::instance()->screenSaverActivate(false);
     }
 
     static void resumeFramework() {
+        QWSServer::instance()->screenSaverActivate(true);
         if (!isTouch()) QProcess::execute("killall -CONT cvm"); else {
             system("./ktresume.sh");
         }
