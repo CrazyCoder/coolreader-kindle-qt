@@ -42,7 +42,8 @@ SOURCES +=  main.cpp \
             openfiledlg.cpp \
             virtualkeysdlg.cpp \
             device.cpp \
-            touchscreen.cpp
+            touchscreen.cpp \
+            brightnesscontrol.cpp
 
 HEADERS +=  mainwindow.h \
             cr3widget.h \
@@ -56,7 +57,8 @@ HEADERS +=  mainwindow.h \
             openfiledlg.h \
             virtualkeysdlg.h \
             device.h \
-            touchscreen.h
+            touchscreen.h \
+            brightnesscontrol.h
 
 FORMS +=    mainwindow.ui \
             tocdlg.ui \
@@ -66,7 +68,8 @@ FORMS +=    mainwindow.ui \
             searchdlg.ui \
             filepropsdlg.ui \
             openfiledlg.ui \
-            virtualkeysdlg.ui
+            virtualkeysdlg.ui \
+            brightnesscontrol.ui
 
 TRANSLATIONS += i18n/Russian.ts \
                 i18n/Ukrainian.ts \
