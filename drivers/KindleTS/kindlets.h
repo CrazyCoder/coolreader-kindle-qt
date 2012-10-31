@@ -3,6 +3,10 @@
 
 #include <QWSMouseHandler>
 #include <QSocketNotifier>
+#include <QWSServer>
+
+#include <fcntl.h>
+#include <linux/input.h>
 
 class KindleTS : public QObject, public QWSMouseHandler
 {
@@ -32,11 +36,9 @@ private:
 
     int oldX, oldY;
 
-    QPoint p ;
+    QPoint p, oldP ;
 
     bool input_captured ;
-
-    qint64 trackingStartedAt ;
 
     void capture_input(void) ;
     void release_input(void) ;

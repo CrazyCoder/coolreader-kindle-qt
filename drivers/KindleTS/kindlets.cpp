@@ -1,12 +1,5 @@
-#include <fcntl.h>
-#include <linux/input.h>
 #include "kindlets.h"
-#include <QWSServer>
-#include <QScreenCursor>
 
-qint64 tv2ms(struct timeval *tv) {
-    return static_cast<qint64>(tv->tv_sec) * 1000 + (tv->tv_usec + 500) / 1000;
-}
 
 KindleTS::KindleTS(const QString & driver, const QString & device, QObject* parent) : QObject(parent), QWSMouseHandler(driver, device)
 {
@@ -32,13 +25,13 @@ KindleTS::KindleTS(const QString & driver, const QString & device, QObject* pare
     _sn->setEnabled(true);
 
     p.setX(0); p.setY(0);
+    oldP.setX(0); oldP.setY(0);
     touch = newtouch = false ;
     doubletap = newdoubletap = false ;
 
     oldX=0; oldY=0;
 
     capture_input() ;
-    trackingStartedAt = QDateTime::currentMSecsSinceEpoch();
 }
 
 KindleTS::~KindleTS()
@@ -55,7 +48,6 @@ void KindleTS::suspend()
 
 void KindleTS::resume()
 {
-    trackingStartedAt = QDateTime::currentMSecsSinceEpoch();
     _sn->setEnabled(true);
 }
 
@@ -70,12 +62,6 @@ void KindleTS::activity(int)
     input_event_t in; ssize_t size ;
 
     size = read(_fd, &in, sizeof(input_event_t));
-
-    // drop old events that were received when input was suspended
-    if (tv2ms(&in.time) < trackingStartedAt) {
-        _sn->setEnabled(true);
-        return;
-    }
 
     if (_debug)
         qDebug("TS data: type %X, code %X, value %d", in.type, in.code, in.value);
@@ -104,6 +90,10 @@ void KindleTS::activity(int)
         }
         break ;
     case EV_SYN:
+        // swipe
+        if (!doubletap && !newdoubletap && touch && newtouch && p != oldP) mouseChanged(p, Qt::LeftButton, 0);
+        oldP.setX(p.x());
+        oldP.setY(p.y());
         touch = newtouch ;
         doubletap = newdoubletap ;
         break ;
