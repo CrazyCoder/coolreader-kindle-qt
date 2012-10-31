@@ -55,7 +55,11 @@ TouchScreen::TouchScreen()
     buttonState = 0;
     newButtonState = 0;
     lastEvent = 0;
-    isFocusInReader = true;
+
+    wasFocusInReader = true;
+    isGestureEnabled = true;
+    wasGestureEnabled = true;
+
     oldX = 0;
     oldY = 0;
 }
@@ -121,12 +125,16 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
 
     // save focus state when button was pressed
     if (newButtonState > 0) {
-        isFocusInReader = focusInReader;
-        oldX = pme->simpleData.x_root;
-        oldY = pme->simpleData.y_root;
+        wasFocusInReader = focusInReader;
+        // start gesture tracking
+        if (buttonState == 0) {
+            oldX = pme->simpleData.x_root;
+            oldY = pme->simpleData.y_root;
+            wasGestureEnabled = isGestureEnabled;
+        }
     }
 
-    qDebug("mouse: x: %d, y: %d, state: %d, time: %d, %d", pme->simpleData.x_root, pme->simpleData.y_root, pme->simpleData.state, pme->simpleData.time - lastEvent, isFocusInReader);
+    qDebug("mouse: x: %d, y: %d, state: %d, time: %d, %d", pme->simpleData.x_root, pme->simpleData.y_root, pme->simpleData.state, pme->simpleData.time - lastEvent, wasFocusInReader);
 
     // touch released
     if (newButtonState == 0 && buttonState != 0) {
@@ -135,36 +143,50 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
 
         TouchType t = TAP_SINGLE;
         if (buttonState == Qt::RightButton) {
-            t = isFocusInReader ? TAP_TWO_READER : TAP_TWO;
+            t = wasFocusInReader ? TAP_TWO_READER : TAP_TWO;
         }
 
         bool isSingleFinger = buttonState == Qt::LeftButton;
-        bool isGesture = this->isGesture(x, y, oldX, oldY) && isSingleFinger;
+        bool isGesture = wasGestureEnabled && this->isGesture(x, y, oldX, oldY) && isSingleFinger;
         bool isLongTap = lastEvent != 0 && pme->simpleData.time - lastEvent > LONG_TAP_INTERVAL && !isGesture && isSingleFinger;
 
-        if (isSingleFinger && !isGesture && !isLongTap && !isFocusInReader) return false; // handle custom single tap actions only when in reader
+        // let Qt handle touch events outside of the reader
+        bool isQtHandled = isSingleFinger && !isGesture && !isLongTap && !wasFocusInReader;
 
         Qt::Key key = Qt::Key_unknown;
 
-        if (isGesture) {
-            qDebug("* gesture detected");
-            SwipeType st = isFocusInReader ? SWIPE_ONE_READER : SWIPE_ONE;
-            key = getSwipeAction(pme->simpleData.x_root, pme->simpleData.y_root, oldX, oldY, st);
-        } else {
-            if (isLongTap) t = isFocusInReader ? TAP_LONG_READER : TAP_LONG;
-            key = getAreaAction(pme->simpleData.x_root, pme->simpleData.y_root, t);
-        }
+        if (!isQtHandled) {
+            if (isGesture) {
+                qDebug("* gesture detected");
+                SwipeType st = wasFocusInReader ? SWIPE_ONE_READER : SWIPE_ONE;
+                key = getSwipeAction(pme->simpleData.x_root, pme->simpleData.y_root, oldX, oldY, st);
+            } else {
+                if (isLongTap) {
+                    qDebug("** long tap");
+                    t = wasFocusInReader ? TAP_LONG_READER : TAP_LONG;
+                }
+                key = getAreaAction(pme->simpleData.x_root, pme->simpleData.y_root, t);
+            }
 
-        if (key != Qt::Key_unknown) {
-            QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, true, false);
-            QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, false, false);
-            buttonState = newButtonState;
-            return true;
-        } else {
-            qDebug("-- area action not defined");
+            if (key != Qt::Key_unknown) {
+                QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, true, false);
+                QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, false, false);
+                buttonState = newButtonState;
+                lastEvent = pme->simpleData.time;
+                return true;
+            } else {
+                qDebug("-- area action not defined");
+            }
         }
     }
     lastEvent = pme->simpleData.time;
     buttonState = newButtonState;
     return false;
+}
+
+bool TouchScreen::enableGesture(bool enable)
+{
+    bool oldValue = isGestureEnabled;
+    isGestureEnabled = enable;
+    return oldValue;
 }

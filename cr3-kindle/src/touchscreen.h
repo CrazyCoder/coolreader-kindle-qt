@@ -47,7 +47,10 @@ public:
     Qt::Key getSwipeAction(int x, int y, int oldX, int oldY, SwipeType t);
     bool isGesture(int x, int y, int oldX, int oldY);
     bool filter(QWSMouseEvent* pme, bool focusInReader);
+    bool enableGesture(bool enable);
 private:
+    bool isGestureEnabled, wasGestureEnabled;
+
     int rightMargin, rpx;
     int leftMargin, lpx;
     int topMargin, tpx;
@@ -56,7 +59,7 @@ private:
     int buttonState;
     int newButtonState;
     int lastEvent;
-    bool isFocusInReader;
+    bool wasFocusInReader;
     int oldX;
     int oldY;
 
