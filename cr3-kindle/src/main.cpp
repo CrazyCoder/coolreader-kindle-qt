@@ -227,19 +227,8 @@ void InitCREngineLog(CRPropRef props)
 
 void wakeUp()
 {
-    QWidget *active;
-
-    active = qApp->activeWindow();
-
     Device::suspendFramework();
-    if(!active->isFullScreen() && !active->isMaximized()) {
-        QWidget *mainwnd = qApp->widgetAt(0,0);
-        mainwnd->repaint();
-    }
-
-    if (Device::isTouch()) QWSServer::instance()->enablePainting(true);
-
-    active->repaint();
+    QWSServer::instance()->refresh();
     pMyApp->connectSystemBus();
 }
 

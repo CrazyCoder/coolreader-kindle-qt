@@ -57,16 +57,21 @@ public:
     static bool isEmulator() { return m_model == EMULATOR; }
 
     static void suspendFramework() {
-        if (!isTouch()) QProcess::execute("killall -STOP cvm");
-        else {
+        qDebug("- framework");
+        QWSServer::instance()->enablePainting(true);
+        if (!isTouch()) {
+            QProcess::execute("killall -STOP cvm");
+        } else {
             system("./ktsuspend.sh");
         }
-        QWSServer::instance()->screenSaverActivate(false);
     }
 
     static void resumeFramework() {
-        QWSServer::instance()->screenSaverActivate(true);
-        if (!isTouch()) QProcess::execute("killall -CONT cvm"); else {
+        qDebug("+ framework");
+        QWSServer::instance()->enablePainting(false);
+        if (!isTouch()) {
+            QProcess::execute("killall -CONT cvm");
+        } else {
             system("./ktresume.sh");
         }
     }
