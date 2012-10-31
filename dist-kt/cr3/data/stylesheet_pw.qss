@@ -150,5 +150,12 @@ QLineEdit {
 }
 
 QPushButton {
-    font-size: 9pt;
+    border: 1px solid black;
 }
+
+QPushButton:pressed {
+    border: 2px solid black;
+}
+
+QProgressBar {border: 1px solid black; border-radius: 0px; text-align: center;}
+QProgressBar::chunk {border: 2px solid black; background-color: white; height: 10px; margin: 5px;}
