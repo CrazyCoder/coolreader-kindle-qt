@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
         QAction *actionAdjustBrightness = ui->actionAdjustBrightness;
         actionAdjustBrightness->setShortcut(Qt::Key_BrightnessAdjust);
         addAction(actionAdjustBrightness);
+        brDlg = new BrightnessControl(this);
     }
 
     QString dataDir = qApp->applicationDirPath() + QDir::toNativeSeparators(QString("/data/"));
@@ -136,6 +137,11 @@ void MainWindow::connectSystemBus() {
     QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.powerd", "outOfScreenSaver", this, SLOT(outOfScreenSaver()));
     QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.hal", "usbConfigured", this, SLOT(usbDriveConnected()));
     QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.hal", "usbUnconfigured",this, SLOT(usbDriveDisconnected()));
+
+    // system bus is connected on startup and when restoring minimized app, good place to fix the light level
+    if (Device::hasLight() && brDlg) {
+        brDlg->fixZeroLevel();
+    }
 #endif
 }
 void MainWindow::disconnectSystemBus() {
@@ -175,6 +181,9 @@ void MainWindow::outOfScreenSaver()
         sleep(1);
         Device::suspendFramework();
         QWSServer::instance()->refresh();
+        if (Device::hasLight()) {
+            brDlg->fixZeroLevel();
+        }
     }
     screenSaverMode = false;
 #endif
@@ -215,6 +224,7 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionClose_triggered()
 {
+    QWSServer::instance()->enablePainting(false);
     close();
 }
 
@@ -415,19 +425,26 @@ void MainWindow::on_actionHide_triggered()
             system("echo send 102 >/proc/keypad");
         } else {
             QWSServer::instance()->closeMouse();
-            system("lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home");
-            QWSServer::instance()->enablePainting(false);
             Device::resumeFramework();
+            system("sleep 1;lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home");
         }
     }
 #endif
 }
 
+#ifndef i386
+#include "touchscreen.h"
+extern TouchScreen * pTouch;
+#endif
+
 void MainWindow::on_actionAdjustBrightness_triggered()
 {
+#ifndef i386
     qDebug("brightness control");
-    QWSServer::instance()->suspendMouse();
-    QProcess::execute("/usr/bin/light.sh");
-    QWSServer::instance()->refresh();
-    QWSServer::instance()->resumeMouse();
+    pTouch->enableGesture(false);
+    menuActive = true;
+    brDlg->exec();
+    menuActive = false;
+    pTouch->enableGesture(true);
+#endif
 }

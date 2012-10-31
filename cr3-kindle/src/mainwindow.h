@@ -32,6 +32,7 @@
 #include "recentdlg.h"
 #include "bookmarklistdlg.h"
 #include "filepropsdlg.h"
+#include "brightnesscontrol.h"
 
 #include "device.h"
 
@@ -125,6 +126,8 @@ public:
     bool isFocusInReader();
 private:
     Ui::MainWindowClass *ui;
+    BrightnessControl *brDlg;
+
     QString _filenameToOpen;
     CRGUIAcceleratorTableRef wndkeys;
     bool loadKeymaps(CRGUIWindowManager & winman, const char * locations[]);
