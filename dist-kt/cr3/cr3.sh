@@ -34,7 +34,7 @@ f_blanket_unload_module ad_screensaver
 f_blanket_unload_module ad_screensaver_active
 f_blanket_load_module screensaver
 
-# Close Xorg windows
+# hide Xorg windows
 ./ktsuspend.sh
 
 export QT_PLUGIN_PATH=/mnt/us/qtKindle/plugins
