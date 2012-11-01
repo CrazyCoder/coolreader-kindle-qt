@@ -426,7 +426,7 @@ void MainWindow::on_actionHide_triggered()
         } else {
             QWSServer::instance()->closeMouse();
             Device::resumeFramework();
-            system("sleep 1;lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home");
+            system("lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home");
         }
     }
 #endif

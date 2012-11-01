@@ -58,12 +58,12 @@ public:
 
     static void suspendFramework() {
         qDebug("- framework");
-        QWSServer::instance()->enablePainting(true);
         if (!isTouch()) {
             QProcess::execute("killall -STOP cvm");
         } else {
-            system("./ktsuspend.sh");
+            QProcess::execute("/bin/sh ./ktsuspend.sh");
         }
+        QWSServer::instance()->enablePainting(true);
     }
 
     static void resumeFramework() {
@@ -72,7 +72,7 @@ public:
         if (!isTouch()) {
             QProcess::execute("killall -CONT cvm");
         } else {
-            system("./ktresume.sh");
+            QProcess::execute("/bin/sh ./ktresume.sh");
         }
     }
 

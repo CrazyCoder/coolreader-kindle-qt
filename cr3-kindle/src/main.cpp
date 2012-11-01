@@ -47,10 +47,10 @@ int main(int argc, char *argv[])
             return 2;
         }
 #ifndef i386
-        system("eips -c");
+        QProcess::execute("eips -c");
+        PrintString(1, 1, "crengine version: " + QString(CR_ENGINE_VERSION));
+        PrintString(1, 2, QString("buid date: %1 %2").arg(__DATE__).arg(__TIME__));
         if (!Device::isTouch()) {
-            PrintString(1, 1, "crengine version: " + QString(CR_ENGINE_VERSION));
-            PrintString(1, 2, QString("buid date: %1 %2").arg(__DATE__).arg(__TIME__));
             QString message = "Please wait while application is loading...";
             int xpos = ((Device::getWidth()/12-1)-message.length())/2;
             int ypos = (Device::getHeight()/20-2)/2;
@@ -272,7 +272,7 @@ bool myEventFilter(void *message, long *)
 
 void PrintString(int x, int y, const QString message) {
     QString cmd = QString("/usr/sbin/eips %1 %2 \"%3\"").arg(QString().number(x)).arg(QString().number(y)).arg(message);
-    system(cmd.toAscii());
+    QProcess::execute(cmd);
 }
 
 void sigCatcher(int sig) {
