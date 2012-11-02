@@ -52,4 +52,5 @@ cd $SAVE_DIR
 # return to home, comment for returning back to runner if you have other commands there
 lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home
 # restore Xorg windows
+killall -CONT awesome
 ./ktresume.sh

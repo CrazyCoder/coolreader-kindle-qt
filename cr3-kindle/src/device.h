@@ -56,23 +56,24 @@ public:
 
     static bool isEmulator() { return m_model == EMULATOR; }
 
-    static void suspendFramework() {
+    static void suspendFramework(bool fast = false) {
         qDebug("- framework");
         if (!isTouch()) {
             QProcess::execute("killall -STOP cvm");
-        } else {
+        } else if (!fast) {
             QProcess::execute("/bin/sh ./ktsuspend.sh");
         }
         QWSServer::instance()->enablePainting(true);
     }
 
-    static void resumeFramework() {
+    static void resumeFramework(bool fast = false) {
         qDebug("+ framework");
         QWSServer::instance()->enablePainting(false);
         if (!isTouch()) {
             QProcess::execute("killall -CONT cvm");
         } else {
-            QProcess::execute("/bin/sh ./ktresume.sh");
+            QProcess::execute("killall -CONT awesome");
+            if (!fast) QProcess::execute("/bin/sh ./ktresume.sh");
         }
     }
 
