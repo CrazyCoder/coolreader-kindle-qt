@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
     {
         Device::instance(); // initialize device
 #ifndef i386
+        QProcess::execute("eips -c");
         pTouch = new TouchScreen();
 #endif
         lString16 exedir = LVExtractPath(LocalToUnicode(lString8(argv[0])));
@@ -47,7 +48,6 @@ int main(int argc, char *argv[])
             return 2;
         }
 #ifndef i386
-        QProcess::execute("eips -c");
         PrintString(1, 1, "crengine version: " + QString(CR_ENGINE_VERSION));
         PrintString(1, 2, QString("buid date: %1 %2").arg(__DATE__).arg(__TIME__));
         if (!Device::isTouch()) {
@@ -270,9 +270,11 @@ bool myEventFilter(void *message, long *)
     return false;
 }
 
-void PrintString(int x, int y, const QString message) {
-    QString cmd = QString("/usr/sbin/eips %1 %2 \"%3\"").arg(QString().number(x)).arg(QString().number(y)).arg(message);
-    QProcess::execute(cmd);
+void PrintString(int x, int y, const QString message, const QString opt) {
+    QStringList args;
+    if(!opt.isEmpty()) args << opt;
+    args << QString().number(x) << QString().number(y) << message;
+    QProcess::execute("eips", args);
 }
 
 void sigCatcher(int sig) {
