@@ -1,30 +1,30 @@
 #include "touchscreen.h"
 
-Qt::Key TouchScreen::TAP_ACTIONS[][7] = {
+Qt::Key TouchScreen::TAP_ACTIONS[][9] = {
     { // single tap when reading
       Qt::Key_Menu, Qt::Key_BrightnessAdjust, Qt::Key_Menu,
       Qt::Key_PageUp, Qt::Key_PageDown, Qt::Key_PageDown,
-      Qt::Key_PageDown
+      Qt::Key_PageUp, Qt::Key_PageDown, Qt::Key_PageDown
     },
     { // two finger tap
       Qt::Key_Escape, Qt::Key_Home, Qt::Key_Select,
       Qt::Key_Up, Qt::Key_O, Qt::Key_Down,
-      Qt::Key_Menu
+      Qt::Key_Up, Qt::Key_Menu, Qt::Key_Down
     },
     { // two finger tap while reading
       Qt::Key_Escape, Qt::Key_Home, Qt::Key_Select,
       Qt::Key_Up, Qt::Key_O, Qt::Key_Down,
-      Qt::Key_Menu
+      Qt::Key_Up, Qt::Key_Menu, Qt::Key_Down
     },
     { // long tap
       Qt::Key_Select, Qt::Key_Select, Qt::Key_Select,
       Qt::Key_Select, Qt::Key_Select, Qt::Key_Select,
-      Qt::Key_Select
+      Qt::Key_Select, Qt::Key_Select, Qt::Key_Select
     },
     { // long tap while reading
       Qt::Key_Minus, Qt::Key_Select, Qt::Key_Plus,
       Qt::Key_unknown, Qt::Key_O, Qt::Key_unknown,
-      Qt::Key_Menu
+      Qt::Key_unknown, Qt::Key_Menu, Qt::Key_unknown
     }
 };
 
@@ -53,7 +53,7 @@ TouchScreen::TouchScreen()
                 if (kok) {
                     QString val = settings.value(key).toString();
                     Qt::Key cmd = static_cast<Qt::Key>(val.toInt(&vok, 16));
-                    if (vok && n < 5 && k < 7) {                 // tap
+                    if (vok && n < 5 && k < 9) {                 // tap
                         TAP_ACTIONS[n][k] = cmd;
                         qDebug("&key[%d][%d]=%x", n, k, cmd);
                     } else if (vok && n > 4 && n < 7 && k < 4) { // swipe
@@ -95,15 +95,16 @@ TouchScreen::Area TouchScreen::getPointArea(int x, int y)
 {
     if (y < tpx) {
         if (x < lpx) return TOP_LEFT;
-        else if (x >= lpx && x < w - rpx) return TOP_MIDDLE;
         else if (x >= w - rpx) return TOP_RIGHT;
-    } else if (y >= tpx) {
-        if (x < lpx) return LEFT;
-        else if (x >= w - rpx) return RIGHT;
-        else if (x >= lpx && x < w - rpx) {
-            if (y >= h - bpx) return BOTTOM_MIDDLE;
-            else return CENTER;
-        }
+        else return TOP_MIDDLE;
+    } else if (y >= tpx && y < h - bpx) {
+        if (x < lpx) return MIDDLE_LEFT;
+        else if (x >= w - rpx) return MIDDLE_RIGHT;
+        else return CENTER;
+    } else {
+        if (x < lpx) return BOTTOM_LEFT;
+        else if (x >= w - rpx) return BOTTOM_RIGHT;
+        else return BOTTOM_MIDDLE;
     }
     qDebug("UNCOVERED AREA: %d, %d", x, y);
     return CENTER;

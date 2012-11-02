@@ -38,10 +38,12 @@ public:
         TOP_LEFT = 0,
         TOP_MIDDLE,
         TOP_RIGHT,
-        LEFT,
+        MIDDLE_LEFT,
         CENTER,
-        RIGHT,
-        BOTTOM_MIDDLE
+        MIDDLE_RIGHT,
+        BOTTOM_LEFT,
+        BOTTOM_MIDDLE,
+        BOTTOM_RIGHT
     } Area;
 
     Area getPointArea(int x, int y);
@@ -68,7 +70,7 @@ private:
     int w;
     int h;
 
-    static Qt::Key TAP_ACTIONS[][7];
+    static Qt::Key TAP_ACTIONS[][9];
     static Qt::Key SWIPE_ACTIONS[][4];
 };
 
