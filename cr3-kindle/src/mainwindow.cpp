@@ -167,7 +167,7 @@ void MainWindow::goingToScreenSaver()
 #ifndef i386
     if (!usbDriveMode && !screenSaverMode) {
         qDebug("screensaver on");
-        Device::resumeFramework();
+        Device::resumeFramework(true);
     }
     screenSaverMode = true;
 #endif
@@ -178,9 +178,7 @@ void MainWindow::outOfScreenSaver()
 #ifndef i386
     if (screenSaverMode && !usbDriveMode) {
         qDebug("screensaver off");
-        sleep(1);
         Device::suspendFramework();
-        QWSServer::instance()->refresh();
         if (Device::hasLight()) {
             brDlg->fixZeroLevel();
         }
@@ -197,7 +195,7 @@ void MainWindow::usbDriveConnected()
         qDebug("usb drive on");
         QWSServer::instance()->closeKeyboard();
         sleep(1);
-        Device::resumeFramework();
+        Device::resumeFramework(true);
     }
     usbDriveMode = true;
 #endif
@@ -209,7 +207,7 @@ void MainWindow::usbDriveDisconnected()
     if (!screenSaverMode && usbDriveMode) {
         qDebug("usb drive off");
         sleep(1);
-        Device::suspendFramework();
+        Device::suspendFramework(true);
         QWSServer::instance()->openKeyboard();
         QWSServer::instance()->refresh();
     }
@@ -391,6 +389,12 @@ void MainWindow::doCommand(int cmd, int param)
         break;
     case CMD_INTERLINE_SPACE:
         ui->view->ChangeInterlineSpace(param);
+        break;
+    case CMD_MINIMIZE:
+        on_actionHide_triggered();
+        break;
+    case CMD_EXIT:
+        on_actionClose_triggered();
         break;
     case DCMD_ROTATE_BY:
         ui->view->Rotate(param);
