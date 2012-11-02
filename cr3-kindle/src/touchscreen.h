@@ -1,6 +1,8 @@
 #ifndef TOUCHSCREEN_H
 #define TOUCHSCREEN_H
 
+#include <QSettings>
+
 #include "device.h"
 
 #define MIN_SWIPE_PIXELS 150
@@ -66,8 +68,8 @@ private:
     int w;
     int h;
 
-    static const Qt::Key TAP_ACTIONS[][7];
-    static const Qt::Key SWIPE_ACTIONS[][4];
+    static Qt::Key TAP_ACTIONS[][7];
+    static Qt::Key SWIPE_ACTIONS[][4];
 };
 
 #endif // TOUCHSCREEN_H

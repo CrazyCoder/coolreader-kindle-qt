@@ -1,6 +1,6 @@
 #include "touchscreen.h"
 
-const Qt::Key TouchScreen::TAP_ACTIONS[][7] = {
+Qt::Key TouchScreen::TAP_ACTIONS[][7] = {
     { // single tap when reading
       Qt::Key_Menu, Qt::Key_BrightnessAdjust, Qt::Key_Menu,
       Qt::Key_PageUp, Qt::Key_PageDown, Qt::Key_PageDown,
@@ -28,7 +28,7 @@ const Qt::Key TouchScreen::TAP_ACTIONS[][7] = {
     }
 };
 
-const Qt::Key TouchScreen::SWIPE_ACTIONS[][4] = { // UP / RIGHT / DOWN / LEFT
+Qt::Key TouchScreen::SWIPE_ACTIONS[][4] = { // UP / RIGHT / DOWN / LEFT
     { // swipe while not in reader
       Qt::Key_PageDown, Qt::Key_Home, Qt::Key_PageUp, Qt::Key_Escape
     },
@@ -39,6 +39,33 @@ const Qt::Key TouchScreen::SWIPE_ACTIONS[][4] = { // UP / RIGHT / DOWN / LEFT
 
 TouchScreen::TouchScreen()
 {
+    QSettings settings("data/touch.ini", QSettings::IniFormat);
+    const QStringList groups = settings.childGroups();
+    foreach (const QString &group, groups) {
+        bool ok;
+        int n = group.toInt(&ok);
+        if (ok) {
+            settings.beginGroup(group);
+            const QStringList keys = settings.childKeys();
+            foreach (const QString &key, keys) {
+                bool kok, vok;
+                int k = key.toInt(&kok);
+                if (kok) {
+                    QString val = settings.value(key).toString();
+                    Qt::Key cmd = static_cast<Qt::Key>(val.toInt(&vok, 16));
+                    if (vok && n < 5 && k < 7) {                 // tap
+                        TAP_ACTIONS[n][k] = cmd;
+                        qDebug("&key[%d][%d]=%x", n, k, cmd);
+                    } else if (vok && n > 4 && n < 7 && k < 4) { // swipe
+                        SWIPE_ACTIONS[n-5][k] = cmd;
+                        qDebug("&swipe[%d][%d]=%x", n, k, cmd);
+                    }
+                }
+            }
+            settings.endGroup();
+        }
+    }
+
     topMargin = 30; // margins in %
     bottomMargin = 30;
     rightMargin = 30;
