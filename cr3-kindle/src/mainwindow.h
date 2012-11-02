@@ -38,15 +38,18 @@
 
 #undef i386 // uncomment when building for desktop, it's for Qt Creator
 
-#define CMD_REFRESH					1001
-#define CMD_ZOOM_FONT				1002
-#define CMD_ZOOM_HEADER_FONT		1003
-#define CMD_TOGGLE_HEADER			1004
-#define CMD_JUMP_FROM_PAGE			1005
-#define CMD_CHANGE_FONT				1006
-#define CMD_CHANGE_HEADER_FONT		1007
-#define CMD_CHANGE_FONT_GAMMA		1008
-#define CMD_INTERLINE_SPACE			1009
+#define CMD_REFRESH                 1001
+#define CMD_ZOOM_FONT               1002
+#define CMD_ZOOM_HEADER_FONT        1003
+#define CMD_TOGGLE_HEADER           1004
+#define CMD_JUMP_FROM_PAGE          1005
+#define CMD_CHANGE_FONT             1006
+#define CMD_CHANGE_HEADER_FONT      1007
+#define CMD_CHANGE_FONT_GAMMA       1008
+#define CMD_INTERLINE_SPACE         1009
+#define CMD_EXIT                    1010
+#define CMD_MINIMIZE                1011
+
 
 // prototypes
 void InitCREngineLog(CRPropRef props);
@@ -55,7 +58,7 @@ void ShutdownCREngine();
 bool getDirectoryFonts( lString16Collection & pathList, lString16 ext, lString16Collection & fonts, bool absPath );
 bool myEventFilter(void *message, long *result);
 #ifndef i386
-void PrintString(int x, int y, const QString message);
+void PrintString(int x, int y, const QString message, const QString opt = "");
 #endif
 void sigCatcher(int sig);
 void wakeUp();
