@@ -35,7 +35,7 @@ f_blanket_unload_module ad_screensaver_active
 f_blanket_load_module screensaver
 
 # hide Xorg windows
-./ktsuspend.sh
+./ktsuspend.sh 0
 
 export QT_PLUGIN_PATH=/mnt/us/qtKindle/plugins
 export QT_QWS_FONTDIR=/mnt/us/qtKindle/lib/fonts
@@ -53,4 +53,4 @@ cd $SAVE_DIR
 lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home
 # restore Xorg windows
 killall -CONT awesome
-./ktresume.sh
+./ktresume.sh 0

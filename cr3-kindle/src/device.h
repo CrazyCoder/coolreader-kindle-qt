@@ -59,9 +59,12 @@ public:
     static void suspendFramework(bool fast = false) {
         qDebug("- framework");
         if (!isTouch()) {
+            // this pause lets CVM handle painting before stopping, or screensaver may not draw
+            // on next resume when device is turned off
+            sleep(1);
             QProcess::execute("killall -STOP cvm");
-        } else if (!fast) {
-            QProcess::execute("/bin/sh ./ktsuspend.sh");
+        } else {
+            QProcess::execute(QString("/bin/sh ./ktsuspend.sh %1").arg(fast ? 1 : 0));
         }
         QWSServer::instance()->enablePainting(true);
     }
@@ -72,8 +75,7 @@ public:
         if (!isTouch()) {
             QProcess::execute("killall -CONT cvm");
         } else {
-            QProcess::execute("killall -CONT awesome");
-            if (!fast) QProcess::execute("/bin/sh ./ktresume.sh");
+            QProcess::execute(QString("/bin/sh ./ktresume.sh %1").arg(fast ? 1 : 0));
         }
     }
 

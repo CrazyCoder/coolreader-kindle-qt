@@ -178,7 +178,7 @@ void MainWindow::outOfScreenSaver()
 #ifndef i386
     if (screenSaverMode && !usbDriveMode) {
         qDebug("screensaver off");
-        Device::suspendFramework();
+        Device::suspendFramework(true);
         if (Device::hasLight()) {
             brDlg->fixZeroLevel();
         }
