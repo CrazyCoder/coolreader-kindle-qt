@@ -1,0 +1,9 @@
+env_libDir=D:/DATA/HOMEDATAXX/HARDWARE/kindle/lib
+env_keystoreDir=conf/keystore
+env_junit3jar=D:/JAVA/Eclipse3/plugins/org.junit_3.8.2.v20090203-1005/junit.jar
+
+key_storePass=pwd1
+key_keyPass=pwd2
+key_keyAlias=victor
+key_keyStore=developer.keystore
+key_validity=5300

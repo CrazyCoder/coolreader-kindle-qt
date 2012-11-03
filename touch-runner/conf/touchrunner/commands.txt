@@ -1,0 +1,3 @@
+/mnt/us/cr3;goqt.sh;cr3;Cool Reader 3
+/mnt/us/prog1;command1;-param;Program 1
+/mnt/us/prog2;command2;NULL;Program 2

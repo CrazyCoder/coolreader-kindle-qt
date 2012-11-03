@@ -1,0 +1,65 @@
+defaultTasks 'kindle'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.4
+targetCompatibility = 1.4
+
+version = '3.0'
+archivesBaseName = 'TouchRunner'
+title = "Touch Runner"
+
+dependencies {
+  compile files("$env_libDir/Kindlet-2.2.jar")
+  compile files("lib/jailbreak.jar")
+  testCompile files(env_junit3jar)
+}
+
+depClasses = { files("lib/jailbreak.jar").collect { it.isDirectory() ? it : zipTree(it) } }
+
+jar {
+  manifest {
+    attributes("Manifest-Version": "1.0",
+               "Main-Class": "kz.pvnhome.cr3runner.TouchRunnerKindlet",
+               "Implementation-Title": title,
+               "Implementation-Version": version,
+               "Implementation-Vendor": "CrazyCoder",
+               "Amazon-Cover-Image": "cover-touch.png",
+               "Extension-List": "SDK",
+               "SDK-Extension-Name": "com.amazon.kindle.kindlet",
+               "SDK-Specification-Version": "2.1",
+               "Toolbar-Mode": "persistent",
+               "Font-Size-Mode": "point")
+  }
+  from(depClasses) {
+    exclude 'META-INF/MANIFEST.MF'
+    exclude '**/*.java'
+  }
+  from files("cover-touch.png")
+}
+
+task copyJarToTmp(dependsOn: jar, type: Copy) {
+  from(jar.archivePath)
+  into(jar.destinationDir)
+  rename '(.+)\\.jar', '$1.tmp'
+}
+
+task signingJarTask(dependsOn: copyJarToTmp) << {
+  println "Signing: $jar.archivePath"
+  signingJar('dk')
+  signingJar('di')
+  signingJar('dn')
+}
+
+task kindle(dependsOn: signingJarTask, type: Copy) {
+  from(jar.archivePath)
+  into(jar.destinationDir)
+  rename '(.+)\\.jar', '$1.azw2'
+}
+
+void signingJar(String keyPref) {
+  println "pref: $keyPref"
+  ant.exec(dir: env_keystoreDir, executable: "jarsigner") {
+    arg(line: "-keystore $key_keyStore -storepass $key_storePass -keypass $key_keyPass $jar.archivePath $keyPref$key_keyAlias")
+  }
+}

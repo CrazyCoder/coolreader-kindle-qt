@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="build" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+    <module name="cr3runner" />
+    <setting name="path" value="D:\projects\coolreader-kindle-qt\touch-runner\build.gradle" />
+    <setting name="vmparams" value="" />
+    <setting name="params" value="" />
+    <setting name="workDir" value="$PROJECT_DIR$" />
+    <setting name="debug" value="false" />
+    <RunnerSettings RunnerId="Profile ">
+      <option name="myExternalizedOptions" value="&#13;&#10;additional-options2=onexit\=snapshot&#13;&#10;" />
+    </RunnerSettings>
+    <RunnerSettings RunnerId="Run" />
+    <ConfigurationWrapper RunnerId="Run" />
+    <method>
+      <option name="Make" enabled="false" />
+    </method>
+  </configuration>
+</component>
