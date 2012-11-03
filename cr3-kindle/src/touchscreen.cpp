@@ -1,6 +1,6 @@
 #include "touchscreen.h"
 
-Qt::Key TouchScreen::TAP_ACTIONS[][9] = {
+Qt::Key TouchScreen::TAP_ACTIONS[][TOUCH_ZONES] = {
     { // single tap when reading
       Qt::Key_Menu, Qt::Key_BrightnessAdjust, Qt::Key_Menu,
       Qt::Key_PageUp, Qt::Key_PageDown, Qt::Key_PageDown,
@@ -28,7 +28,7 @@ Qt::Key TouchScreen::TAP_ACTIONS[][9] = {
     }
 };
 
-Qt::Key TouchScreen::SWIPE_ACTIONS[][4] = { // UP / RIGHT / DOWN / LEFT
+Qt::Key TouchScreen::SWIPE_ACTIONS[][SWIPE_TYPES] = { // UP / RIGHT / DOWN / LEFT
     { // swipe while not in reader
       Qt::Key_PageDown, Qt::Key_Home, Qt::Key_PageUp, Qt::Key_Escape
     },
@@ -37,34 +37,20 @@ Qt::Key TouchScreen::SWIPE_ACTIONS[][4] = { // UP / RIGHT / DOWN / LEFT
     }
 };
 
+template <typename T, size_t N>
+inline
+int ARRAY_SIZE( const T(&)[ N ] )
+{
+  return N;
+}
+
 TouchScreen::TouchScreen()
 {
-    QSettings settings("data/touch.ini", QSettings::IniFormat);
-    const QStringList groups = settings.childGroups();
-    foreach (const QString &group, groups) {
-        bool ok;
-        int n = group.toInt(&ok);
-        if (ok) {
-            settings.beginGroup(group);
-            const QStringList keys = settings.childKeys();
-            foreach (const QString &key, keys) {
-                bool kok, vok;
-                int k = key.toInt(&kok);
-                if (kok) {
-                    QString val = settings.value(key).toString();
-                    Qt::Key cmd = static_cast<Qt::Key>(val.toInt(&vok, 16));
-                    if (vok && n < 5 && k < 9) {                 // tap
-                        TAP_ACTIONS[n][k] = cmd;
-                        qDebug("&key[%d][%d]=%x", n, k, cmd);
-                    } else if (vok && n > 4 && n < 7 && k < 4) { // swipe
-                        SWIPE_ACTIONS[n-5][k] = cmd;
-                        qDebug("&swipe[%d][%d]=%x", n, k, cmd);
-                    }
-                }
-            }
-            settings.endGroup();
-        }
-    }
+    longTapTimer = new QTimer(this);
+    longTapTimer->setSingleShot(true);
+    connect(longTapTimer, SIGNAL(timeout()), this, SLOT(longTap()));
+
+    loadConfiguration();
 
     topMargin = 30; // margins in %
     bottomMargin = 30;
@@ -86,6 +72,7 @@ TouchScreen::TouchScreen()
     wasFocusInReader = true;
     isGestureEnabled = true;
     wasGestureEnabled = true;
+    isLongTapHandled = false;
 
     oldX = 0;
     oldY = 0;
@@ -106,8 +93,6 @@ TouchScreen::Area TouchScreen::getPointArea(int x, int y)
         else if (x >= w - rpx) return BOTTOM_RIGHT;
         else return BOTTOM_MIDDLE;
     }
-    qDebug("UNCOVERED AREA: %d, %d", x, y);
-    return CENTER;
 }
 
 Qt::Key TouchScreen::getAreaAction(int x, int y, TouchScreen::TouchType t)
@@ -150,24 +135,32 @@ bool TouchScreen::isGesture(int x, int y, int oldX, int oldY)
 bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
 {
     newButtonState = pme->simpleData.state;
+    int x = pme->simpleData.x_root;
+    int y = pme->simpleData.y_root;
 
     // save focus state when button was pressed
     if (newButtonState > 0) {
         wasFocusInReader = focusInReader;
         // start gesture tracking
         if (buttonState == 0) {
-            oldX = pme->simpleData.x_root;
-            oldY = pme->simpleData.y_root;
+            oldX = x;
+            oldY = y;
             wasGestureEnabled = isGestureEnabled;
+            // start timer for the new long tap
+            if (newButtonState == Qt::LeftButton)  {
+                longTapTimer->start(LONG_TAP_INTERVAL);
+            }
+        } else {
+            // cancel long tap on position change (swipe)
+            longTapTimer->stop();
         }
     }
 
-    qDebug("mouse: x: %d, y: %d, state: %d, time: %d, %d", pme->simpleData.x_root, pme->simpleData.y_root, pme->simpleData.state, pme->simpleData.time - lastEvent, wasFocusInReader);
+    qDebug("mouse: x: %d, y: %d, state: %d, time: %d, %d", x, y, newButtonState, pme->simpleData.time - lastEvent, wasFocusInReader);
 
     // touch released
     if (newButtonState == 0 && buttonState != 0) {
-        int x = pme->simpleData.x_root;
-        int y = pme->simpleData.y_root;
+        longTapTimer->stop(); // cancel long tap timer when touch is released
 
         TouchType t = TAP_SINGLE;
         if (buttonState == Qt::RightButton) {
@@ -176,24 +169,24 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
 
         bool isSingleFinger = buttonState == Qt::LeftButton;
         bool isGesture = wasGestureEnabled && this->isGesture(x, y, oldX, oldY) && isSingleFinger;
-        bool isLongTap = lastEvent != 0 && pme->simpleData.time - lastEvent > LONG_TAP_INTERVAL && !isGesture && isSingleFinger;
 
         // let Qt handle touch events outside of the reader
-        bool isQtHandled = isSingleFinger && !isGesture && !isLongTap && !wasFocusInReader;
+        bool isHandled = isSingleFinger && !isGesture && !wasFocusInReader;
+        // long taps are handled via timer
+        if (isLongTapHandled) {
+            isHandled = true;
+            isLongTapHandled = false;
+        }
 
         Qt::Key key = Qt::Key_unknown;
 
-        if (!isQtHandled) {
+        if (!isHandled) {
             if (isGesture) {
                 qDebug("* gesture detected");
                 SwipeType st = wasFocusInReader ? SWIPE_ONE_READER : SWIPE_ONE;
-                key = getSwipeAction(pme->simpleData.x_root, pme->simpleData.y_root, oldX, oldY, st);
+                key = getSwipeAction(x, y, oldX, oldY, st);
             } else {
-                if (isLongTap) {
-                    qDebug("** long tap");
-                    t = wasFocusInReader ? TAP_LONG_READER : TAP_LONG;
-                }
-                key = getAreaAction(pme->simpleData.x_root, pme->simpleData.y_root, t);
+                key = getAreaAction(x, y, t);
             }
 
             if (key != Qt::Key_unknown) {
@@ -217,4 +210,57 @@ bool TouchScreen::enableGesture(bool enable)
     bool oldValue = isGestureEnabled;
     isGestureEnabled = enable;
     return oldValue;
+}
+
+void TouchScreen::loadConfiguration()
+{
+    QSettings settings(TOUCH_CONFIG, QSettings::IniFormat);
+    const QStringList groups = settings.childGroups();
+    foreach (const QString &group, groups) {
+        bool ok, isSwipe = false;
+        int g;
+        if (group.startsWith('s')) {
+            isSwipe = true;
+            g = group.right(group.length() - 1).toInt(&ok);
+        } else {
+            g = group.toInt(&ok);
+        }
+        if (!ok || g < 0) continue;
+
+        settings.beginGroup(group);
+        const QStringList keys = settings.childKeys();
+        foreach (const QString &key, keys) {
+            bool kok, vok;
+            int k = key.toInt(&kok);
+            if (!kok || k < 0) continue;
+
+            QString val = settings.value(key).toString();
+            Qt::Key cmd = static_cast<Qt::Key>(val.toInt(&vok, 16));
+            if (!vok) continue;
+
+            if (isSwipe && g < ARRAY_SIZE(SWIPE_ACTIONS) && k < ARRAY_SIZE(SWIPE_ACTIONS[0])) {
+                SWIPE_ACTIONS[g][k] = cmd;
+                qDebug("&swipe[%d][%d]=%x", g, k, cmd);
+            } else if (g < ARRAY_SIZE(TAP_ACTIONS) && k < ARRAY_SIZE(TAP_ACTIONS[0])) {
+                TAP_ACTIONS[g][k] = cmd;
+                qDebug("&key[%d][%d]=%x", g, k, cmd);
+            } else {
+                qDebug("&unknown[%d][%d]=%x", g, k, cmd);
+            }
+        }
+        settings.endGroup();
+    }
+}
+
+void TouchScreen::longTap()
+{
+    qDebug("** long tap");
+    Qt::Key key = getAreaAction(oldX, oldY, wasFocusInReader ? TAP_LONG_READER : TAP_LONG);
+    if (key != Qt::Key_unknown) {
+        QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, true, false);
+        QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, false, false);
+    } else {
+        qDebug("-- area action not defined for long tap");
+    }
+    isLongTapHandled = true;
 }

@@ -1,15 +1,23 @@
 #ifndef TOUCHSCREEN_H
 #define TOUCHSCREEN_H
 
+#include <QObject>
+#include <QTimer>
 #include <QSettings>
 
 #include "device.h"
 
 #define MIN_SWIPE_PIXELS 150
 #define LONG_TAP_INTERVAL 500
+#define TOUCH_CONFIG "data/touch.ini"
 
-class TouchScreen
+#define TOUCH_ZONES 9
+#define SWIPE_TYPES 4
+
+class TouchScreen: public QObject
 {
+    Q_OBJECT
+
 public:
     TouchScreen();
 
@@ -52,8 +60,12 @@ public:
     bool isGesture(int x, int y, int oldX, int oldY);
     bool filter(QWSMouseEvent* pme, bool focusInReader);
     bool enableGesture(bool enable);
+    void loadConfiguration();
 private:
     bool isGestureEnabled, wasGestureEnabled;
+
+    bool isLongTapHandled;
+    QTimer *longTapTimer;
 
     int rightMargin, rpx;
     int leftMargin, lpx;
@@ -70,8 +82,10 @@ private:
     int w;
     int h;
 
-    static Qt::Key TAP_ACTIONS[][9];
-    static Qt::Key SWIPE_ACTIONS[][4];
+    static Qt::Key TAP_ACTIONS[][TOUCH_ZONES];
+    static Qt::Key SWIPE_ACTIONS[][SWIPE_TYPES];
+private slots:
+    void longTap();
 };
 
 #endif // TOUCHSCREEN_H
