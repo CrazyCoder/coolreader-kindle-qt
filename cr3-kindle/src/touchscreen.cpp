@@ -202,6 +202,10 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
     }
     lastEvent = pme->simpleData.time;
     buttonState = newButtonState;
+
+    // filter events until long tap is released
+    if (isLongTapHandled && newButtonState == Qt::LeftButton) return true;
+
     return false;
 }
 
