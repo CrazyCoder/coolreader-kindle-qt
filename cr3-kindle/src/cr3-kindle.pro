@@ -82,8 +82,8 @@ RESOURCES += cr3res.qrc
 LIBS += -lQtGui -lQtCore -lQtNetwork -lQtDBus -lpthread -ldl
 
 arm {
-    LIBS += ../../crengine/crengine-build-kindle/libcrengine_kindle.a -lz -lpng -lfreetype -lfontconfig -ljpeg
+    LIBS += ../../crengine/crengine-build-kindle/libcrengine_kindle.a ../libs/kindle/libantiword.a -lz -lpng -lfreetype -lfontconfig -ljpeg
     QMAKE_POST_LINK=arm-linux-gnueabi-strip -s $(TARGET)
 } else {
-    LIBS += ../../crengine/crengine-build-desktop/libcrengine_desktop.a `pkg-config --libs zlib libpng freetype2 fontconfig jpeg`
+    LIBS += ../../crengine/crengine-build-desktop/libcrengine_desktop.a ../libs/desktop/libantiword.a `pkg-config --libs zlib libpng freetype2 fontconfig jpeg`
 }
