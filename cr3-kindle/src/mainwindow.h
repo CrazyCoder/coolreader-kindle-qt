@@ -36,7 +36,6 @@
 
 #include "device.h"
 
-#undef i386 // uncomment when building for desktop, it's for Qt Creator
 
 #define CMD_REFRESH                 1001
 #define CMD_ZOOM_FONT               1002

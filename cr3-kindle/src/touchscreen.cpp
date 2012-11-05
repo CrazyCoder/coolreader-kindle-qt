@@ -140,9 +140,9 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
 
     // save focus state when button was pressed
     if (newButtonState > 0) {
-        wasFocusInReader = focusInReader;
         // start gesture tracking
         if (buttonState == 0) {
+            wasFocusInReader = focusInReader;
             oldX = x;
             oldY = y;
             wasGestureEnabled = isGestureEnabled;
@@ -201,10 +201,11 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
         }
     }
     lastEvent = pme->simpleData.time;
+    int tempButtonState = buttonState;
     buttonState = newButtonState;
 
-    // filter events until long tap is released
-    if (isLongTapHandled && newButtonState == Qt::LeftButton) return true;
+    // filter events from UI until finger is released
+    if (newButtonState > 0 && tempButtonState == newButtonState) return true;
 
     return false;
 }
