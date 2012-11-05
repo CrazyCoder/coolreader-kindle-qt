@@ -138,6 +138,9 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
     int x = pme->simpleData.x_root;
     int y = pme->simpleData.y_root;
 
+    // filter events from UI until finger is released
+    bool isFiltered = newButtonState > 0 && buttonState == newButtonState;
+
     // save focus state when button was pressed
     if (newButtonState > 0) {
         // start gesture tracking
@@ -201,13 +204,9 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
         }
     }
     lastEvent = pme->simpleData.time;
-    int tempButtonState = buttonState;
     buttonState = newButtonState;
 
-    // filter events from UI until finger is released
-    if (newButtonState > 0 && tempButtonState == newButtonState) return true;
-
-    return false;
+    return isFiltered;
 }
 
 bool TouchScreen::enableGesture(bool enable)
