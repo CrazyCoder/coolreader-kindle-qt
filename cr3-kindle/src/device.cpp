@@ -61,6 +61,7 @@ Device::Device()
             m_model = K4NTB;
             break;
         case 0xB01B:
+        case 0xB01D:
         case 0xB024:
             m_model = KPW;
             break;
