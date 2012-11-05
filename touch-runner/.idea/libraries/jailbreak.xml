@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jailbreak">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jailbreak.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/jailbreak.jar!/" />
+    </SOURCES>
+  </library>
+</component>
