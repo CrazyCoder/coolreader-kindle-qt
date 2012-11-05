@@ -1,10 +1,17 @@
 #include "device.h"
 
-//                                    ???    EMU   K2    KDX   K3    K4NT   K4NTB  KT     KPW
-const int  Device::WIDTH[]         = {600,   600,  600,  824,  600,  600,   600,   600,   758};
-const int  Device::HEIGHT[]        = {800,   800,  800,  1200, 800,  800,   800,   800,   1024};
-const bool Device::KEYBOARD[]      = {false, true, true, true, true, false, false, false, false};
-const bool Device::FIVE_WAY[]      = {false, true, true, true, true, true,  true,  false, false};
+const Device::Properties Device::PROPS[] = {
+//    x    y    KBD    JOY
+    {600, 800,  false, false},    // UNKNOWN
+    {600, 800,  true,  true },    // EMULATOR
+    {600, 800,  true,  true },    // K2
+    {824, 1200, true,  true },    // KDX
+    {600, 800,  true,  true },    // K3
+    {600, 800,  false, true },    // K4NT
+    {600, 800,  false, true },    // K4NTB
+    {600, 800,  false, false},    // KT
+    {758, 1024, false, false},    // KPW
+};
 
 Device::Model Device::m_model = UNKNOWN;
 

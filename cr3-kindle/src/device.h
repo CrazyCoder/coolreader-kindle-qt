@@ -8,6 +8,14 @@
 class Device
 {
 public:
+    class Properties {
+    public:
+        int width;
+        int height;
+        bool hasKeyboard;
+        bool hasFiveWay;
+    };
+
     static Device& instance()
     {
         static Device instance;
@@ -31,23 +39,23 @@ public:
     }
 
     static int getWidth() {
-        return WIDTH[m_model];
+        return PROPS[m_model].width;
     }
 
     static int getHeight() {
-        return HEIGHT[m_model];
+        return PROPS[m_model].height;
     }
 
     static bool hasKeyboard() {
-        return KEYBOARD[m_model];
+        return PROPS[m_model].hasKeyboard;
     }
 
     static bool hasFiveWay() {
-        return FIVE_WAY[m_model];
+        return PROPS[m_model].hasFiveWay;
     }
 
     static bool isTouch() {
-        return !FIVE_WAY[m_model] && !KEYBOARD[m_model];
+        return !hasKeyboard() && !hasFiveWay();
     }
 
     static bool hasLight() {
@@ -57,6 +65,7 @@ public:
     static bool isEmulator() { return m_model == EMULATOR; }
 
     static void suspendFramework(bool fast = false) {
+#ifndef i386
         qDebug("- framework");
         if (!isTouch()) {
             // this pause lets CVM handle painting before stopping, or screensaver may not draw
@@ -67,9 +76,11 @@ public:
             QProcess::execute(QString("/bin/sh ./ktsuspend.sh %1").arg(fast ? 1 : 0));
         }
         QWSServer::instance()->enablePainting(true);
+#endif
     }
 
     static void resumeFramework(bool fast = false) {
+#ifndef i386
         qDebug("+ framework");
         QWSServer::instance()->enablePainting(false);
         if (!isTouch()) {
@@ -77,13 +88,11 @@ public:
         } else {
             QProcess::execute(QString("/bin/sh ./ktresume.sh %1").arg(fast ? 1 : 0));
         }
+#endif
     }
 
 private:
-    static const int WIDTH[], HEIGHT[];
-    static const bool KEYBOARD[];
-    static const bool FIVE_WAY[];
-
+    static const Properties PROPS[];
     static MODEL m_model;
 
     Device();
