@@ -24,8 +24,8 @@ import com.amazon.kindle.kindlet.KindletContext;
  *
  * @author Victor Pyankov & Serge Baranov
  */
-public class TouchRunnerKindlet extends RunnerKindlet {
-  private static final String CONFIG_DIR  = "/mnt/us/touchrunner";
+public class CoolReaderRunnerKindlet extends RunnerKindlet {
+  private static final String CONFIG_DIR  = "/mnt/us/cr3";
   private static final String CONFIG_FILE = "commands.txt";
 
   protected void initCommandsUI(KindletContext ctx) {

@@ -20,7 +20,7 @@ depClasses = { files("lib/jailbreak.jar").collect { it.isDirectory() ? it : zipT
 jar {
   manifest {
     attributes("Manifest-Version": "1.0",
-               "Main-Class": "kz.pvnhome.cr3runner.CR3RunnerKindlet",
+               "Main-Class": "kz.pvnhome.cr3runner.CoolReaderRunnerKindlet",
                "Implementation-Title": title,
                "Implementation-Version": version,
                "Implementation-Vendor": "CrazyCoder",
