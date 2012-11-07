@@ -8,7 +8,7 @@ targetCompatibility = 1.4
 
 version = '2.7'
 archivesBaseName = 'cr3runner'
-title = "CoolReader 3"
+title = "Cool Reader"
 eclipse.project.name = 'CR3Runner'
 
 dependencies {
@@ -44,6 +44,6 @@ task kindle(dependsOn: signingJarTask, type: Copy) {
 void signingJar(String keyPref) {
    println "pref: $keyPref"
    ant.exec(dir: env_keystoreDir, executable: "jarsigner") {
-      arg(line: "-keystore $key_keyStore -storepass $key_storePass -keypass $key_keyPass $jar.archivePath $keyPref$key_keyAlias")
+      arg(line: "-keystore $key_keyStore -storepass $key_storePass $jar.archivePath $keyPref$key_keyAlias")
    }
 }
