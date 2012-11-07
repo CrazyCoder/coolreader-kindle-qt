@@ -118,6 +118,7 @@ MainWindow::MainWindow(QWidget *parent)
         array.truncate(array.indexOf("\n"));
         ui->view->getDocView()->setBatteryState(array.toInt());
     }
+    myProcess->close();
 #endif
 }
 

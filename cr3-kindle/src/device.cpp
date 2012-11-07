@@ -76,4 +76,5 @@ Device::Device()
             qDebug("Unknown model: %X", sn);
         }
     }
+    myProcess->close();
 }
