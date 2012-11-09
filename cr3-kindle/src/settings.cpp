@@ -20,8 +20,11 @@ SettingsDlg::SettingsDlg(QWidget *parent, CR3View * docView ) :
     m_ui->setupUi(this);
 
     addAction(m_ui->actionSaveSettings);
-    addAction(m_ui->actionNextTab);
-    addAction(m_ui->actionPrevTab);
+
+    if (!Device::isTouch()) { // don't use PageUp/PageDown for tab switching on touch devices (mapped to spinboxes)
+        addAction(m_ui->actionNextTab);
+        addAction(m_ui->actionPrevTab);
+    }
 
     m_props = m_docview->getOptions();
     optionToUi(PROP_FOOTNOTES, m_ui->ShowFootNotes);
@@ -35,6 +38,7 @@ SettingsDlg::SettingsDlg(QWidget *parent, CR3View * docView ) :
     optionToUi(PROP_SHOW_POS_PERCENT, m_ui->PositionPercent);
     optionToUi(PROP_FONT_WEIGHT_EMBOLDEN, m_ui->cbEmbolden);
     optionToUi(PROP_FONT_KERNING_ENABLED, m_ui->cbKerning);
+    optionToUi(PROP_REPLACE_SCREENSAVER, m_ui->cbCoverScreensaver);
 
     int state1 = m_props->getIntDef(PROP_SHOW_PAGE_NUMBER, 1);
     int state2 = m_props->getIntDef(PROP_SHOW_PAGE_COUNT, 1);
@@ -492,4 +496,10 @@ void SettingsDlg::on_sbSpaceCond_valueChanged(int arg1)
     if(!initDone) return;
     m_props->setInt(PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT, arg1);
     updateStyleSample();
+}
+
+void SettingsDlg::on_cbCoverScreensaver_toggled(bool checked)
+{
+    if(!initDone) return;
+    setCheck(PROP_REPLACE_SCREENSAVER, checked);
 }

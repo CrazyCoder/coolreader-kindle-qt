@@ -11,16 +11,63 @@
 #include <QDir>
 #include <QMessageBox>
 #include <QTranslator>
+#include <QKeyEvent>
+#include <QApplication>
 
 #include "crqtutil.h"
 #include "cr3widget.h"
+#include "device.h"
 
 namespace Ui {
 class SettingsDlg;
 }
 
-#define PROP_APP_START_ACTION			"cr3.app.start.action"
-#define PROP_WINDOW_LANG				"window.language"
+#define PROP_APP_START_ACTION      "cr3.app.start.action"
+#define PROP_WINDOW_LANG           "window.language"
+#define PROP_REPLACE_SCREENSAVER   "cr3.kindle.replace.screensaver"
+
+// Filter Home, PageUp and PageDown in SpinBoxes, allows to Save settings
+// when focus is in widget and to change value on touch Kindles
+// if up/down swipes are mapped to PageUp/PageDown (default in settings)
+static bool spinKeyFilter(QAbstractSpinBox *sb, QKeyEvent *event) {
+    qDebug("filter: %x", event->key());
+    switch(event->key()) {
+    case Qt::Key_Home:
+        QApplication::sendEvent(sb->parentWidget(), event);
+        break;
+    case Qt::Key_PageUp:
+        sb->stepUp();
+        break;
+    case Qt::Key_PageDown:
+        sb->stepDown();
+        break;
+    default:
+        return false;
+    }
+    return true;
+}
+
+class FilteredSpinBox : public QSpinBox
+{
+public:
+    FilteredSpinBox(QWidget *parent = 0) : QSpinBox(parent) { }
+protected:
+    void keyPressEvent(QKeyEvent *event)
+    {
+        if (!spinKeyFilter(this, event)) QAbstractSpinBox::keyPressEvent(event);
+    }
+};
+
+class FilteredDoubleSpinBox : public QDoubleSpinBox
+{
+public:
+    FilteredDoubleSpinBox(QWidget *parent = 0) : QDoubleSpinBox(parent) { }
+protected:
+    void keyPressEvent(QKeyEvent *event)
+    {
+        if (!spinKeyFilter(this, event)) QAbstractSpinBox::keyPressEvent(event);
+    }
+};
 
 class CR3View;
 class SettingsDlg : public QDialog {
@@ -81,6 +128,7 @@ private slots:
     void on_cbAA_currentIndexChanged(int index);
     void on_cbHinting_currentIndexChanged(int index);
     void on_sbSpaceCond_valueChanged(int arg1);
+    void on_cbCoverScreensaver_toggled(bool checked);
 };
 
 #endif // SETTINGSDLG_H
