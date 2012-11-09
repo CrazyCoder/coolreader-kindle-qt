@@ -46,4 +46,5 @@ echo "./$1 -qws"
 
 cd $SAVE_DIR
 # always try to continue cvm
+sleep 1
 killall -cont cvm || /etc/init.d/framework start
