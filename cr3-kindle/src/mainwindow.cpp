@@ -170,6 +170,11 @@ void MainWindow::disablePainting()
     QWSServer::instance()->enablePainting(false);
 }
 
+bool MainWindow::isCoverScreensaver()
+{
+    return ui->view->getOptions()->getIntDef(PROP_REPLACE_SCREENSAVER, 0) == 1 && !ui->view->getDocView()->getCoverPageImage().isNull();
+}
+
 void MainWindow::replaceScreensaver()
 {
     QWSServer::instance()->enablePainting(true);
@@ -186,7 +191,7 @@ void MainWindow::goingToScreenSaver()
         qDebug("screensaver on");
         Device::resumeFramework(true);
 
-        if (ui->view->getOptions()->getIntDef(PROP_REPLACE_SCREENSAVER, 0) == 1) {
+        if (isCoverScreensaver()) {
             foreach (QWidget *widget, QApplication::topLevelWidgets()) {
                 if (widget != this && widget->isVisible())
                     widget->close();
@@ -205,7 +210,7 @@ void MainWindow::outOfScreenSaver()
         qDebug("screensaver off");
         Device::suspendFramework(true);
 
-        if (ui->view->getOptions()->getIntDef(PROP_REPLACE_SCREENSAVER, 0) == 1) {
+        if (isCoverScreensaver()) {
             ui->view->getDocView()->goToPage(lastPage, true);
             ui->view->update();
         }
