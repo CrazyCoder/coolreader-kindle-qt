@@ -32,7 +32,7 @@
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabWindow">
       <property name="toolTip">
@@ -90,6 +90,13 @@
          </item>
          <item row="1" column="1">
           <widget class="QComboBox" name="cbLanguage"/>
+         </item>
+         <item row="2" column="0" colspan="2">
+          <widget class="QCheckBox" name="cbCoverScreensaver">
+           <property name="text">
+            <string>Use book cover as screensaver</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -150,7 +157,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="sbMargin">
+            <widget class="FilteredSpinBox" name="sbMargin">
              <property name="maximum">
               <number>30</number>
              </property>
@@ -411,7 +418,7 @@
           <widget class="QComboBox" name="cbTitleFontFace"/>
          </item>
          <item>
-          <widget class="QSpinBox" name="sbTitleFontSize">
+          <widget class="FilteredSpinBox" name="sbTitleFontSize">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -590,12 +597,15 @@
             </spacer>
            </item>
            <item>
-            <widget class="QSpinBox" name="sbTextFontSize">
+            <widget class="FilteredSpinBox" name="sbTextFontSize">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::WheelFocus</enum>
              </property>
             </widget>
            </item>
@@ -609,9 +619,9 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QDoubleSpinBox" name="sbFontGamma">
+          <widget class="FilteredDoubleSpinBox" name="sbFontGamma">
            <property name="focusPolicy">
-            <enum>Qt::StrongFocus</enum>
+            <enum>Qt::WheelFocus</enum>
            </property>
            <property name="decimals">
             <number>1</number>
@@ -652,7 +662,7 @@
           </widget>
          </item>
          <item row="5" column="1">
-          <widget class="QSpinBox" name="sbInterlineSpace">
+          <widget class="FilteredSpinBox" name="sbInterlineSpace">
            <property name="minimum">
             <number>70</number>
            </property>
@@ -741,7 +751,7 @@
           </widget>
          </item>
          <item row="6" column="1">
-          <widget class="QSpinBox" name="sbSpaceCond">
+          <widget class="FilteredSpinBox" name="sbSpaceCond">
            <property name="minimum">
             <number>25</number>
            </property>
@@ -837,10 +847,21 @@
     <slot>contextMenu(QPoint)</slot>
    </slots>
   </customwidget>
+  <customwidget>
+   <class>FilteredSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>settings.h</header>
+  </customwidget>
+  <customwidget>
+   <class>FilteredDoubleSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
+   <header>settings.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>cbStartupAction</tabstop>
   <tabstop>cbLanguage</tabstop>
+  <tabstop>cbCoverScreensaver</tabstop>
   <tabstop>cbMarginSide</tabstop>
   <tabstop>sbMargin</tabstop>
   <tabstop>cbViewMode</tabstop>

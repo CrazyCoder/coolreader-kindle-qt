@@ -327,6 +327,7 @@ CR3View::CR3View( QWidget *parent)
 void CR3View::updateDefProps()
 {
     _data->_props->setIntDef(PROP_APP_START_ACTION, 0);
+    _data->_props->setIntDef(PROP_REPLACE_SCREENSAVER, 0);
     _data->_props->setIntDef(PROP_FONT_SIZE, DEF_FONT_SIZE);
     _data->_props->setIntDef(PROP_STATUS_FONT_SIZE, DEF_HEADER_FONT_SIZE);
     _data->_props->setIntDef(PROP_LANDSCAPE_PAGES, 1);

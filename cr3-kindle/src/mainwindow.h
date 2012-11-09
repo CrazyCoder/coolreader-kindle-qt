@@ -16,6 +16,7 @@
 #include <QTextCodec>
 #include <QClipboard>
 #include <QWSServer>
+#include <QTimer>
 
 #include "cr3widget.h"
 #include "crqtutil.h"
@@ -163,6 +164,8 @@ private slots:
     void usbDriveDisconnected();
     void on_actionHide_triggered();
     void on_actionAdjustBrightness_triggered();
+    void disablePainting();
+    void replaceScreensaver();
 };
 
 class MyApplication : public QApplication {

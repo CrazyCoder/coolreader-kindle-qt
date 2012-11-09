@@ -163,12 +163,36 @@ void MainWindow::battLevelChanged(int fparam)
 #endif
 }
 
+int lastPage;
+
+void MainWindow::disablePainting()
+{
+    QWSServer::instance()->enablePainting(false);
+}
+
+void MainWindow::replaceScreensaver()
+{
+    QWSServer::instance()->enablePainting(true);
+    lastPage = ui->view->getDocView()->getCurPage();
+    ui->view->getDocView()->goToPage(0, false);
+    ui->view->update();
+    QTimer::singleShot(3000, this, SLOT(disablePainting()));
+}
+
 void MainWindow::goingToScreenSaver()
 {
 #ifndef i386
     if (!usbDriveMode && !screenSaverMode) {
         qDebug("screensaver on");
         Device::resumeFramework(true);
+
+        if (ui->view->getOptions()->getIntDef(PROP_REPLACE_SCREENSAVER, 0) == 1) {
+            foreach (QWidget *widget, QApplication::topLevelWidgets()) {
+                if (widget != this && widget->isVisible())
+                    widget->close();
+            }
+            QTimer::singleShot(3000, this, SLOT(replaceScreensaver()));
+        }
     }
     screenSaverMode = true;
 #endif
@@ -180,6 +204,12 @@ void MainWindow::outOfScreenSaver()
     if (screenSaverMode && !usbDriveMode) {
         qDebug("screensaver off");
         Device::suspendFramework(true);
+
+        if (ui->view->getOptions()->getIntDef(PROP_REPLACE_SCREENSAVER, 0) == 1) {
+            ui->view->getDocView()->goToPage(lastPage, true);
+            ui->view->update();
+        }
+
         if (Device::hasLight()) {
             brDlg->fixZeroLevel();
         }
@@ -445,7 +475,6 @@ extern TouchScreen * pTouch;
 void MainWindow::on_actionAdjustBrightness_triggered()
 {
 #ifndef i386
-    qDebug("brightness control");
     pTouch->enableGesture(false);
     menuActive = true;
     brDlg->exec();
