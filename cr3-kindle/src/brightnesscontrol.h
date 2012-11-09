@@ -35,8 +35,8 @@ public:
     void fixZeroLevel();
 protected:
     bool eventFilter(QObject *object, QEvent *event);
-    void closeEvent(QCloseEvent *);
     void showEvent(QShowEvent *);
+    void hideEvent(QHideEvent *);
 private slots:
     void on_btnPlus_pressed();
     void on_btnMinus_pressed();
@@ -44,10 +44,10 @@ private slots:
 private:
     int maxHeight, maxLevel;
     Ui::BrightnessControl *ui;
-    bool initDone;
+    bool initDone, isActive;
     QFile *backlightFile;
 
-
+    void saveLevel();
 };
 
 #endif // BRIGHTNESSCONTROL_H

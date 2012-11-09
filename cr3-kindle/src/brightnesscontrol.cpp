@@ -72,6 +72,7 @@ BrightnessControl::BrightnessControl(QWidget *parent) :
         backlightFile = 0;
     }
     initDone = true;
+    isActive = false;
 }
 
 BrightnessControl::~BrightnessControl()
@@ -92,6 +93,7 @@ bool BrightnessControl::eventFilter(QObject *object, QEvent *event)
 
         QPoint dp = this->mapFromGlobal(QCursor::pos()); // close dialog when clicked outside
         if (dp.x() < 0 || dp.y() < 0 || dp.x() > width() || dp.y() > height()) {
+            saveLevel();
             close();
             return true;
         }
@@ -111,25 +113,24 @@ bool BrightnessControl::eventFilter(QObject *object, QEvent *event)
     return false;
 }
 
-void BrightnessControl::closeEvent(QCloseEvent *)
+void BrightnessControl::showEvent(QShowEvent *)
 {
-    removeEventFilter(this);
-    releaseMouse();
-    int smoothLevel = ui->progressBar->value();
-    // save the value so that it's restored by framework when turning on
-    setSmoothLevel(smoothLevel);
-    // override Kindle zero level and turn off the light completely
-    if (smoothLevel == 0) {
-        setRawLevel(0);
+    if (!isActive) {
+        isActive = true;
+        installEventFilter(this);
+        grabMouse();
+        ui->progressBar->setFocus();
+        ui->progressBar->setValue(getSmoothLevel());
     }
 }
 
-void BrightnessControl::showEvent(QShowEvent *)
+void BrightnessControl::hideEvent(QHideEvent *)
 {
-    installEventFilter(this);
-    grabMouse();
-    ui->progressBar->setFocus();
-    ui->progressBar->setValue(getSmoothLevel());
+    if (isActive) {
+        isActive = false;
+        removeEventFilter(this);
+        releaseMouse();
+    }
 }
 
 void BrightnessControl::on_btnPlus_pressed()
@@ -147,6 +148,17 @@ void BrightnessControl::on_progressBar_valueChanged(int value)
     if (!initDone) return;
     // qDebug("value: %d=>%d", value, smoothToRaw(value));
     setRawLevel(smoothToRaw(value));
+}
+
+void BrightnessControl::saveLevel()
+{
+    int smoothLevel = ui->progressBar->value();
+    // save the value so that it's restored by framework when turning on
+    setSmoothLevel(smoothLevel);
+    // override Kindle zero level and turn off the light completely
+    if (smoothLevel == 0) {
+        setRawLevel(0);
+    }
 }
 
 // quickly set raw level (doesn't survive on/off)
