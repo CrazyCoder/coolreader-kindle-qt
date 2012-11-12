@@ -7,9 +7,10 @@
 
 #include "device.h"
 
-#define MIN_SWIPE_PIXELS 150
+#define MIN_SWIPE_PIXELS  150
 #define LONG_TAP_INTERVAL 500
-#define TOUCH_CONFIG "data/touch.ini"
+#define LONG_TAP_ZONE     50
+#define TOUCH_CONFIG      "data/touch.ini"
 
 #define TOUCH_ZONES 9
 #define SWIPE_TYPES 4

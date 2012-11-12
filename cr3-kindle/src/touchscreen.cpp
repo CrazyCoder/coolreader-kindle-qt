@@ -152,14 +152,14 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
             }
         } else {
             // cancel long tap on position change (swipe)
-            longTapTimer->stop();
+            if (abs(x-oldX) > LONG_TAP_ZONE || abs(y-oldY) > LONG_TAP_ZONE) longTapTimer->stop();
         }
     }
 
     // filter events from UI until finger is released, but don't filter if gestures are disabled
     bool isFiltered = wasGestureEnabled && newButtonState > 0 && buttonState == newButtonState;
 
-    qDebug("mouse: x: %d, y: %d, state: %d, time: %d, focus: %d", x, y, newButtonState, pme->simpleData.time - lastEvent, wasFocusInReader);
+    qDebug("mouse: x: %d, y: %d, state: %d, time: %d, focus: %d, filter: %d", x, y, newButtonState, pme->simpleData.time - lastEvent, wasFocusInReader, isFiltered);
 
     // touch released
     if (newButtonState == 0 && buttonState != 0) {
