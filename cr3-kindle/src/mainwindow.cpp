@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     usbDriveMode = false;
     screenSaverMode = false;
     menuActive = false;
+    lastPage = 0;
 
     ui->setupUi(this);
 
@@ -163,8 +164,6 @@ void MainWindow::battLevelChanged(int fparam)
 #endif
 }
 
-int lastPage;
-
 void MainWindow::disablePainting()
 {
     QWSServer::instance()->enablePainting(false);
@@ -177,6 +176,7 @@ bool MainWindow::isCoverScreensaver()
 
 void MainWindow::replaceScreensaver()
 {
+    qDebug("+ setting custom screensaver");
     QWSServer::instance()->enablePainting(true);
     lastPage = ui->view->getDocView()->getCurPage();
     ui->view->getDocView()->goToPage(0, false);
@@ -188,7 +188,6 @@ void MainWindow::goingToScreenSaver()
 {
 #ifndef i386
     if (!usbDriveMode && !screenSaverMode) {
-        qDebug("screensaver on");
         Device::resumeFramework(true);
 
         if (isCoverScreensaver()) {
@@ -199,6 +198,7 @@ void MainWindow::goingToScreenSaver()
             QTimer::singleShot(3000, this, SLOT(replaceScreensaver()));
         }
     }
+    qDebug("screensaver on");
     screenSaverMode = true;
 #endif
 }
@@ -207,18 +207,22 @@ void MainWindow::outOfScreenSaver()
 {
 #ifndef i386
     if (screenSaverMode && !usbDriveMode) {
-        qDebug("screensaver off");
         Device::suspendFramework(true);
-
-        if (isCoverScreensaver()) {
-            ui->view->getDocView()->goToPage(lastPage, true);
-            ui->view->update();
-        }
 
         if (Device::hasLight()) {
             brDlg->fixZeroLevel();
         }
     }
+
+    qDebug("screensaver off");
+
+    if (isCoverScreensaver() && lastPage != 0) {
+        qDebug("- restore from custom screensaver");
+        ui->view->getDocView()->goToPage(lastPage, true);
+        ui->view->update();
+        lastPage = 0;
+    }
+
     screenSaverMode = false;
 #endif
 }
@@ -244,6 +248,11 @@ void MainWindow::usbDriveDisconnected()
         qDebug("usb drive off");
         sleep(1);
         Device::suspendFramework(true);
+
+        if (Device::hasLight()) {
+            brDlg->fixZeroLevel();
+        }
+
         QWSServer::instance()->openKeyboard();
         QWSServer::instance()->refresh();
     }

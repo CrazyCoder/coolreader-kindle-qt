@@ -141,6 +141,8 @@ private:
     bool usbDriveMode;
     bool screenSaverMode;
     bool menuActive;
+
+    int lastPage;
 public slots:
     void contextMenu( QPoint pos );
     void on_actionFindText_triggered();
