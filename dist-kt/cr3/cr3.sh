@@ -54,3 +54,4 @@ lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home
 # restore Xorg windows
 sleep 1
 ./ktresume.sh 0
+./wmctrl -r searchBar -b remove,hidden

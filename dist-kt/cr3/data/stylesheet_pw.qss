@@ -19,16 +19,13 @@ QMenu {
 
 QMenu::item {
     font-size: 10pt;
-    spacing: 6px;
-    padding: 7px 4px 18px 4px;
+    padding: 3px 4px 18px 4px;
     margin-bottom: 10px;
     border-bottom: 1px solid black;
 }
 
 QMenu::item:selected {
     font-size: 10pt;
-    spacing: 6px;
-    padding: 7px 4px 18px 4px;
     margin-bottom: 7px;
     border-bottom: 4px solid black;
     background-color: transparent;
