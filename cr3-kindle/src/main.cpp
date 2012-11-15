@@ -58,11 +58,22 @@ int main(int argc, char *argv[])
         }
 #endif
 
-        // set row count
+        // set row count depending on device model (used in lists)
         int rc = props->getIntDef(PROP_WINDOW_ROW_COUNT, 0);
         if(!rc) {
 #ifndef i386
-            props->setInt(PROP_WINDOW_ROW_COUNT, Device::getModel() != Device::KDX ? 10 : 16);
+            switch(Device::getModel()) {
+            case Device::KDX:
+                rc = 16;
+                break;
+            case Device::KT:
+            case Device::KPW:
+                rc = 8;
+                break;
+            default:
+                rc = 10;
+            }
+            props->setInt(PROP_WINDOW_ROW_COUNT, rc);
 #else
             props->setInt(PROP_WINDOW_ROW_COUNT, 10);
 #endif
@@ -75,8 +86,9 @@ int main(int argc, char *argv[])
         pMyApp = &a;
         // set app stylesheet
 #ifndef i386
-        QString style = (Device::getModel() != Device::KDX ? "stylesheet_k3.qss" : "stylesheet_dx.qss");
-        if (Device::getModel() == Device::KPW) style = "stylesheet_pw.qss";
+        Device::Model m = Device::getModel();
+        QString style = (m != Device::KDX ? "stylesheet_k3.qss" : "stylesheet_dx.qss");
+        if (m == Device::KPW || m == Device::KT) style = "stylesheet_pw.qss";
         QFile qss(QDir::toNativeSeparators(cr2qt(datadir)) + style);
         // set up full update interval for the graphics driver
         QKindleFb *pscreen = static_cast<QKindleFb*>(QScreen::instance());
