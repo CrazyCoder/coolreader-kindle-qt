@@ -5,7 +5,8 @@ TEMPLATE = lib
 CONFIG += plugin
 DESTDIR = $$(QTDIR)/plugins/mousedrivers
 SOURCES += tsplugin.cpp \
-    kindlets.cpp
+    kindlets.cpp \
+    ../../cr3-kindle/src/device.cpp
 HEADERS += tsplugin.h \
     kindlets.h
 

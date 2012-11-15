@@ -108,6 +108,7 @@ private:
 
     bool isKindle4 ;
     bool isKindle5 ;
+    bool isKindleTouch ;
     bool flashingUpdates ;
     bool isDirty ;
     QRect dirtyRect ;

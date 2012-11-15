@@ -8,7 +8,9 @@
 #include <fcntl.h>
 #include <linux/input.h>
 
-class KindleTS : public QObject, public QWSMouseHandler
+#include "../../cr3-kindle/src/device.h"
+
+class KindleTS : public QObject, public QWSMouseHandler, public QWSKeyboardHandler
 {
     Q_OBJECT
 
@@ -21,10 +23,16 @@ public:
 
 private slots:
     void activity(int);
+    void kt_activity(int);
 
 private:
+    int width, height;
+
     int _fd;
     QSocketNotifier* _sn;
+
+    int kt_fd;
+    QSocketNotifier* kt_sn;
 
     bool _debug;
 
@@ -42,6 +50,8 @@ private:
 
     void capture_input(void) ;
     void release_input(void) ;
+
+    bool isKT;
 };
 
 #define EV_SYN			0x00
@@ -56,6 +66,6 @@ private:
 #define BTN_TOUCH		0x14a
 #define BTN_TOOL_DOUBLETAP	0x14d
 
-
+#define KT_HOME 102
 
 #endif // KINDLETS_H

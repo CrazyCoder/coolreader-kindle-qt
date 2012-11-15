@@ -321,11 +321,14 @@ bool QKindleFb::connect(const QString &displaySpec)
     lstep = finfo.line_length;
 
     isKindle5 = false ;
+    isKindleTouch = false;
     if (d == 8)
     {
         isKindle4 = true ;
-        if (lstep > 600)
+        if (lstep > 608)
             isKindle5 = true ;
+        else if (lstep == 608)
+            isKindleTouch = true ;
     }
     else
     {
@@ -757,7 +760,7 @@ void QKindleFb::exposeRegion(QRegion region, int changing)
         // it takes an argument describing the updated screen area and
         // specifying whether or not to flash the screen while updating.
 
-        if (isKindle5)
+        if (isKindle5 || isKindleTouch)
         {
             mxcfb_update_data ud ;
 
@@ -961,7 +964,7 @@ void QKindleFb::blit(const QImage& image, const QPoint& topLeft, const QRegion& 
 {
     QImage imageInverted = image;
 
-    if (!isKindle5)
+    if (!isKindle5 && !isKindleTouch)
         imageInverted.invertPixels();
 
 #ifdef DEBUG_OUTPUT
