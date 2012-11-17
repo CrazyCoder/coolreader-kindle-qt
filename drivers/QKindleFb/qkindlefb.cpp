@@ -115,7 +115,6 @@ QKindleFbPrivate::QKindleFbPrivate()
 }
 QKindleFbPrivate::~QKindleFbPrivate()
 {
-
 }
 
 
@@ -123,9 +122,6 @@ QKindleFb *QKindleFb::instance()
 {
     return QKindleFbPrivate::instance;
 }
-
-
-
 
 QImage::Format QKindleFb::alphaPixmapFormat() const
 {
@@ -142,9 +138,16 @@ QImage::Format QKindleFb::alphaPixmapFormat() const
 QKindleFb::QKindleFb(int display_id)
     : QScreen(display_id, LinuxFBClass), d_ptr(new QKindleFbPrivate)
 {
+    Device::instance();
+
     canaccel=false;
     QKindleFbPrivate::instance = this;
 
+    Device::Model m = Device::getModel();
+
+    isKindle4 = m == Device::K4NT || m == Device::K4NTB || m == Device::KT;
+    isKindleTouch = m == Device::KT;
+    isKindle5 = m == Device::KPW;
 }
 
 /*!
@@ -317,24 +320,7 @@ bool QKindleFb::connect(const QString &displaySpec)
 
     grayscale = vinfo.grayscale;
     d = vinfo.bits_per_pixel;
-
     lstep = finfo.line_length;
-
-    isKindle5 = false ;
-    isKindleTouch = false;
-    if (d == 8)
-    {
-        isKindle4 = true ;
-        if (lstep > 608)
-            isKindle5 = true ;
-        else if (lstep == 608)
-            isKindleTouch = true ;
-    }
-    else
-    {
-        isKindle4 = false ;
-    }
-
 
     int xoff = vinfo.xoffset;
     int yoff = vinfo.yoffset;
@@ -370,9 +356,9 @@ bool QKindleFb::connect(const QString &displaySpec)
 
     if (w == 0 || h == 0) {
         qWarning("QKindleFb::connect(): Unable to find screen geometry, "
-                 "will use 600x800.");
-        dw = w = 600;
-        dh = h = 800;
+                 "will use detected device values.");
+        dw = w = Device::getWidth();
+        dh = h = Device::getHeight();
     }
 
     // Handle display physical size spec.
@@ -383,24 +369,8 @@ bool QKindleFb::connect(const QString &displaySpec)
     } else {
         // the controller didn't report screen physical
         // dimensions. Set them manually:
-
-        double dpi ;
+        double dpi = Device::getDpi();
         double mmperinch = 25.4 ;
-        if (isKindle5)  // Kindle PaperWhite - 758x1024 @ 212dpi
-        {
-            dpi = 212 ;
-        }
-        else if (isKindle4) // Kindle 4 NT & Touch - 600x800 @ 167dpi
-        {
-            dpi = 167 ;
-        }
-        else if (lstep == 824)  // Kindle DX - 824x1200 @
-        {
-            dpi = 152 ;
-        }
-        else
-            dpi = 167 ;         // all others.. (?)
-
         physWidth = qRound(dw*mmperinch/dpi) ;
         physHeight = qRound(dh*mmperinch/dpi) ;
     }
@@ -438,7 +408,7 @@ bool QKindleFb::connect(const QString &displaySpec)
         screencols= (vinfo.bits_per_pixel==8) ? 256 : 16;
 
         // force screen colors to be 16 if it is K4
-        if (isKindle4)
+        if (isKindle4 || isKindle5)
         {
             screencols = 16 ;
         }
@@ -510,7 +480,7 @@ void QKindleFb::createPalette(fb_cmap &cmap, fb_var_screeninfo &vinfo, fb_fix_sc
         screencols= (vinfo.bits_per_pixel==8) ? 256 : 16;
 
         // force screen colors to be 16 if it is K4
-        if (isKindle4)
+        if (isKindle4 || isKindle5)
         {
             screencols = 16 ;
         }

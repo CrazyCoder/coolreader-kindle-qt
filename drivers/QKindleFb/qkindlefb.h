@@ -42,8 +42,8 @@
 #ifndef QKINDLEFB_H
 #define QKINDLEFB_H
 
-////#include <QtGui/qscreen_qws.h>
 #include <QScreen>
+#include <device.h>
 
 struct fb_cmap;
 struct fb_var_screeninfo;
