@@ -9,4 +9,4 @@ arm {
     drivers/KindleTS
 }
 
-CONFIG += ordered release debug
+CONFIG += ordered
