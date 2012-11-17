@@ -14,9 +14,10 @@
 #include <QKeyEvent>
 #include <QApplication>
 
+#include <device.h>
+
 #include "crqtutil.h"
 #include "cr3widget.h"
-#include "device.h"
 
 namespace Ui {
 class SettingsDlg;

@@ -5,7 +5,7 @@
 #include <QTimer>
 #include <QSettings>
 
-#include "device.h"
+#include <device.h>
 
 #define MIN_SWIPE_PIXELS  150
 #define LONG_TAP_INTERVAL 500

@@ -18,6 +18,8 @@
 #include <QWSServer>
 #include <QTimer>
 
+#include <device.h>
+
 #include "cr3widget.h"
 #include "crqtutil.h"
 #include "crgui.h"
@@ -34,8 +36,6 @@
 #include "bookmarklistdlg.h"
 #include "filepropsdlg.h"
 #include "brightnesscontrol.h"
-
-#include "device.h"
 
 
 #define CMD_REFRESH                 1001

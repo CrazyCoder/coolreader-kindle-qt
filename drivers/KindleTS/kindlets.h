@@ -8,7 +8,7 @@
 #include <fcntl.h>
 #include <linux/input.h>
 
-#include "../../cr3-kindle/src/device.h"
+#include <device.h>
 
 class KindleTS : public QObject, public QWSMouseHandler, public QWSKeyboardHandler
 {
