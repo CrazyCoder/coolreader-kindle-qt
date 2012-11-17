@@ -1,16 +1,16 @@
 #include "device.h"
 
 const Device::Properties Device::PROPS[] = {
-//    x    y    KBD    JOY
-    {600, 800,  false, false},    // UNKNOWN
-    {600, 800,  true,  true },    // EMULATOR
-    {600, 800,  true,  true },    // K2
-    {824, 1200, true,  true },    // KDX
-    {600, 800,  true,  true },    // K3
-    {600, 800,  false, true },    // K4NT
-    {600, 800,  false, true },    // K4NTB
-    {600, 800,  false, false},    // KT
-    {758, 1024, false, false},    // KPW
+//    x    y    DPI, KBD    JOY
+    {600, 800,  167, false, false},    // UNKNOWN
+    {600, 800,  167, true,  true },    // EMULATOR
+    {600, 800,  167, true,  true },    // K2
+    {824, 1200, 152, true,  true },    // KDX
+    {600, 800,  167, true,  true },    // K3
+    {600, 800,  167, false, true },    // K4NT
+    {600, 800,  167, false, true },    // K4NTB
+    {600, 800,  167, false, false},    // KT
+    {758, 1024, 212, false, false},    // KPW
 };
 
 Device::Model Device::m_model = UNKNOWN;
@@ -77,4 +77,40 @@ Device::Device()
         }
     }
     myProcess->close();
+}
+
+Device &Device::instance()
+{
+    static Device instance;
+    qDebug("DEVICE: %d (%d x %d @ %d) [%d|%d]", getModel(), getWidth(), getHeight(), getDpi(), hasKeyboard(), hasFiveWay());
+    return instance;
+}
+
+void Device::suspendFramework(bool fast)
+{
+#ifndef i386
+        qDebug("- framework");
+        if (!isTouch()) {
+            // this pause lets CVM handle painting before stopping, or screensaver may not draw
+            // on next resume when device is turned off
+            sleep(1);
+            QProcess::execute("killall -STOP cvm");
+        } else {
+            QProcess::execute(QString("/bin/sh ./ktsuspend.sh %1").arg(fast ? 1 : 0));
+        }
+        QWSServer::instance()->enablePainting(true);
+#endif
+}
+
+void Device::resumeFramework(bool fast)
+{
+#ifndef i386
+        qDebug("+ framework");
+        QWSServer::instance()->enablePainting(false);
+        if (!isTouch()) {
+            QProcess::execute("killall -CONT cvm");
+        } else {
+            QProcess::execute(QString("/bin/sh ./ktresume.sh %1").arg(fast ? 1 : 0));
+        }
+#endif
 }
