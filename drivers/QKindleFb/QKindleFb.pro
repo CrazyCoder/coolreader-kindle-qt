@@ -1,12 +1,6 @@
-# -------------------------------------------------
-# Project created by QtCreator 2009-12-17T16:35:12
-# -------------------------------------------------
-QT += core \
-    gui
 TARGET = QKindleFb
 TEMPLATE = lib
 CONFIG += plugin
-DESTDIR = $$(QTDIR)/plugins/gfxdrivers
 SOURCES += qkindlefbplugin.cpp \
     qkindlefb.cpp \
     qkindlecursor.cpp
@@ -16,6 +10,10 @@ HEADERS += qkindlefb.h \
     linux/mxcfb.h \
     qkindlecursor.h
 
-INCLUDEPATH += $$(QTDIR)/mkspecs/qws/linux-arm-g++
-INCLUDEPATH += /opt/ELDK-ARM/arm/include
-INCLUDEPATH += /opt/ELDK-ARM/arm/usr/include
+QMAKE_LFLAGS += -rdynamic
+LIBS += -L$$OUT_PWD/../../cr3-kindle/src/device/ -ldevice
+INCLUDEPATH += $$PWD/../../cr3-kindle/src/device
+DEPENDPATH += $$PWD/../../cr3-kindle/src/device
+
+target.path = /mnt/us/qtKindle/plugins/gfxdrivers
+INSTALLS += target

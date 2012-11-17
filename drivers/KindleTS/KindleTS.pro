@@ -1,14 +1,15 @@
-QT += core
-
 TARGET = KindleTS
 TEMPLATE = lib
 CONFIG += plugin
-DESTDIR = $$(QTDIR)/plugins/mousedrivers
 SOURCES += tsplugin.cpp \
-    kindlets.cpp \
-    ../../cr3-kindle/src/device.cpp
+    kindlets.cpp
 HEADERS += tsplugin.h \
     kindlets.h
 
-INCLUDEPATH += $$(QTDIR)/mkspecs/qws/linux-arm-g++
-INCLUDEPATH += /opt/ELDK-ARM/arm/usr/include
+QMAKE_LFLAGS += -rdynamic
+LIBS += -L$$OUT_PWD/../../cr3-kindle/src/device/ -ldevice
+INCLUDEPATH += $$PWD/../../cr3-kindle/src/device
+DEPENDPATH += $$PWD/../../cr3-kindle/src/device
+
+target.path = /mnt/us/qtKindle/plugins/mousedrivers
+INSTALLS += target
