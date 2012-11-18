@@ -46,24 +46,20 @@ int ARRAY_SIZE( const T(&)[ N ] )
 
 TouchScreen::TouchScreen()
 {
-    longTapTimer = new QTimer(this);
-    longTapTimer->setSingleShot(true);
-    connect(longTapTimer, SIGNAL(timeout()), this, SLOT(longTap()));
+    TOP_MARGIN = BOTTOM_MARGIN = RIGHT_MARGIN = LEFT_MARGIN = 33; // margins in %
 
     loadConfiguration();
-
-    topMargin = 30; // margins in %
-    bottomMargin = 30;
-    rightMargin = 30;
-    leftMargin = 30;
 
     w = Device::getWidth();
     h = Device::getHeight();
 
-    lpx = w * leftMargin / 100;
-    rpx = w * rightMargin / 100;
-    tpx = h * topMargin / 100;
-    bpx = h * bottomMargin / 100;
+    lpx = w * LEFT_MARGIN / 100;
+    rpx = w * RIGHT_MARGIN / 100;
+    tpx = h * TOP_MARGIN / 100;
+    bpx = h * BOTTOM_MARGIN / 100;
+
+    MIN_SWIPE_PIXELS = w * MIN_SWIPE / 100;
+    LONG_TAP_ZONE_PIXELS = w * LONG_TAP_ZONE / 100;
 
     buttonState = 0;
     newButtonState = 0;
@@ -76,6 +72,10 @@ TouchScreen::TouchScreen()
 
     oldX = 0;
     oldY = 0;
+
+    longTapTimer = new QTimer(this);
+    longTapTimer->setSingleShot(true);
+    connect(longTapTimer, SIGNAL(timeout()), this, SLOT(longTap()));
 }
 
 TouchScreen::Area TouchScreen::getPointArea(int x, int y)
@@ -152,7 +152,7 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
             }
         } else {
             // cancel long tap on position change (swipe)
-            if (abs(x-oldX) > LONG_TAP_ZONE || abs(y-oldY) > LONG_TAP_ZONE) longTapTimer->stop();
+            if (abs(x-oldX) > LONG_TAP_ZONE_PIXELS || abs(y-oldY) > LONG_TAP_ZONE_PIXELS) longTapTimer->stop();
         }
     }
 
@@ -244,10 +244,10 @@ void TouchScreen::loadConfiguration()
 
             if (isSwipe && g < ARRAY_SIZE(SWIPE_ACTIONS) && k < ARRAY_SIZE(SWIPE_ACTIONS[0])) {
                 SWIPE_ACTIONS[g][k] = cmd;
-                qDebug("&swipe[%d][%d]=%x", g, k, cmd);
+                // qDebug("&swipe[%d][%d]=%x", g, k, cmd);
             } else if (g < ARRAY_SIZE(TAP_ACTIONS) && k < ARRAY_SIZE(TAP_ACTIONS[0])) {
                 TAP_ACTIONS[g][k] = cmd;
-                qDebug("&key[%d][%d]=%x", g, k, cmd);
+                // qDebug("&key[%d][%d]=%x", g, k, cmd);
             } else {
                 qDebug("&unknown[%d][%d]=%x", g, k, cmd);
             }

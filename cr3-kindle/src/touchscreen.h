@@ -7,9 +7,9 @@
 
 #include <device.h>
 
-#define MIN_SWIPE_PIXELS  150
+#define MIN_SWIPE         20 // % of screen width
+#define LONG_TAP_ZONE     7
 #define LONG_TAP_INTERVAL 500
-#define LONG_TAP_ZONE     50
 #define TOUCH_CONFIG      "data/touch.ini"
 
 #define TOUCH_ZONES 9
@@ -62,21 +62,20 @@ public:
     bool filter(QWSMouseEvent* pme, bool focusInReader);
     bool enableGesture(bool enable);
     void loadConfiguration();
+
 private:
     bool isGestureEnabled, wasGestureEnabled;
-
+    bool wasFocusInReader;
     bool isLongTapHandled;
-    QTimer *longTapTimer;
 
-    int rightMargin, rpx;
-    int leftMargin, lpx;
-    int topMargin, tpx;
-    int bottomMargin, bpx;
+    int RIGHT_MARGIN, rpx;
+    int LEFT_MARGIN, lpx;
+    int TOP_MARGIN, tpx;
+    int BOTTOM_MARGIN, bpx;
 
     int buttonState;
     int newButtonState;
     int lastEvent;
-    bool wasFocusInReader;
     int oldX;
     int oldY;
 
@@ -85,6 +84,10 @@ private:
 
     static Qt::Key TAP_ACTIONS[][TOUCH_ZONES];
     static Qt::Key SWIPE_ACTIONS[][SWIPE_TYPES];
+
+    int MIN_SWIPE_PIXELS, LONG_TAP_ZONE_PIXELS;
+
+    QTimer *longTapTimer;
 private slots:
     void longTap();
 };
