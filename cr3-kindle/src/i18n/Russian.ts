@@ -874,6 +874,10 @@
         <translation>Ничего не делать</translation>
     </message>
     <message>
+        <source>Use book cover as screensaver</source>
+        <translation>Показывать обложку книги как скринсейвер</translation>
+    </message>
+    <message>
         <source>Controls</source>
         <translation>Инструменты</translation>
     </message>
