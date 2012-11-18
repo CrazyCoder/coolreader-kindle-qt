@@ -23,7 +23,7 @@ debug:DEFINES += _DEBUG=1
 
 QMAKE_CFLAGS_WARN_ON = -Wall -Wno-unused-parameter
 QMAKE_CXXFLAGS_WARN_ON = -Wall -Wno-unused-parameter
-QMAKE_LFLAGS += -rdynamic
+QMAKE_POST_LINK=$(STRIP) -s $(TARGET)
 
 INCLUDEPATH += $$(QTDIR)/include/freetype2 \
     ../../crengine/crengine/include \
