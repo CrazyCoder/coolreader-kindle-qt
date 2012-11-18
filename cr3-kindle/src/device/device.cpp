@@ -82,7 +82,7 @@ Device::Device()
 Device &Device::instance()
 {
     static Device instance;
-    qDebug("DEVICE: %d (%d x %d @ %d) [%d|%d]", getModel(), getWidth(), getHeight(), getDpi(), hasKeyboard(), hasFiveWay());
+    // qDebug("DEVICE: %d (%d x %d @ %d) [%d|%d]", getModel(), getWidth(), getHeight(), getDpi(), hasKeyboard(), hasFiveWay());
     return instance;
 }
 
