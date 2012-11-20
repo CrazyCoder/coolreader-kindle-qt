@@ -89,28 +89,37 @@ Device &Device::instance()
 void Device::suspendFramework(bool fast)
 {
 #ifndef i386
-        qDebug("- framework");
-        if (!isTouch()) {
-            // this pause lets CVM handle painting before stopping, or screensaver may not draw
-            // on next resume when device is turned off
-            sleep(1);
-            QProcess::execute("killall -STOP cvm");
-        } else {
-            QProcess::execute(QString("/bin/sh ./ktsuspend.sh %1").arg(fast ? 1 : 0));
-        }
-        QWSServer::instance()->enablePainting(true);
+    qDebug("- framework");
+    if (!isTouch()) {
+        // this pause lets CVM handle painting before stopping, or screensaver may not draw
+        // on next resume when device is turned off
+        sleep(1);
+        QProcess::execute("killall -STOP cvm");
+    } else {
+        QProcess::execute(QString("/bin/sh /var/tmp/ktsuspend.sh %1").arg(fast ? 1 : 0));
+    }
+    QWSServer::instance()->enablePainting(true);
 #endif
 }
 
 void Device::resumeFramework(bool fast)
 {
 #ifndef i386
-        qDebug("+ framework");
-        QWSServer::instance()->enablePainting(false);
-        if (!isTouch()) {
-            QProcess::execute("killall -CONT cvm");
-        } else {
-            QProcess::execute(QString("/bin/sh ./ktresume.sh %1").arg(fast ? 1 : 0));
-        }
+    qDebug("+ framework");
+    QWSServer::instance()->enablePainting(false);
+    if (!isTouch()) {
+        QProcess::execute("killall -CONT cvm");
+    } else {
+        QProcess::execute(QString("/bin/sh /var/tmp/ktresume.sh %1").arg(fast ? 1 : 0));
+    }
 #endif
+}
+
+void Device::enableInput(bool enable)
+{
+    if (enable) {
+        isTouch() ? QWSServer::instance()->openMouse() : QWSServer::instance()->openKeyboard();
+    } else {
+        isTouch() ? QWSServer::instance()->closeMouse() : QWSServer::instance()->closeKeyboard();
+    }
 }

@@ -166,7 +166,7 @@ void MainWindow::battLevelChanged(int fparam)
 
 void MainWindow::disablePainting()
 {
-    QWSServer::instance()->enablePainting(false);
+    if (screenSaverMode) QWSServer::instance()->enablePainting(false);
 }
 
 bool MainWindow::isCoverScreensaver()
@@ -176,7 +176,12 @@ bool MainWindow::isCoverScreensaver()
 
 void MainWindow::replaceScreensaver()
 {
-    qDebug("+ setting custom screensaver");
+    if (screenSaverMode) {
+        qDebug("+ setting custom screensaver");
+    } else {
+        qDebug(". custom screensaver aborted");
+        return;
+    }
     QWSServer::instance()->enablePainting(true);
     lastPage = ui->view->getDocView()->getCurPage();
     ui->view->getDocView()->goToPage(0, false);
@@ -233,9 +238,9 @@ void MainWindow::usbDriveConnected()
     screenSaverMode = false; // screensaver is disabled automatically when USB is connected
     if (!usbDriveMode) {
         qDebug("usb drive on");
-        QWSServer::instance()->closeKeyboard();
+        Device::enableInput(false);
         sleep(1);
-        Device::resumeFramework(true);
+        Device::resumeFramework(false);
     }
     usbDriveMode = true;
 #endif
@@ -247,13 +252,13 @@ void MainWindow::usbDriveDisconnected()
     if (!screenSaverMode && usbDriveMode) {
         qDebug("usb drive off");
         sleep(1);
-        Device::suspendFramework(true);
+        Device::suspendFramework(false);
 
         if (Device::hasLight()) {
             brDlg->fixZeroLevel();
         }
 
-        QWSServer::instance()->openKeyboard();
+        Device::enableInput(true);
         QWSServer::instance()->refresh();
     }
     usbDriveMode = false;
@@ -468,13 +473,11 @@ void MainWindow::on_actionHide_triggered()
         system("echo sendalt 42>/proc/keypad"); // Alt+Shift works only on keyboard devices
     } else {
         gotoSleep();
+        Device::enableInput(false);
+        Device::resumeFramework();
         if (!Device::isTouch()) {
-            QWSServer::instance()->closeKeyboard();
-            Device::resumeFramework();
             system("echo send 102 >/proc/keypad");
         } else {
-            QWSServer::instance()->closeMouse();
-            Device::resumeFramework();
             system("lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home");
         }
     }

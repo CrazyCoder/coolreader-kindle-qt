@@ -68,6 +68,7 @@ public:
     static void suspendFramework(bool fast = false);
     static void resumeFramework(bool fast = false);
 
+    static void enableInput(bool enable);
 private:
     static const Properties PROPS[];
     static MODEL m_model;
