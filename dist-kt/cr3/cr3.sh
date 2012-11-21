@@ -34,8 +34,11 @@ f_blanket_unload_module ad_screensaver
 f_blanket_unload_module ad_screensaver_active
 f_blanket_load_module screensaver
 
+# copy scripts to temp folder so that they work when USB is connected and /mnt/us is unmounted
+cp -f ./ktsuspend.sh ./ktresume.sh ./wmctrl /var/tmp/
+
 # hide Xorg windows
-./ktsuspend.sh 0
+/var/tmp/ktsuspend.sh 0
 
 export QT_PLUGIN_PATH=/mnt/us/qtKindle/plugins
 export QT_QWS_FONTDIR=/mnt/us/qtKindle/lib/fonts
@@ -53,5 +56,5 @@ cd $SAVE_DIR
 lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home
 # restore Xorg windows
 sleep 1
-./ktresume.sh 0
-./wmctrl -r searchBar -b remove,hidden
+/var/tmp/ktresume.sh 0
+/var/tmp/wmctrl -r searchBar -b remove,hidden
