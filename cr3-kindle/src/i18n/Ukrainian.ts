@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Remove Bookmark</source>
-        <translation>Видалити закладку</translation>
+        <translation type="obsolete">Видалити закладку</translation>
     </message>
     <message>
         <source>Remove ALL Bookmarks</source>
@@ -116,26 +116,6 @@
     <message>
         <source>Close</source>
         <translation type="obsolete">Закрити</translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove all bookmarks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SelectBookmark</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -189,7 +169,7 @@
     </message>
     <message>
         <source>Archive name</source>
-        <translation>Ім'я файлу архіву</translation>
+        <translation>Ім&apos;я файлу архіву</translation>
     </message>
     <message>
         <source>Archive path</source>
@@ -201,7 +181,7 @@
     </message>
     <message>
         <source>File name</source>
-        <translation>Ім'я файлу</translation>
+        <translation>Ім&apos;я файлу</translation>
     </message>
     <message>
         <source>File path</source>
@@ -330,6 +310,10 @@
         <source>Close</source>
         <translation>Закрити</translation>
     </message>
+    <message>
+        <source>Minimize</source>
+        <translation type="unfinished">Згорнути</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowClass</name>
@@ -371,11 +355,11 @@
     </message>
     <message>
         <source>Page Down</source>
-        <translation>На стрінку вниз</translation>
+        <translation type="obsolete">На стрінку вниз</translation>
     </message>
     <message>
         <source>Page Up</source>
-        <translation>На стрінку вгору</translation>
+        <translation type="obsolete">На стрінку вгору</translation>
     </message>
     <message>
         <source>Line Down</source>
@@ -447,7 +431,7 @@
     </message>
     <message>
         <source>Show table of contents</source>
-        <translation>Показати зміст</translation>
+        <translation type="obsolete">Показати зміст</translation>
     </message>
     <message>
         <source>Recent Books</source>
@@ -522,38 +506,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Go to next page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back by page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back in navigation history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to the next position in navigation history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>copy2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy alternative shortcut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Toggle Edit Mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -562,36 +514,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>L</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shift+B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">К</translation>
     </message>
     <message>
         <source>ShowMenu</source>
@@ -604,14 +528,6 @@
 </context>
 <context>
     <name>OpenFileDlg</name>
-    <message>
-        <source>SelectFile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
@@ -649,56 +565,111 @@
         <translation type="unfinished">Інший файл знаходиться по такому шляху (на місці попереднього) із історії відкритих книг</translation>
     </message>
     <message>
-        <source>You can't remove last book that you are reading now. Please, choose other active book then try to remove file again.</source>
+        <source>You can&apos;t remove last book that you are reading now. Please, choose other active book then try to remove file again.</source>
         <translation>Вы не можете видалити останню книгу із історії, яку зараз читаєте. Будьласка, відкрийте іншу книгу - потім зможете видалити попередню.</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Так</translation>
+        <translation type="obsolete">Так</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Ні</translation>
+        <translation type="obsolete">Ні</translation>
+    </message>
+</context>
+<context>
+    <name>QDialogButtonBox</name>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
-        <source>GoToBegin</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Save</source>
+        <translation type="obsolete">&amp;Зберегти</translation>
     </message>
     <message>
-        <source>Home</source>
-        <translation type="unfinished"></translation>
+        <source>Save</source>
+        <translation type="obsolete">Зберегти</translation>
     </message>
     <message>
-        <source>NextPage</source>
-        <translation type="unfinished"></translation>
+        <source>Open</source>
+        <translation type="obsolete">Відкрити</translation>
     </message>
     <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Cancel</source>
+        <translation type="obsolete">&amp;Скасувати</translation>
     </message>
     <message>
-        <source>PrevPage</source>
-        <translation type="unfinished"></translation>
+        <source>Cancel</source>
+        <translation type="obsolete">Скасувати</translation>
     </message>
     <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Close</source>
+        <translation type="obsolete">Закри&amp;ти</translation>
     </message>
     <message>
-        <source>GoToLastPage</source>
-        <translation type="unfinished"></translation>
+        <source>Close</source>
+        <translation type="obsolete">Закрити</translation>
     </message>
     <message>
-        <source>Right</source>
-        <translation type="unfinished"></translation>
+        <source>Apply</source>
+        <translation type="obsolete">Застосувати</translation>
     </message>
     <message>
-        <source>GoToFirstPage</source>
-        <translation type="unfinished"></translation>
+        <source>Reset</source>
+        <translation type="obsolete">Скинути</translation>
     </message>
     <message>
-        <source>Left</source>
-        <translation type="unfinished"></translation>
+        <source>Help</source>
+        <translation type="obsolete">Довідка</translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="obsolete">Не зберігати</translation>
+    </message>
+    <message>
+        <source>Close without Saving</source>
+        <translation type="obsolete">Закрити без збереження</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation type="obsolete">Відхилити</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation type="obsolete">Т&amp;ак</translation>
+    </message>
+    <message>
+        <source>Yes to &amp;All</source>
+        <translation type="obsolete">Так &amp;для всіх</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation type="obsolete">&amp;Ні</translation>
+    </message>
+    <message>
+        <source>N&amp;o to All</source>
+        <translation type="obsolete">Ні для вс&amp;іх</translation>
+    </message>
+    <message>
+        <source>Save All</source>
+        <translation type="obsolete">Зберегти все</translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation type="obsolete">Перервати</translation>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="obsolete">Повторити</translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation type="obsolete">Ігнорувати</translation>
+    </message>
+    <message>
+        <source>Restore Defaults</source>
+        <translation type="obsolete">Відновити типово</translation>
     </message>
 </context>
 <context>
@@ -713,7 +684,7 @@
     </message>
     <message>
         <source>Filename</source>
-        <translation type="obsolete">Ім'я файлу</translation>
+        <translation type="obsolete">Ім&apos;я файлу</translation>
     </message>
     <message>
         <source>Remove all history items</source>
@@ -734,46 +705,6 @@
     <message>
         <source>Clear All</source>
         <translation type="obsolete">Очистити весь список</translation>
-    </message>
-    <message>
-        <source>RemoveAll</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RemoveBook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SelectBook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NextPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PrevPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -804,7 +735,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="obsolete">Закрити</translation>
+        <translation type="unfinished">Закрити</translation>
     </message>
     <message>
         <source>Not found</source>
@@ -827,7 +758,7 @@
     </message>
     <message>
         <source>The quick brown fox jumps over the lazy dog. </source>
-        <translation type="unfinished">З'їж ще цих м'яких французьких булочок! </translation>
+        <translation type="unfinished">З&apos;їж ще цих м&apos;яких французьких булочок! </translation>
     </message>
     <message>
         <source>Text color</source>
@@ -1038,36 +969,60 @@
         <translation>Висяча пунктуація</translation>
     </message>
     <message>
-        <source>SaveSettings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PrevTab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NextTab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View Mode</source>
         <translation>Режим перегляду</translation>
     </message>
     <message>
         <source>In percent</source>
         <translation>в відсотках</translation>
+    </message>
+    <message>
+        <source>Use book cover as screensaver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full screen update interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Embolden font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font kerning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font antialiasing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On for large fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On for all fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font hinting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bytecode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min space width (%)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1087,133 +1042,6 @@
     <message>
         <source>Type page number:</source>
         <translation>Введіть номер сторінки чи відсоток:</translation>
-    </message>
-    <message>
-        <source>GotoPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NextPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PrevPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QDialogButtonBox</name>
-    <message>
-        <source>OK</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Зберегти</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Зберегти</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Відкрити</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Скасувати</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Скасувати</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation>Закри&amp;ти</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Закрити</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Застосувати</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation>Скинути</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Довідка</translation>
-    </message>
-    <message>
-        <source>Don&apos;t Save</source>
-        <translation>Не зберігати</translation>
-    </message>
-    <message>
-        <source>Close without Saving</source>
-        <translation>Закрити без збереження</translation>
-    </message>
-    <message>
-        <source>Discard</source>
-        <translation>Відхилити</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation>Т&amp;ак</translation>
-    </message>
-    <message>
-        <source>Yes to &amp;All</source>
-        <translation>Так &amp;для всіх</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation>&amp;Ні</translation>
-    </message>
-    <message>
-        <source>N&amp;o to All</source>
-        <translation>Ні для вс&amp;іх</translation>
-    </message>
-    <message>
-        <source>Save All</source>
-        <translation>Зберегти все</translation>
-    </message>
-    <message>
-        <source>Abort</source>
-        <translation>Перервати</translation>
-    </message>
-    <message>
-        <source>Retry</source>
-        <translation>Повторити</translation>
-    </message>
-    <message>
-        <source>Ignore</source>
-        <translation>Ігнорувати</translation>
-    </message>
-    <message>
-        <source>Restore Defaults</source>
-        <translation>Відновити типово</translation>
     </message>
 </context>
 </TS>

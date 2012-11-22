@@ -1,62 +1,62 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="ru_RU" sourcelanguage="en_US">
 <context>
     <name>AboutDialog</name>
     <message>
         <source>About CoolReader</source>
-        <translation>О программе</translation>
+        <translation type="obsolete">О программе</translation>
     </message>
     <message>
         <source>License</source>
-        <translation>Лицензия</translation>
+        <translation type="obsolete">Лицензия</translation>
     </message>
     <message>
         <source>Source Code</source>
-        <translation>Исходный код</translation>
+        <translation type="obsolete">Исходный код</translation>
     </message>
     <message>
         <source>(c) 1998-2009 Vadim Lopatin</source>
-        <translation>(c) 1998-2012 Вадим Лопатин</translation>
+        <translation type="obsolete">(c) 1998-2012 Вадим Лопатин</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>О программе</translation>
+        <translation type="obsolete">О программе</translation>
     </message>
     <message>
         <source>About Cool Reader</source>
-        <translation>О программе</translation>
+        <translation type="obsolete">О программе</translation>
     </message>
 </context>
 <context>
     <name>AddBookmarkDialog</name>
     <message>
         <source>Add bookmark</source>
-        <translation>Добавить закладку</translation>
+        <translation type="obsolete">Добавить закладку</translation>
     </message>
     <message>
         <source>Correction</source>
-        <translation>Исправление</translation>
+        <translation type="obsolete">Исправление</translation>
     </message>
     <message>
         <source>Bookmark type</source>
-        <translation>Тип закладки</translation>
+        <translation type="obsolete">Тип закладки</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Название</translation>
+        <translation type="obsolete">Название</translation>
     </message>
     <message>
         <source>Position</source>
-        <translation>Позиция</translation>
+        <translation type="obsolete">Позиция</translation>
     </message>
     <message>
         <source>Position text</source>
-        <translation>Текст</translation>
+        <translation type="obsolete">Текст</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Комментарии</translation>
+        <translation type="obsolete">Комментарии</translation>
     </message>
 </context>
 <context>
@@ -72,7 +72,7 @@
     <message>
         <source>Type</source>
         <comment>bookmark type</comment>
-        <translation>Тип</translation>
+        <translation type="obsolete">Тип</translation>
     </message>
     <message>
         <source>Text</source>
@@ -80,62 +80,46 @@
     </message>
     <message>
         <source>Comment</source>
-        <translation>Комментарии</translation>
+        <translation type="obsolete">Комментарии</translation>
     </message>
     <message>
         <source>P</source>
         <comment>Bookmark type first letter - Position</comment>
-        <translation>П</translation>
+        <translation type="obsolete">П</translation>
     </message>
     <message>
         <source>C</source>
         <comment>Bookmark type first letter - Comment</comment>
-        <translation>К</translation>
+        <translation type="obsolete">К</translation>
     </message>
     <message>
         <source>E</source>
         <comment>Bookmark type first letter - Correction/Edit</comment>
-        <translation>И</translation>
+        <translation type="obsolete">И</translation>
     </message>
     <message>
         <source>Go to Bookmark</source>
-        <translation>Перейти к закладке</translation>
+        <translation type="obsolete">Перейти к закладке</translation>
     </message>
     <message>
         <source>Remove Bookmark</source>
-        <translation>Удалить закладку</translation>
+        <translation type="obsolete">Удалить закладку</translation>
     </message>
     <message>
         <source>Remove ALL Bookmarks</source>
-        <translation>Удалить все закладки</translation>
+        <translation type="obsolete">Удалить все закладки</translation>
     </message>
     <message>
         <source>Edit Bookmark</source>
-        <translation>Редактировать закладку</translation>
+        <translation type="obsolete">Редактировать закладку</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Закрыть</translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Backspace</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Закрыть</translation>
     </message>
     <message>
         <source>Remove all bookmarks</source>
-        <translation>Удалить все закладки</translation>
-    </message>
-    <message>
-        <source>Alt+Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SelectBookmark</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Удалить все закладки</translation>
     </message>
 </context>
 <context>
@@ -157,35 +141,35 @@
     </message>
     <message>
         <source>Property</source>
-        <translation>Свойство</translation>
+        <translation type="obsolete">Свойство</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Значение</translation>
+        <translation type="obsolete">Значение</translation>
     </message>
     <message>
         <source>Current page</source>
-        <translation>Текущая страница</translation>
+        <translation type="obsolete">Текущая страница</translation>
     </message>
     <message>
         <source>Total pages</source>
-        <translation>Всего страниц</translation>
+        <translation type="obsolete">Всего страниц</translation>
     </message>
     <message>
         <source>Battery state</source>
-        <translation>Состояние батареи</translation>
+        <translation type="obsolete">Состояние батареи</translation>
     </message>
     <message>
         <source>Current Time</source>
-        <translation>Текущее время</translation>
+        <translation type="obsolete">Текущее время</translation>
     </message>
     <message>
         <source>Current chapter</source>
-        <translation>Глава</translation>
+        <translation type="obsolete">Глава</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Статус</translation>
+        <translation type="obsolete">Статус</translation>
     </message>
     <message>
         <source>Archive name</source>
@@ -305,26 +289,26 @@
     </message>
     <message>
         <source>Dialog</source>
-        <translation>Диалог</translation>
+        <translation type="obsolete">Диалог</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Open book file</source>
-        <translation>Открыть книгу</translation>
+        <translation type="obsolete">Открыть книгу</translation>
     </message>
     <message>
         <source>All supported formats (*.fb2 *.txt *.tcr *.rtf *.epub *.html *.htm *.zip);;FB2 books (*.fb2 *.fb2.zip);;Text files (*.txt);;Rich text (*.rtf);;HTML files (*.htm *.html);;EPUB files (*.epub);;ZIP archives (*.zip)</source>
-        <translation>Все форматы (*.fb2 *.txt *.tcr *.rtf *.epub *.html *.htm *.zip);;Книги FB2 (*.fb2 *.fb2.zip);;Текстовые файлы (*.txt);;Текст RTF (*.rtf);;HTML (*.htm *.html);;EPUB (*.epub);;Архивы ZIP (*.zip)</translation>
+        <translation type="obsolete">Все форматы (*.fb2 *.txt *.tcr *.rtf *.epub *.html *.htm *.zip);;Книги FB2 (*.fb2 *.fb2.zip);;Текстовые файлы (*.txt);;Текст RTF (*.rtf);;HTML (*.htm *.html);;EPUB (*.epub);;Архивы ZIP (*.zip)</translation>
     </message>
     <message>
         <source>Not implemented</source>
-        <translation>Функция недоступна</translation>
+        <translation type="obsolete">Функция недоступна</translation>
     </message>
     <message>
         <source>Search is not implemented yet</source>
-        <translation>Извините, поиск по тексту пока не реализован.</translation>
+        <translation type="obsolete">Извините, поиск по тексту пока не реализован.</translation>
     </message>
     <message>
         <source>Minimize</source>
@@ -339,19 +323,19 @@
     <name>MainWindowClass</name>
     <message>
         <source>File</source>
-        <translation>Файл</translation>
+        <translation type="obsolete">Файл</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Вид</translation>
+        <translation type="obsolete">Вид</translation>
     </message>
     <message>
         <source>Navigation</source>
-        <translation>Навигация</translation>
+        <translation type="obsolete">Навигация</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>Справка</translation>
+        <translation type="obsolete">Справка</translation>
     </message>
     <message>
         <source>Open...</source>
@@ -363,47 +347,43 @@
     </message>
     <message>
         <source>Toggle Pages/Scroll</source>
-        <translation>Переключить страница/свиток</translation>
+        <translation type="obsolete">Переключить страница/свиток</translation>
     </message>
     <message>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <source>Minimize</source>
-        <translation>Свернуть</translation>
-    </message>
-    <message>
         <source>Page Down</source>
-        <translation>На страницу вниз</translation>
+        <translation type="obsolete">На страницу вниз</translation>
     </message>
     <message>
         <source>Page Up</source>
-        <translation>На страницу вверх</translation>
+        <translation type="obsolete">На страницу вверх</translation>
     </message>
     <message>
         <source>Line Down</source>
-        <translation>На строку вниз</translation>
+        <translation type="obsolete">На строку вниз</translation>
     </message>
     <message>
         <source>Line Up</source>
-        <translation>На строку вверх</translation>
+        <translation type="obsolete">На строку вверх</translation>
     </message>
     <message>
         <source>First Page</source>
-        <translation>Первая страница</translation>
+        <translation type="obsolete">Первая страница</translation>
     </message>
     <message>
         <source>Go to first page</source>
-        <translation>Первая страница</translation>
+        <translation type="obsolete">Первая страница</translation>
     </message>
     <message>
         <source>Last Page</source>
-        <translation>Последняя страница</translation>
+        <translation type="obsolete">Последняя страница</translation>
     </message>
     <message>
         <source>End</source>
-        <translation>В конец</translation>
+        <translation type="obsolete">В конец</translation>
     </message>
     <message>
         <source>Back</source>
@@ -415,35 +395,35 @@
     </message>
     <message>
         <source>Next Chapter</source>
-        <translation>Следующая глава</translation>
+        <translation type="obsolete">Следующая глава</translation>
     </message>
     <message>
         <source>Previous Chapter</source>
-        <translation>Предыдущая глава</translation>
+        <translation type="obsolete">Предыдущая глава</translation>
     </message>
     <message>
         <source>Toggle Full Screen</source>
-        <translation>Полноэкранный режим</translation>
+        <translation type="obsolete">Полноэкранный режим</translation>
     </message>
     <message>
         <source>Toggle Full Screen mode</source>
-        <translation>Полноэкранный режим</translation>
+        <translation type="obsolete">Полноэкранный режим</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation>Увеличить шрифт</translation>
+        <translation type="obsolete">Увеличить шрифт</translation>
     </message>
     <message>
         <source>Increase font size</source>
-        <translation>Увеличить размер шрифта</translation>
+        <translation type="obsolete">Увеличить размер шрифта</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation>Уменьшить шрифт</translation>
+        <translation type="obsolete">Уменьшить шрифт</translation>
     </message>
     <message>
         <source>Decrease font size</source>
-        <translation>Уменьшить размер шрифта</translation>
+        <translation type="obsolete">Уменьшить размер шрифта</translation>
     </message>
     <message>
         <source>Table of Contents...</source>
@@ -451,7 +431,7 @@
     </message>
     <message>
         <source>Show table of contents</source>
-        <translation>Показать содержание</translation>
+        <translation type="obsolete">Показать содержание</translation>
     </message>
     <message>
         <source>Recent Books</source>
@@ -479,11 +459,11 @@
     </message>
     <message>
         <source>About Qt</source>
-        <translation>О Qt</translation>
+        <translation type="obsolete">О Qt</translation>
     </message>
     <message>
         <source>About CoolReader</source>
-        <translation>О программе CoolReader</translation>
+        <translation type="obsolete">О программе CoolReader</translation>
     </message>
     <message>
         <source>Add Bookmark</source>
@@ -511,7 +491,7 @@
     </message>
     <message>
         <source>Rotate</source>
-        <translation>Поворот страницы</translation>
+        <translation type="obsolete">Поворот страницы</translation>
     </message>
     <message>
         <source>Find text...</source>
@@ -527,27 +507,19 @@
     </message>
     <message>
         <source>Go to next page</source>
-        <translation>След. страница</translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">След. страница</translation>
     </message>
     <message>
         <source>Back by page</source>
-        <translation>Пред. страница</translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Пред. страница</translation>
     </message>
     <message>
         <source>Back in navigation history</source>
-        <translation>Назад по истории навигации</translation>
+        <translation type="obsolete">Назад по истории навигации</translation>
     </message>
     <message>
         <source>Go to the next position in navigation history</source>
-        <translation>Далее по истории навигации</translation>
+        <translation type="obsolete">Далее по истории навигации</translation>
     </message>
     <message>
         <source>Toggle Edit Mode</source>
@@ -556,38 +528,6 @@
     <message>
         <source>Toggle edit mode</source>
         <translation>Переключить режим правки</translation>
-    </message>
-    <message>
-        <source>O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>L</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shift+B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ShowMenu</source>
@@ -600,14 +540,6 @@
 </context>
 <context>
     <name>OpenFileDlg</name>
-    <message>
-        <source>SelectFile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Open file</source>
         <translation>Открыть файл</translation>
@@ -645,71 +577,122 @@
         <translation>Другой файл находится по такому пути в истории открытых книг</translation>
     </message>
     <message>
-        <source>You can't remove last book that you are reading now. Please, choose other active book then try to remove file again.</source>
+        <source>You can&apos;t remove last book that you are reading now. Please, choose other active book then try to remove file again.</source>
         <translation>Вы не можете удалить последнюю книгу из истории, которую сейчас читаете. Пожалуйста, откройте другую книгу - затем сможете удалить предыдущую.</translation>
     </message>
+</context>
+<context>
+    <name>QDialogButtonBox</name>
     <message>
-        <source>Yes</source>
-        <translation>Да</translation>
+        <source>OK</source>
+        <translation type="obsolete">ОК</translation>
     </message>
     <message>
-        <source>No</source>
-        <translation>Нет</translation>
+        <source>Save</source>
+        <translation type="obsolete">Сохранить</translation>
     </message>
     <message>
-        <source>GoToBegin</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Save</source>
+        <translation type="obsolete">&amp;Сохранить</translation>
     </message>
     <message>
-        <source>Home</source>
-        <translation type="unfinished"></translation>
+        <source>Open</source>
+        <translation type="obsolete">Открыть</translation>
     </message>
     <message>
-        <source>NextPage</source>
-        <translation type="unfinished"></translation>
+        <source>Cancel</source>
+        <translation type="obsolete">Отмена</translation>
     </message>
     <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Cancel</source>
+        <translation type="obsolete">От&amp;мена</translation>
     </message>
     <message>
-        <source>PrevPage</source>
-        <translation type="unfinished"></translation>
+        <source>Close</source>
+        <translation type="obsolete">Закрыть</translation>
     </message>
     <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Close</source>
+        <translation type="obsolete">&amp;Закрыть</translation>
     </message>
     <message>
-        <source>GoToLastPage</source>
-        <translation type="unfinished"></translation>
+        <source>Apply</source>
+        <translation type="obsolete">Применить</translation>
     </message>
     <message>
-        <source>Right</source>
-        <translation type="unfinished"></translation>
+        <source>Reset</source>
+        <translation type="obsolete">Сбросить</translation>
     </message>
     <message>
-        <source>GoToFirstPage</source>
-        <translation type="unfinished"></translation>
+        <source>Help</source>
+        <translation type="obsolete">Справка</translation>
     </message>
     <message>
-        <source>Left</source>
-        <translation type="unfinished"></translation>
+        <source>Don&apos;t Save</source>
+        <translation type="obsolete">Не сохранять</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation type="obsolete">Отклонить</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation type="obsolete">&amp;Да</translation>
+    </message>
+    <message>
+        <source>Yes to &amp;All</source>
+        <translation type="obsolete">Да для &amp;всех</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation type="obsolete">&amp;Нет</translation>
+    </message>
+    <message>
+        <source>N&amp;o to All</source>
+        <translation type="obsolete">Н&amp;ет для всех</translation>
+    </message>
+    <message>
+        <source>Save All</source>
+        <translation type="obsolete">Сохранить все</translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation type="obsolete">Прервать</translation>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="obsolete">Повторить</translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation type="obsolete">Пропустить</translation>
+    </message>
+    <message>
+        <source>Restore Defaults</source>
+        <translation type="obsolete">По умолчанию</translation>
+    </message>
+    <message>
+        <source>Close without Saving</source>
+        <translation type="obsolete">Закрыть без сохранения</translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="obsolete">&amp;ОК</translation>
     </message>
 </context>
 <context>
     <name>RecentBooksDlg</name>
     <message>
         <source>Author</source>
-        <translation>Автор</translation>
+        <translation type="obsolete">Автор</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Название</translation>
+        <translation type="obsolete">Название</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation>Имя файла</translation>
+        <translation type="obsolete">Имя файла</translation>
     </message>
     <message>
         <source>Remove all history items</source>
@@ -725,51 +708,11 @@
     </message>
     <message>
         <source>Remove Item</source>
-        <translation>Удалить запись</translation>
+        <translation type="obsolete">Удалить запись</translation>
     </message>
     <message>
         <source>Clear All</source>
-        <translation>Очистить весь список</translation>
-    </message>
-    <message>
-        <source>RemoveAll</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RemoveBook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SelectBook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NextPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PrevPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Очистить весь список</translation>
     </message>
 </context>
 <context>
@@ -823,19 +766,19 @@
     </message>
     <message>
         <source>The quick brown fox jumps over the lazy dog. </source>
-        <translation>Съешь ещё этих мягких французских булок, да выпей чаю. 1234567890 -~=+_.,:;?!`' @#$%^*()\|/ </translation>
+        <translation>Съешь ещё этих мягких французских булок, да выпей чаю. 1234567890 -~=+_.,:;?!`&apos; @#$%^*()\|/ </translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation>Цвет текста</translation>
+        <translation type="obsolete">Цвет текста</translation>
     </message>
     <message>
         <source>Background color</source>
-        <translation>Цвет фона</translation>
+        <translation type="obsolete">Цвет фона</translation>
     </message>
     <message>
         <source>Page header text color</source>
-        <translation>Цвет колонтитула</translation>
+        <translation type="obsolete">Цвет колонтитула</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -851,7 +794,7 @@
     </message>
     <message>
         <source>Look &amp; feel</source>
-        <translation>Стиль интерфеса</translation>
+        <translation type="obsolete">Стиль интерфеса</translation>
     </message>
     <message>
         <source>Startup action</source>
@@ -875,31 +818,31 @@
     </message>
     <message>
         <source>Use book cover as screensaver</source>
-        <translation>Показывать обложку книги как скринсейвер</translation>
+        <translation>В спящем режиме показывать обложку книги</translation>
     </message>
     <message>
         <source>Controls</source>
-        <translation>Инструменты</translation>
+        <translation type="obsolete">Инструменты</translation>
     </message>
     <message>
         <source>Show toolbar</source>
-        <translation>Панель инструментов</translation>
+        <translation type="obsolete">Панель инструментов</translation>
     </message>
     <message>
         <source>Show menu</source>
-        <translation>Меню</translation>
+        <translation type="obsolete">Меню</translation>
     </message>
     <message>
         <source>Show scroll bar</source>
-        <translation>Полоса прокрутки</translation>
+        <translation type="obsolete">Полоса прокрутки</translation>
     </message>
     <message>
         <source>Show status bar</source>
-        <translation>Строка состояния</translation>
+        <translation type="obsolete">Строка состояния</translation>
     </message>
     <message>
         <source>Fullscreen display</source>
-        <translation>Полноэкранный режим</translation>
+        <translation type="obsolete">Полноэкранный режим</translation>
     </message>
     <message>
         <source>Page</source>
@@ -915,11 +858,11 @@
     </message>
     <message>
         <source>Scroll View</source>
-        <translation>Свиток</translation>
+        <translation type="obsolete">Свиток</translation>
     </message>
     <message>
         <source>Vew Mode</source>
-        <translation>Режим просмотра</translation>
+        <translation type="obsolete">Режим просмотра</translation>
     </message>
     <message>
         <source>Page margins</source>
@@ -951,7 +894,7 @@
     </message>
     <message>
         <source>Change</source>
-        <translation>Изменить</translation>
+        <translation type="obsolete">Изменить</translation>
     </message>
     <message>
         <source>Show footnotes at bottom of page</source>
@@ -971,11 +914,11 @@
     </message>
     <message>
         <source>Interline spacing</source>
-        <translation>Межстрочный интервал</translation>
+        <translation type="obsolete">Межстрочный интервал</translation>
     </message>
     <message>
         <source>Page skin</source>
-        <translation>Стиль фона</translation>
+        <translation type="obsolete">Стиль фона</translation>
     </message>
     <message>
         <source>Sample</source>
@@ -983,11 +926,11 @@
     </message>
     <message>
         <source>.TXT files</source>
-        <translation>.TXT файлы</translation>
+        <translation type="obsolete">.TXT файлы</translation>
     </message>
     <message>
         <source>Disable automatic formatting</source>
-        <translation>Отключить автоформатирование</translation>
+        <translation type="obsolete">Отключить автоформатирование</translation>
     </message>
     <message>
         <source>Language</source>
@@ -1082,30 +1025,6 @@
         <translation>Висячая пунктуация</translation>
     </message>
     <message>
-        <source>SaveSettings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PrevTab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NextTab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View Mode</source>
         <translation>Режим просмотра </translation>
     </message>
@@ -1118,11 +1037,11 @@
     <name>TocDlg</name>
     <message>
         <source>Title</source>
-        <translation>Название</translation>
+        <translation type="obsolete">Название</translation>
     </message>
     <message>
         <source>Page</source>
-        <translation>Страница</translation>
+        <translation type="obsolete">Страница</translation>
     </message>
     <message>
         <source>Table of Contents</source>
@@ -1131,133 +1050,6 @@
     <message>
         <source>Type page number:</source>
         <translation>Укажите номер страницы (можно в %):</translation>
-    </message>
-    <message>
-        <source>GotoPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NextPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PrevPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QDialogButtonBox</name>
-    <message>
-        <source>OK</source>
-        <translation>ОК</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Сохранить</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Сохранить</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Открыть</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Отмена</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation>От&amp;мена</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Закрыть</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation>&amp;Закрыть</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Применить</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation>Сбросить</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <source>Don&apos;t Save</source>
-        <translation>Не сохранять</translation>
-    </message>
-    <message>
-        <source>Discard</source>
-        <translation>Отклонить</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation>&amp;Да</translation>
-    </message>
-    <message>
-        <source>Yes to &amp;All</source>
-        <translation>Да для &amp;всех</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation>&amp;Нет</translation>
-    </message>
-    <message>
-        <source>N&amp;o to All</source>
-        <translation>Н&amp;ет для всех</translation>
-    </message>
-    <message>
-        <source>Save All</source>
-        <translation>Сохранить все</translation>
-    </message>
-    <message>
-        <source>Abort</source>
-        <translation>Прервать</translation>
-    </message>
-    <message>
-        <source>Retry</source>
-        <translation>Повторить</translation>
-    </message>
-    <message>
-        <source>Ignore</source>
-        <translation>Пропустить</translation>
-    </message>
-    <message>
-        <source>Restore Defaults</source>
-        <translation>По умолчанию</translation>
-    </message>
-    <message>
-        <source>Close without Saving</source>
-        <translation>Закрыть без сохранения</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation>&amp;ОК</translation>
     </message>
 </context>
 </TS>

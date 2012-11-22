@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Remove Bookmark</source>
-        <translation>Supprimer le signet</translation>
+        <translation type="obsolete">Supprimer le signet</translation>
     </message>
     <message>
         <source>Remove ALL Bookmarks</source>
@@ -119,30 +119,22 @@
     </message>
     <message>
         <source>Return</source>
-        <translation type="unfinished">Retour</translation>
-    </message>
-    <message>
-        <source>Backspace</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Retour</translation>
     </message>
     <message>
         <source>Remove all bookmarks</source>
-        <translation type="unfinished">Retirez tous les signets</translation>
-    </message>
-    <message>
-        <source>Alt+Backspace</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Retirez tous les signets</translation>
     </message>
     <message>
         <source>SelectBookmark</source>
-        <translation type="unfinished">Selectionnez Ajouter aux signets</translation>
+        <translation type="obsolete">Selectionnez Ajouter aux signets</translation>
     </message>
 </context>
 <context>
     <name>CR3View</name>
     <message>
         <source>Error while opening document </source>
-        <translation>Erreur à l'ouverture du document</translation>
+        <translation>Erreur à l&apos;ouverture du document</translation>
     </message>
     <message>
         <source>Loading: please wait...</source>
@@ -189,15 +181,15 @@
     </message>
     <message>
         <source>Archive name</source>
-        <translation>Nom de l'archive</translation>
+        <translation>Nom de l&apos;archive</translation>
     </message>
     <message>
         <source>Archive path</source>
-        <translation>Répertoire de l'archive</translation>
+        <translation>Répertoire de l&apos;archive</translation>
     </message>
     <message>
         <source>Archive size</source>
-        <translation>Taille de l'archive</translation>
+        <translation>Taille de l&apos;archive</translation>
     </message>
     <message>
         <source>File name</source>
@@ -285,11 +277,11 @@
     </message>
     <message>
         <source>Publisher city</source>
-        <translation>Ville d'édition</translation>
+        <translation>Ville d&apos;édition</translation>
     </message>
     <message>
         <source>Publication year</source>
-        <translation>Année d'édition</translation>
+        <translation>Année d&apos;édition</translation>
     </message>
     <message>
         <source>ISBN</source>
@@ -297,7 +289,7 @@
     </message>
     <message>
         <source>Publication info</source>
-        <translation>Information sur l'édition</translation>
+        <translation>Information sur l&apos;édition</translation>
     </message>
     <message>
         <source>Custom info</source>
@@ -329,6 +321,10 @@
     <message>
         <source>Close</source>
         <translation>Fermer</translation>
+    </message>
+    <message>
+        <source>Minimize</source>
+        <translation type="unfinished">Minimiser</translation>
     </message>
 </context>
 <context>
@@ -371,11 +367,11 @@
     </message>
     <message>
         <source>Page Down</source>
-        <translation>Page suivante</translation>
+        <translation type="obsolete">Page suivante</translation>
     </message>
     <message>
         <source>Page Up</source>
-        <translation>Page précédente</translation>
+        <translation type="obsolete">Page précédente</translation>
     </message>
     <message>
         <source>Line Down</source>
@@ -447,7 +443,7 @@
     </message>
     <message>
         <source>Show table of contents</source>
-        <translation>Montrer la table des matières</translation>
+        <translation type="obsolete">Montrer la table des matières</translation>
     </message>
     <message>
         <source>Recent Books</source>
@@ -522,38 +518,6 @@
         <translation type="unfinished">CoolReader</translation>
     </message>
     <message>
-        <source>Go to next page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back by page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back in navigation history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to the next position in navigation history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>copy2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy alternative shortcut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Toggle Edit Mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -562,36 +526,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>L</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shift+B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">C</translation>
     </message>
     <message>
         <source>ShowMenu</source>
@@ -604,14 +540,6 @@
 </context>
 <context>
     <name>OpenFileDlg</name>
-    <message>
-        <source>SelectFile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Open file</source>
         <translation>Ouvrir fichier</translation>
@@ -626,7 +554,7 @@
     </message>
     <message>
         <source> is not empty.</source>
-        <translation> n'est pas vide.</translation>
+        <translation> n&apos;est pas vide.</translation>
     </message>
     <message>
         <source>Remove directory</source>
@@ -646,59 +574,118 @@
     </message>
     <message>
         <source>Other File with such FilePath in history</source>
-        <translation type="unfinished">Autre fichier ayant un chemin identique dans l'historique</translation>
+        <translation type="unfinished">Autre fichier ayant un chemin identique dans l&apos;historique</translation>
     </message>
     <message>
-        <source>You can't remove last book that you are reading now. Please, choose other active book then try to remove file again.</source>
-        <translation>Impossible de supprimer le livre que vous llisiez en dernier . Svp, activez la lecture d'un nouveau livre et réessayez de supprimer ce fichier.</translation>
+        <source>You can&apos;t remove last book that you are reading now. Please, choose other active book then try to remove file again.</source>
+        <translation>Impossible de supprimer le livre que vous llisiez en dernier . Svp, activez la lecture d&apos;un nouveau livre et réessayez de supprimer ce fichier.</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Oui</translation>
+        <translation type="obsolete">Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Non</translation>
+        <translation type="obsolete">Non</translation>
+    </message>
+</context>
+<context>
+    <name>QDialogButtonBox</name>
+    <message>
+        <source>OK</source>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <source>GoToBegin</source>
-        <translation type="unfinished"></translation>
+        <source>Save</source>
+        <translation type="obsolete">Enregistrer</translation>
     </message>
     <message>
-        <source>Home</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Save</source>
+        <translation type="obsolete">Enregi&amp;strer</translation>
     </message>
     <message>
-        <source>NextPage</source>
-        <translation type="unfinished"></translation>
+        <source>Open</source>
+        <translation type="obsolete">Ouvrir</translation>
     </message>
     <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
+        <source>Cancel</source>
+        <translation type="obsolete">Annuler</translation>
     </message>
     <message>
-        <source>PrevPage</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Cancel</source>
+        <translation type="obsolete">&amp;Annuler</translation>
     </message>
     <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
+        <source>Close</source>
+        <translation type="obsolete">Fermer</translation>
     </message>
     <message>
-        <source>GoToLastPage</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Close</source>
+        <translation type="obsolete">&amp;Fermer</translation>
     </message>
     <message>
-        <source>Right</source>
-        <translation type="unfinished"></translation>
+        <source>Apply</source>
+        <translation type="obsolete">Appliquer</translation>
     </message>
     <message>
-        <source>GoToFirstPage</source>
-        <translation type="unfinished"></translation>
+        <source>Reset</source>
+        <translation type="obsolete">Réinitialiser</translation>
     </message>
     <message>
-        <source>Left</source>
-        <translation type="unfinished"></translation>
+        <source>Help</source>
+        <translation type="obsolete">Aide</translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="obsolete">Ne pas enregistrer</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation type="obsolete">Ne pas enregistrer</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation type="obsolete">&amp;Oui</translation>
+    </message>
+    <message>
+        <source>Yes to &amp;All</source>
+        <translation type="obsolete">Oui à &amp;tout</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation type="obsolete">&amp;Non</translation>
+    </message>
+    <message>
+        <source>N&amp;o to All</source>
+        <translation type="obsolete">Non à to&amp;ut</translation>
+    </message>
+    <message>
+        <source>Save All</source>
+        <translation type="obsolete">Tout Enregistrer</translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation type="obsolete">Abandonner</translation>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="obsolete">Réessayer</translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation type="obsolete">Ignorer</translation>
+    </message>
+    <message>
+        <source>Restore Defaults</source>
+        <translation type="obsolete">Restaurer les valeurs par défaut</translation>
+    </message>
+    <message>
+        <source>Close without Saving</source>
+        <translation type="obsolete">Fermer sans enregistrer</translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
 </context>
 <context>
@@ -717,11 +704,11 @@
     </message>
     <message>
         <source>Remove all history items</source>
-        <translation>Supprimer l'historique au complet</translation>
+        <translation>Supprimer l&apos;historique au complet</translation>
     </message>
     <message>
         <source>Do you really want to remove all history records?</source>
-        <translation>Voulez-vous vraiment supprimet toute l'historique?</translation>
+        <translation>Voulez-vous vraiment supprimet toute l&apos;historique?</translation>
     </message>
     <message>
         <source>Recent Books</source>
@@ -729,51 +716,15 @@
     </message>
     <message>
         <source>Remove Item</source>
-        <translation type="obsolete">Supprimer l'item</translation>
+        <translation type="obsolete">Supprimer l&apos;item</translation>
     </message>
     <message>
         <source>Clear All</source>
         <translation type="obsolete">Tout effacer</translation>
     </message>
     <message>
-        <source>RemoveAll</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RemoveBook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SelectBook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NextPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PrevPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Retour</translation>
     </message>
 </context>
 <context>
@@ -804,7 +755,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="obsolete">Fermer</translation>
+        <translation type="unfinished">Fermer</translation>
     </message>
     <message>
         <source>Not found</source>
@@ -812,7 +763,7 @@
     </message>
     <message>
         <source>Search pattern is not found in document</source>
-        <translation>Le patron recherché n'a pas été trouvé dans le document</translation>
+        <translation>Le patron recherché n&apos;a pas été trouvé dans le document</translation>
     </message>
 </context>
 <context>
@@ -871,7 +822,7 @@
     </message>
     <message>
         <source>Show File Open dialog</source>
-        <translation>Montrer le dialogue d'ouverture de fichier</translation>
+        <translation>Montrer le dialogue d&apos;ouverture de fichier</translation>
     </message>
     <message>
         <source>Do nothing</source>
@@ -883,7 +834,7 @@
     </message>
     <message>
         <source>Show toolbar</source>
-        <translation type="obsolete">Montrer la barre d'outils</translation>
+        <translation type="obsolete">Montrer la barre d&apos;outils</translation>
     </message>
     <message>
         <source>Show menu</source>
@@ -943,7 +894,7 @@
     </message>
     <message>
         <source>Header font</source>
-        <translation>Fonte de l'en-tête</translation>
+        <translation>Fonte de l&apos;en-tête</translation>
     </message>
     <message>
         <source>Change</source>
@@ -967,7 +918,7 @@
     </message>
     <message>
         <source>Interline spacing</source>
-        <translation type="obsolete">Espacement d'interligne</translation>
+        <translation type="obsolete">Espacement d&apos;interligne</translation>
     </message>
     <message>
         <source>Page skin</source>
@@ -1027,7 +978,7 @@
     </message>
     <message>
         <source>Interline spacing (%)</source>
-        <translation>Espacement d'interligne (%)</translation>
+        <translation>Espacement d&apos;interligne (%)</translation>
     </message>
     <message>
         <source>Disable automatic formatting of txt format files</source>
@@ -1038,36 +989,60 @@
         <translation>ponctuation flottante</translation>
     </message>
     <message>
-        <source>SaveSettings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PrevTab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NextTab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View Mode</source>
         <translation>Mode de vue</translation>
     </message>
     <message>
         <source>In percent</source>
         <translation>вEn pourcentage</translation>
+    </message>
+    <message>
+        <source>Use book cover as screensaver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full screen update interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Embolden font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font kerning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font antialiasing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On for large fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On for all fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font hinting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bytecode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min space width (%)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1087,133 +1062,6 @@
     <message>
         <source>Type page number:</source>
         <translation>Tapez le numéro de la page:</translation>
-    </message>
-    <message>
-        <source>GotoPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NextPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PrevPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QDialogButtonBox</name>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Enregistrer</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>Enregi&amp;strer</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Ouvrir</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Annuler</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Annuler</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Fermer</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation>&amp;Fermer</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Appliquer</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation>Réinitialiser</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Aide</translation>
-    </message>
-    <message>
-        <source>Don&apos;t Save</source>
-        <translation>Ne pas enregistrer</translation>
-    </message>
-    <message>
-        <source>Discard</source>
-        <translation>Ne pas enregistrer</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation>&amp;Oui</translation>
-    </message>
-    <message>
-        <source>Yes to &amp;All</source>
-        <translation>Oui à &amp;tout</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation>&amp;Non</translation>
-    </message>
-    <message>
-        <source>N&amp;o to All</source>
-        <translation>Non à to&amp;ut</translation>
-    </message>
-    <message>
-        <source>Save All</source>
-        <translation>Tout Enregistrer</translation>
-    </message>
-    <message>
-        <source>Abort</source>
-        <translation>Abandonner</translation>
-    </message>
-    <message>
-        <source>Retry</source>
-        <translation>Réessayer</translation>
-    </message>
-    <message>
-        <source>Ignore</source>
-        <translation>Ignorer</translation>
-    </message>
-    <message>
-        <source>Restore Defaults</source>
-        <translation>Restaurer les valeurs par défaut</translation>
-    </message>
-    <message>
-        <source>Close without Saving</source>
-        <translation>Fermer sans enregistrer</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
     </message>
 </context>
 </TS>

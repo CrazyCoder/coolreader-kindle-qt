@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Remove Bookmark</source>
-        <translation>Könyvjelző törlése</translation>
+        <translation type="obsolete">Könyvjelző törlése</translation>
     </message>
     <message>
         <source>Remove ALL Bookmarks</source>
@@ -112,26 +112,6 @@
     <message>
         <source>Edit Bookmark</source>
         <translation type="obsolete">Könyvjelző szerkesztése</translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove all bookmarks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SelectBookmark</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -326,6 +306,10 @@
         <source>Close</source>
         <translation>Kilépés</translation>
     </message>
+    <message>
+        <source>Minimize</source>
+        <translation type="unfinished">Kis méret</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowClass</name>
@@ -363,11 +347,11 @@
     </message>
     <message>
         <source>Page Down</source>
-        <translation>Ugrás le</translation>
+        <translation type="obsolete">Ugrás le</translation>
     </message>
     <message>
         <source>Page Up</source>
-        <translation>Ugrás fel</translation>
+        <translation type="obsolete">Ugrás fel</translation>
     </message>
     <message>
         <source>Line Down</source>
@@ -439,7 +423,7 @@
     </message>
     <message>
         <source>Show table of contents</source>
-        <translation>Tartalomjegyzék mutatása</translation>
+        <translation type="obsolete">Tartalomjegyzék mutatása</translation>
     </message>
     <message>
         <source>Recent Books</source>
@@ -514,38 +498,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Go to next page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back by page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back in navigation history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to the next position in navigation history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>copy2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy alternative shortcut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Toggle Edit Mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -554,36 +506,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>L</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shift+B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">M</translation>
     </message>
     <message>
         <source>ShowMenu</source>
@@ -593,17 +517,13 @@
         <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OpenFileDlg</name>
-    <message>
-        <source>SelectFile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Open file</source>
         <translation>Fájl megnyitása</translation>
@@ -641,56 +561,115 @@
         <translation type="unfinished">Ilyen fájl már létezik az előzményekben</translation>
     </message>
     <message>
-        <source>You can't remove last book that you are reading now. Please, choose other active book then try to remove file again.</source>
+        <source>You can&apos;t remove last book that you are reading now. Please, choose other active book then try to remove file again.</source>
         <translation>A jelenleg olvasott könyv nem törölhető. Kérem válasszon egy másik könyvet, majd próbálkozzon ismét a jelenlegi fájl törlésével.</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Igen</translation>
+        <translation type="obsolete">Igen</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nem</translation>
+        <translation type="obsolete">Nem</translation>
+    </message>
+</context>
+<context>
+    <name>QDialogButtonBox</name>
+    <message>
+        <source>OK</source>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <source>GoToBegin</source>
-        <translation type="unfinished"></translation>
+        <source>Save</source>
+        <translation type="obsolete">Mentés</translation>
     </message>
     <message>
-        <source>Home</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Save</source>
+        <translation type="obsolete">&amp;Mentés</translation>
     </message>
     <message>
-        <source>NextPage</source>
-        <translation type="unfinished"></translation>
+        <source>Open</source>
+        <translation type="obsolete">Megnyitás</translation>
     </message>
     <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
+        <source>Cancel</source>
+        <translation type="obsolete">Mégsem</translation>
     </message>
     <message>
-        <source>PrevPage</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Cancel</source>
+        <translation type="obsolete">&amp;Mégsem</translation>
     </message>
     <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
+        <source>Close</source>
+        <translation type="obsolete">Bezárás</translation>
     </message>
     <message>
-        <source>GoToLastPage</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Close</source>
+        <translation type="obsolete">&amp;Bezárás</translation>
     </message>
     <message>
-        <source>Right</source>
-        <translation type="unfinished"></translation>
+        <source>Apply</source>
+        <translation type="obsolete">Alkalmaz</translation>
     </message>
     <message>
-        <source>GoToFirstPage</source>
-        <translation type="unfinished"></translation>
+        <source>Reset</source>
+        <translation type="obsolete">Visszaállítás</translation>
     </message>
     <message>
-        <source>Left</source>
-        <translation type="unfinished"></translation>
+        <source>Help</source>
+        <translation type="obsolete">Súgó</translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="obsolete">Nincs mentés</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation type="obsolete">Elvetés</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation type="obsolete">&amp;Igen</translation>
+    </message>
+    <message>
+        <source>Yes to &amp;All</source>
+        <translation type="obsolete">&amp;Mindent elfogad</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation type="obsolete">&amp;Nem</translation>
+    </message>
+    <message>
+        <source>N&amp;o to All</source>
+        <translation type="obsolete">Mindent &amp;kihagy</translation>
+    </message>
+    <message>
+        <source>Save All</source>
+        <translation type="obsolete">Mindet menti</translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation type="obsolete">Megszakítás</translation>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="obsolete">Újra</translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation type="obsolete">Kihagyás</translation>
+    </message>
+    <message>
+        <source>Restore Defaults</source>
+        <translation type="obsolete">Alapértelmezések visszaállítása</translation>
+    </message>
+    <message>
+        <source>Close without Saving</source>
+        <translation type="obsolete">Bezárás mentés nélkül</translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
 </context>
 <context>
@@ -727,46 +706,6 @@
         <source>Clear All</source>
         <translation type="obsolete">Összes törlése</translation>
     </message>
-    <message>
-        <source>RemoveAll</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RemoveBook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SelectBook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NextPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PrevPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>SearchDialog</name>
@@ -801,6 +740,10 @@
     <message>
         <source>Search pattern is not found in document</source>
         <translation>A keresett minta nem található</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1013,47 +956,47 @@
         <source>Font gamma correction</source>
         <translation>Gamma korrekció</translation>
     </message>
-	<message>
+    <message>
         <source>Full screen update interval</source>
         <translation>Teljes képernyőfrissítés gyakorisága</translation>
     </message>
-	<message>
+    <message>
         <source>Font antialiasing</source>
         <translation>Élsimítás módja</translation>
     </message>
-	<message>
+    <message>
         <source>Font hinting</source>
         <translation>Hinting</translation>
     </message>
-	<message>
+    <message>
         <source>Font kerning</source>
         <translation>Alávágás</translation>
     </message>
-	<message>
+    <message>
         <source>Embolden font</source>
         <translation>Betű vastagítása</translation>
     </message>
-	<message>
+    <message>
         <source>Min space width (%)</source>
         <translation>Minimális térköz (%)</translation>
     </message>
-	<message>
+    <message>
         <source>On for all fonts</source>
         <translation>Minden betű</translation>
     </message>
-	<message>
+    <message>
         <source>On for large fonts</source>
         <translation>Csak nagyméretű betűk</translation>
     </message>
-	<message>
+    <message>
         <source>Disabled</source>
         <translation>Kikapcsolva</translation>
     </message>
-	<message>
+    <message>
         <source>Auto</source>
         <translation>Automata</translation>
     </message>
-	<message>
+    <message>
         <source>Bytecode</source>
         <translation>Bytecode</translation>
     </message>
@@ -1070,36 +1013,16 @@
         <translation>Lebegő írásjelek</translation>
     </message>
     <message>
-        <source>SaveSettings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PrevTab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NextTab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View Mode</source>
         <translation>Megjelenítés módja</translation>
     </message>
     <message>
         <source>In percent</source>
         <translation>%-os kijelzés</translation>
+    </message>
+    <message>
+        <source>Use book cover as screensaver</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1119,133 +1042,6 @@
     <message>
         <source>Type page number:</source>
         <translation>Oldalszám:</translation>
-    </message>
-    <message>
-        <source>GotoPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NextPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgDown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PrevPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PgUp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QDialogButtonBox</name>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Mentés</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Mentés</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Megnyitás</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Mégsem</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Mégsem</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Bezárás</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation>&amp;Bezárás</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Alkalmaz</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation>Visszaállítás</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Súgó</translation>
-    </message>
-    <message>
-        <source>Don&apos;t Save</source>
-        <translation>Nincs mentés</translation>
-    </message>
-    <message>
-        <source>Discard</source>
-        <translation>Elvetés</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation>&amp;Igen</translation>
-    </message>
-    <message>
-        <source>Yes to &amp;All</source>
-        <translation>&amp;Mindent elfogad</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation>&amp;Nem</translation>
-    </message>
-    <message>
-        <source>N&amp;o to All</source>
-        <translation>Mindent &amp;kihagy</translation>
-    </message>
-    <message>
-        <source>Save All</source>
-        <translation>Mindet menti</translation>
-    </message>
-    <message>
-        <source>Abort</source>
-        <translation>Megszakítás</translation>
-    </message>
-    <message>
-        <source>Retry</source>
-        <translation>Újra</translation>
-    </message>
-    <message>
-        <source>Ignore</source>
-        <translation>Kihagyás</translation>
-    </message>
-    <message>
-        <source>Restore Defaults</source>
-        <translation>Alapértelmezések visszaállítása</translation>
-    </message>
-    <message>
-        <source>Close without Saving</source>
-        <translation>Bezárás mentés nélkül</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
     </message>
 </context>
 </TS>

@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Remove Bookmark</source>
-        <translation>Rimuovi segnalibro</translation>
+        <translation type="obsolete">Rimuovi segnalibro</translation>
     </message>
     <message>
         <source>Remove ALL Bookmarks</source>
@@ -119,34 +119,38 @@
     </message>
     <message>
         <source>Return</source>
-        <translation>Return</translation>
+        <translation type="obsolete">Return</translation>
     </message>
     <message>
         <source>Backspace</source>
-        <translation>Backspace</translation>
+        <translation type="obsolete">Backspace</translation>
     </message>
     <message>
         <source>Remove all bookmarks</source>
-        <translation>Rimuovi TUTTI i segnalibri</translation>
+        <translation type="obsolete">Rimuovi TUTTI i segnalibri</translation>
     </message>
     <message>
         <source>Alt+Backspace</source>
-        <translation>Alt+Backspace</translation>
+        <translation type="obsolete">Alt+Backspace</translation>
     </message>
     <message>
         <source>SelectBookmark</source>
-        <translation>SelezionaSegnalibro</translation>
+        <translation type="obsolete">SelezionaSegnalibro</translation>
     </message>
 </context>
 <context>
     <name>CR3View</name>
     <message>
         <source>Error while opening document</source>
-        <translation>Errore nell'apertura del documento</translation>
+        <translation type="obsolete">Errore nell&apos;apertura del documento</translation>
     </message>
     <message>
         <source>Loading: please wait...</source>
         <translation>Caricamento in corso, attendere...</translation>
+    </message>
+    <message>
+        <source>Error while opening document </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -189,15 +193,15 @@
     </message>
     <message>
         <source>Archive name</source>
-        <translation>Nome dell'archivio</translation>
+        <translation>Nome dell&apos;archivio</translation>
     </message>
     <message>
         <source>Archive path</source>
-        <translation>Percorso dell'archivio</translation>
+        <translation>Percorso dell&apos;archivio</translation>
     </message>
     <message>
         <source>Archive size</source>
-        <translation>Dimensioni dell'archivio</translation>
+        <translation>Dimensioni dell&apos;archivio</translation>
     </message>
     <message>
         <source>File name</source>
@@ -285,7 +289,7 @@
     </message>
     <message>
         <source>Publisher city</source>
-        <translation>Citta' di edizione</translation>
+        <translation>Citta&apos; di edizione</translation>
     </message>
     <message>
         <source>Publication year</source>
@@ -297,7 +301,7 @@
     </message>
     <message>
         <source>Publication info</source>
-        <translation>Informazioni sull'edizione</translation>
+        <translation>Informazioni sull&apos;edizione</translation>
     </message>
     <message>
         <source>Custom info</source>
@@ -329,6 +333,10 @@
     <message>
         <source>Close</source>
         <translation>Chiudi</translation>
+    </message>
+    <message>
+        <source>Minimize</source>
+        <translation type="unfinished">Minimizza</translation>
     </message>
 </context>
 <context>
@@ -371,11 +379,11 @@
     </message>
     <message>
         <source>Page Down</source>
-        <translation>Pagina successiva</translation>
+        <translation type="obsolete">Pagina successiva</translation>
     </message>
     <message>
         <source>Page Up</source>
-        <translation>Pagina precedente</translation>
+        <translation type="obsolete">Pagina precedente</translation>
     </message>
     <message>
         <source>Line Down</source>
@@ -423,7 +431,7 @@
     </message>
     <message>
         <source>Toggle Full Screen mode</source>
-        <translation type="obsolete">Abilita modalita' Schermo Intero</translation>
+        <translation type="obsolete">Abilita modalita&apos; Schermo Intero</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -447,7 +455,7 @@
     </message>
     <message>
         <source>Show table of contents</source>
-        <translation>Mostra l'indice</translation>
+        <translation type="obsolete">Mostra l&apos;indice</translation>
     </message>
     <message>
         <source>Recent Books</source>
@@ -523,75 +531,75 @@
     </message>
     <message>
         <source>Go to next page</source>
-        <translation>Vai alla pagina successiva</translation>
+        <translation type="obsolete">Vai alla pagina successiva</translation>
     </message>
     <message>
         <source>PgDown</source>
-        <translation>Pagina avanti</translation>
+        <translation type="obsolete">Pagina avanti</translation>
     </message>
     <message>
         <source>Back by page</source>
-        <translation>Pagina precedente</translation>
+        <translation type="obsolete">Pagina precedente</translation>
     </message>
     <message>
         <source>PgUp</source>
-        <translation>Pagina indietro</translation>
+        <translation type="obsolete">Pagina indietro</translation>
     </message>
     <message>
         <source>Back in navigation history</source>
-        <translation>Indietro nelle azioni compiute</translation>
+        <translation type="obsolete">Indietro nelle azioni compiute</translation>
     </message>
     <message>
         <source>Go to the next position in navigation history</source>
-        <translation>Vai alla posizione successiva nella azioni compiute</translation>
+        <translation type="obsolete">Vai alla posizione successiva nella azioni compiute</translation>
     </message>
     <message>
         <source>copy2</source>
-        <translation>copia2</translation>
+        <translation type="obsolete">copia2</translation>
     </message>
     <message>
         <source>Copy alternative shortcut</source>
-        <translation>Scorciatoia per copiare</translation>
+        <translation type="obsolete">Scorciatoia per copiare</translation>
     </message>
     <message>
         <source>Toggle Edit Mode</source>
-        <translation>Abilita modalita' Modifica</translation>
+        <translation>Abilita modalita&apos; Modifica</translation>
     </message>
     <message>
         <source>Toggle edit mode</source>
-        <translation>Abilita modalita' Modifica</translation>
+        <translation>Abilita modalita&apos; Modifica</translation>
     </message>
     <message>
         <source>O</source>
-        <translation>O</translation>
+        <translation type="obsolete">O</translation>
     </message>
     <message>
         <source>C</source>
-        <translation>C</translation>
+        <translation type="obsolete">C</translation>
     </message>
     <message>
         <source>L</source>
-        <translation>L</translation>
+        <translation type="obsolete">L</translation>
     </message>
     <message>
         <source>S</source>
-        <translation>S</translation>
+        <translation type="obsolete">S</translation>
     </message>
     <message>
         <source>Shift+B</source>
-        <translation>Shift+B</translation>
+        <translation type="obsolete">Shift+B</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation type="obsolete">B</translation>
     </message>
     <message>
         <source>I</source>
-        <translation>I</translation>
+        <translation type="obsolete">I</translation>
     </message>
     <message>
         <source>F</source>
-        <translation>F</translation>
+        <translation type="obsolete">F</translation>
     </message>
     <message>
         <source>ShowMenu</source>
@@ -606,11 +614,11 @@
     <name>OpenFileDlg</name>
     <message>
         <source>SelectFile</source>
-        <translation>Seleziona File</translation>
+        <translation type="obsolete">Seleziona File</translation>
     </message>
     <message>
         <source>Return</source>
-        <translation>Ritorna</translation>
+        <translation type="obsolete">Ritorna</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -622,11 +630,11 @@
     </message>
     <message>
         <source>Directory</source>
-        <translation>Cartella</translation>
+        <translation type="obsolete">Cartella</translation>
     </message>
     <message>
         <source>is not empty.</source>
-        <translation>non e' vuoto.</translation>
+        <translation type="obsolete">non e&apos; vuoto.</translation>
     </message>
     <message>
         <source>Remove directory</source>
@@ -634,7 +642,7 @@
     </message>
     <message>
         <source>Do you really want to remove directory</source>
-        <translation>Vuoi davvero cancellare la cartella</translation>
+        <translation type="obsolete">Vuoi davvero cancellare la cartella</translation>
     </message>
     <message>
         <source>Remove file</source>
@@ -642,63 +650,79 @@
     </message>
     <message>
         <source>Do you really want to remove file</source>
-        <translation>Vuoi davvero cancellare il file</translation>
+        <translation type="obsolete">Vuoi davvero cancellare il file</translation>
     </message>
     <message>
         <source>Other File with such FilePath in history</source>
         <translation>Altro file con lo stesso percorso nello storico</translation>
     </message>
     <message>
-        <source>You can't remove last book that you are reading now. Please, choose other active book then try to remove file again.</source>
+        <source>You can&apos;t remove last book that you are reading now. Please, choose other active book then try to remove file again.</source>
         <translation>Non puoi cancellare il libro che stai leggendo. Attiva la lettura di un altro libro e quindi prova di nuovo a cancellare il file.</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Si'</translation>
+        <translation type="obsolete">Si&apos;</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="obsolete">No</translation>
     </message>
     <message>
         <source>GoToBegin</source>
-        <translation>Vai all'inizio</translation>
+        <translation type="obsolete">Vai all&apos;inizio</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Home</translation>
+        <translation type="obsolete">Home</translation>
     </message>
     <message>
         <source>NextPage</source>
-        <translation>PaginaSuccessiva</translation>
+        <translation type="obsolete">PaginaSuccessiva</translation>
     </message>
     <message>
         <source>PgDown</source>
-        <translation>PaginaGiu'</translation>
+        <translation type="obsolete">PaginaGiu&apos;</translation>
     </message>
     <message>
         <source>PrevPage</source>
-        <translation>PaginaPrecedente</translation>
+        <translation type="obsolete">PaginaPrecedente</translation>
     </message>
     <message>
         <source>PgUp</source>
-        <translation>PaginaSu</translation>
+        <translation type="obsolete">PaginaSu</translation>
     </message>
     <message>
         <source>GoToLastPage</source>
-        <translation>VaiUltimaPagina</translation>
+        <translation type="obsolete">VaiUltimaPagina</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Destra</translation>
+        <translation type="obsolete">Destra</translation>
     </message>
     <message>
         <source>GoToFirstPage</source>
-        <translation>VaiPrimaPagina</translation>
+        <translation type="obsolete">VaiPrimaPagina</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation>Sinistra</translation>
+        <translation type="obsolete">Sinistra</translation>
+    </message>
+    <message>
+        <source>Directory </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> is not empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to remove directory </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to remove file </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -729,7 +753,7 @@
     </message>
     <message>
         <source>Remove Item</source>
-        <translation type="obsolete">Cancella l'articolo</translation>
+        <translation type="obsolete">Cancella l&apos;articolo</translation>
     </message>
     <message>
         <source>Clear All</source>
@@ -737,43 +761,43 @@
     </message>
     <message>
         <source>RemoveAll</source>
-        <translation>CancellaTutto</translation>
+        <translation type="obsolete">CancellaTutto</translation>
     </message>
     <message>
         <source>Alt+Backspace</source>
-        <translation>Alt+Backspace</translation>
+        <translation type="obsolete">Alt+Backspace</translation>
     </message>
     <message>
         <source>RemoveBook</source>
-        <translation>CancellaLibro</translation>
+        <translation type="obsolete">CancellaLibro</translation>
     </message>
     <message>
         <source>Backspace</source>
-        <translation>Backspace</translation>
+        <translation type="obsolete">Backspace</translation>
     </message>
     <message>
         <source>SelectBook</source>
-        <translation>SelezionaLibro</translation>
+        <translation type="obsolete">SelezionaLibro</translation>
     </message>
     <message>
         <source>Return</source>
-        <translation>Ritorna</translation>
+        <translation type="obsolete">Ritorna</translation>
     </message>
     <message>
         <source>NextPage</source>
-        <translation>PaginaSuccessiva</translation>
+        <translation type="obsolete">PaginaSuccessiva</translation>
     </message>
     <message>
         <source>PgDown</source>
-        <translation>PaginaGiu'</translation>
+        <translation type="obsolete">PaginaGiu&apos;</translation>
     </message>
     <message>
         <source>PrevPage</source>
-        <translation>PaginaPrecedente</translation>
+        <translation type="obsolete">PaginaPrecedente</translation>
     </message>
     <message>
         <source>PgUp</source>
-        <translation>PaginaSu</translation>
+        <translation type="obsolete">PaginaSu</translation>
     </message>
 </context>
 <context>
@@ -804,7 +828,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="obsolete">Chiudi</translation>
+        <translation type="unfinished">Chiudi</translation>
     </message>
     <message>
         <source>Not found</source>
@@ -813,6 +837,10 @@
     <message>
         <source>Search pattern is not found in document</source>
         <translation>Nessuna ricorrenza trovata nel documento</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="obsolete">Home</translation>
     </message>
 </context>
 <context>
@@ -827,7 +855,7 @@
     </message>
     <message>
         <source>The quick brown fox jumps over the lazy dog.</source>
-        <translation>La veloce volpe fulva salta sopra il pigro cane.</translation>
+        <translation type="obsolete">La veloce volpe fulva salta sopra il pigro cane.</translation>
     </message>
     <message>
         <source>Text color</source>
@@ -863,7 +891,7 @@
     </message>
     <message>
         <source>Open recent book</source>
-        <translation>Apri l'ultimo libro letto</translation>
+        <translation>Apri l&apos;ultimo libro letto</translation>
     </message>
     <message>
         <source>Show list of recent books</source>
@@ -883,7 +911,7 @@
     </message>
     <message>
         <source>Show toolbar</source>
-        <translation type="obsolete">Mostra la barra di utilita'</translation>
+        <translation type="obsolete">Mostra la barra di utilita&apos;</translation>
     </message>
     <message>
         <source>Show menu</source>
@@ -919,7 +947,7 @@
     </message>
     <message>
         <source>Vew Mode</source>
-        <translation type="obsolete">Modalita' di visualizzazione</translation>
+        <translation type="obsolete">Modalita&apos; di visualizzazione</translation>
     </message>
     <message>
         <source>Page margins</source>
@@ -951,7 +979,7 @@
     </message>
     <message>
         <source>Show footnotes at bottom of page</source>
-        <translation>Mostra note a pie' di pagina</translation>
+        <translation>Mostra note a pie&apos; di pagina</translation>
     </message>
     <message>
         <source>Styles</source>
@@ -967,7 +995,7 @@
     </message>
     <message>
         <source>Interline spacing</source>
-        <translation type="obsolete">Spazio dell'interlinea</translation>
+        <translation type="obsolete">Spazio dell&apos;interlinea</translation>
     </message>
     <message>
         <source>Page skin</source>
@@ -1027,7 +1055,7 @@
     </message>
     <message>
         <source>Interline spacing (%)</source>
-        <translation>Spazio dell'interlinea (%)</translation>
+        <translation>Spazio dell&apos;interlinea (%)</translation>
     </message>
     <message>
         <source>Disable automatic formatting of txt format files</source>
@@ -1039,35 +1067,87 @@
     </message>
     <message>
         <source>SaveSettings</source>
-        <translation>SalvaImpostazioni</translation>
+        <translation type="obsolete">SalvaImpostazioni</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Home</translation>
+        <translation type="obsolete">Home</translation>
     </message>
     <message>
         <source>PrevTab</source>
-        <translation>TabulazioneSinistra</translation>
+        <translation type="obsolete">TabulazioneSinistra</translation>
     </message>
     <message>
         <source>PgUp</source>
-        <translation>PaginaSu</translation>
+        <translation type="obsolete">PaginaSu</translation>
     </message>
     <message>
         <source>NextTab</source>
-        <translation>TabulazioneDestra</translation>
+        <translation type="obsolete">TabulazioneDestra</translation>
     </message>
     <message>
         <source>PgDown</source>
-        <translation>PaginaGiu'</translation>
+        <translation type="obsolete">PaginaGiu&apos;</translation>
     </message>
     <message>
         <source>View Mode</source>
-        <translation>Modalita' di visualizzazione</translation>
+        <translation>Modalita&apos; di visualizzazione</translation>
     </message>
     <message>
         <source>In percent</source>
         <translation>In percentuale</translation>
+    </message>
+    <message>
+        <source>Use book cover as screensaver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full screen update interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Embolden font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font kerning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font antialiasing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On for large fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On for all fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font hinting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bytecode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min space width (%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The quick brown fox jumps over the lazy dog. </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1090,31 +1170,31 @@
     </message>
     <message>
         <source>GotoPage</source>
-        <translation>VaiPagina</translation>
+        <translation type="obsolete">VaiPagina</translation>
     </message>
     <message>
         <source>Return</source>
-        <translation>Ritorna</translation>
+        <translation type="obsolete">Ritorna</translation>
     </message>
     <message>
         <source>NextPage</source>
-        <translation>PaginaSuccessiva</translation>
+        <translation type="obsolete">PaginaSuccessiva</translation>
     </message>
     <message>
         <source>PgDown</source>
-        <translation>PaginaGiu'</translation>
+        <translation type="obsolete">PaginaGiu&apos;</translation>
     </message>
     <message>
         <source>PrevPage</source>
-        <translation>PaginaPrecedente</translation>
+        <translation type="obsolete">PaginaPrecedente</translation>
     </message>
     <message>
         <source>PgUp</source>
-        <translation>PaginaSu</translation>
+        <translation type="obsolete">PaginaSu</translation>
     </message>
     <message>
         <source>1</source>
-        <translation>1</translation>
+        <translation type="obsolete">1</translation>
     </message>
 </context>
 </TS>
