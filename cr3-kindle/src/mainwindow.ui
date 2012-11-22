@@ -56,7 +56,7 @@
     <string>Open file</string>
    </property>
    <property name="shortcut">
-    <string>O</string>
+    <string notr="true">O</string>
    </property>
   </action>
   <action name="actionClose">
@@ -66,27 +66,30 @@
    <property name="toolTip">
     <string>Close</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionNextPage">
    <property name="text">
-    <string>Page Down</string>
+    <string notr="true">Page Down</string>
    </property>
    <property name="toolTip">
-    <string>Go to next page</string>
+    <string notr="true">Go to next page</string>
    </property>
    <property name="shortcut">
-    <string>PgDown</string>
+    <string notr="true">PgDown</string>
    </property>
   </action>
   <action name="actionPrevPage">
    <property name="text">
-    <string>Page Up</string>
+    <string notr="true">Page Up</string>
    </property>
    <property name="toolTip">
-    <string>Back by page</string>
+    <string notr="true">Back by page</string>
    </property>
    <property name="shortcut">
-    <string>PgUp</string>
+    <string notr="true">PgUp</string>
    </property>
   </action>
   <action name="actionBack">
@@ -94,7 +97,10 @@
     <string>Back</string>
    </property>
    <property name="toolTip">
-    <string>Back in navigation history</string>
+    <string notr="true">Back in navigation history</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionForward">
@@ -102,7 +108,10 @@
     <string>Forward</string>
    </property>
    <property name="toolTip">
-    <string>Go to the next position in navigation history</string>
+    <string notr="true">Go to the next position in navigation history</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionTOC">
@@ -110,10 +119,10 @@
     <string>Table of Contents...</string>
    </property>
    <property name="toolTip">
-    <string>Show table of contents</string>
+    <string notr="true">Show table of contents</string>
    </property>
    <property name="shortcut">
-    <string>C</string>
+    <string notr="true">C</string>
    </property>
   </action>
   <action name="actionRecentBooks">
@@ -124,7 +133,7 @@
     <string>Show recent books list</string>
    </property>
    <property name="shortcut">
-    <string>L</string>
+    <string notr="true">L</string>
    </property>
   </action>
   <action name="actionSettings">
@@ -135,7 +144,7 @@
     <string>Settings dialog</string>
    </property>
    <property name="shortcut">
-    <string>S</string>
+    <string notr="true">S</string>
    </property>
   </action>
   <action name="actionCopy">
@@ -144,6 +153,9 @@
    </property>
    <property name="toolTip">
     <string>Copy selected text</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionAddBookmark">
@@ -154,7 +166,7 @@
     <string>Add bookmark</string>
    </property>
    <property name="shortcut">
-    <string>Shift+B</string>
+    <string notr="true">Shift+B</string>
    </property>
   </action>
   <action name="actionShowBookmarksList">
@@ -165,7 +177,7 @@
     <string>Show bookmarks list</string>
    </property>
    <property name="shortcut">
-    <string>B</string>
+    <string notr="true">B</string>
    </property>
   </action>
   <action name="actionFileProperties">
@@ -176,7 +188,7 @@
     <string>Show file properties</string>
    </property>
    <property name="shortcut">
-    <string>I</string>
+    <string notr="true">I</string>
    </property>
   </action>
   <action name="actionFindText">
@@ -187,7 +199,7 @@
     <string>Find text</string>
    </property>
    <property name="shortcut">
-    <string>F</string>
+    <string notr="true">F</string>
    </property>
   </action>
   <action name="actionToggleEditMode">
@@ -197,28 +209,52 @@
    <property name="toolTip">
     <string>Toggle edit mode</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionShowMenu">
    <property name="text">
     <string>ShowMenu</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">ShowMenu</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionEmpty">
    <property name="text">
     <string>Empty</string>
    </property>
+   <property name="toolTip">
+    <string notr="true">Empty</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionHide">
    <property name="text">
-    <string>Hide</string>
+    <string notr="true">Hide</string>
    </property>
    <property name="toolTip">
-    <string>Hide</string>
+    <string notr="true">Hide</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionAdjustBrightness">
    <property name="text">
-    <string>adjustBrightness</string>
+    <string notr="true">adjustBrightness</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">adjustBrightness</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
  </widget>

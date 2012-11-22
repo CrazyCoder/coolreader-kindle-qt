@@ -57,61 +57,79 @@
   </layout>
   <action name="actionSelectFile">
    <property name="text">
-    <string>SelectFile</string>
+    <string notr="true">SelectFile</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SelectFile</string>
    </property>
    <property name="shortcut">
-    <string>Return</string>
+    <string notr="true">Return</string>
    </property>
   </action>
   <action name="actionGoToBegin">
    <property name="text">
-    <string>GoToBegin</string>
+    <string notr="true">GoToBegin</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">GoToBegin</string>
    </property>
    <property name="shortcut">
-    <string>Home</string>
+    <string notr="true">Home</string>
    </property>
   </action>
   <action name="actionNextPage">
    <property name="text">
-    <string>NextPage</string>
+    <string notr="true">NextPage</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">NextPage</string>
    </property>
    <property name="shortcut">
-    <string>PgDown</string>
+    <string notr="true">PgDown</string>
    </property>
   </action>
   <action name="actionPrevPage">
    <property name="text">
-    <string>PrevPage</string>
+    <string notr="true">PrevPage</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">PrevPage</string>
    </property>
    <property name="shortcut">
-    <string>PgUp</string>
+    <string notr="true">PgUp</string>
    </property>
   </action>
   <action name="actionGoToLastPage">
    <property name="text">
-    <string>GoToLastPage</string>
+    <string notr="true">GoToLastPage</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">GoToLastPage</string>
    </property>
    <property name="shortcut">
-    <string>Right</string>
+    <string notr="true">Right</string>
    </property>
   </action>
   <action name="actionGoToFirstPage">
    <property name="text">
-    <string>GoToFirstPage</string>
+    <string notr="true">GoToFirstPage</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">GoToFirstPage</string>
    </property>
    <property name="shortcut">
-    <string>Left</string>
+    <string notr="true">Left</string>
    </property>
   </action>
   <action name="actionRemoveFile">
    <property name="text">
-    <string>RemoveFile</string>
+    <string notr="true">RemoveFile</string>
    </property>
    <property name="toolTip">
-    <string>RemoveFile</string>
+    <string notr="true">RemoveFile</string>
    </property>
    <property name="shortcut">
-    <string>Backspace</string>
+    <string notr="true">Backspace</string>
    </property>
   </action>
  </widget>

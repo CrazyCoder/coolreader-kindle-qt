@@ -49,11 +49,14 @@
        <property name="focusPolicy">
         <enum>Qt::StrongFocus</enum>
        </property>
+       <property name="toolTip">
+        <string notr="true"/>
+       </property>
        <property name="styleSheet">
         <string notr="true"/>
        </property>
        <property name="text">
-        <string>+</string>
+        <string notr="true">+</string>
        </property>
        <property name="autoRepeat">
         <bool>true</bool>
@@ -110,6 +113,9 @@
        </property>
        <property name="focusPolicy">
         <enum>Qt::StrongFocus</enum>
+       </property>
+       <property name="toolTip">
+        <string notr="true"/>
        </property>
        <property name="maximum">
         <number>24</number>
@@ -168,11 +174,14 @@
        <property name="focusPolicy">
         <enum>Qt::StrongFocus</enum>
        </property>
+       <property name="toolTip">
+        <string notr="true"/>
+       </property>
        <property name="styleSheet">
         <string notr="true"/>
        </property>
        <property name="text">
-        <string>-</string>
+        <string notr="true">-</string>
        </property>
        <property name="autoRepeat">
         <bool>true</bool>

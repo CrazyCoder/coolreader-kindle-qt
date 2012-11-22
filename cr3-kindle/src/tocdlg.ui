@@ -98,34 +98,46 @@
   </layout>
   <action name="actionGotoPage">
    <property name="text">
-    <string>GotoPage</string>
+    <string notr="true">GotoPage</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">GotoPage</string>
    </property>
    <property name="shortcut">
-    <string>Clear</string>
+    <string notr="true">Clear</string>
    </property>
   </action>
   <action name="actionNextPage">
    <property name="text">
-    <string>NextPage</string>
+    <string notr="true">NextPage</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">NextPage</string>
    </property>
    <property name="shortcut">
-    <string>PgDown</string>
+    <string notr="true">PgDown</string>
    </property>
   </action>
   <action name="actionPrevPage">
    <property name="text">
-    <string>PrevPage</string>
+    <string notr="true">PrevPage</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">PrevPage</string>
    </property>
    <property name="shortcut">
-    <string>PgUp</string>
+    <string notr="true">PgUp</string>
    </property>
   </action>
   <action name="actionUpdatePage">
    <property name="text">
-    <string>UpdatePage</string>
+    <string notr="true">UpdatePage</string>
    </property>
    <property name="toolTip">
-    <string>UpdatePage</string>
+    <string notr="true">UpdatePage</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
  </widget>

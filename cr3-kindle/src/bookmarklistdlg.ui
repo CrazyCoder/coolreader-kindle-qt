@@ -67,29 +67,35 @@
   </layout>
   <action name="actionRemoveBookmark">
    <property name="text">
-    <string>Remove Bookmark</string>
+    <string notr="true">Remove Bookmark</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Remove Bookmark</string>
    </property>
    <property name="shortcut">
-    <string>Backspace</string>
+    <string notr="true">Backspace</string>
    </property>
   </action>
   <action name="actionRemoveAllBookmarks">
    <property name="text">
-    <string>Remove all bookmarks</string>
+    <string notr="true">Remove all bookmarks</string>
    </property>
    <property name="toolTip">
-    <string>Remove all bookmarks</string>
+    <string notr="true">Remove all bookmarks</string>
    </property>
    <property name="shortcut">
-    <string>Alt+Backspace</string>
+    <string notr="true">Alt+Backspace</string>
    </property>
   </action>
   <action name="actionSelectBookmark">
    <property name="text">
-    <string>SelectBookmark</string>
+    <string notr="true">SelectBookmark</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SelectBookmark</string>
    </property>
    <property name="shortcut">
-    <string>Return</string>
+    <string notr="true">Return</string>
    </property>
   </action>
  </widget>

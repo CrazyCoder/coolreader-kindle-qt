@@ -812,26 +812,35 @@
   </layout>
   <action name="actionSaveSettings">
    <property name="text">
-    <string>SaveSettings</string>
+    <string notr="true">SaveSettings</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SaveSettings</string>
    </property>
    <property name="shortcut">
-    <string>Home</string>
+    <string notr="true">Home</string>
    </property>
   </action>
   <action name="actionPrevTab">
    <property name="text">
-    <string>PrevTab</string>
+    <string notr="true">PrevTab</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">PrevTab</string>
    </property>
    <property name="shortcut">
-    <string>PgUp</string>
+    <string notr="true">PgUp</string>
    </property>
   </action>
   <action name="actionNextTab">
    <property name="text">
-    <string>NextTab</string>
+    <string notr="true">NextTab</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">NextTab</string>
    </property>
    <property name="shortcut">
-    <string>PgDown</string>
+    <string notr="true">PgDown</string>
    </property>
   </action>
  </widget>

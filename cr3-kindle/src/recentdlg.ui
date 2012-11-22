@@ -100,45 +100,57 @@
   </layout>
   <action name="actionRemoveAll">
    <property name="text">
-    <string>RemoveAll</string>
+    <string notr="true">RemoveAll</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">RemoveAll</string>
    </property>
    <property name="shortcut">
-    <string>Alt+Backspace</string>
+    <string notr="true">Alt+Backspace</string>
    </property>
   </action>
   <action name="actionRemoveBook">
    <property name="text">
-    <string>RemoveBook</string>
+    <string notr="true">RemoveBook</string>
    </property>
    <property name="toolTip">
-    <string>RemoveBook</string>
+    <string notr="true">RemoveBook</string>
    </property>
    <property name="shortcut">
-    <string>Backspace</string>
+    <string notr="true">Backspace</string>
    </property>
   </action>
   <action name="actionSelectBook">
    <property name="text">
-    <string>SelectBook</string>
+    <string notr="true">SelectBook</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SelectBook</string>
    </property>
    <property name="shortcut">
-    <string>Return</string>
+    <string notr="true">Return</string>
    </property>
   </action>
   <action name="actionNextPage">
    <property name="text">
-    <string>NextPage</string>
+    <string notr="true">NextPage</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">NextPage</string>
    </property>
    <property name="shortcut">
-    <string>PgDown</string>
+    <string notr="true">PgDown</string>
    </property>
   </action>
   <action name="actionPrevPage">
    <property name="text">
-    <string>PrevPage</string>
+    <string notr="true">PrevPage</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">PrevPage</string>
    </property>
    <property name="shortcut">
-    <string>PgUp</string>
+    <string notr="true">PgUp</string>
    </property>
   </action>
  </widget>

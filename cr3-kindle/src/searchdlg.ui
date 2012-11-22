@@ -100,13 +100,13 @@
   </layout>
   <action name="actionVirtualKeys">
    <property name="text">
-    <string>Virtual Keyboard</string>
+    <string notr="true">Virtual Keyboard</string>
    </property>
    <property name="toolTip">
-    <string>Virtual Keyboard</string>
+    <string notr="true">Virtual Keyboard</string>
    </property>
    <property name="shortcut">
-    <string>Home</string>
+    <string notr="true">Home</string>
    </property>
   </action>
  </widget>
