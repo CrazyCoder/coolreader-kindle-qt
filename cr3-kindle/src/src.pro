@@ -41,7 +41,6 @@ SOURCES += main.cpp \
     bookmarklistdlg.cpp \
     filepropsdlg.cpp \
     openfiledlg.cpp \
-    virtualkeysdlg.cpp \
     touchscreen.cpp \
     brightnesscontrol.cpp
 
@@ -55,7 +54,6 @@ HEADERS += mainwindow.h \
     searchdlg.h \
     filepropsdlg.h \
     openfiledlg.h \
-    virtualkeysdlg.h \
     touchscreen.h \
     brightnesscontrol.h
 
@@ -67,7 +65,6 @@ FORMS += mainwindow.ui \
     searchdlg.ui \
     filepropsdlg.ui \
     openfiledlg.ui \
-    virtualkeysdlg.ui \
     brightnesscontrol.ui
 
 TRANSLATIONS += i18n/Russian.ts \

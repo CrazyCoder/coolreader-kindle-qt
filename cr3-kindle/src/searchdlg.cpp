@@ -167,5 +167,5 @@ void SearchDialog::on_rbBackward_toggled(bool checked)
 
 void SearchDialog::on_actionVirtualKeys_triggered()
 {
-    VirtualKeysDialog::showDlg( this, ui->edPattern );
+    // VirtualKeysDialog::showDlg( this, ui->edPattern );
 }
