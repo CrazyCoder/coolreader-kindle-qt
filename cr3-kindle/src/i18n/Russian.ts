@@ -2,33 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="ru_RU" sourcelanguage="en_US">
 <context>
-    <name>AboutDialog</name>
-    <message>
-        <source>About CoolReader</source>
-        <translation type="obsolete">О программе</translation>
-    </message>
-    <message>
-        <source>License</source>
-        <translation type="obsolete">Лицензия</translation>
-    </message>
-    <message>
-        <source>Source Code</source>
-        <translation type="obsolete">Исходный код</translation>
-    </message>
-    <message>
-        <source>(c) 1998-2009 Vadim Lopatin</source>
-        <translation type="obsolete">(c) 1998-2012 Вадим Лопатин</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="obsolete">О программе</translation>
-    </message>
-    <message>
-        <source>About Cool Reader</source>
-        <translation type="obsolete">О программе</translation>
-    </message>
-</context>
-<context>
     <name>AddBookmarkDialog</name>
     <message>
         <source>Add bookmark</source>
@@ -458,14 +431,6 @@
         <translation>Копировать выделение</translation>
     </message>
     <message>
-        <source>About Qt</source>
-        <translation type="obsolete">О Qt</translation>
-    </message>
-    <message>
-        <source>About CoolReader</source>
-        <translation type="obsolete">О программе CoolReader</translation>
-    </message>
-    <message>
         <source>Add Bookmark</source>
         <translation>Добавить закладку</translation>
     </message>
@@ -793,10 +758,6 @@
         <translation>Общие</translation>
     </message>
     <message>
-        <source>Look &amp; feel</source>
-        <translation type="obsolete">Стиль интерфеса</translation>
-    </message>
-    <message>
         <source>Startup action</source>
         <translation>При старте </translation>
     </message>
@@ -821,30 +782,6 @@
         <translation>В спящем режиме показывать обложку книги</translation>
     </message>
     <message>
-        <source>Controls</source>
-        <translation type="obsolete">Инструменты</translation>
-    </message>
-    <message>
-        <source>Show toolbar</source>
-        <translation type="obsolete">Панель инструментов</translation>
-    </message>
-    <message>
-        <source>Show menu</source>
-        <translation type="obsolete">Меню</translation>
-    </message>
-    <message>
-        <source>Show scroll bar</source>
-        <translation type="obsolete">Полоса прокрутки</translation>
-    </message>
-    <message>
-        <source>Show status bar</source>
-        <translation type="obsolete">Строка состояния</translation>
-    </message>
-    <message>
-        <source>Fullscreen display</source>
-        <translation type="obsolete">Полноэкранный режим</translation>
-    </message>
-    <message>
         <source>Page</source>
         <translation>Страница</translation>
     </message>
@@ -855,14 +792,6 @@
     <message>
         <source>Two pages</source>
         <translation>Две страницы</translation>
-    </message>
-    <message>
-        <source>Scroll View</source>
-        <translation type="obsolete">Свиток</translation>
-    </message>
-    <message>
-        <source>Vew Mode</source>
-        <translation type="obsolete">Режим просмотра</translation>
     </message>
     <message>
         <source>Page margins</source>
@@ -913,24 +842,8 @@
         <translation>Переносы</translation>
     </message>
     <message>
-        <source>Interline spacing</source>
-        <translation type="obsolete">Межстрочный интервал</translation>
-    </message>
-    <message>
-        <source>Page skin</source>
-        <translation type="obsolete">Стиль фона</translation>
-    </message>
-    <message>
         <source>Sample</source>
         <translation>Образец:</translation>
-    </message>
-    <message>
-        <source>.TXT files</source>
-        <translation type="obsolete">.TXT файлы</translation>
-    </message>
-    <message>
-        <source>Disable automatic formatting</source>
-        <translation type="obsolete">Отключить автоформатирование</translation>
     </message>
     <message>
         <source>Language</source>
