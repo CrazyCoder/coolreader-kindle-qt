@@ -291,7 +291,7 @@ void PrintString(int x, int y, const QString message, const QString opt) {
 
 void sigCatcher(int sig) {
   if(sig == SIGUSR1) {
-      Device::isTouch() ? QWSServer::instance()->openMouse() : QWSServer::instance()->openKeyboard();
+      Device::enableInput(true);
       wakeUp();
   }
 }
