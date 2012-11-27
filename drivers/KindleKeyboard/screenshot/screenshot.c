@@ -80,7 +80,7 @@ int do_screenshot(char *pdest)
 
     if ((fd = open(FRAMEBUFFER, O_RDONLY)) != -1)
     {
-        if ((fd_ss = open(pdest, O_WRONLY| O_CREAT)) != -1)
+        if ((fd_ss = open(pdest, O_WRONLY| O_CREAT, S_IRUSR|S_IWUSR)) != -1)
         {
             memset(&vinfo, 0, sizeof(vinfo));
             memset(&finfo, 0, sizeof(finfo));
