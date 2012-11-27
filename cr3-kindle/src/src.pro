@@ -77,17 +77,17 @@ RESOURCES += cr3res.qrc
 
 LIBS += -lQtGui -lQtCore -lQtNetwork -lQtDBus -lpthread -ldl
 
-arm {
-    LIBS += -L$$PWD/../libs/kindle/ -lz -lpng -lfreetype -lfontconfig -ljpeg
-} else {
-    LIBS += -L$$PWD/../libs/desktop/ `pkg-config --libs zlib libpng freetype2 fontconfig jpeg`
-}
-
 # depends on crengine + antiword (precompiled)
-LIBS += -L$$OUT_PWD/../../crengine/crengine/ -lcrengine -lantiword
+LIBS += -L$$OUT_PWD/../../crengine/crengine -lcrengine -lantiword
 DEPENDPATH += $$PWD/../../crengine/crengine
 PRE_TARGETDEPS += $$OUT_PWD/../../crengine/crengine/libcrengine.a
 
 # depends on device (Kindle model detection library)
 LIBS += -L$$OUT_PWD/device/ -ldevice
 DEPENDPATH += $$PWD/device
+
+arm {
+    LIBS += -L$$PWD/../libs/kindle -lz -lpng -lfreetype -lfontconfig -ljpeg
+} else {
+    LIBS += -L$$PWD/../libs/desktop `pkg-config --libs zlib libpng freetype2 fontconfig jpeg`
+}
