@@ -10,6 +10,7 @@
 // ANY KIND.  The use of this software indicates your knowledge and acceptance
 // of this.
 
+#include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <linux/input.h>
