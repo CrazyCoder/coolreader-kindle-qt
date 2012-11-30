@@ -499,3 +499,44 @@ void MainWindow::on_actionAdjustBrightness_triggered()
     pTouch->enableGesture(true);
 #endif
 }
+
+
+QRegion MyDecoration::region(const QWidget *widget, const QRect &rect, int /*decorationRegion*/)
+{
+    // all
+    QRegion region;
+    QRect r(rect.left(), rect.top() - titleHeight, rect.width(), rect.height() + titleHeight);
+    region = r;
+    region -= rect;
+
+    return region;
+}
+
+bool MyDecoration::paint(QPainter *painter, const QWidget *widget, int decorationRegion, QDecoration::DecorationState state)
+{
+    if(decorationRegion == None) return false;
+
+    const QRect titleRect = QDecoration::region(widget, Title).boundingRect();
+
+    int titleWidth = titleRect.width();
+
+    Qt::WindowFlags flags = widget->windowFlags();
+    bool hasTitle = flags & Qt::WindowTitleHint;
+
+    bool paintAll = (decorationRegion == int(All));
+    bool handled = false;
+
+    if (((paintAll || decorationRegion & Title) && titleWidth > 0) && state == Normal && hasTitle) {
+        painter->save();
+        painter->fillRect(titleRect, QBrush(qRgb(221,221,221)));
+        painter->setPen(QPen(Qt::black));
+        QFont font = qApp->font();
+        font.setBold(true);
+        painter->setFont(font);
+        painter->drawText(titleRect.x() + 4, titleRect.y(), titleRect.width(), titleRect.height(), Qt::AlignVCenter, windowTitleFor(widget));
+        painter->restore();
+
+        handled |= true;
+    }
+    return handled;
+}

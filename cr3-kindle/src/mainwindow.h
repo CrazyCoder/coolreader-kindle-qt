@@ -69,45 +69,12 @@ class MyDecoration : public QDecorationDefault
 private:
     int titleHeight;
 public:
-    MyDecoration() : QDecorationDefault() { titleHeight = qApp->font().pointSize() + 20; }
-    QRegion region(const QWidget *widget, const QRect &rect, int decorationRegion = All)
-    {
-        // all
-        QRegion region;
-        QRect r(rect.left(), rect.top() - titleHeight, rect.width(), rect.height() + titleHeight);
-        region = r;
-        region -= rect;
-
-        return region;
+    MyDecoration() : QDecorationDefault() {
+        QFontMetrics fm(qApp->font());
+        titleHeight = fm.height() + 4;
     }
-    bool paint(QPainter *painter, const QWidget *widget, int decorationRegion = All, DecorationState state = Normal)
-    {
-        if(decorationRegion == None) return false;
-
-        const QRect titleRect = QDecoration::region(widget, Title).boundingRect();
-
-        int titleWidth = titleRect.width();
-
-        Qt::WindowFlags flags = widget->windowFlags();
-        bool hasTitle = flags & Qt::WindowTitleHint;
-
-        bool paintAll = (decorationRegion == int(All));
-        bool handled = false;
-
-        if ((paintAll || decorationRegion & Title && titleWidth > 0) && state == Normal && hasTitle) {
-            painter->save();
-            painter->fillRect(titleRect, QBrush(Qt::black));
-            painter->setPen(QPen(Qt::white));
-            QFont font = qApp->font();
-            font.setBold(true);
-            painter->setFont(font);
-            painter->drawText(titleRect.x() + 4, titleRect.y(), titleRect.width(), titleRect.height(), Qt::AlignVCenter, windowTitleFor(widget));
-            painter->restore();
-
-            handled |= true;
-        }
-        return handled;
-    }
+    QRegion region(const QWidget *widget, const QRect &rect, int decorationRegion = All);
+    bool paint(QPainter *painter, const QWidget *widget, int decorationRegion = All, DecorationState state = Normal);
 };
 
 namespace Ui {
@@ -171,6 +138,29 @@ private slots:
     void replaceScreensaver();
 };
 
+class SolidFocusProxyStyle : public QProxyStyle {
+public:
+    SolidFocusProxyStyle(QStyle *baseStyle = 0) : QProxyStyle(baseStyle) {
+        pen.setStyle(Qt::SolidLine);
+        pen.setWidth(2);
+        pen.setColor(Qt::black);
+        isFocusRectEnabled = not Device::isTouch(); // no focus rectangle on Touch devices
+    }
+    void drawPrimitive(PrimitiveElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget) const {
+        if(element == QStyle::PE_FrameFocusRect) {
+            if (isFocusRectEnabled) {
+                painter->setPen(pen);
+                painter->drawRect(option->rect);
+            }
+            return;
+        }
+        QProxyStyle::drawPrimitive(element, option, painter, widget);
+    }
+private:
+    QPen pen;
+    bool isFocusRectEnabled;
+};
+
 class MyApplication : public QApplication {
     Q_OBJECT
 public:
@@ -187,7 +177,8 @@ public:
         palette.setColor(QPalette::HighlightedText, Qt::black);
         setPalette(palette);
 
-        setStyle("cleanlooks");
+        setStyle(new SolidFocusProxyStyle(QStyleFactory::create("cleanlooks")));
+
         qwsSetDecoration(new MyDecoration());
 
         setNavigationMode(Qt::NavigationModeKeypadTabOrder);

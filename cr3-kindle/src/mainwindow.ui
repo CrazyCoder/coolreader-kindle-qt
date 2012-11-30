@@ -215,7 +215,7 @@
   </action>
   <action name="actionShowMenu">
    <property name="text">
-    <string>ShowMenu</string>
+    <string notr="true">ShowMenu</string>
    </property>
    <property name="toolTip">
     <string notr="true">ShowMenu</string>
@@ -226,7 +226,7 @@
   </action>
   <action name="actionEmpty">
    <property name="text">
-    <string>Empty</string>
+    <string notr="true">Empty</string>
    </property>
    <property name="toolTip">
     <string notr="true">Empty</string>
