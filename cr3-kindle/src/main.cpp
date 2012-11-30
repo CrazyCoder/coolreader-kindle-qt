@@ -82,9 +82,7 @@ int main(int argc, char *argv[])
         pMyApp = &a;
         // set app stylesheet
 #ifndef i386
-        Device::Model m = Device::getModel();
-        QString style = (m != Device::KDX ? "stylesheet_k3.qss" : "stylesheet_dx.qss");
-        if (m == Device::KPW || m == Device::KT) style = "stylesheet_pw.qss";
+        QString style = Device::isTouch() ? "stylesheet_pw.qss" : "stylesheet_k3.qss";
         QFile qss(QDir::toNativeSeparators(cr2qt(datadir)) + style);
         // set up full update interval for the graphics driver
         Device::setFullScreenUpdateEvery(props->getIntDef(PROP_DISPLAY_FULL_UPDATE_INTERVAL, 1));
