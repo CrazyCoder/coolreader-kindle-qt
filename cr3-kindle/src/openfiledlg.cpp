@@ -26,9 +26,9 @@ OpenFileDlg::OpenFileDlg(QWidget *parent, CR3View * docView):
     actionSelect->setShortcut(Qt::Key_Select);
     addAction(actionSelect);
 
-    folder = QIcon(":/icons/folder_sans_32.png");
-    file = QIcon(":/icons/book_text_32.png");
-    arrowUp = QIcon(":/icons/arrow_full_up_32.png");
+    folder = QIcon(":/icons/folder.png");
+    file = QIcon(":/icons/book.png");
+    arrowUp = QIcon(":/icons/arrow_top.png");
 
     m_ui->FileList->setItemDelegate(new FileListDelegate());
 

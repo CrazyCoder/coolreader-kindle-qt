@@ -1,7 +1,11 @@
 <RCC>
     <qresource prefix="/">
-        <file>icons/folder_sans_32.png</file>
-        <file>icons/book_text_32.png</file>
-        <file>icons/arrow_full_up_32.png</file>
+        <file>icons/checkbox_checked.png</file>
+        <file>icons/checkbox_unchecked.png</file>
+        <file>icons/checkbox_checked_disabled.png</file>
+        <file>icons/checkbox_unchecked_disabled.png</file>
+        <file>icons/arrow_top.png</file>
+        <file>icons/book.png</file>
+        <file>icons/folder.png</file>
     </qresource>
 </RCC>
