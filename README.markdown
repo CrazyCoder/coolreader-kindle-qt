@@ -37,7 +37,7 @@ Kindle Paperwhite and Touch Support
 -   [Installation instructions](http://www.the-ebook.org/forum/viewtopic.php?p=973382#973382) (rus)
 
 
-Quick Installation Guide for K3/K4N
+Quick Installation Guide for K3/K4NT
 =========================================
 1.  [Jailbreak](http://wiki.mobileread.com/wiki/Kindle4NTHacking) your Kindle
 2.  Copy **update_cr3runner_n.n_install-k4.bin** from
