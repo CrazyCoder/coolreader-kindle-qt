@@ -7,7 +7,7 @@
 
 #include <device.h>
 
-#define MIN_SWIPE         20 // % of screen width
+#define MIN_SWIPE         10 // % of screen width
 #define LONG_TAP_ZONE     7
 #define LONG_TAP_INTERVAL 500
 #define TOUCH_CONFIG      "data/touch.ini"
@@ -67,6 +67,7 @@ private:
     bool isGestureEnabled, wasGestureEnabled;
     bool wasFocusInReader;
     bool isLongTapHandled;
+    bool isSimulatedClick;
 
     int RIGHT_MARGIN, rpx;
     int LEFT_MARGIN, lpx;

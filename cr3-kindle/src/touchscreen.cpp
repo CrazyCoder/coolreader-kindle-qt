@@ -69,6 +69,7 @@ TouchScreen::TouchScreen()
     isGestureEnabled = true;
     wasGestureEnabled = true;
     isLongTapHandled = false;
+    isSimulatedClick = false;
 
     oldX = 0;
     oldY = 0;
@@ -138,6 +139,11 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
     int x = pme->simpleData.x_root;
     int y = pme->simpleData.y_root;
 
+    if (isSimulatedClick) {
+        if (newButtonState == 0) isSimulatedClick = false;
+        return false;
+    }
+
     // save focus state when button was pressed
     if (newButtonState > 0) {
         // start gesture tracking
@@ -157,7 +163,7 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
     }
 
     // filter events from UI until finger is released, but don't filter if gestures are disabled
-    bool isFiltered = wasGestureEnabled && newButtonState > 0 && buttonState == newButtonState;
+    bool isFiltered = wasGestureEnabled;
 
     qDebug("mouse: x: %d, y: %d, state: %d, time: %d, focus: %d, filter: %d", x, y, newButtonState, pme->simpleData.time - lastEvent, wasFocusInReader, isFiltered);
 
@@ -172,40 +178,38 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
 
         bool isSingleFinger = buttonState == Qt::LeftButton;
         bool isGesture = wasGestureEnabled && this->isGesture(x, y, oldX, oldY) && isSingleFinger;
+        bool isCustomAction = !isSingleFinger || isGesture || wasFocusInReader;
 
-        // let Qt handle touch events outside of the reader
-        bool isHandled = isSingleFinger && !isGesture && !wasFocusInReader;
         // long taps are handled via timer
         if (isLongTapHandled) {
-            isHandled = true;
             isLongTapHandled = false;
-        }
-
-        Qt::Key key = Qt::Key_unknown;
-
-        if (!isHandled) {
+        } else if (isCustomAction) {
+            Qt::Key key = Qt::Key_unknown;
             if (isGesture) {
                 qDebug("* gesture detected");
                 SwipeType st = wasFocusInReader ? SWIPE_ONE_READER : SWIPE_ONE;
                 key = getSwipeAction(x, y, oldX, oldY, st);
             } else {
+                qDebug("* area action");
                 key = getAreaAction(x, y, t);
             }
 
             if (key != Qt::Key_unknown) {
                 QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, true, false);
                 QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, false, false);
-                buttonState = newButtonState;
-                lastEvent = pme->simpleData.time;
-                return true;
             } else {
                 qDebug("-- area action not defined");
             }
+        } else if (isFiltered) {
+            qDebug("* click");
+            // simulate mouse click on touch release only
+            QWSServer::sendMouseEvent(QPoint(x, y), 1);
+            QWSServer::sendMouseEvent(QPoint(x, y), 0);
+            isSimulatedClick = true;
         }
     }
     lastEvent = pme->simpleData.time;
     buttonState = newButtonState;
-
     return isFiltered;
 }
 
