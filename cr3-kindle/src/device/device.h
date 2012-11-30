@@ -1,6 +1,8 @@
 #ifndef DEVICE_H
 #define DEVICE_H
 
+#include <unistd.h>
+
 #include <QProcess>
 #include <QDebug>
 #include <QWSServer>
