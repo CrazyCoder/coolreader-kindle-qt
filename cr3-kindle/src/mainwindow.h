@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <unistd.h>
 #include <sys/ioctl.h>
 #include <fcntl.h>
 #include <linux/fb.h>

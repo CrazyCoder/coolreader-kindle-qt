@@ -13,6 +13,8 @@
 #ifndef KINDLEFIVEWAY_H
 #define KINDLEFIVEWAY_H
 
+#include <unistd.h>
+
 #include <QWSMouseHandler>
 #include <QSocketNotifier>
 
