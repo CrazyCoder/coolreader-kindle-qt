@@ -5,6 +5,7 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QSpinBox>
+#include <QPushButton>
 #include <QWSEvent>
 #include <QColorDialog>
 #include <QStyleFactory>
@@ -13,6 +14,7 @@
 #include <QTranslator>
 #include <QKeyEvent>
 #include <QApplication>
+#include <QStyledItemDelegate>
 
 #include <device.h>
 
@@ -26,12 +28,12 @@ class SettingsDlg;
 #define PROP_APP_START_ACTION      "cr3.app.start.action"
 #define PROP_WINDOW_LANG           "window.language"
 #define PROP_REPLACE_SCREENSAVER   "cr3.kindle.replace.screensaver"
+#define PROP_LAST_TAB              "cr3.kindle.last.settings.tab"
 
 // Filter Home, PageUp and PageDown in SpinBoxes, allows to Save settings
 // when focus is in widget and to change value on touch Kindles
 // if up/down swipes are mapped to PageUp/PageDown (default in settings)
 static bool spinKeyFilter(QAbstractSpinBox *sb, QKeyEvent *event) {
-    qDebug("filter: %x", event->key());
     switch(event->key()) {
     case Qt::Key_Home:
         QApplication::sendEvent(sb->parentWidget(), event);
@@ -107,7 +109,9 @@ private slots:
     void on_ShowClock_toggled(bool checked);
     void on_ShowBookName_toggled(bool checked);
     void on_ShowPageHeader_toggled(bool checked);
-    void on_TxtPreFormatted_toggled(bool checked);
+    void on_cbTxtPreFormatted_toggled(bool checked);
+    void on_cbEnableEmbeddedFonts_toggled(bool checked);
+    void on_cbEnableDocumentStyles_toggled(bool checked);
     void on_FloatingPunctuation_toggled(bool checked);
     void on_ChapterMarks_toggled(bool checked);
     void on_PositionPercent_toggled(bool checked);
@@ -130,6 +134,9 @@ private slots:
     void on_cbHinting_currentIndexChanged(int index);
     void on_sbSpaceCond_valueChanged(int arg1);
     void on_cbCoverScreensaver_toggled(bool checked);
+    void on_buttonBox_accepted();
+    void on_buttonBox_rejected();
+    void on_tabWidget_currentChanged(int index);
 };
 
 #endif // SETTINGSDLG_H

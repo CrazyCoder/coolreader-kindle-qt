@@ -1,10 +1,6 @@
 #include "settings.h"
 #include "ui_settings.h"
 
-#ifndef i386
-#include "../../drivers/QKindleFb/qkindlefb.h"
-#endif
-
 static bool initDone = false;
 
 static int cr_interline_spaces[] = { 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150 };
@@ -32,7 +28,10 @@ SettingsDlg::SettingsDlg(QWidget *parent, CR3View * docView ) :
     optionToUi(PROP_SHOW_BATTERY_PERCENT, m_ui->ShowBatteryInPercent);
     optionToUi(PROP_SHOW_TIME, m_ui->ShowClock);
     optionToUi(PROP_SHOW_TITLE, m_ui->ShowBookName);
-    optionToUi(PROP_TXT_OPTION_PREFORMATTED, m_ui->TxtPreFormatted);
+    optionToUi(PROP_TXT_OPTION_PREFORMATTED, m_ui->cbTxtPreFormatted);
+    optionToUi(PROP_EMBEDDED_STYLES, m_ui->cbEnableDocumentStyles);
+    optionToUi(PROP_EMBEDDED_FONTS, m_ui->cbEnableEmbeddedFonts);
+    m_ui->cbEnableEmbeddedFonts->setEnabled(m_props->getIntDef(PROP_EMBEDDED_STYLES, 1) == 1 ? Qt::Checked : Qt::Unchecked);
     optionToUi(PROP_FLOATING_PUNCTUATION, m_ui->FloatingPunctuation);
     optionToUi(PROP_STATUS_CHAPTER_MARKS, m_ui->ChapterMarks);
     optionToUi(PROP_SHOW_POS_PERCENT, m_ui->PositionPercent);
@@ -125,6 +124,19 @@ SettingsDlg::SettingsDlg(QWidget *parent, CR3View * docView ) :
     m_ui->crSample->getDocView()->createDefaultDocument(lString16(), testPhrase+testPhrase+testPhrase+testPhrase+testPhrase+testPhrase);
 
     updateStyleSample();
+
+    // required for QComboBox QAbstractItemView::item to work in .qss
+    QStyledItemDelegate* itd = new QStyledItemDelegate();
+    QList<QComboBox*> list = this->findChildren<QComboBox *>();
+    foreach(QComboBox *w, list) {
+        w->setItemDelegate(itd);
+    }
+    // for translations
+    m_ui->buttonBox->button(QDialogButtonBox::Save)->setText(tr("Save"));
+    m_ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Cancel"));
+    // restore last open tab
+    m_ui->tabWidget->setCurrentIndex(m_props->getIntDef(PROP_LAST_TAB, 0));
+
     initDone = true;
 }
 
@@ -213,6 +225,8 @@ void SettingsDlg::on_ShowFootNotes_toggled(bool checked)
 
 void SettingsDlg::updateStyleSample()
 {
+    if (initDone) Device::forceFullScreenUpdate();
+
     int i;
     m_props->getInt(PROP_FONT_SIZE, i);
     m_ui->crSample->propsApply(m_props);
@@ -277,8 +291,7 @@ void SettingsDlg::on_sbFontGamma_valueChanged(double arg1)
 void SettingsDlg::on_actionSaveSettings_triggered()
 {
 #ifndef i386
-    QKindleFb *pscreen = static_cast<QKindleFb*>(QScreen::instance());
-    pscreen->setFullUpdateEvery(m_props->getIntDef(PROP_DISPLAY_FULL_UPDATE_INTERVAL, 1));
+    Device::setFullScreenUpdateEvery(m_props->getIntDef(PROP_DISPLAY_FULL_UPDATE_INTERVAL, 1));
 #endif
 
     m_docview->setOptions(m_props);
@@ -344,16 +357,30 @@ void SettingsDlg::on_cbKerning_toggled(bool checked)
     updateStyleSample();
 }
 
-void SettingsDlg::on_TxtPreFormatted_toggled(bool checked)
+void SettingsDlg::on_cbTxtPreFormatted_toggled(bool checked)
 {
     if(!initDone) return;
     setCheck(PROP_TXT_OPTION_PREFORMATTED, checked);
+}
+
+void SettingsDlg::on_cbEnableEmbeddedFonts_toggled(bool checked)
+{
+    if(!initDone) return;
+    setCheck(PROP_EMBEDDED_FONTS, checked ? Qt::Checked : Qt::Unchecked);
+}
+
+void SettingsDlg::on_cbEnableDocumentStyles_toggled(bool checked)
+{
+    if(!initDone) return;
+    setCheck(PROP_EMBEDDED_STYLES, checked ? Qt::Checked : Qt::Unchecked);
+    m_ui->cbEnableEmbeddedFonts->setEnabled(checked);
 }
 
 void SettingsDlg::on_FloatingPunctuation_toggled(bool checked)
 {
     if(!initDone) return;
     setCheck(PROP_FLOATING_PUNCTUATION, checked);
+    updateStyleSample();
 }
 
 void SettingsDlg::on_ChapterMarks_toggled(bool checked)
@@ -502,4 +529,21 @@ void SettingsDlg::on_cbCoverScreensaver_toggled(bool checked)
 {
     if(!initDone) return;
     setCheck(PROP_REPLACE_SCREENSAVER, checked);
+}
+
+void SettingsDlg::on_buttonBox_accepted()
+{
+    on_actionSaveSettings_triggered();
+}
+
+void SettingsDlg::on_buttonBox_rejected()
+{
+    close();
+}
+
+void SettingsDlg::on_tabWidget_currentChanged(int index)
+{
+    if(!initDone) return;
+    Device::forceFullScreenUpdate();
+    m_props->setInt(PROP_LAST_TAB, index);
 }
