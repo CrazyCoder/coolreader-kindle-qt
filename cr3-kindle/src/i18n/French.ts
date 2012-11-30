@@ -529,14 +529,6 @@
         <source>C</source>
         <translation type="obsolete">C</translation>
     </message>
-    <message>
-        <source>ShowMenu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Empty</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>OpenFileDlg</name>
@@ -926,7 +918,7 @@
     </message>
     <message>
         <source>Sample</source>
-        <translation>Échantillon</translation>
+        <translation type="obsolete">Échantillon</translation>
     </message>
     <message>
         <source>.TXT files</source>
@@ -1042,6 +1034,34 @@
     </message>
     <message>
         <source>Min space width (%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="obsolete">Enregi&amp;strer</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="obsolete">&amp;Annuler</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Enregistrer</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuler</translation>
+    </message>
+    <message>
+        <source>Formatting:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable document internal fonts (EPUB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable document internal styles (CSS)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

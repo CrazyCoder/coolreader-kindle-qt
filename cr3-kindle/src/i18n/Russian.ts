@@ -494,14 +494,6 @@
         <source>Toggle edit mode</source>
         <translation>Переключить режим правки</translation>
     </message>
-    <message>
-        <source>ShowMenu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Empty</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>OpenFileDlg</name>
@@ -731,19 +723,7 @@
     </message>
     <message>
         <source>The quick brown fox jumps over the lazy dog. </source>
-        <translation>Съешь ещё этих мягких французских булок, да выпей чаю. 1234567890 -~=+_.,:;?!`&apos; @#$%^*()\|/ </translation>
-    </message>
-    <message>
-        <source>Text color</source>
-        <translation type="obsolete">Цвет текста</translation>
-    </message>
-    <message>
-        <source>Background color</source>
-        <translation type="obsolete">Цвет фона</translation>
-    </message>
-    <message>
-        <source>Page header text color</source>
-        <translation type="obsolete">Цвет колонтитула</translation>
+        <translation>Съешь ещё этих мягких французских булок, да выпей чаю. </translation>
     </message>
     <message>
         <source>Settings</source>
@@ -843,7 +823,7 @@
     </message>
     <message>
         <source>Sample</source>
-        <translation>Образец:</translation>
+        <translation type="obsolete">Образец:</translation>
     </message>
     <message>
         <source>Language</source>
@@ -883,11 +863,11 @@
     </message>
     <message>
         <source>Font gamma correction</source>
-        <translation>Гамма-коррекция шрифта</translation>
+        <translation>Гамма-коррекция</translation>
     </message>
     <message>
         <source>Font antialiasing</source>
-        <translation>Сглаживание шрифта</translation>
+        <translation>Сглаживание</translation>
     </message>
     <message>
         <source>Disabled</source>
@@ -903,7 +883,7 @@
     </message>
     <message>
         <source>Font hinting</source>
-        <translation>Хинтинг шрифта</translation>
+        <translation>Хинтинг</translation>
     </message>
     <message>
         <source>Bytecode</source>
@@ -915,11 +895,11 @@
     </message>
     <message>
         <source>Interline spacing (%)</source>
-        <translation>Межстрочный интервал (%)</translation>
+        <translation>Межстрочный интервал</translation>
     </message>
     <message>
         <source>Min space width (%)</source>
-        <translation>Мин. ширина пробела (%)</translation>
+        <translation>Мин. ширина пробела</translation>
     </message>
     <message>
         <source>Embolden font</source>
@@ -943,7 +923,27 @@
     </message>
     <message>
         <source>In percent</source>
-        <translation>...в процентах</translation>
+        <translation>…в процентах</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Сохранить</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <source>Formatting:</source>
+        <translation>Форматирование:</translation>
+    </message>
+    <message>
+        <source>Enable document internal fonts (EPUB)</source>
+        <translation>Разрешить встроенные шрифты (EPUB)</translation>
+    </message>
+    <message>
+        <source>Enable document internal styles (CSS)</source>
+        <translation>Разрешить встроенные стили (CSS)</translation>
     </message>
 </context>
 <context>

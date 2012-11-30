@@ -603,11 +603,11 @@
     </message>
     <message>
         <source>ShowMenu</source>
-        <translation>MostraMenu</translation>
+        <translation type="obsolete">MostraMenu</translation>
     </message>
     <message>
         <source>Empty</source>
-        <translation>Vuoto</translation>
+        <translation type="obsolete">Vuoto</translation>
     </message>
 </context>
 <context>
@@ -1003,7 +1003,7 @@
     </message>
     <message>
         <source>Sample</source>
-        <translation>Esempio</translation>
+        <translation type="obsolete">Esempio</translation>
     </message>
     <message>
         <source>.TXT files</source>
@@ -1147,6 +1147,26 @@
     </message>
     <message>
         <source>The quick brown fox jumps over the lazy dog. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formatting:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable document internal fonts (EPUB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable document internal styles (CSS)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -510,14 +510,6 @@
         <translation type="obsolete">M</translation>
     </message>
     <message>
-        <source>ShowMenu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -906,7 +898,7 @@
     </message>
     <message>
         <source>Sample</source>
-        <translation>Példa</translation>
+        <translation type="obsolete">Példa</translation>
     </message>
     <message>
         <source>.TXT files</source>
@@ -1022,6 +1014,34 @@
     </message>
     <message>
         <source>Use book cover as screensaver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="obsolete">&amp;Mentés</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="obsolete">&amp;Mégsem</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Mentés</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Mégsem</translation>
+    </message>
+    <message>
+        <source>Formatting:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable document internal fonts (EPUB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable document internal styles (CSS)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
