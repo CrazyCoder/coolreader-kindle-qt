@@ -26,7 +26,6 @@ QMenu::item {
 QMenu::item:selected {
     margin-bottom: 7px;
     border-bottom: 4px solid black;
-    background-color: transparent;
 }
 
 QMenu::item:disabled {
