@@ -87,10 +87,9 @@ public:
     static QKindleFb *instance() ;
 
     virtual void setFullUpdateEvery(int n) ;
+    virtual void forceFullUpdate(bool fullScreen = false);
 
 protected:
-
-
     bool canaccel;
     int dataoffset;
 
@@ -117,6 +116,9 @@ private:
     bool hasCursor ;
 
     int fullUpdateEvery;
+    bool isFullUpdateForced;
+    bool isFullScreenForced;
+    QRect customRect;
 };
 
 

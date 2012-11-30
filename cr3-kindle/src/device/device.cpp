@@ -1,5 +1,9 @@
 #include "device.h"
 
+#ifndef i386
+#include "../../../drivers/QKindleFb/qkindlefb.h"
+#endif
+
 const Device::Properties Device::PROPS[] = {
 //    x    y    DPI, KBD    JOY
     {600, 800,  167, false, false},    // UNKNOWN
@@ -122,4 +126,20 @@ void Device::enableInput(bool enable)
     } else {
         isTouch() ? QWSServer::instance()->closeMouse() : QWSServer::instance()->closeKeyboard();
     }
+}
+
+void Device::setFullScreenUpdateEvery(int n)
+{
+#ifndef i386
+    QKindleFb *pscreen = static_cast<QKindleFb*>(QScreen::instance());
+    if (pscreen) pscreen->setFullUpdateEvery(n);
+#endif
+}
+
+void Device::forceFullScreenUpdate(bool fullScreen)
+{
+#ifndef i386
+    QKindleFb *pscreen = static_cast<QKindleFb*>(QScreen::instance());
+    if (pscreen) pscreen->forceFullUpdate(fullScreen);
+#endif
 }

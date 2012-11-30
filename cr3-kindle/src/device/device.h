@@ -69,6 +69,8 @@ public:
     static void resumeFramework(bool fast = false);
 
     static void enableInput(bool enable);
+    static void setFullScreenUpdateEvery(int n);
+    static void forceFullScreenUpdate(bool fullScreen = false);
 private:
     static const Properties PROPS[];
     static MODEL m_model;

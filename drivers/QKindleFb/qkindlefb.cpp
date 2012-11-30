@@ -148,6 +148,9 @@ QKindleFb::QKindleFb(int display_id)
     isKindle4 = m == Device::K4NT || m == Device::K4NTB || m == Device::KT;
     isKindleTouch = m == Device::KT;
     isKindle5 = m == Device::KPW;
+
+    isFullUpdateForced = false;
+    isFullScreenForced = false;
 }
 
 /*!
@@ -704,6 +707,13 @@ void QKindleFb::exposeRegion(QRegion region, int changing)
 
     QScreen::exposeRegion(region, changing);
 
+    if (isFullUpdateForced) {
+        doFullUpdate = true;
+        if (isFullScreenForced) dirtyRect.setRect(0, 0, dw, dh);
+        isFullUpdateForced = false;
+        isFullScreenForced = false;
+    }
+
     if (isDirty)
     {
         // force flashing update if updating the full screen
@@ -1007,6 +1017,12 @@ void QKindleFb::setFullUpdateEvery(int n)
 {
     fullUpdateEvery = n ;
     partialUpdatesCount = n; // to force immediate update after change
+}
+
+void QKindleFb::forceFullUpdate(bool fullScreen)
+{
+    isFullUpdateForced = true;
+    isFullScreenForced = fullScreen;
 }
 
 QT_END_NAMESPACE
