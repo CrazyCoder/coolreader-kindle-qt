@@ -27,7 +27,7 @@ then
 fi
 
 export LD_LIBRARY_PATH=/mnt/us/qtKindle/lib:`pwd`/lib
-
+# switch to the standard screensaver and disable the ads screensaver (with swipe to unlock)
 source /etc/upstart/functions
 source /etc/upstart/blanket_functions
 f_blanket_unload_module ad_screensaver
@@ -48,7 +48,21 @@ export QWS_KEYBOARD=none
 export QWS_DISPLAY=QKindleFb
 
 echo "./$1 -qws"
+if [ -f ".running" ] # unclean shutdown (device reboot?)
+then
+  echo "removing cr3 cache..."
+  rm -rf /mnt/us/cr3/data/cache/*
+fi
+touch .running
+
 ./"$1" -qws
+
+if [ "$?" -ne "0" ] # non-zero exit code, clean cache
+then
+  echo "removing cr3 cache..."
+  rm -rf /mnt/us/cr3/data/cache/*
+fi
+rm -f .running
 
 cd $SAVE_DIR
 

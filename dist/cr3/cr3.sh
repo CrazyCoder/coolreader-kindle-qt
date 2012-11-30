@@ -18,7 +18,6 @@ then
    echo "goqt: "$1" -- not an executable file." ;
    exit 1
 fi
-
 if [ ! -z `pidof $1` ]
 then
    echo "goqt: "$1" -- already running." ;
@@ -42,7 +41,21 @@ export QWS_KEYBOARD=KindleKeyboard
 export QWS_DISPLAY=QKindleFb
 
 echo "./$1 -qws"
+if [ -f ".running" ] # unclean shutdown (device reboot?)
+then
+  echo "removing cr3 cache..."
+  rm -rf /mnt/us/cr3/data/cache/*
+fi
+touch .running
+
 ./"$1" -qws
+
+if [ "$?" -ne "0" ] # non-zero exit code, clean cache
+then
+  echo "removing cr3 cache..."
+  rm -rf /mnt/us/cr3/data/cache/*
+fi
+rm -f .running
 
 cd $SAVE_DIR
 # always try to continue cvm
