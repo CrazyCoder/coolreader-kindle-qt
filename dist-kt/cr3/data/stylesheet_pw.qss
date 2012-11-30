@@ -1,5 +1,5 @@
 * {
-    font-size: 10pt;
+    font-size: 9pt;
     color: black;
     background: white;
     background-color: white;
@@ -7,152 +7,230 @@
     selection-background-color: white;
 }
 
+
 QMenu {
     font: bold;
-    spacing: 2px;
-    padding: 17px 14px 18px 14px;
-    margin: 10px;
     border: 4px solid #222222;
     border-radius: 10px;
+    margin: 0.3em;
+    padding: 0.5em 0.7em 0.5em 0.7em;
     font-family: "Helvetica Neue LT 65 Kindle Medium";
 }
 
 QMenu::item {
-    font-size: 10pt;
-    padding: 3px 4px 18px 4px;
+    padding: 0.1em 0.1em 0.3em 0.1em;
     margin-bottom: 10px;
     border-bottom: 1px solid black;
 }
 
 QMenu::item:selected {
-    font-size: 10pt;
     margin-bottom: 7px;
     border-bottom: 4px solid black;
     background-color: transparent;
 }
 
 QMenu::item:disabled {
-    font-size: 10pt;
     color: grey;
 }
 
+
 QTabWidget::pane {
-    border: 1px solid grey;
+    border: 1px solid black;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    top: -1px;
 }
 
 QTabWidget::tab-bar {
     left: 0px;
 }
 
-QTabBar {
-    font: bold 12pt;
+QTabBar::tab {
+    padding: 0.2em;
+    min-width: 3em;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: none;
 }
 
 QTabBar::tab:selected {
-    padding: 10px;
-    color: white;
-    background-color: black;
-    border: 1px solid black;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    color: black;
+    background-color: white;
+}
+
+QTabBar::tab:first {
+    border-left: 1px solid black;
+}
+
+QTabBar::tab:only-one {
+    border-right: 1px solid black;
+    border-left: 1px solid black;
 }
 
 QTabBar::tab:!selected {
-    padding: 10px;
-    color: #444444;
-    background-color: white;
-    border: 1px solid grey;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    color: black;
+    background-color: lightgrey;
+    border-bottom: 1px solid black;
 }
 
+
 QListView {
-    font-size: 9pt;
+    font-size: 8pt;
     border-bottom: 2px solid black;
 }
 
-QTableWidget {
-    font-size: 10pt;
-}
-
 QTableWidget::item {
-    font-size: 10pt;
     border-bottom: 2px solid transparent;
 }
 
 QTableWidget::item:selected {
-    font-size: 10pt;
     border-bottom: 2px solid black;
 }
 
 QTreeView {
     font-size: 10pt;
-    border-bottom: 1px dotted grey;
+    outline: none;
 }
 
 QTreeView::item {
-    font-size: 10pt;
-    padding-top: 9px;
-    padding-bottom: 10px;
-    border-bottom: 1px dotted grey;
+    padding-top: 2px;
+    padding-bottom: 1px;
+    border-bottom: 1px solid lightgrey;
 }
 
 QTreeView::item:selected {
-    font-size: 10pt;
-    padding-top: 9px;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
     border-bottom: 2px solid black;
 }
 
 QLabel {
-    font-size: 9pt;
     margin-right: 2px;
 }
 
-QCheckBox {
-    font-size: 9pt;
-}
 
-QComboBox {
-    font-size: 9pt;
+QSpinBox, QDoubleSpinBox {
     selection-color: white;
     selection-background-color: black;
 }
 
-QSpinBox {
-    font-size: 9pt;
-    selection-color: white;
-    selection-background-color: black;
+
+QComboBox QAbstractItemView {
+    border: 1px solid grey;
+    outline: none;
+    padding: 0px 0.5em 0.2em 0.5em;
+    border-radius: 4px;
 }
 
-QDoubleSpinBox {
-    font-size: 9pt;
-    selection-color: white;
-    selection-background-color: black;
+QComboBox QAbstractItemView::item {
+    min-height: 1em;
+    margin-bottom: 4px;
+    border-bottom: 1px solid grey;
 }
+
+QComboBox QAbstractItemView::item:selected {
+    margin-bottom: 1px;
+    border-bottom: 4px solid black;
+}
+
 
 QDialog {
-    font-size: 9pt;
     border: 2px solid black;
 }
 
-QRadioButton {
-    font-size: 9pt;
-}
-
-QLineEdit {
-    font-size: 9pt;
+QDialogButtonBox > QPushButton {
+    min-height: 1.5em;
+    min-width: 5em;
 }
 
 QPushButton {
     border: 1px solid black;
 }
 
-QPushButton:pressed {
+QPushButton:focus {
     border: 2px solid black;
 }
 
+
+QDialogButtonBox, QMessageBox {
+    dialogbuttonbox-buttons-have-icons: 0;
+}
+
+
+QCheckBox {
+    spacing: 0.6em;
+    height: 1.3em;
+}
+
+QCheckBox::indicator {
+    width: 0.6em;
+    height: 0.6em;
+}
+
+QCheckBox::indicator:checked {
+    image: url(:/icons/checkbox_checked.png);
+}
+
+QCheckBox::indicator:unchecked {
+    image: url(:/icons/checkbox_unchecked.png);
+}
+
+QCheckBox::indicator:unchecked:disabled {
+    image: url(:/icons/checkbox_unchecked_disabled.png);
+}
+
+QCheckBox::indicator:checked:disabled {
+    image: url(:/icons/checkbox_checked_disabled.png);
+}
+
+
 QProgressBar {border: 1px solid black; border-radius: 0px; text-align: center;}
 QProgressBar::chunk {border: 2px solid black; background-color: white; height: 10px; margin: 5px;}
+
+
+
+/* TOUCH DEVICES OVERRIDES SECTION */
+QMenu {
+   font-size: 10pt; 
+}
+
+QCheckBox, QLabel, QListView, QComboBox, QSpinBox, QDoubleSpingBox, QRadioButton, QLineEdit {
+    min-height: 1.45em;
+}
+
+QPushButton, QCheckBox, QListView, ComboBox, QRadioButton {
+    outline: none;
+}
+
+QDialogButtonBox > QPushButton {
+    min-height: 2em;
+    min-width: 5em;
+}
+
+QTabBar::tab {
+    padding: 0.25em;
+    min-height: 1em;
+}
+
+QMenu::item {
+    padding: 0.25em 0.1em 0.4em 0.1em;
+}
+
+QComboBox QAbstractItemView::item {
+    min-height: 1.5em;
+}
+
+QTreeView::item {
+    padding-top: 5px;
+    padding-bottom: 4px;
+}
+
+QTreeView::item:selected {
+    padding-bottom: 3px;
+}
+
+QPushButton:focus {
+    border: 1px solid black;
+}
