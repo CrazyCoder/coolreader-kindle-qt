@@ -5,6 +5,10 @@ TEMPLATE = app
 target.path = /mnt/us/cr3
 INSTALLS += target
 
+trans.files = $$OUT_PWD/data/i18n/*.qm
+trans.path = /mnt/us/cr3/data/i18n
+INSTALLS += trans
+
 UI_DIR = .ui
 MOC_DIR = .moc
 OBJECTS_DIR = .obj
@@ -23,7 +27,7 @@ debug:DEFINES += _DEBUG=1
 
 QMAKE_CFLAGS_WARN_ON = -Wall -Wno-unused-parameter
 QMAKE_CXXFLAGS_WARN_ON = -Wall -Wno-unused-parameter
-QMAKE_POST_LINK=$(STRIP) -s $(TARGET)
+QMAKE_POST_LINK = $(STRIP) -s $(TARGET)
 
 INCLUDEPATH += $$(QTDIR)/include/freetype2 \
     ../../crengine/crengine/include \
@@ -74,6 +78,13 @@ TRANSLATIONS += i18n/Russian.ts \
     i18n/Hungarian.ts
 
 RESOURCES += cr3res.qrc
+
+lrelease.input = TRANSLATIONS
+lrelease.output = data/i18n/${QMAKE_FILE_BASE}.qm
+lrelease.commands = $$[QT_INSTALL_BINS]/lrelease -silent ${QMAKE_FILE_IN} -qm data/i18n/${QMAKE_FILE_BASE}.qm
+lrelease.CONFIG += no_link target_predeps
+QMAKE_EXTRA_COMPILERS += lrelease
+DEPENDPATH += i18n
 
 LIBS += -lQtGui -lQtCore -lQtNetwork -lQtDBus -lpthread -ldl
 
