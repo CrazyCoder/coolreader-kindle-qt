@@ -3,13 +3,9 @@
 #include "mainwindow.h"
 
 #ifndef i386
-#include "../../drivers/QKindleFb/qkindlefb.h"
-
 #include "touchscreen.h"
 TouchScreen *pTouch;
-
 #endif
-
 
 MyApplication *pMyApp;
 
@@ -91,8 +87,7 @@ int main(int argc, char *argv[])
         if (m == Device::KPW || m == Device::KT) style = "stylesheet_pw.qss";
         QFile qss(QDir::toNativeSeparators(cr2qt(datadir)) + style);
         // set up full update interval for the graphics driver
-        QKindleFb *pscreen = static_cast<QKindleFb*>(QScreen::instance());
-        pscreen->setFullUpdateEvery(props->getIntDef(PROP_DISPLAY_FULL_UPDATE_INTERVAL, 1));
+        Device::setFullScreenUpdateEvery(props->getIntDef(PROP_DISPLAY_FULL_UPDATE_INTERVAL, 1));
 #else
         QFile qss(QDir::toNativeSeparators(cr2qt(datadir)) + "stylesheet_k3.qss");
 #endif
@@ -252,8 +247,9 @@ bool myEventFilter(void *message, long *)
 {
     QWSEvent* pev = static_cast<QWSEvent*>(message);
     QWSKeyEvent* pke = static_cast<QWSKeyEvent*>(message);
+#ifndef i386
     QWSMouseEvent* pme = pev->asMouse();
-
+#endif
     if(pev->type == QWSEvent::Key)
     {
 #ifdef i386
