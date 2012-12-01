@@ -319,6 +319,9 @@ void MainWindow::contextMenu( QPoint pos )
     menu->addAction(ui->actionAddBookmark);
     menu->addAction(ui->actionHide);
     menu->addAction(ui->actionClose);
+
+    new QShortcut(Qt::Key_Menu, menu, SLOT(hide()));
+
     menuActive = true;
     menu->exec(ui->view->mapToGlobal(pos));
     menuActive = false;
