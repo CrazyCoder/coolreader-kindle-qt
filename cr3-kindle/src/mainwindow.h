@@ -18,6 +18,7 @@
 #include <QClipboard>
 #include <QWSServer>
 #include <QTimer>
+#include <QShortcut>
 
 #include <device.h>
 
