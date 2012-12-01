@@ -401,6 +401,8 @@ bool TocDlg::setCurrentItemFirstInPage(int page_num,LVTocItem * item_top,QTreeWi
 
 void TocDlg::movePage()
 {
+    Device::forceFullScreenUpdate();
+
     QScrollBar * scrollBar = m_ui->treeWidget->verticalScrollBar();
     scrollBar->setMaximum((pageCount-1) * pageStrCount);
     scrollBar->setValue(curPage*pageStrCount-pageStrCount);

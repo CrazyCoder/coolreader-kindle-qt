@@ -15,6 +15,8 @@
 #include "cr3widget.h"
 #include "crqtutil.h"
 
+#include "device/device.h"
+
 namespace Ui {
 class OpenFileDlg;
 }

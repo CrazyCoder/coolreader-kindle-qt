@@ -123,6 +123,8 @@ void OpenFileDlg::FillFileList()
 
 void OpenFileDlg::ShowPage(int updown)
 {
+    Device::forceFullScreenUpdate();
+
     if(updown>0) {
         if(curPage+1>pageCount) curPage=0;
         curPage+=1;

@@ -14,6 +14,7 @@
 #include "crqtutil.h"
 #include "lvdocview.h"
 
+#include "device/device.h"
 
 namespace Ui {
 class RecentBooksDlg;

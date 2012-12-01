@@ -96,6 +96,8 @@ void RecentBooksDlg::SetPageCount()
 
 void RecentBooksDlg::ShowPage(int updown, int selectRow)
 {
+    Device::forceFullScreenUpdate();
+
     if(updown>0) {
         if(curPage+1>pageCount) curPage=0;
         curPage+=1;
