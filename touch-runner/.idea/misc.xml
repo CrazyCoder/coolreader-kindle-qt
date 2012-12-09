@@ -6,14 +6,6 @@
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_4" assert-keyword="true" jdk-15="false" project-jdk-name="IDEA jdk" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
-  <component name="PyConsoleOptionsProvider">
-    <option name="myPythonConsoleState">
-      <PyConsoleSettings />
-    </option>
-    <option name="myDjangoConsoleState">
-      <PyConsoleSettings />
-    </option>
-  </component>
   <component name="SvnBranchConfigurationManager">
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>

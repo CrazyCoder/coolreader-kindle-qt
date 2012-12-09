@@ -20,11 +20,20 @@ import java.util.List;
  */
 public abstract class RunnerKindlet extends SuicidalKindlet implements CommandExecuter {
   protected void onCreate(final KindletContext context) {
-    SwingUtilities.invokeLater(new Runnable() {
+    new Thread() {
       public void run() {
-        checkJailBreak(context);
+        try {
+          while (!(context.getRootContainer().isValid() && context.getRootContainer().isVisible())) {
+            Thread.sleep(100);
+          }
+        } catch (Exception ignored) {}
+        SwingUtilities.invokeLater(new Runnable() {
+          public void run() {
+            checkJailBreak(context);
+          }
+        });
       }
-    });
+    }.start();
   }
 
   private void checkJailBreak(KindletContext ctx) {

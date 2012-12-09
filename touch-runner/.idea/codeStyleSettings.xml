@@ -154,6 +154,22 @@
             <option name="TAB_SIZE" value="2" />
           </indentOptions>
         </codeStyleSettings>
+        <codeStyleSettings language="PHP">
+          <option name="ALIGN_MULTILINE_CHAINED_METHODS" value="true" />
+          <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
+          <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
+          <option name="ALIGN_MULTILINE_TERNARY_OPERATION" value="true" />
+          <option name="ALIGN_MULTILINE_EXTENDS_LIST" value="true" />
+          <option name="ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION" value="true" />
+          <option name="BINARY_OPERATION_WRAP" value="1" />
+          <option name="KEEP_SIMPLE_METHODS_IN_ONE_LINE" value="true" />
+          <option name="ASSIGNMENT_WRAP" value="1" />
+          <option name="PARENT_SETTINGS_INSTALLED" value="true" />
+        </codeStyleSettings>
+        <codeStyleSettings language="Python">
+          <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
+          <option name="PARENT_SETTINGS_INSTALLED" value="true" />
+        </codeStyleSettings>
         <codeStyleSettings language="SASS">
           <indentOptions>
             <option name="CONTINUATION_INDENT_SIZE" value="2" />
