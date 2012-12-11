@@ -89,11 +89,12 @@ SettingsDlg::SettingsDlg(QWidget *parent, CR3View * docView ) :
     // translations
     QString v = m_props->getStringDef(PROP_WINDOW_LANG, "English");
     QDir Dir(qApp->applicationDirPath() + QDir::toNativeSeparators(QString("/data/i18n")));
-    QStringList Filter;
-    Filter << "*.qm";
-    QStringList Files = Dir.entryList(Filter, QDir::Files, QDir::Name);
+    QStringList filter;
+    filter << "*.qm";
+    QStringList files = Dir.entryList(filter, QDir::Files, QDir::Name);
     m_ui->cbLanguage->addItem("English");
-    foreach(const QString &str, Files) {
+    foreach(const QString &str, files) {
+        if (str.contains("_")) continue; // ignore qt_ translations
         QString s = str;
         s.chop(3);
         m_ui->cbLanguage->addItem(s);

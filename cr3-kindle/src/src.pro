@@ -75,13 +75,20 @@ TRANSLATIONS += i18n/Russian.ts \
     i18n/Ukrainian.ts \
     i18n/French.ts \
     i18n/Italian.ts \
-    i18n/Hungarian.ts
+    i18n/Hungarian.ts \
+    i18n/German.ts
+
+QT_TRANSLATIONS += i18n/qt_ru.ts \
+    i18n/qt_uk.ts \
+    i18n/qt_fr.ts \
+    i18n/qt_hu.ts \
+    i18n/qt_de.ts
 
 RESOURCES += cr3res.qrc
 
-lrelease.input = TRANSLATIONS
+lrelease.input = TRANSLATIONS + QT_TRANSLATIONS
 lrelease.output = data/i18n/${QMAKE_FILE_BASE}.qm
-lrelease.commands = $$[QT_INSTALL_BINS]/lrelease -silent ${QMAKE_FILE_IN} -qm data/i18n/${QMAKE_FILE_BASE}.qm
+lrelease.commands = $$[QT_INSTALL_BINS]/lrelease -silent -compress ${QMAKE_FILE_IN} -qm data/i18n/${QMAKE_FILE_BASE}.qm
 lrelease.CONFIG += no_link target_predeps
 QMAKE_EXTRA_COMPILERS += lrelease
 DEPENDPATH += i18n

@@ -94,13 +94,31 @@ int main(int argc, char *argv[])
             a.setStyleSheet(qss.readAll());
             qss.close();
         }
+
+        QMap<QString, QString> langToCode;
+        langToCode["Russian"]   = "ru";
+        langToCode["French"]    = "fr";
+        langToCode["Hungarian"] = "hu";
+        langToCode["Italian"]   = "it";
+        langToCode["German"]    = "de";
+        langToCode["Ukrainian"] = "uk";
+
         QString translations = cr2qt(datadir) + "i18n";
-        QTranslator myappTranslator;
-        if(!lang.empty() && lang.compare(L"English")) {
-            if(myappTranslator.load(cr2qt(lang), translations))
+        QTranslator myappTranslator, qtr;
+        if (!lang.empty() && lang.compare(L"English")) {
+            QString lng = cr2qt(lang);
+            if (myappTranslator.load(lng, translations)) {
+                // default translator for Qt standard dialogs
+                if (qtr.load("qt_" + langToCode[lng], translations)) {
+                    QApplication::installTranslator(&qtr);
+                } else {
+                    qDebug() << "Failed to load Qt translation for " << lng;
+                }
+                // load after default to allow overriding translations
                 QApplication::installTranslator(&myappTranslator);
-            else
-                qDebug("Can`t load translation file %s from dir %s", UnicodeToUtf8(lang).c_str(), UnicodeToUtf8(qt2cr(translations)).c_str());
+            } else {
+                qDebug() << "Can`t load translation file " << lng << " from dir " << translations;
+            }
         }
 
         (void) signal(SIGUSR1, sigCatcher);
