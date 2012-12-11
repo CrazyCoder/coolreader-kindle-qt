@@ -252,23 +252,15 @@ void RecentBooksDlg::removeFile(LVPtrVector<CRFileHistRecord> & files, int num)
         m_docview->loadDocument(cr2qt(files[num-1]->getFilePathName()));
 
         // remove cache file
-        QString filename = cr2qt(files.get(num-1)->getFileName());
-        filename = cr2qt(m_docview->getDocView()->getDocProps()->getStringDef(DOC_PROP_FILE_NAME));
-
-        // Уточняем CRC удаляемого файла
         lUInt32 crc = m_docview->getDocView()->getDocProps()->getIntDef(DOC_PROP_FILE_CRC32, 0);
-        char s[16];
-        sprintf(s, ".%08x", (unsigned)crc);
-        filename = filename+ QString(s);
+        QString cachePattern;
+        cachePattern.sprintf("*.%08x*.cr3", crc);
 
         // Возвращаем активным первоначально просматриваемый документ (он сейчас первым в списке истории стоит)
         m_docview->loadDocument(cr2qt(files[1]->getFilePathName()));
-        //	// для отладки
-
-        // trim file extension, need for archive files
 
         QDir Dir(qApp->applicationDirPath() + QDir::toNativeSeparators(QString("/data/cache/")));
-        QStringList fileList = Dir.entryList(QStringList() << filename + "*.cr3", QDir::Files);
+        QStringList fileList = Dir.entryList(QStringList() << cachePattern + "*.cr3", QDir::Files);
         if(fileList.count())
             Dir.remove(fileList.at(0));
 

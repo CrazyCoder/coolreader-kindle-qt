@@ -214,13 +214,10 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
                     // делаем активным найденный документ чтобы узнать его истинное название файла
                     if(num>0)
                         m_docview->loadDocument(cr2qt(files[num]->getFilePathName()));
-                    QString filename1 = cr2qt(files.get(num)->getFileName());
-                    filename1 = cr2qt(m_docview->getDocView()->getDocProps()->getStringDef(DOC_PROP_FILE_NAME));
                     // Уточняем CRC удаляемого файла
                     lUInt32 crc = m_docview->getDocView()->getDocProps()->getIntDef(DOC_PROP_FILE_CRC32, 0);
-                    char s[16];
-                    sprintf(s, ".%08x", (unsigned)crc);
-                    filename1 = filename1+ QString(s);
+                    QString cachePattern;
+                    cachePattern.sprintf("*.%08x*.cr3", crc);
                     // делаем активным опять предыдущий документ
                     if(files.length()>1) {
                         m_docview->loadDocument(cr2qt(files[1]->getFilePathName()));
@@ -232,7 +229,7 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
 
                     // trim file extension, need for archive files
                     QDir Dir(qApp->applicationDirPath() + QDir::toNativeSeparators(QString("/data/cache/")));
-                    QStringList fileList1 = Dir.entryList(QStringList() << filename1 + "*.cr3", QDir::Files);
+                    QStringList fileList1 = Dir.entryList(QStringList() << cachePattern, QDir::Files);
                     if(fileList1.count())
                         Dir.remove(fileList1.at(0));
 
