@@ -202,12 +202,15 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
             if(QMessageBox::question(this, tr("Remove file"), tr("Do you really want to remove file ")+ItemText+"?", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes) {
                 // Удаление из истории и файла кеша
                 LVPtrVector<CRFileHistRecord> & files = m_docview->getDocView()->getHistory()->getRecords();
-                int num=-1;
+                int num = -1;
                 QString filenamepath;
                 // ищем в истории файл с таким путём и названием архива
-                for(int i=0;i<files.length();i++) {
+                for(int i=0; i<files.length(); i++) {
                     filenamepath = cr2qt(files.get(i)->getFilePathName());
-                    if(fileName == filenamepath) num = i;
+                    if(fileName == filenamepath) {
+                        num = i;
+                        break;
+                    }
                 }
                 // Найдена запись в истории, удаляем саму запись и нужный файл кеша
                 if(num>-1){
@@ -227,7 +230,6 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
                         return;
                     }
 
-                    // trim file extension, need for archive files
                     QDir Dir(qApp->applicationDirPath() + QDir::toNativeSeparators(QString("/data/cache/")));
                     QStringList fileList1 = Dir.entryList(QStringList() << cachePattern, QDir::Files);
                     if(fileList1.count())
@@ -344,65 +346,34 @@ void OpenFileDlg::on_actionSelectFile_triggered()
             curPage=0;
             ShowPage(1);
         } else {
-            // Удаление из истории и файла кеша
-            LVPtrVector<CRFileHistRecord> & files = m_docview->getDocView()->getHistory()->getRecords();
-            int num=-1;
+            // Search history for files with the same path
+            LVPtrVector<CRFileHistRecord> & files1 = m_docview->getDocView()->getHistory()->getRecords();
+            int num = -1;
             QString filenamepath;
-            // ищем в истории файл с таким путём и названием архива
-            for(int i=0;i<files.length();i++) {
-                filenamepath = cr2qt(files.get(i)->getFilePathName());
-                if(fileName == filenamepath) num = i;
-            }
-            lvpos_t file_size1;
-            // Проверка - не лежит ли в истории файл с таким же путём и названием
-            if(fileName.length()>0){
-                // Найдена запись в истории, удаляем саму запись и нужный файл кеша
-                if(num>-1){
-                    file_size1 = files.get(num)->getFileSize();
-
-                    // делаем активным найденный документ чтобы узнать его истинное название файла
-                    if(num>=0) {
-                        QString filename1;
-                        filename1 = cr2qt(files.get(num)->getFileName());
-                        // Уточняем CRC удаляемого файла
-                        // делаем активным опять предыдущий документ
-                        // trim file extension, need for archive files
-                        int pos = filename1.lastIndexOf(".");
-                        if(pos != -1) filename1.resize(pos);
-                        // remove cache file
-                        QDir Dir(qApp->applicationDirPath() + QDir::toNativeSeparators(QString("/data/cache/")));
-                        QStringList fileList1 = Dir.entryList(QStringList() << filename1 + "*.cr3", QDir::Files);
-                        if(fileList1.count())
-                            Dir.remove(fileList1.at(0));
-                        fileList1 = Dir.entryList(QStringList() << filename1 + "*.cr3", QDir::Files);
-                        if(fileList1.count())
-                            Dir.remove(fileList1.at(0));
-
-                        // Удаление записи истории
-
-                        // Загружаем новую книгу
-                        m_docview->loadDocument(fileName);
-
-                        LVPtrVector<CRFileHistRecord> & files1 = m_docview->getDocView()->getHistory()->getRecords();
-                        lvpos_t file_size2 = files.get(0)->getFileSize();
-                        if(num>-1){
-                            // Удаление записи истории
-                            if (file_size1 != file_size2) {
-                                QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Info"), tr("Other File with such FilePath in history"), QMessageBox::Close, this );
-                                mb->exec();
-                                files1.remove(num+1);
-                            }
-                        }
-                    }
-                    // Удаление из истории
-                    // ищем в истории файл с таким путём и названием архива
-                    // Найдена запись в истории, удаляем саму запись
+            for(int i=0; i<files1.length(); i++) {
+                filenamepath = cr2qt(files1.get(i)->getFilePathName());
+                if(fileName == filenamepath) {
+                    num = i;
+                    break;
                 }
             }
+            if(num >= 0) {
+                lvpos_t file_size1 = files1.get(num)->getFileSize();
 
-            // Загружаем новую книгу
-            m_docview->loadDocument(fileName);
-            // Зачем вообще нужен файл кеша? Все равно потом появится сам :-(
+                // make the new document active
+                m_docview->loadDocument(fileName);
+
+                LVPtrVector<CRFileHistRecord> & files2 = m_docview->getDocView()->getHistory()->getRecords();
+                lvpos_t file_size2 = files1.get(0)->getFileSize();
+                // file with the same name, but with different size exists in history, delete history entry
+                if (file_size1 != file_size2) {
+                    QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Info"), tr("Other File with such FilePath in history"), QMessageBox::Close, this );
+                    mb->exec();
+                    files2.remove(num + 1);
+                }
+            } else {
+                m_docview->loadDocument(fileName);
+            }
             close();
         }
     }
