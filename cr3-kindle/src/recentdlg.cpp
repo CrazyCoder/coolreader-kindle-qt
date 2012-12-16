@@ -260,7 +260,7 @@ void RecentBooksDlg::removeFile(LVPtrVector<CRFileHistRecord> & files, int num)
         m_docview->loadDocument(cr2qt(files[1]->getFilePathName()));
 
         QDir Dir(qApp->applicationDirPath() + QDir::toNativeSeparators(QString("/data/cache/")));
-        QStringList fileList = Dir.entryList(QStringList() << cachePattern + "*.cr3", QDir::Files);
+        QStringList fileList = Dir.entryList(QStringList() << cachePattern, QDir::Files);
         if(fileList.count())
             Dir.remove(fileList.at(0));
 
