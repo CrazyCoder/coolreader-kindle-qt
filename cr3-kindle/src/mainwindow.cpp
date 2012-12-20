@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     screenSaverMode = false;
     menuActive = false;
     lastPage = 0;
+    menu = 0;
 
     ui->setupUi(this);
 
@@ -305,22 +306,43 @@ void MainWindow::onPropsChange(PropsRef props)
 {
 }
 
+void MainWindow::addMenuAction(QAction *action)
+{
+    if (menu) {
+        // shortcuts are displayed in menu only if device has a keyboard
+        QString text;
+        if (Device::hasKeyboard()) {
+            if (action->text().contains('\t')) {
+                text = action->text(); // shortcut text already present
+            } else {
+                text = action->text() + '\t' + action->shortcut().toString(); // add shortcut text
+            }
+        } else {
+            text = action->text().left(action->text().indexOf('\t')); // strip manually added shortcut text
+        }
+        // a little hack to specify default SLOT depending on the object name
+        menu->addAction(text, this, QString("1on_%1_triggered()").arg(action->objectName()).toStdString().c_str());
+    }
+}
+
 void MainWindow::contextMenu( QPoint pos )
 {
-    QMenu *menu = new QMenu;
+    if (!menu) {
+        menu = new QMenu;
 
-    menu->addAction(ui->actionOpen);
-    menu->addAction(ui->actionRecentBooks);
-    menu->addAction(ui->actionTOC);
-    menu->addAction(ui->actionFindText);
-    menu->addAction(ui->actionSettings);
-    menu->addAction(ui->actionFileProperties);
-    menu->addAction(ui->actionShowBookmarksList);
-    menu->addAction(ui->actionAddBookmark);
-    menu->addAction(ui->actionHide);
-    menu->addAction(ui->actionClose);
+        addMenuAction(ui->actionOpen);
+        addMenuAction(ui->actionRecentBooks);
+        addMenuAction(ui->actionTOC);
+        if (Device::hasKeyboard()) addMenuAction(ui->actionFindText);   //TODO: enable when virtual keyboard is implemented
+        addMenuAction(ui->actionSettings);
+        addMenuAction(ui->actionFileProperties);
+        addMenuAction(ui->actionShowBookmarksList);
+        addMenuAction(ui->actionAddBookmark);
+        addMenuAction(ui->actionHide);
+        addMenuAction(ui->actionClose);
 
-    new QShortcut(Qt::Key_Menu, menu, SLOT(hide()));
+        new QShortcut(Device::isEmulator() ? Qt::Key_M : Qt::Key_Menu, menu, SLOT(hide()));
+    }
 
     menuActive = true;
     menu->exec(ui->view->mapToGlobal(pos));

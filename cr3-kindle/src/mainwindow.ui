@@ -237,13 +237,10 @@
   </action>
   <action name="actionHide">
    <property name="text">
-    <string notr="true">Hide</string>
+    <string>Minimize</string>
    </property>
    <property name="toolTip">
-    <string notr="true">Hide</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
+    <string>Minimize</string>
    </property>
   </action>
   <action name="actionAdjustBrightness">

@@ -99,13 +99,16 @@ public:
 private:
     Ui::MainWindowClass *ui;
     BrightnessControl *brDlg;
+    QMenu *menu;
 
     QString _filenameToOpen;
     CRGUIAcceleratorTableRef wndkeys;
+
     bool loadKeymaps(CRGUIWindowManager & winman, const char * locations[]);
     void doCommand(int cmd, int param = 0);
     bool isReservedKey(int key);
     bool isCoverScreensaver();
+    void addMenuAction(QAction *action);
 
     bool usbDriveMode;
     bool screenSaverMode;
