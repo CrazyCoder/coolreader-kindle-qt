@@ -364,7 +364,7 @@ void OpenFileDlg::on_actionSelectFile_triggered()
                 m_docview->loadDocument(fileName);
 
                 LVPtrVector<CRFileHistRecord> & files2 = m_docview->getDocView()->getHistory()->getRecords();
-                lvpos_t file_size2 = files1.get(0)->getFileSize();
+                lvpos_t file_size2 = files2.get(0)->getFileSize();
                 // file with the same name, but with different size exists in history, delete history entry
                 if (file_size1 != file_size2) {
                     QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Info"), tr("Other File with such FilePath in history"), QMessageBox::Close, this );
