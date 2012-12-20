@@ -48,6 +48,8 @@ TouchScreen::TouchScreen()
 {
     TOP_MARGIN = BOTTOM_MARGIN = RIGHT_MARGIN = LEFT_MARGIN = 33; // margins in %
 
+    if (not Device::hasLight()) TAP_ACTIONS[0][1] = Qt::Key_Menu; // menu instead of light control
+
     loadConfiguration();
 
     w = Device::getWidth();
