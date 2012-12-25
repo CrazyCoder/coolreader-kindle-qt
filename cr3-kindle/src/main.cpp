@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
         }
 #ifndef i386
         PrintString(1, 1, "crengine version: " + QString(CR_ENGINE_VERSION));
-        PrintString(1, 2, QString("buid date: %1 %2").arg(__DATE__).arg(__TIME__));
+        PrintString(1, 2, QString("build date: %1 %2").arg(__DATE__).arg(__TIME__));
         if (!Device::isTouch()) {
             QString message = "Please wait while application is loading...";
             int xpos = ((Device::getWidth()/12-1)-message.length())/2;
