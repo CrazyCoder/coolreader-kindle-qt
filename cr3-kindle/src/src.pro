@@ -76,7 +76,8 @@ TRANSLATIONS += i18n/Russian.ts \
     i18n/French.ts \
     i18n/Italian.ts \
     i18n/Hungarian.ts \
-    i18n/German.ts
+    i18n/German.ts \
+    i18n/Romanian.ts
 
 QT_TRANSLATIONS += i18n/qt_ru.ts \
     i18n/qt_uk.ts \
