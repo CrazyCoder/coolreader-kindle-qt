@@ -30,6 +30,22 @@ OpenFileDlg::OpenFileDlg(QWidget *parent, CR3View * docView):
     file = QIcon(":/icons/book.png");
     arrowUp = QIcon(":/icons/arrow_top.png");
 
+    QDir iconsDir(qApp->applicationDirPath() + QDir::toNativeSeparators(QString("/data/icons/")));
+    if (iconsDir.exists()) {
+        QFileInfo folderIcon(iconsDir, "folder.png");
+        if (folderIcon.exists()) {
+            folder = QIcon(folderIcon.absoluteFilePath());
+        }
+        QFileInfo bookIcon(iconsDir, "book.png");
+        if (bookIcon.exists()) {
+            file = QIcon(bookIcon.absoluteFilePath());
+        }
+        QFileInfo arrowIcon(iconsDir, "arrow_top.png");
+        if (arrowIcon.exists()) {
+            arrowUp = QIcon(arrowIcon.absoluteFilePath());
+        }
+    }
+
     m_ui->FileList->setItemDelegate(new FileListDelegate());
 
     QString lastPathName;
