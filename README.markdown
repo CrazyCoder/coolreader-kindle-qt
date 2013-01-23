@@ -39,13 +39,19 @@ Kindle Paperwhite and Touch Support
 
 Quick Installation Guide for K3/K4NT
 =========================================
+-   [Russian guide](http://kindle.copiny.com/question/details/id/66374)
+
 1.  [Jailbreak](http://wiki.mobileread.com/wiki/Kindle4NTHacking) your Kindle
 2.  Copy **update_cr3runner_n.n_install-k4.bin** from
     [cr3runner.zip](https://github.com/downloads/CrazyCoder/coolreader-kindle-qt/cr3runner.zip) to Kindle flash root
 3.  Copy all directories from **cr3-kindle-nnnn-nn-nn.zip** available in
     [Downloads](https://github.com/CrazyCoder/coolreader-kindle-qt/downloads) to Kindle flash root
-4.  From the Kindle **Settings** dialog open menu, run **Update Your Kindle**
-5.  After reboot you should have **Cool Reader** in the documents list, open it.
+4.  (optional, but recommended) Download the latest test version as the 
+    [repository snapshot zip](https://github.com/CrazyCoder/coolreader-kindle-qt/zipball/master) and copy all the files
+    from the **dist** folder replacing all existing file on the connected Kindle (this way you update to the most recent
+    version with all the latest changes)
+5.  From the Kindle **Settings** dialog open menu, run **Update Your Kindle**
+6.  After reboot you should have **Cool Reader** in the documents list, open it.
 
 Kindle 3/DX owners can also use [launchpad](http://www.mobileread.com/forums/showthread.php?t=97636).
 
