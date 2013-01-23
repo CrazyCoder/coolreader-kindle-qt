@@ -14,6 +14,7 @@
 #include "lvstream.h"
 #include "cr3widget.h"
 #include "crqtutil.h"
+#include "settings.h"
 
 #include "device/device.h"
 
@@ -90,7 +91,7 @@ private slots:
     void on_actionRemoveFile_triggered();
 
 private:
-    void FillFileList();
+    void fillFileList();
     void ShowPage(int updown);
     Ui::OpenFileDlg *m_ui;
     CR3View * m_docview;

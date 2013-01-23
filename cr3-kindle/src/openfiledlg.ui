@@ -27,7 +27,7 @@
     <number>1</number>
    </property>
    <item>
-    <widget class="QListWidget" name="FileList">
+    <widget class="QListWidget" name="fileList">
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
