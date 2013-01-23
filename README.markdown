@@ -48,7 +48,7 @@ Quick Installation Guide for K3/K4NT
     [Downloads](https://github.com/CrazyCoder/coolreader-kindle-qt/downloads) to Kindle flash root
 4.  (optional, but recommended) Download the latest test version as the 
     [repository snapshot zip](https://github.com/CrazyCoder/coolreader-kindle-qt/zipball/master) and copy all the files
-    from the **dist** folder replacing all existing file on the connected Kindle (this way you update to the most recent
+    from the **dist** folder replacing all existing files on the connected Kindle (this way you update to the most recent
     version with all the latest changes)
 5.  From the Kindle **Settings** dialog open menu, run **Update Your Kindle**
 6.  After reboot you should have **Cool Reader** in the documents list, open it.
