@@ -68,12 +68,12 @@ Device::Device()
         case 0xB012: // ???
             m_model = KT;
             break;
-        case 0x9023:
         case 0xB023:
             m_model = K4NTB;
             break;
         case 0xB01B:
         case 0xB01D:
+        case 0xB01F:
         case 0xB024:
             m_model = KPW;
             break;
