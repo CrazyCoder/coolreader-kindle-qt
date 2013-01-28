@@ -131,17 +131,16 @@ void OpenFileDlg::fillFileList()
            << "*.html" << "*.htm" << "*.tcr" << "*.pdb" << "*.chm" << "*.mobi" << "*.doc" << "*.azw";
     curFileList+= Dir.entryList(Filter, QDir::Files, QDir::Name);
 
-    int count = curFileList.count();
     int rc = m_docview->rowCount*2;
 
     if (isUpdirOnEveryPage && curFileList.at(0) == "..") {
         // add updir entry on every page except first
-        for (int i = 1; i < count; i++) {
+        for (int i = 1; i < curFileList.count(); i++) {
             if (i % rc == 0) curFileList.insert(i, "..");
         }
-        count = curFileList.count(); // update count
     }
 
+    int count = curFileList.count();
     pageCount = 1;
     if (count > rc) {
         pageCount = count / rc;
