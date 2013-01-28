@@ -135,20 +135,17 @@ void OpenFileDlg::fillFileList()
     int rc = m_docview->rowCount*2;
 
     if (isUpdirOnEveryPage && curFileList.at(0) == "..") {
-        // + updir entry on every page, first doesn't count
-        int upDirCount = count / rc - 1;
-        if (upDirCount > 0) {
-            count += upDirCount;
-            if (count % rc == 1) {
-                count--; // to avoid a new page with just updir
-            }
+        // add updir entry on every page except first
+        for (int i = 1; i < count; i++) {
+            if (i % rc == 0) curFileList.insert(i, "..");
         }
+        count = curFileList.count(); // update count
     }
 
     pageCount = 1;
-    if(count>rc) {
-        pageCount = count/rc;
-        if(count%rc) pageCount+=1;
+    if (count > rc) {
+        pageCount = count / rc;
+        if(count % rc) pageCount += 1;
     }
 }
 
@@ -184,7 +181,7 @@ void OpenFileDlg::ShowPage(int updown)
         pItem->setIcon(arrowUp);
         m_ui->fileList->addItem(pItem);
         i++;
-        if (curPage == 1) startPos++;
+        startPos++;
     }
 
     for(int k=startPos; (k<curFileList.count()) && (i<rc); ++k, ++i) {
