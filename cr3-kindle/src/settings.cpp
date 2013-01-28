@@ -56,6 +56,14 @@ SettingsDlg::SettingsDlg(QWidget *parent, CR3View * docView ) :
 
     QStringList faceList;
     crGetFontFaceList(faceList);
+
+    // fonts that are known to cause problems
+    QStringList blackListFonts = QStringList() << "HYGothic" << "HYMyeongJo" << "MYing Hei T" << "Song T";
+    QString toRemove;
+    foreach (toRemove, blackListFonts) {
+        faceList.removeAll(toRemove);
+    }
+
     m_ui->cbTextFontFace->addItems(faceList);
     m_ui->cbTitleFontFace->addItems(faceList);
 
