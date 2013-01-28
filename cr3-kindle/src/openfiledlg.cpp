@@ -46,6 +46,8 @@ OpenFileDlg::OpenFileDlg(QWidget *parent, CR3View * docView):
         }
     }
 
+    isUpdirOnEveryPage = m_docview->getOptions()->getIntDef(PROP_UPDIR_ON_EVERY_PAGE, 0) == 1;
+
     m_ui->fileList->setItemDelegate(new FileListDelegate());
 
     QString lastPathName;
@@ -130,8 +132,20 @@ void OpenFileDlg::fillFileList()
     curFileList+= Dir.entryList(Filter, QDir::Files, QDir::Name);
 
     int count = curFileList.count();
-    pageCount = 1;
     int rc = m_docview->rowCount*2;
+
+    if (isUpdirOnEveryPage && curFileList.at(0) == "..") {
+        // + updir entry on every page, first doesn't count
+        int upDirCount = count / rc - 1;
+        if (upDirCount > 0) {
+            count += upDirCount;
+            if (count % rc == 1) {
+                count--; // to avoid a new page with just updir
+            }
+        }
+    }
+
+    pageCount = 1;
     if(count>rc) {
         pageCount = count/rc;
         if(count%rc) pageCount+=1;
@@ -162,7 +176,6 @@ void OpenFileDlg::ShowPage(int updown)
     int i=0;
     int startPos = ((curPage-1)*rc);
 
-    bool isUpdirOnEveryPage = m_docview->getOptions()->getIntDef(PROP_UPDIR_ON_EVERY_PAGE, 0) == 1;
     bool isUpdir = (isUpdirOnEveryPage || startPos == 0) && curFileList.at(0) == "..";
 
     if (isUpdir) {
@@ -171,7 +184,7 @@ void OpenFileDlg::ShowPage(int updown)
         pItem->setIcon(arrowUp);
         m_ui->fileList->addItem(pItem);
         i++;
-        startPos++;
+        if (curPage == 1) startPos++;
     }
 
     for(int k=startPos; (k<curFileList.count()) && (i<rc); ++k, ++i) {

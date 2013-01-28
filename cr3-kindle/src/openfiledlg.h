@@ -101,6 +101,7 @@ private:
     QString titleMask;
     int dirCount;
     int rowCount;
+    bool isUpdirOnEveryPage;
 };
 
 #endif // OPENFILEDLG_H
