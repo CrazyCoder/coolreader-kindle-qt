@@ -29,6 +29,8 @@ RecentBooksDlg::RecentBooksDlg(QWidget *parent, CR3View * docView ) :
     m_ui->tableWidget->horizontalHeader()->setResizeMode(0, QHeaderView::Stretch);
     m_ui->tableWidget->horizontalHeader()->setResizeMode(1, QHeaderView::ResizeToContents);
 
+    isCyclic = m_docview->getOptions()->getIntDef(PROP_CYCLIC_LIST_PAGES, 1) == 1;
+
     int rc = m_docview->rowCount*2;
     int h  = m_docview->height() -2 - (qApp->font().pointSize() + rc);
     m_ui->tableWidget->verticalHeader()->setResizeMode(QHeaderView::Custom);
@@ -98,11 +100,11 @@ void RecentBooksDlg::ShowPage(int updown, int selectRow)
 {
     Device::forceFullScreenUpdate();
 
-    if(updown>0) {
-        if(curPage+1>pageCount) curPage=0;
+    if (updown > 0) {
+        if (curPage+1 > pageCount) curPage = isCyclic ? 0 : curPage - 1;
         curPage+=1;
     } else {
-        if(curPage-1<=0) curPage=pageCount+1;
+        if (curPage-1 <= 0) curPage = isCyclic ? pageCount+1 : 2;
         curPage-=1;
     }
     setWindowTitle(titleMask + " (" + QString::number(curPage) + "/" + QString::number(pageCount) + ")");

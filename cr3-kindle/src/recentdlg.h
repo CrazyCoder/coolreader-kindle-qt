@@ -13,6 +13,7 @@
 #include "cr3widget.h"
 #include "crqtutil.h"
 #include "lvdocview.h"
+#include "settings.h"
 
 #include "device/device.h"
 
@@ -46,6 +47,7 @@ private:
     void SetPageCount();
     // added 14.12.2011
     void removeFile(LVPtrVector<CRFileHistRecord> & files, int num);
+    bool isCyclic;
 private slots:
     void on_actionRemoveBook_triggered();
     void on_actionRemoveAll_triggered();

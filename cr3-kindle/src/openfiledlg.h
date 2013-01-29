@@ -102,6 +102,7 @@ private:
     int dirCount;
     int rowCount;
     bool isUpdirOnEveryPage;
+    bool isCyclic;
 };
 
 #endif // OPENFILEDLG_H

@@ -47,6 +47,7 @@ OpenFileDlg::OpenFileDlg(QWidget *parent, CR3View * docView):
     }
 
     isUpdirOnEveryPage = m_docview->getOptions()->getIntDef(PROP_UPDIR_ON_EVERY_PAGE, 0) == 1;
+    isCyclic = m_docview->getOptions()->getIntDef(PROP_CYCLIC_LIST_PAGES, 1) == 1;
 
     m_ui->fileList->setItemDelegate(new FileListDelegate());
 
@@ -152,11 +153,11 @@ void OpenFileDlg::ShowPage(int updown)
 {
     Device::forceFullScreenUpdate();
 
-    if(updown>0) {
-        if(curPage+1>pageCount) curPage=0;
+    if (updown > 0) {
+        if (curPage+1 > pageCount) curPage = isCyclic ? 0 : curPage - 1;
         curPage+=1;
     } else {
-        if(curPage-1<=0) curPage=pageCount+1;
+        if (curPage-1 <= 0) curPage = isCyclic ? pageCount+1 : 2;
         curPage-=1;
     }
     m_ui->fileList->clear();
