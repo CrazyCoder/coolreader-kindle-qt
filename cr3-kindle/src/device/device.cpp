@@ -73,6 +73,7 @@ Device::Device()
             m_model = K4NTB;
             break;
         case 0xB01B:
+        case 0xB01C:
         case 0xB01D:
         case 0xB01F:
         case 0xB024:
