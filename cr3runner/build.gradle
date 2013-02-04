@@ -8,7 +8,7 @@ targetCompatibility = 1.4
 
 version = '2.7'
 archivesBaseName = 'cr3runner'
-title = "Cool Reader"
+ext.title = "Cool Reader"
 eclipse.project.name = 'CR3Runner'
 
 dependencies {

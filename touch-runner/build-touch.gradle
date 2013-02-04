@@ -7,7 +7,7 @@ targetCompatibility = 1.4
 
 version = '3.0'
 archivesBaseName = 'TouchRunner'
-title = "Touch Runner"
+ext.title = "Touch Runner"
 
 dependencies {
   compile files("$env_libDir/Kindlet-2.2.jar")
@@ -15,7 +15,7 @@ dependencies {
   testCompile files(env_junit3jar)
 }
 
-depClasses = { files("lib/jailbreak.jar").collect { it.isDirectory() ? it : zipTree(it) } }
+ext.depClasses = { files("lib/jailbreak.jar").collect { it.isDirectory() ? it : zipTree(it) } }
 
 jar {
   manifest {
