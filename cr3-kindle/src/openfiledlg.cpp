@@ -398,7 +398,7 @@ void OpenFileDlg::on_actionSelectFile_triggered()
                 LVPtrVector<CRFileHistRecord> & files2 = m_docview->getDocView()->getHistory()->getRecords();
                 lvpos_t file_size2 = files2.get(0)->getFileSize();
                 // file with the same name, but with different size exists in history, delete history entry
-                bool shouldDeleteHistory = m_docview->getOptions()->getIntDef(PROP_KEEP_HISTORY_MINOR, 0) == 0 || abs(file_size1 - file_size2) > 5000;
+                bool shouldDeleteHistory = (m_docview->getOptions()->getIntDef(PROP_KEEP_HISTORY_MINOR, 0) == 0 && file_size1 != file_size2) || abs(file_size1 - file_size2) > 5000;
                 if (shouldDeleteHistory) { // do not remove from history if file size is almost the same (minor changes, edits)
                     QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Info"), tr("Other File with such FilePath in history"), QMessageBox::Close, this );
                     mb->exec();
