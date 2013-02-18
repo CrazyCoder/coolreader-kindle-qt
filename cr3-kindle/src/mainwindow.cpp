@@ -57,13 +57,15 @@ MainWindow::MainWindow(QWidget *parent)
     QString iniFile = dataDir + "cr3.ini";
     QString cssFile = dataDir + "fb2.css";
     QString hyphDir = dataDir + "hyph" + QDir::separator();
-    ldomDocCache::init(qt2cr(cacheDir), DOC_CACHE_SIZE);
-    ui->view->setPropsChangeCallback(this);
 
-    ui->view->loadCSS(cssFile);
     ui->view->setHyphDir(hyphDir);
+
+    ldomDocCache::init(qt2cr(cacheDir), DOC_CACHE_SIZE);
+
+    ui->view->setPropsChangeCallback(this);
     ui->view->loadSettings(iniFile);
     ui->view->loadHistory(histFile);
+    ui->view->loadCSS(cssFile);
 #if ENABLE_BOOKMARKS_DIR==1
     ui->view->setBookmarksDir(bookmarksDir);
 #endif

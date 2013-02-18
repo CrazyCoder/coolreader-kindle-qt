@@ -378,7 +378,7 @@ void CR3View::setHyphDir(QString dirname)
     _hyphDicts.clear();
     for ( int i=0; i<HyphMan::getDictList()->length(); i++ ) {
         HyphDictionary * item = HyphMan::getDictList()->get( i );
-        QString fn = cr2qt( item->getFilename() );
+        QString fn = cr2qt( item->getId() );
         _hyphDicts.append( fn );
     }
 }

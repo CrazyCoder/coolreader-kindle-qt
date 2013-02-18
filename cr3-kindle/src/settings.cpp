@@ -115,7 +115,7 @@ SettingsDlg::SettingsDlg(QWidget *parent, CR3View * docView ) :
     v = m_props->getStringDef(PROP_HYPHENATION_DICT,"@algorithm");
     for ( int i=0; i<HyphMan::getDictList()->length(); i++ ) {
         HyphDictionary * item = HyphMan::getDictList()->get( i );
-        if ( v == cr2qt(item->getFilename() ) )
+        if (v == cr2qt(item->getFilename() ) ||  v == cr2qt(item->getId() ))
             hi = i;
         QString s = cr2qt( item->getTitle() );
         if( item->getType()==HDT_NONE)
