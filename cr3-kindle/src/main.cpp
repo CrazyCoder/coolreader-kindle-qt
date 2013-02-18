@@ -53,7 +53,8 @@ int main(int argc, char *argv[])
             PrintString(xpos, ypos, message);
         }
 #endif
-
+        // to catch crashes and remove current cache file on crash (SIGSEGV etc.)
+        crSetSignalHandler();
         // set row count depending on device model (used in lists)
         int rc = props->getIntDef(PROP_WINDOW_ROW_COUNT, 0);
         if(!rc) {
