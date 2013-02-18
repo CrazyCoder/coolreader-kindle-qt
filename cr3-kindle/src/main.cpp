@@ -141,28 +141,41 @@ void ShutdownCREngine()
     CRLog::setLogger(NULL);
 }
 
-bool getDirectoryFonts( lString16Collection & pathList, lString16 ext, lString16Collection & fonts, bool absPath )
+bool getDirectoryFonts( lString16Collection & pathList, lString16Collection & ext, lString16Collection & fonts, bool absPath )
 {
     int foundCount = 0;
     lString16 path;
-    for (int di=0; di<pathList.length();di++ ) {
+    for ( int di=0; di<pathList.length();di++ ) {
         path = pathList[di];
         LVContainerRef dir = LVOpenDirectory(path.c_str());
-        if(!dir.isNull()) {
+        if ( !dir.isNull() ) {
             CRLog::trace("Checking directory %s", UnicodeToUtf8(path).c_str() );
-            for(int i=0; i < dir->GetObjectCount(); i++ ) {
+            for ( int i=0; i < dir->GetObjectCount(); i++ ) {
                 const LVContainerItemInfo * item = dir->GetObjectInfo(i);
                 lString16 fileName = item->GetName();
-                if ( !item->IsContainer() && fileName.length()>4 && lString16(fileName, fileName.length()-4, 4)==ext ) {
+                lString8 fn = UnicodeToLocal(fileName);
+                    //printf(" test(%s) ", fn.c_str() );
+                if ( !item->IsContainer() ) {
+                    bool found = false;
+                    lString16 lc = fileName;
+                    lc.lowercase();
+                    for ( int j=0; j<ext.length(); j++ ) {
+                        if ( lc.endsWith(ext[j]) ) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if ( !found )
+                        continue;
                     lString16 fn;
                     if ( absPath ) {
                         fn = path;
-                        if (!fn.empty() && fn[fn.length()-1]!=PATH_SEPARATOR_CHAR)
+                        if ( !fn.empty() && fn[fn.length()-1]!=PATH_SEPARATOR_CHAR)
                             fn << PATH_SEPARATOR_CHAR;
                     }
                     fn << fileName;
                     foundCount++;
-                    fonts.add(fn);
+                    fonts.add( fn );
                 }
             }
         }
@@ -174,13 +187,18 @@ bool InitCREngine( const char * exename, lString16Collection & fontDirs)
 {
     CRLog::trace("InitCREngine(%s)", exename);
 
-    InitFontManager(lString8());
+    InitFontManager(lString8::empty_str);
 
     // Load font definitions into font manager
     // fonts are in files font1.lbf, font2.lbf, ... font32.lbf
     // use fontconfig
 
-    lString16 fontExt = L".ttf";
+    lString16Collection fontExt;
+    fontExt.add(cs16(".ttf"));
+    fontExt.add(cs16(".otf"));
+    fontExt.add(cs16(".pfa"));
+    fontExt.add(cs16(".pfb"));
+
     lString16Collection fonts;
 
     getDirectoryFonts( fontDirs, fontExt, fonts, true );

@@ -57,7 +57,7 @@
 void InitCREngineLog(CRPropRef props);
 bool InitCREngine(const char * exename, lString16Collection & fontDirs);
 void ShutdownCREngine();
-bool getDirectoryFonts( lString16Collection & pathList, lString16 ext, lString16Collection & fonts, bool absPath );
+bool getDirectoryFonts( lString16Collection & pathList, lString16Collection & ext, lString16Collection & fonts, bool absPath );
 bool myEventFilter(void *message, long *result);
 #ifndef i386
 void PrintString(int x, int y, const QString message, const QString opt = "");
