@@ -33,7 +33,6 @@ public:
 protected:
     explicit RecentBooksDlg(QWidget *parent, CR3View * docView);
     virtual void changeEvent(QEvent *e);
-    bool eventFilter(QObject *obj, QEvent *event);
 private:
     Ui::RecentBooksDlg *m_ui;
     CR3View * m_docview;
@@ -43,8 +42,8 @@ private:
     int pageCount;
     int curPage;
     QString titleMask;
-    void ShowPage(int updown, int selectRow = 1);
-    void SetPageCount();
+    void showPage(int updown, int selectRow = 1);
+    void setPageCount();
     // added 14.12.2011
     void removeFile(LVPtrVector<CRFileHistRecord> & files, int num);
     bool isCyclic;

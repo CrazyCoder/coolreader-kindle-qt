@@ -32,17 +32,11 @@ RecentBooksDlg::RecentBooksDlg(QWidget *parent, CR3View * docView ) :
     isCyclic = m_docview->getOptions()->getIntDef(PROP_CYCLIC_LIST_PAGES, 1) == 1;
 
     int rc = m_docview->rowCount*2;
-    int h  = m_docview->height() -2 - (qApp->font().pointSize() + rc);
+
+    QFontMetrics fm(qApp->font());
+    int h = (m_docview->height() - fm.height() - 10);
     m_ui->tableWidget->verticalHeader()->setResizeMode(QHeaderView::Custom);
     m_ui->tableWidget->verticalHeader()->setDefaultSectionSize(h/rc);
-    h = h%rc;
-    int t, b;
-    if(h%2) {
-        t = h/2;
-        b = t + h%2;
-    } else
-        t = b = h/2;
-    m_ui->verticalLayout->setContentsMargins(0, t, 0, b);
     // fill rows
     QFont fontBold = m_ui->tableWidget->font();
     fontBold.setBold(true);
@@ -78,13 +72,13 @@ RecentBooksDlg::RecentBooksDlg(QWidget *parent, CR3View * docView ) :
 
     titleMask = windowTitle();
     docView->getDocView()->savePosition(); // to move current file to top
-    SetPageCount();
+    setPageCount();
     curPage=0;
 
-    ShowPage(1);
+    showPage(1);
 }
 
-void RecentBooksDlg::SetPageCount()
+void RecentBooksDlg::setPageCount()
 {
     LVPtrVector<CRFileHistRecord> & files = m_docview->getDocView()->getHistory()->getRecords();
     int count = files.length() - (m_docview->getDocView()->isDocumentOpened() ? 1 : 0);
@@ -96,7 +90,7 @@ void RecentBooksDlg::SetPageCount()
     }
 }
 
-void RecentBooksDlg::ShowPage(int updown, int selectRow)
+void RecentBooksDlg::showPage(int updown, int selectRow)
 {
     Device::forceFullScreenUpdate();
 
@@ -175,41 +169,6 @@ void RecentBooksDlg::changeEvent(QEvent *e)
     default:
         break;
     }
-}
-
-bool RecentBooksDlg::eventFilter(QObject *obj, QEvent *event)
-{
-    if(event->type() == QEvent::KeyPress) {
-        QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
-        QString text;
-        switch(keyEvent->key()) {
-        case Qt::Key_Up:
-            if(obj == m_ui->tableWidget) {
-
-                QScrollBar * scrollBar = m_ui->tableWidget->verticalScrollBar();
-                int pageStrCount = scrollBar->pageStep();
-                int fullStrCount = scrollBar->maximum()-scrollBar->minimum()+pageStrCount;
-
-                if(fullStrCount==pageStrCount) {
-                    pageCount = 1;
-                    //return;
-                }
-                if(pageStrCount==1) {
-                    scrollBar->setMaximum(fullStrCount*2);
-                    pageStrCount = scrollBar->pageStep();
-                }
-                pageCount = ceil((double)fullStrCount/pageStrCount);
-
-                if(((m_ui->tableWidget->currentRow()+1)/2 == 1) && (pageStrCount/2>1)){
-                }
-
-
-            }
-            break;
-            return true;
-        }
-    }
-    return false;
 }
 
 void RecentBooksDlg::openBook(int row)
@@ -307,7 +266,7 @@ void RecentBooksDlg::on_actionRemoveBook_triggered()
 
     removeFile(files, row);
 
-    SetPageCount();
+    setPageCount();
     if(curPage>pageCount)
         curPage-=1;
     curPage-=1;
@@ -319,15 +278,15 @@ void RecentBooksDlg::on_actionRemoveBook_triggered()
         cr = files.length()*2-3;
     if(cr<0) cr=1;
 
-    ShowPage(1, cr);
+    showPage(1, cr);
 }
 
 void RecentBooksDlg::on_actionNextPage_triggered()
 {
-    ShowPage(1);
+    showPage(1);
 }
 
 void RecentBooksDlg::on_actionPrevPage_triggered()
 {
-    ShowPage(-1);
+    showPage(-1);
 }
