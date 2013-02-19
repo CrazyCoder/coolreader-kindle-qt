@@ -55,22 +55,22 @@ OpenFileDlg::OpenFileDlg(QWidget *parent, CR3View * docView):
     QString lastName;
     if(!docView->GetLastPathName(&lastPathName))
 #ifdef i386
-        CurrentDir = "/home/";
+        currentDir = "/home/";
 #else
-        CurrentDir = "/mnt/us/documents/";
+        currentDir = "/mnt/us/documents/";
 #endif
     else {
         int pos = lastPathName.lastIndexOf("/");
-        CurrentDir = lastPathName.mid(0, pos+1);
+        currentDir = lastPathName.mid(0, pos+1);
         lastName = lastPathName.mid(pos+1);
     }
     do {
-        QDir Dir(CurrentDir);
+        QDir Dir(currentDir);
         if(Dir.exists()) break;
         // trim last "/"
-        CurrentDir.chop(1);
-        int pos = CurrentDir.lastIndexOf("/");
-        CurrentDir = CurrentDir.mid(0, pos+1);
+        currentDir.chop(1);
+        int pos = currentDir.lastIndexOf("/");
+        currentDir = currentDir.mid(0, pos+1);
         lastName = "";
     } while(true);
 
@@ -87,7 +87,7 @@ OpenFileDlg::OpenFileDlg(QWidget *parent, CR3View * docView):
         }
     }
 
-    ShowPage(1);
+    showPage(1);
     // selecting last opened book
     if(!lastName.isEmpty()) {
         QList<QListWidgetItem*> searchlist = m_ui->fileList->findItems(lastName, Qt::MatchExactly);
@@ -118,12 +118,12 @@ void OpenFileDlg::fillFileList()
     QDir::Filters filters;
 
 #ifdef i386
-    if(CurrentDir=="/") filters = QDir::AllDirs|QDir::NoDotAndDotDot;
+    if(currentDir=="/") filters = QDir::AllDirs|QDir::NoDotAndDotDot;
 #else
-    if(CurrentDir=="/mnt/us/") filters = QDir::AllDirs|QDir::NoDotAndDotDot;
+    if(currentDir=="/mnt/us/") filters = QDir::AllDirs|QDir::NoDotAndDotDot;
 #endif
     else filters = QDir::AllDirs|QDir::NoDot;
-    QDir Dir(CurrentDir);
+    QDir Dir(currentDir);
     curFileList=Dir.entryList(filters, QDir::Name);
     dirCount=curFileList.count();
 
@@ -149,7 +149,7 @@ void OpenFileDlg::fillFileList()
     }
 }
 
-void OpenFileDlg::ShowPage(int updown)
+void OpenFileDlg::showPage(int updown)
 {
     Device::forceFullScreenUpdate();
 
@@ -161,7 +161,7 @@ void OpenFileDlg::ShowPage(int updown)
         curPage-=1;
     }
     m_ui->fileList->clear();
-    setWindowTitle(titleMask + " (" + QString::number(curPage) + "/" + QString::number(pageCount) + ")");
+    updateTitle();
 
     QFontMetrics fm(qApp->font());
     int rc = m_docview->rowCount*2;
@@ -195,6 +195,11 @@ void OpenFileDlg::ShowPage(int updown)
     m_ui->fileList->setCurrentRow(0);
 }
 
+void OpenFileDlg::updateTitle()
+{
+    setWindowTitle("[" + QString::number(curPage) + "/" + QString::number(pageCount) + "] " + QDir(currentDir).dirName());
+}
+
 void OpenFileDlg::on_actionRemoveFile_triggered()
 {
     QListWidgetItem *item  = m_ui->fileList->currentItem();
@@ -207,7 +212,7 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
 
         int current_row = m_ui->fileList->currentRow();
         if (ItemText.length()==0) return;
-        QString fileName = CurrentDir + ItemText;
+        QString fileName = currentDir + ItemText;
         QFileInfo FileInfo(fileName);
         if(FileInfo.isDir()) {
             QDir::Filters filters;
@@ -225,7 +230,7 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
             } else {
                 QMessageBox * mb = new QMessageBox(QMessageBox::Information,"","", QMessageBox::Yes | QMessageBox::No, this);
                 if(mb->question(this, tr("Remove directory"), tr("Do you really want to remove directory ")+ItemText+"?", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes) {
-                    QDir Dir_file(QDir::toNativeSeparators(CurrentDir));
+                    QDir Dir_file(QDir::toNativeSeparators(currentDir));
                     isFileRemoved = Dir_file.rmdir(ItemText);
                 }
             }
@@ -273,7 +278,7 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
                     }
                 }
 
-                QDir Dir_file(QDir::toNativeSeparators(CurrentDir));
+                QDir Dir_file(QDir::toNativeSeparators(currentDir));
                 QStringList fileList = Dir_file.entryList(QStringList() << ItemText, QDir::Files);
                 if(fileList.count())
                     isFileRemoved = Dir_file.remove(fileList.at(0));
@@ -289,7 +294,7 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
             }
 
             m_ui->fileList->clear();
-            setWindowTitle(titleMask + " (" + QString::number(curPage) + "/" + QString::number(pageCount) + ")");
+            updateTitle();
 
             int rc = m_docview->rowCount*2;
             int h = (m_docview->height() -2 - (qApp->font().pointSize() + rc))/rc;
@@ -341,13 +346,13 @@ void OpenFileDlg::on_actionSelectFile_triggered()
     if(ItemText == "..")
     {
         int i;
-        for(i=CurrentDir.length()-1; i>1; i--) {
-            if(CurrentDir[i-1] == QChar('/')) break;
+        for(i=currentDir.length()-1; i>1; i--) {
+            if(currentDir[i-1] == QChar('/')) break;
         }
-        QString prevDir = CurrentDir.mid(i);
+        QString prevDir = currentDir.mid(i);
         prevDir.resize(prevDir.count()-1);
 
-        CurrentDir.resize(i);
+        currentDir.resize(i);
         fillFileList();
         // showing previous opened page
         int rc = m_docview->rowCount*2;
@@ -359,7 +364,7 @@ void OpenFileDlg::on_actionSelectFile_triggered()
                 if(pos%rc) curPage+=1;
             }
         }
-        ShowPage(1);
+        showPage(1);
         // selecting previous opened dir
         if(!prevDir.isEmpty()) {
             QList<QListWidgetItem*> searchlist = m_ui->fileList->findItems(prevDir, Qt::MatchExactly);
@@ -369,14 +374,14 @@ void OpenFileDlg::on_actionSelectFile_triggered()
     } else {
         if (ItemText.length()==0) return;
 
-        QString fileName = CurrentDir + ItemText;
+        QString fileName = currentDir + ItemText;
         QFileInfo FileInfo(fileName);
 
         if(FileInfo.isDir()) {
-            CurrentDir = fileName + QString("/");
+            currentDir = fileName + QString("/");
             fillFileList();
             curPage=0;
-            ShowPage(1);
+            showPage(1);
         } else {
             // Search history for files with the same path
             LVPtrVector<CRFileHistRecord> & files1 = m_docview->getDocView()->getHistory()->getRecords();
@@ -414,24 +419,24 @@ void OpenFileDlg::on_actionSelectFile_triggered()
 
 void OpenFileDlg::on_actionNextPage_triggered()
 {
-    ShowPage(1);
+    showPage(1);
 }
 
 void OpenFileDlg::on_actionPrevPage_triggered()
 {
-    ShowPage(-1);
+    showPage(-1);
 }
 
 void OpenFileDlg::on_actionGoToLastPage_triggered()
 {
     if(pageCount-1==0) return;
     curPage=pageCount-1;
-    ShowPage(1);
+    showPage(1);
 }
 
 void OpenFileDlg::on_actionGoToFirstPage_triggered()
 {
     if(curPage==1) return;
     curPage=0;
-    ShowPage(1);
+    showPage(1);
 }

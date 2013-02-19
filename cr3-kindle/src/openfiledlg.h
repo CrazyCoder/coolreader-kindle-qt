@@ -75,7 +75,7 @@ class OpenFileDlg : public QDialog {
 public:
     explicit OpenFileDlg(QWidget *parent, CR3View * docView);
     virtual ~OpenFileDlg();
-    QString CurrentDir;
+    QString currentDir;
 
     static bool showDlg(QWidget *parent, CR3View * docView);
 private slots:
@@ -92,7 +92,8 @@ private slots:
 
 private:
     void fillFileList();
-    void ShowPage(int updown);
+    void showPage(int updown);
+    void updateTitle();
     Ui::OpenFileDlg *m_ui;
     CR3View * m_docview;
     QIcon folder, file, arrowUp;
