@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 #ifndef i386
             switch(Device::getModel()) {
             case Device::KDX:
-                rc = 16;
+                rc = 20;
                 break;
             case Device::KT:
             case Device::KPW:
