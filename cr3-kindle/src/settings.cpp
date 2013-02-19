@@ -130,7 +130,7 @@ SettingsDlg::SettingsDlg(QWidget *parent, CR3View * docView ) :
     m_ui->sbFontGamma->setValue(fgamma);
 
     lString16 testPhrase = qt2cr(tr("The quick brown fox jumps over the lazy dog. "));
-    m_ui->crSample->getDocView()->createDefaultDocument(lString16(), testPhrase+testPhrase+testPhrase+testPhrase+testPhrase+testPhrase);
+    m_ui->crSample->getDocView()->createDefaultDocument(lString16::empty_str, testPhrase+testPhrase+testPhrase+testPhrase+testPhrase+testPhrase);
 
     updateStyleSample();
 

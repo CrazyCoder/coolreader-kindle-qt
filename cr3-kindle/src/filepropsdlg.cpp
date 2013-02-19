@@ -62,25 +62,25 @@ QString FilePropsDialog::getDocAuthors( const char * path, const char * delim )
         lString16 email = qt2cr(getDocText( (p + "/email").c_str(), " " ));
         lString16 s = firstName;
         if ( !middleName.empty() )
-            s << L" " << middleName;
+            s << " " << middleName;
         if ( !lastName.empty() ) {
             if ( !s.empty() )
-                s << L" ";
+                s << " ";
             s << lastName;
         }
         if ( !nickName.empty() ) {
             if ( !s.empty() )
-                s << L" ";
+                s << " ";
             s << nickName;
         }
         if ( !homePage.empty() ) {
             if ( !s.empty() )
-                s << L" ";
+                s << " ";
             s << homePage;
         }
         if ( !email.empty() ) {
             if ( !s.empty() )
-                s << L" ";
+                s << " ";
             s << email;
         }
         if ( s.empty() )

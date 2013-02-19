@@ -20,18 +20,18 @@ int main(int argc, char *argv[])
 #endif
         lString16 exedir = LVExtractPath(LocalToUnicode(lString8(argv[0])));
         LVAppendPathDelimiter(exedir);
-        lString16 datadir = exedir + L"data/";
-        lString16 exefontpath = exedir + L"fonts";
+        lString16 datadir = exedir + "data/";
+        lString16 exefontpath = exedir + "fonts";
 
         lString16Collection fontDirs;
         fontDirs.add(exefontpath);
 #ifndef i386
-        fontDirs.add(lString16(L"/usr/java/lib/fonts"));
-        fontDirs.add(lString16(L"/mnt/us/fonts"));
+        fontDirs.add("/usr/java/lib/fonts");
+        fontDirs.add("/mnt/us/fonts");
 #endif
         CRPropRef props = LVCreatePropsContainer();
         {
-            LVStreamRef cfg = LVOpenFileStream(UnicodeToUtf8(datadir + L"cr3.ini").data(), LVOM_READ);
+            LVStreamRef cfg = LVOpenFileStream(UnicodeToUtf8(datadir + "cr3.ini").data(), LVOM_READ);
             if(!cfg.isNull()) props->loadFromStream(cfg.get());
         }
 
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
 #else
             props->setInt(PROP_WINDOW_ROW_COUNT, 10);
 #endif
-            LVStreamRef cfg = LVOpenFileStream(UnicodeToUtf8(datadir + L"cr3.ini").data(), LVOM_WRITE);
+            LVStreamRef cfg = LVOpenFileStream(UnicodeToUtf8(datadir + "cr3.ini").data(), LVOM_WRITE);
             props->saveToStream(cfg.get());
         }
 
@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
 
         QString translations = cr2qt(datadir) + "i18n";
         QTranslator myappTranslator, qtr;
-        if (!lang.empty() && lang.compare(L"English")) {
+        if (!lang.empty() && lang.compare("English")) {
             QString lng = cr2qt(lang);
             if (myappTranslator.load(lng, translations)) {
                 // default translator for Qt standard dialogs
@@ -239,26 +239,26 @@ void InitCREngineLog(CRPropRef props)
     bool autoFlush = props->getBoolDef(PROP_LOG_AUTOFLUSH, false);
 
     CRLog::log_level level = CRLog::LL_INFO;
-    if ( loglevelstr==L"OFF" ) {
+    if ( loglevelstr=="OFF" ) {
         level = CRLog::LL_FATAL;
         logfname.clear();
-    } else if ( loglevelstr==L"FATAL" ) {
+    } else if ( loglevelstr=="FATAL" ) {
         level = CRLog::LL_FATAL;
-    } else if ( loglevelstr==L"ERROR" ) {
+    } else if ( loglevelstr=="ERROR" ) {
         level = CRLog::LL_ERROR;
-    } else if ( loglevelstr==L"WARN" ) {
+    } else if ( loglevelstr=="WARN" ) {
         level = CRLog::LL_WARN;
-    } else if ( loglevelstr==L"INFO" ) {
+    } else if ( loglevelstr=="INFO" ) {
         level = CRLog::LL_INFO;
-    } else if ( loglevelstr==L"DEBUG" ) {
+    } else if ( loglevelstr=="DEBUG" ) {
         level = CRLog::LL_DEBUG;
-    } else if ( loglevelstr==L"TRACE" ) {
+    } else if ( loglevelstr=="TRACE" ) {
         level = CRLog::LL_TRACE;
     }
     if ( !logfname.empty() ) {
-        if ( logfname==L"stdout" )
+        if ( logfname=="stdout" )
             CRLog::setStdoutLogger();
-        else if ( logfname==L"stderr" )
+        else if ( logfname=="stderr" )
             CRLog::setStderrLogger();
         else
             CRLog::setFileLogger(UnicodeToUtf8( logfname ).c_str(), autoFlush);

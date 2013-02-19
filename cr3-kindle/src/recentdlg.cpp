@@ -129,9 +129,9 @@ void RecentBooksDlg::ShowPage(int updown, int selectRow)
             CRBookmark *bm = book->getLastPos();
             int percent = bm->getPercent();
 
-            if(author.empty()) author = L"-";
-            if(title.empty()) title = L"-";
-            if(!series.empty()) series = L"(" + series + L")";
+            if(author.empty()) author = "-";
+            if(title.empty()) title = "-";
+            if(!series.empty()) series = "(" + series + ")";
 
             QTableWidgetItem *item = m_ui->tableWidget->item(index, 0);
             item->setText(cr2qt(title));
