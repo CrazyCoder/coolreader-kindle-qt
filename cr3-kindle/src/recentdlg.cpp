@@ -37,6 +37,7 @@ RecentBooksDlg::RecentBooksDlg(QWidget *parent, CR3View * docView ) :
     int h = (m_docview->height() - fm.height() - 10);
     m_ui->tableWidget->verticalHeader()->setResizeMode(QHeaderView::Custom);
     m_ui->tableWidget->verticalHeader()->setDefaultSectionSize(h/rc);
+    m_ui->verticalLayout->setContentsMargins(0, 1, 0, 0);
     // fill rows
     QFont fontBold = m_ui->tableWidget->font();
     fontBold.setBold(true);
@@ -101,7 +102,7 @@ void RecentBooksDlg::showPage(int updown, int selectRow)
         if (curPage-1 <= 0) curPage = isCyclic ? pageCount+1 : 2;
         curPage-=1;
     }
-    setWindowTitle(titleMask + " (" + QString::number(curPage) + "/" + QString::number(pageCount) + ")");
+    setWindowTitle("[" + QString::number(curPage) + "/" + QString::number(pageCount) + "] " + titleMask);
 
     int rc = m_docview->rowCount;
     int firstItem = m_docview->getDocView()->isDocumentOpened() ? 1 : 0;
