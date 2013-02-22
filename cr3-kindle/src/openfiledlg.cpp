@@ -137,7 +137,10 @@ void OpenFileDlg::fillFileList()
     if (isUpdirOnEveryPage && curFileList.at(0) == "..") {
         // add updir entry on every page except first
         for (int i = 1; i < curFileList.count(); i++) {
-            if (i % rc == 0) curFileList.insert(i, "..");
+            if (i % rc == 0) {
+                curFileList.insert(i, "..");
+                if (i < dirCount) dirCount++;
+            }
         }
     }
 
