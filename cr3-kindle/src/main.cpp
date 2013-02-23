@@ -123,6 +123,8 @@ int main(int argc, char *argv[])
         }
 
         (void) signal(SIGUSR1, sigCatcher);
+        (void) signal(SIGINT, sigCatcher);
+        (void) signal(SIGTERM, sigCatcher);
 
         MainWindow mainWin;
         a.setMainWindow(&mainWin);
@@ -321,8 +323,13 @@ void PrintString(int x, int y, const QString message, const QString opt) {
 }
 
 void sigCatcher(int sig) {
-  if(sig == SIGUSR1) {
-      Device::enableInput(true);
-      wakeUp();
-  }
+    switch (sig) {
+    case SIGUSR1:
+        Device::enableInput(true);
+        wakeUp();
+        break;
+    case SIGINT:
+    case SIGTERM:
+        qApp->exit(0);
+    }
 }
