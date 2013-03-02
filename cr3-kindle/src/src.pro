@@ -25,8 +25,8 @@ DEFINES += USE_FREETYPE=1 \
 
 debug:DEFINES += _DEBUG=1
 
-QMAKE_CFLAGS_WARN_ON = -Wall -Wno-unused-parameter
-QMAKE_CXXFLAGS_WARN_ON = -Wall -Wno-unused-parameter
+QMAKE_CFLAGS_WARN_ON = -Wall -Wno-unused-parameter -Wno-sign-compare
+QMAKE_CXXFLAGS_WARN_ON = -Wall -Wno-unused-parameter -Wno-sign-compare
 QMAKE_POST_LINK = $(STRIP) -s $(TARGET)
 
 INCLUDEPATH += $$(QTDIR)/include/freetype2 \

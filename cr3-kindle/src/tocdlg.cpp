@@ -127,7 +127,7 @@ void TocDlg::on_actionGotoPage_triggered()
         close();
     } else {
         // code added 28.11.2011
-        qDebug(focusWidget()->objectName().toAscii().data());
+        qDebug() << focusWidget()->objectName().toAscii().data();
         QString s = m_ui->treeWidget->currentIndex().data(Qt::UserRole).toString();
         m_docview->goToXPointer(s);
         close();
@@ -194,7 +194,7 @@ bool TocDlg::eventFilter(QObject *obj, QEvent *event)
             moveDown();
             break;
         case Qt::Key_Select:
-            qDebug(focusWidget()->objectName().toAscii().data());
+            qDebug() << focusWidget()->objectName().toAscii().data();
         {
 
             QString s = m_ui->treeWidget->currentIndex().data(Qt::UserRole).toString();
