@@ -23,6 +23,7 @@ import com.amazon.kindle.kindlet.KindletContext;
  * Kindle Touch version
  *
  * @author Victor Pyankov & Serge Baranov
+ * @noinspection UnusedDeclaration
  */
 public class TouchRunnerKindlet extends RunnerKindlet {
   private static final String CONFIG_DIR  = "/mnt/us/touchrunner";

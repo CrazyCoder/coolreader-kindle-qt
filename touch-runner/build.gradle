@@ -5,9 +5,11 @@ apply plugin: 'java'
 sourceCompatibility = 1.4
 targetCompatibility = 1.4
 
+ext.cr3 = !project.hasProperty("TouchRunner")
+
 version = '3.0'
-archivesBaseName = 'cr3runner'
-ext.title = "Cool Reader"
+archivesBaseName = cr3 ? 'cr3runner' : 'TouchRunner'
+ext.title = cr3 ? "Cool Reader" : "Touch Runner"
 
 dependencies {
   compile files("$env_libDir/Kindlet-2.2.jar")
@@ -20,11 +22,12 @@ ext.depClasses = { files("lib/jailbreak.jar").collect { it.isDirectory() ? it : 
 jar {
   manifest {
     attributes("Manifest-Version": "1.0",
-               "Main-Class": "kz.pvnhome.cr3runner.CoolReaderRunnerKindlet",
+               "Main-Class":
+                 cr3 ? "kz.pvnhome.cr3runner.CoolReaderRunnerKindlet" : "kz.pvnhome.cr3runner.TouchRunnerKindlet",
                "Implementation-Title": title,
                "Implementation-Version": version,
                "Implementation-Vendor": "CrazyCoder",
-               "Amazon-Cover-Image": "cover.png",
+               "Amazon-Cover-Image": cr3 ? "cover.png" : "cover-touch.png",
                "Extension-List": "SDK",
                "SDK-Extension-Name": "com.amazon.kindle.kindlet",
                "SDK-Specification-Version": "2.1",
@@ -35,7 +38,7 @@ jar {
     exclude 'META-INF/MANIFEST.MF'
     exclude '**/*.java'
   }
-  from files("cover.png")
+  from files(cr3 ? "cover.png" : "cover-touch.png")
 }
 
 task copyJarToTmp(dependsOn: jar, type: Copy) {

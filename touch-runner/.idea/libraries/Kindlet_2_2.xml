@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="jailbreak">
+  <library name="Kindlet-2.2">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/jailbreak.jar!/" />
+      <root url="jar://D:/dev/kindle/fw520/lib/Kindlet-2.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

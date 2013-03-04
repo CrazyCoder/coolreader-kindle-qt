@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/cr3runner.iml" filepath="$PROJECT_DIR$/cr3runner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/touch-runner.iml" filepath="$PROJECT_DIR$/touch-runner.iml" />
     </modules>
   </component>
 </project>
