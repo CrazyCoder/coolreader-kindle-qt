@@ -186,7 +186,8 @@ void MainWindow::replaceScreensaver()
         return;
     }
     QWSServer::instance()->enablePainting(true);
-    lastPage = ui->view->getDocView()->getCurPage();
+    int pageToSave = ui->view->getDocView()->getCurPage();
+    if (pageToSave > 0) lastPage = pageToSave;
     ui->view->getDocView()->goToPage(0, false);
     ui->view->update();
     QTimer::singleShot(3000, this, SLOT(disablePainting()));
