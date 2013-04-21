@@ -76,6 +76,7 @@ Device::Device()
         case 0xB01C:
         case 0xB01D:
         case 0xB01F:
+        case 0xB020:
         case 0xB024:
             m_model = KPW;
             break;
