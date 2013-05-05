@@ -391,7 +391,7 @@ void MainWindow::on_actionFindText_triggered()
 
 void MainWindow::on_actionShowMenu_triggered()
 {
-    contextMenu(QPoint(5,5));
+    contextMenu(QPoint(0,0));
 }
 
 void MainWindow::on_actionEmpty_triggered()
