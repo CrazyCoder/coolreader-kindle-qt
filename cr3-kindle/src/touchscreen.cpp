@@ -142,6 +142,7 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
     int y = pme->simpleData.y_root;
 
     if (isSimulatedClick) {
+        qDebug("* simulated click: %d", newButtonState);
         if (newButtonState == 0) isSimulatedClick = false;
         return false;
     }
@@ -185,6 +186,17 @@ bool TouchScreen::filter(QWSMouseEvent *pme, bool focusInReader)
         // long taps are handled via timer
         if (isLongTapHandled) {
             isLongTapHandled = false;
+            qDebug("* long tap released");
+            if (not wasFocusInReader) {
+                // simulate single click for proper selection of elements in lists, then send action
+                QWSServer::sendMouseEvent(QPoint(oldX, oldY), 1);
+                Qt::Key key = getAreaAction(oldX, oldY, TAP_LONG);
+                if (key != Qt::Key_unknown) {
+                    QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, true, false);
+                    QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, false, false);
+                }
+                isSimulatedClick = true;
+            }
         } else if (isCustomAction) {
             Qt::Key key = Qt::Key_unknown;
             if (isGesture) {
@@ -267,8 +279,13 @@ void TouchScreen::longTap()
     qDebug("** long tap");
     Qt::Key key = getAreaAction(oldX, oldY, wasFocusInReader ? TAP_LONG_READER : TAP_LONG);
     if (key != Qt::Key_unknown) {
-        QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, true, false);
-        QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, false, false);
+        if (wasFocusInReader) {
+            QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, true, false);
+            QWSServer::sendKeyEvent(-1, key, Qt::NoModifier, false, false);
+        } else {
+            // simulate click to trigger filter without long tap release
+            QWSServer::sendMouseEvent(QPoint(oldX, oldY), 0);
+        }
     } else {
         qDebug("-- area action not defined for long tap");
     }
