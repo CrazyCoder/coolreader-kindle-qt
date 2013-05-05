@@ -205,7 +205,7 @@
     </message>
     <message>
         <source>Series name</source>
-        <translation>Sororatcím</translation>
+        <translation>Sorozatcím</translation>
     </message>
     <message>
         <source>Series number</source>
@@ -915,7 +915,7 @@
     </message>
     <message>
         <source>Use book cover as screensaver</source>
-        <translation type="unfinished"></translation>
+        <translation>Könyvborító képernyővédőként való használata</translation>
     </message>
     <message>
         <source>&amp;Save</source>
@@ -939,11 +939,11 @@
     </message>
     <message>
         <source>Enable document internal fonts (EPUB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Beágyazott betűtípusok használata (EPUB)</translation>
     </message>
     <message>
         <source>Enable document internal styles (CSS)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumentum saját formázásainak használata (CSS)</translation>
     </message>
 </context>
 <context>
