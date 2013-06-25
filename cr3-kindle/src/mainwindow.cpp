@@ -225,6 +225,8 @@ void MainWindow::outOfScreenSaver()
 
     qDebug("screensaver off");
 
+    Device::forceFullScreenUpdate(true);
+
     if (isCoverScreensaver() && lastPage != 0) {
         qDebug("- restore from custom screensaver");
         ui->view->getDocView()->goToPage(lastPage, true);
