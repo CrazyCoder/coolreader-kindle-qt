@@ -289,41 +289,10 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
         }
 
         if(isFileRemoved){
-            for(int k=0; k<curFileList.count(); ++k) {
-                if(curFileList.at(k) == ItemText) {
-                    curFileList.removeAt(k);
-                    break;
-                }
-            }
+            fillFileList();
+            curPage = curPage - 1;
+            showPage(1);
 
-            m_ui->fileList->clear();
-            updateTitle();
-
-            int rc = m_docview->rowCount*2;
-            int h = (m_docview->height() -2 - (qApp->font().pointSize() + rc))/rc;
-            QListWidgetItem *item = new QListWidgetItem();
-            item->setSizeHint(QSize(item->sizeHint().width(), h));
-            QListWidgetItem *pItem;
-
-            int i=0;
-            int startPos = ((curPage-1)*rc);
-            if(startPos==0 && curFileList.at(0)=="..") {
-                pItem = item->clone();
-                pItem->setText("..");
-                pItem->setIcon(arrowUp);
-                m_ui->fileList->addItem(pItem);
-                i++;
-                startPos++;
-            }
-
-            for(int k=startPos; (k<curFileList.count()) && (i<rc); ++k, ++i) {
-                if(k<dirCount) item->setIcon(folder);
-                else item->setIcon(file);
-
-                pItem = item->clone();
-                pItem->setText(curFileList[k]);
-                m_ui->fileList->addItem(pItem);
-            }
             m_ui->fileList->setCurrentRow(0);
 
             int count = curFileList.count();
