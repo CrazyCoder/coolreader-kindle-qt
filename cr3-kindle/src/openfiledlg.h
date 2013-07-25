@@ -91,6 +91,7 @@ private slots:
     void on_actionRemoveFile_triggered();
 
 private:
+    QString filterName(QString name);
     void fillFileList();
     void showPage(int updown);
     void updateTitle();
@@ -104,6 +105,8 @@ private:
     int rowCount;
     bool isUpdirOnEveryPage;
     bool isCyclic;
+    bool isFilterEnabled;
+    QRegExp filterRx;
 };
 
 #endif // OPENFILEDLG_H

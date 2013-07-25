@@ -87,7 +87,19 @@ OpenFileDlg::OpenFileDlg(QWidget *parent, CR3View * docView):
         }
     }
 
+    isFilterEnabled = m_docview->getOptions()->getIntDef(PROP_HIDE_EXTENSION, 0) == 1;
+
+    if (isFilterEnabled) {
+        // remove extensions and numbers at the end of the file name
+        filterRx = QRegExp("(\\.\\d+)*\\.(fb2\\.zip|fb2|epub|rtf|txt|html|htm|tcr|pdb|chm|mobi|doc|azw)$");
+        filterRx.setCaseSensitivity(Qt::CaseInsensitive);
+        filterRx.setMinimal(true);
+
+        lastName = filterName(lastName);
+    }
+
     showPage(1);
+
     // selecting last opened book
     if(!lastName.isEmpty()) {
         QList<QListWidgetItem*> searchlist = m_ui->fileList->findItems(lastName, Qt::MatchExactly);
@@ -130,7 +142,7 @@ void OpenFileDlg::fillFileList()
     QStringList Filter;
     Filter << "*.fb2" << "*.zip" << "*.epub" << "*.rtf" << "*.txt" \
            << "*.html" << "*.htm" << "*.tcr" << "*.pdb" << "*.chm" << "*.mobi" << "*.doc" << "*.azw";
-    curFileList+= Dir.entryList(Filter, QDir::Files, QDir::Name);
+    curFileList += Dir.entryList(Filter, QDir::Files, QDir::Name);
 
     int rc = m_docview->rowCount*2;
 
@@ -150,6 +162,13 @@ void OpenFileDlg::fillFileList()
         pageCount = count / rc;
         if(count % rc) pageCount += 1;
     }
+}
+
+QString OpenFileDlg::filterName(QString name)
+{
+    name.remove(filterRx);
+    name.replace('_', ' ');
+    return name;
 }
 
 void OpenFileDlg::showPage(int updown)
@@ -181,6 +200,7 @@ void OpenFileDlg::showPage(int updown)
     if (isUpdir) {
         pItem = item->clone();
         pItem->setText("..");
+        pItem->setData(Qt::UserRole, "..");
         pItem->setIcon(arrowUp);
         m_ui->fileList->addItem(pItem);
         i++;
@@ -192,7 +212,12 @@ void OpenFileDlg::showPage(int updown)
         else item->setIcon(file);
 
         pItem = item->clone();
-        pItem->setText(curFileList[k]);
+        if (isFilterEnabled && k >= dirCount) {
+            pItem->setText(filterName(curFileList[k]));
+        } else {
+            pItem->setText(curFileList[k]);
+        }
+        pItem->setData(Qt::UserRole, curFileList[k]);
         m_ui->fileList->addItem(pItem);
     }
     m_ui->fileList->setCurrentRow(0);
@@ -206,40 +231,36 @@ void OpenFileDlg::updateTitle()
 void OpenFileDlg::on_actionRemoveFile_triggered()
 {
     QListWidgetItem *item  = m_ui->fileList->currentItem();
-    QString ItemText = item->text();
-    if(ItemText == "..")
+    QString itemText = item->data(Qt::UserRole).toString();
+    if(itemText == "..")
     {
         return;
     } else {
         bool isFileRemoved = false;
 
         int current_row = m_ui->fileList->currentRow();
-        if (ItemText.length()==0) return;
-        QString fileName = currentDir + ItemText;
-        QFileInfo FileInfo(fileName);
-        if(FileInfo.isDir()) {
-            QDir::Filters filters;
-            filters = QDir::AllDirs|QDir::NoDotAndDotDot;
-            QDir Dir(fileName);
-            QStringList curFileList1 = Dir.entryList(filters, QDir::Name);
-            QStringList Filter;
-            Filter << "*.fb2" << "*.zip" << "*.epub" << "*.rtf" << "*.txt" \
-                   << "*.html" << "*.htm" << "*.tcr" << "*.pdb" << "*.chm" << "*.mobi" << "*.doc" << "*.azw" << "*.*";
+        if (itemText.length()==0) return;
 
-            curFileList1 += Dir.entryList(Filter, QDir::Files, QDir::Name);
-            if(curFileList1.count()>0) {
-                QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Info"), tr("Directory ")+ItemText+tr(" is not empty."), QMessageBox::Close, this );
+        QString fileName = currentDir + itemText;
+        QFileInfo FileInfo(fileName);
+
+        if (FileInfo.isDir()) {
+            QDir Dir(fileName);
+            QStringList directoryFiles = Dir.entryList(QDir::AllDirs | QDir::Files | QDir::NoDotAndDotDot, QDir::Name);
+
+            if(not directoryFiles.empty()) {
+                QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Info"), tr("Directory ")+itemText+tr(" is not empty."), QMessageBox::Close, this );
                 mb->exec();
             } else {
                 QMessageBox * mb = new QMessageBox(QMessageBox::Information,"","", QMessageBox::Yes | QMessageBox::No, this);
-                if(mb->question(this, tr("Remove directory"), tr("Do you really want to remove directory ")+ItemText+"?", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes) {
-                    QDir Dir_file(QDir::toNativeSeparators(currentDir));
-                    isFileRemoved = Dir_file.rmdir(ItemText);
+                if(mb->question(this, tr("Remove directory"), tr("Do you really want to remove directory ")+itemText+"?", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes) {
+                    QDir dirToRemove(QDir::toNativeSeparators(currentDir));
+                    isFileRemoved = dirToRemove.rmdir(itemText);
                 }
             }
         } else {
             // Remove file dialog
-            if(QMessageBox::question(this, tr("Remove file"), tr("Do you really want to remove file ")+ItemText+"?", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes) {
+            if(QMessageBox::question(this, tr("Remove file"), tr("Do you really want to remove file ")+itemText+"?", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes) {
                 // Удаление из истории и файла кеша
                 LVPtrVector<CRFileHistRecord> & files = m_docview->getDocView()->getHistory()->getRecords();
                 int num = -1;
@@ -282,24 +303,19 @@ void OpenFileDlg::on_actionRemoveFile_triggered()
                 }
 
                 QDir Dir_file(QDir::toNativeSeparators(currentDir));
-                QStringList fileList = Dir_file.entryList(QStringList() << ItemText, QDir::Files);
+                QStringList fileList = Dir_file.entryList(QStringList() << itemText, QDir::Files);
                 if(fileList.count())
                     isFileRemoved = Dir_file.remove(fileList.at(0));
             }
         }
 
-        if(isFileRemoved){
+        if (isFileRemoved) {
             fillFileList();
             curPage = curPage - 1;
             showPage(1);
 
-            m_ui->fileList->setCurrentRow(0);
-
-            int count = curFileList.count();
-            if(count>current_row)
-                m_ui->fileList->setCurrentRow(current_row);
-            else
-                m_ui->fileList->setCurrentRow(current_row-1);
+            if (curFileList.count() > current_row) current_row--;
+            m_ui->fileList->setCurrentRow(current_row);
         }
         return;
     }
@@ -313,9 +329,9 @@ void OpenFileDlg::on_actionGoToBegin_triggered()
 void OpenFileDlg::on_actionSelectFile_triggered()
 {
     QListWidgetItem *item  = m_ui->fileList->currentItem();
-    QString ItemText = item->text();
+    QString itemText = item->data(Qt::UserRole).toString();
 
-    if(ItemText == "..")
+    if(itemText == "..")
     {
         int i;
         for(i=currentDir.length()-1; i>1; i--) {
@@ -344,12 +360,12 @@ void OpenFileDlg::on_actionSelectFile_triggered()
                 m_ui->fileList->setCurrentItem(searchlist.at(0));
         }
     } else {
-        if (ItemText.length()==0) return;
+        if (itemText.length()==0) return;
 
-        QString fileName = currentDir + ItemText;
-        QFileInfo FileInfo(fileName);
+        QString fileName = currentDir + itemText;
+        QFileInfo fileInfo(fileName);
 
-        if(FileInfo.isDir()) {
+        if(fileInfo.isDir()) {
             currentDir = fileName + QString("/");
             fillFileList();
             curPage=0;

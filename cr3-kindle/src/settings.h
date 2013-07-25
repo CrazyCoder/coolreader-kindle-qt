@@ -30,6 +30,7 @@ class SettingsDlg;
 #define PROP_REPLACE_SCREENSAVER   "cr3.kindle.replace.screensaver"
 #define PROP_LAST_TAB              "cr3.kindle.last.settings.tab"
 #define PROP_UPDIR_ON_EVERY_PAGE   "cr3.kindle.updir.on.every.page"
+#define PROP_HIDE_EXTENSION        "cr3.kindle.hide.extension"
 #define PROP_KEEP_HISTORY_MINOR    "cr3.kindle.keep.history.on.minor.changes"
 #define PROP_CYCLIC_LIST_PAGES     "cr3.kindle.cyclic.list.pages"
 
