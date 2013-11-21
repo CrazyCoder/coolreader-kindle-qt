@@ -15,6 +15,7 @@ const Device::Properties Device::PROPS[] = {
     {600, 800,  167, false, true },    // K4NTB
     {600, 800,  167, false, false},    // KT
     {758, 1024, 212, false, false},    // KPW
+    {758, 1024, 212, false, false},    // KPW2
 };
 
 Device::Model Device::m_model = UNKNOWN;
@@ -79,6 +80,11 @@ Device::Device()
         case 0xB020:
         case 0xB024:
             m_model = KPW;
+            break;
+        case 0xB0D4:
+        case 0xB0D5:
+        case 0xB05A:
+            m_model = KPW2;
             break;
         default:
             qDebug("Unknown model: %X", sn);

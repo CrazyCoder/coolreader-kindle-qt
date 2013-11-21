@@ -51,7 +51,7 @@ private:
     void capture_input(void) ;
     void release_input(void) ;
 
-    bool isKT;
+    bool isKT, isKPW;
 };
 
 #define EV_SYN			0x00

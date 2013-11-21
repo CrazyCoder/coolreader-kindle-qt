@@ -147,7 +147,7 @@ QKindleFb::QKindleFb(int display_id)
 
     isKindle4 = m == Device::K4NT || m == Device::K4NTB || m == Device::KT;
     isKindleTouch = m == Device::KT;
-    isKindle5 = m == Device::KPW;
+    isKindle5 = m == Device::KPW || m == Device::KPW2;
 
     isFullUpdateForced = false;
     isFullScreenForced = false;

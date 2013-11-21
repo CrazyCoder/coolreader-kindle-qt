@@ -30,7 +30,8 @@ public:
         K4NT,     // Kindle Non-Touch Silver 2011
         K4NTB,    // Kindle Non-Touch Black 2012
         KT,       // Kindle Touch
-        KPW       // Kindle PaperWhite
+        KPW,      // Kindle PaperWhite
+        KPW2      // Kindle PaperWhite 2013
     } Model;
 
     static Model getModel() {
@@ -62,7 +63,7 @@ public:
     }
 
     static bool hasLight() {
-        return m_model == KPW;
+        return m_model == KPW || m_model == KPW2;
     }
 
     static bool isEmulator() { return m_model == EMULATOR; }

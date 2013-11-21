@@ -147,7 +147,8 @@ void BrightnessControl::on_progressBar_valueChanged(int value)
 {
     if (!initDone) return;
     // qDebug("value: %d=>%d", value, smoothToRaw(value));
-    setRawLevel(smoothToRaw(value));
+    if (backlightFile) setRawLevel(smoothToRaw(value));
+    else setSmoothLevel(value);
 }
 
 void BrightnessControl::saveLevel()
@@ -190,7 +191,22 @@ int BrightnessControl::getRawLevel()
 
 int BrightnessControl::getSmoothLevel()
 {
-    return rawToSmooth(getRawLevel());
+    if (backlightFile) {
+        return rawToSmooth(getRawLevel());
+    } else {
+        int level = 0;
+        QStringList list;
+        QProcess *myProcess = new QProcess();
+        list << "com.lab126.powerd" << "flIntensity";
+        myProcess->start("/usr/bin/lipc-get-prop", list);
+        if (myProcess->waitForReadyRead(1000)) {
+            QByteArray array = myProcess->readAll();
+            array.truncate(array.indexOf("\n"));
+            level = array.toInt();
+        }
+        myProcess->close();
+        return level;
+    }
 }
 
 // called on start, when returning from minimized state and from screensaver

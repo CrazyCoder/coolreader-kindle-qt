@@ -65,6 +65,7 @@ int main(int argc, char *argv[])
                 break;
             case Device::KT:
             case Device::KPW:
+            case Device::KPW2:
                 rc = 8;
                 break;
             default:

@@ -7,6 +7,7 @@ KindleTS::KindleTS(const QString & driver, const QString & device, QObject* pare
 
     Device::instance();
     isKT = Device::getModel() == Device::KT;
+    isKPW = Device::getModel() == Device::KPW;
 
     width = Device::getWidth();
     height = Device::getHeight();
@@ -21,8 +22,10 @@ KindleTS::KindleTS(const QString & driver, const QString & device, QObject* pare
         kt_sn = new QSocketNotifier(kt_fd, QSocketNotifier::Read);
         connect(kt_sn, SIGNAL(activated(int)), this, SLOT(kt_activity(int)));
         kt_sn->setEnabled(true);
+    } else if (isKPW) {
+        _fd = open("/dev/input/event0", O_RDONLY); // KPW
     } else {
-        _fd = open("/dev/input/event0", O_RDONLY);
+        _fd = open("/dev/input/event1", O_RDONLY); // KPW2
     }
 
     if (_debug)
@@ -133,26 +136,30 @@ void KindleTS::activity(int)
             p.setY(pos);
             oldY = pos;
         }
-        break ;
+        break;
     case EV_KEY:
         if (in.code == BTN_TOUCH)
         {
             newtouch = (in.value == 0) ? false : true ;
-            mouseChanged(p, (newtouch) ? Qt::LeftButton : 0, 0);
         }
         else if (in.code == BTN_TOOL_DOUBLETAP)
         {
             newdoubletap = (in.value == 0) ? false : true ;
-            mouseChanged(p, (newdoubletap) ? Qt::RightButton : 0, 0);
         }
-        break ;
+        break;
     case EV_SYN:
         // swipe
-        if (!doubletap && !newdoubletap && touch && newtouch && p != oldP) mouseChanged(p, Qt::LeftButton, 0);
+        if (!doubletap && !newdoubletap && touch && newtouch && p != oldP) {
+            mouseChanged(p, Qt::LeftButton, 0);
+        } else if ((touch || newtouch) && !newdoubletap && !doubletap) {
+            mouseChanged(p, (newtouch) ? Qt::LeftButton : 0, 0);
+        } else if (doubletap || newdoubletap) {
+            mouseChanged(p, (newdoubletap) ? Qt::RightButton : 0, 0);
+        }
         oldP.setX(p.x());
         oldP.setY(p.y());
         touch = newtouch ;
-        doubletap = newdoubletap ;
+        doubletap = newdoubletap;
         break ;
     default:
         break ;
@@ -162,7 +169,7 @@ void KindleTS::activity(int)
     {
         qDebug("x=%d, y=%d, touch=%d %d, doubletap=%d %d", p.x(), p.y(), touch, newtouch, doubletap, newdoubletap);
         if (in.type == EV_SYN)
-            qDebug("________________") ;
+            qDebug("________________");
     }
 
     _sn->setEnabled(true);

@@ -23,7 +23,7 @@ DEFINES += USE_FREETYPE=1 \
     USE_DOM_UTF8_STORAGE=1 \
     NDEBUG=1
 
-debug:DEFINES += _DEBUG=1
+#debug:DEFINES += _DEBUG=1
 
 QMAKE_CFLAGS_WARN_ON = -Wall -Wno-unused-parameter -Wno-sign-compare
 QMAKE_CXXFLAGS_WARN_ON = -Wall -Wno-unused-parameter -Wno-sign-compare
