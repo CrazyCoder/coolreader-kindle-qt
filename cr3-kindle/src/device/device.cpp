@@ -1,4 +1,5 @@
 #include "device.h"
+#include <QFile>
 
 #ifndef i386
 #include "../../../drivers/QKindleFb/qkindlefb.h"
@@ -26,21 +27,24 @@ Device::Device()
     m_model = EMULATOR;
     return;
 #endif
-    QStringList list;
-    QProcess *myProcess = new QProcess();
+    QFile file("/proc/usid");
 
-    list << "-c" << "cat /proc/usid";
-    myProcess->start("/bin/sh", list);
-    if (myProcess->waitForReadyRead(10000)) {
-        QByteArray array = myProcess->readAll();
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Can't open /proc/usid";
+        return;
+    }
 
+    QTextStream in(&file);
+    QString line = in.readLine();
+
+    if (!line.isNull()) {
         bool ok;
-        int sn = QString(array).left(4).toInt(&ok, 16);
+        int sn = line.left(4).toInt(&ok, 16);
 
         if (ok) {
             qDebug("serial: %X", sn);
         } else {
-            qDebug() << "unexpected output: " << QString(array);
+            qDebug() << "unexpected output: " << line;
             return;
         }
 
@@ -89,7 +93,8 @@ Device::Device()
             qDebug("Unknown model: %X", sn);
         }
     }
-    myProcess->close();
+
+    file.close();
 }
 
 Device &Device::instance()
