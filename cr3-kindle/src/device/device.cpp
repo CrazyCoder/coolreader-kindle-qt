@@ -29,14 +29,13 @@ Device::Device()
     QStringList list;
     QProcess *myProcess = new QProcess();
 
-    list << "-c" << "grep erial /proc/cpuinfo|cut -c12-15";
+    list << "-c" << "cat /proc/usid";
     myProcess->start("/bin/sh", list);
     if (myProcess->waitForReadyRead(10000)) {
         QByteArray array = myProcess->readAll();
-        array.truncate(array.indexOf("\n"));
 
         bool ok;
-        int sn = QString(array).toInt(&ok, 16);
+        int sn = QString(array).left(4).toInt(&ok, 16);
 
         if (ok) {
             qDebug("serial: %X", sn);
