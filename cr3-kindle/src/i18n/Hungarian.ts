@@ -935,7 +935,7 @@
     </message>
     <message>
         <source>Formatting:</source>
-        <translation type="unfinished"></translation>
+        <translation>Formázás:</translation>
     </message>
     <message>
         <source>Enable document internal fonts (EPUB)</source>
