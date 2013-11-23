@@ -45,6 +45,7 @@ Device::Device()
             qDebug("serial: %X", sn);
         } else {
             qDebug() << "unexpected output: " << line;
+            file.close();
             return;
         }
 
@@ -86,6 +87,7 @@ Device::Device()
             break;
         case 0xB0D4:
         case 0xB0D5:
+        case 0xB0D7:
         case 0xB05A:
             m_model = KPW2;
             break;
