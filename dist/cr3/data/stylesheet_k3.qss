@@ -1,3 +1,4 @@
+/* Global style */
 * {
     font-size: 9pt;
     color: black;
@@ -7,13 +8,13 @@
     selection-background-color: white;
 }
 
-
+/* Style of main menu */
 QMenu {
     font: bold;
+    padding: 0.5em 0.7em 0.5em 0.7em;
+    margin: 0.3em;
     border: 4px solid #222222;
     border-radius: 10px;
-    margin: 0.3em;
-    padding: 0.5em 0.7em 0.5em 0.7em;
     font-family: "Helvetica Neue LT 65 Kindle Medium";
 }
 
@@ -32,7 +33,7 @@ QMenu::item:disabled {
     color: grey;
 }
 
-
+/* Tabs bar style */
 QTabWidget::pane {
     border: 1px solid black;
     border-bottom-left-radius: 4px;
@@ -45,6 +46,7 @@ QTabWidget::tab-bar {
     left: 0px;
 }
 
+/* Style of tabs */
 QTabBar::tab {
     padding: 0.2em;
     min-width: 3em;
@@ -75,12 +77,13 @@ QTabBar::tab:!selected {
     border-bottom: 1px solid black;
 }
 
-
+/* Style of lists */
 QListView {
     font-size: 8pt;
     border-bottom: 2px solid black;
 }
 
+/* Style of tables */
 QTableWidget::item {
     border-bottom: 2px solid transparent;
 }
@@ -89,6 +92,7 @@ QTableWidget::item:selected {
     border-bottom: 2px solid black;
 }
 
+/* Table of contents style */
 QTreeView {
     font-size: 10pt;
     outline: none;
@@ -105,17 +109,18 @@ QTreeView::item:selected {
     border-bottom: 2px solid black;
 }
 
+/* Style of text labels */
 QLabel {
     margin-right: 2px;
 }
 
-
+/* Style of numerical values */
 QSpinBox, QDoubleSpinBox {
     selection-color: white;
     selection-background-color: black;
 }
 
-
+/* Style of fields with list */
 QComboBox QAbstractItemView {
     border: 1px solid grey;
     outline: none;
@@ -134,7 +139,7 @@ QComboBox QAbstractItemView::item:selected {
     border-bottom: 4px solid black;
 }
 
-
+/* Style of standard dialogs and buttons */
 QDialog {
     border: 2px solid black;
 }
@@ -152,12 +157,11 @@ QPushButton:focus {
     border: 2px solid black;
 }
 
-
 QDialogButtonBox, QMessageBox {
     dialogbuttonbox-buttons-have-icons: 0;
 }
 
-
+/* Style of check boxes */
 QCheckBox {
     spacing: 0.6em;
     height: 1.3em;
@@ -184,15 +188,16 @@ QCheckBox::indicator:checked:disabled {
     image: url(:/icons/checkbox_checked_disabled.png);
 }
 
-
+/* Style of progress bar */
 QProgressBar {
+    text-align: center;
     border: 1px solid black;
     border-radius: 0px;
-    text-align: center;
 }
 
 QProgressBar::chunk {
+    height: 10px;
+    margin: 5px;
     border: 2px solid black;
     background-color: white;
-    height: 10px; margin: 5px;
 }
