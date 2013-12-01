@@ -8,36 +8,21 @@
 
 const IntList BrightnessControl::RAW_LEVELS = IntList()
         << 0  // Kindle returns 1 here and light remains, return 0 to turn it off
-        << 2
-        << 3
-        << 4
-        << 5
-        << 6
-        << 7
-        << 8
-        << 9
-        << 10
-        << 13
-        << 19
-        << 26
-        << 36
-        << 47
-        << 60
-        << 75
-        << 90
-        << 107
-        << 126
-        << 147
-        << 170
-        << 196
-        << 224
-        << 254 // 24
+        << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 13 << 19 << 26 << 36 << 47
+        << 60 << 75 << 90 << 107 << 126 << 147 << 170 << 196 << 224 << 254 // 24
+        ;
+
+// Kindle Paperwhite 2 (2013) uses different driver and values scale
+const IntList BrightnessControl::RAW_LEVELS_PW2 = IntList()
+        << 0  // Kindle returns 1 here and light remains, return 0 to turn it off
+        << 2 << 3 << 4 << 6 << 14 << 28 << 49 << 78 << 120 << 167 << 245 << 336 << 465
+        << 607 << 775 << 969 << 1162 << 1382 << 1627 << 1898 << 2195 << 2531 << 2893 << 3280 // 24
         ;
 
 int BrightnessControl::smoothToRaw(int level)
 {
-    if (level >= 0 && level < RAW_LEVELS.size()) {
-        return RAW_LEVELS.at(level);
+    if (level >= 0 && level < getLevels()->size()) {
+        return getLevels()->at(level);
     } else {
         return 0; // should never happen
     }
@@ -45,8 +30,8 @@ int BrightnessControl::smoothToRaw(int level)
 
 int BrightnessControl::rawToSmooth(int level)
 {
-    if (RAW_LEVELS.contains(level)) {
-        return RAW_LEVELS.indexOf(level);
+    if (getLevels()->contains(level)) {
+        return getLevels()->indexOf(level);
     } else {
         return 0; // if raw is set to 1 (kindle level 0), return 0 to turn it off
     }
@@ -62,10 +47,10 @@ BrightnessControl::BrightnessControl(QWidget *parent) :
 
     ui->setupUi(this);
 
-    maxLevel = RAW_LEVELS.size() - 1;
+    maxLevel = getLevels()->size() - 1;
     ui->progressBar->setMaximum(maxLevel);
 
-    backlightFile = new QFile(INTENSITY_DEVICE);
+    backlightFile = getBackLightFile();
 
     if (!backlightFile->open(QIODevice::WriteOnly)) {
         qDebug("Backlight intensity file could not been opened.");
@@ -151,6 +136,26 @@ void BrightnessControl::on_progressBar_valueChanged(int value)
     else setSmoothLevel(value);
 }
 
+QFile *BrightnessControl::getBackLightFile()
+{
+    QFile *bl;
+    if (Device::getModel() == Device::KPW2) {
+        bl = new QFile(INTENSITY_DEVICE_PW2);
+    } else {
+        bl = new QFile(INTENSITY_DEVICE);
+    }
+    return bl;
+}
+
+const IntList *BrightnessControl::getLevels()
+{
+    if (Device::getModel() == Device::KPW2) {
+        return &RAW_LEVELS_PW2;
+    } else {
+        return &RAW_LEVELS;
+    }
+}
+
 void BrightnessControl::saveLevel()
 {
     int smoothLevel = ui->progressBar->value();
@@ -179,14 +184,23 @@ void BrightnessControl::setSmoothLevel(int level)
 
 int BrightnessControl::getRawLevel()
 {
-    QFile backRead(INTENSITY_DEVICE);
-    if (!backRead.open(QIODevice::ReadOnly)) return 0;
-    QByteArray array = backRead.readLine();
-    backRead.close();
+    QFile *backRead = getBackLightFile();
+
+    if (!backRead->open(QIODevice::ReadOnly)) {
+        qDebug("Can't open backlight file");
+        return 0;
+    }
+    QByteArray array = backRead->readLine();
+    backRead->close();
 
     array.truncate(array.indexOf("\n"));
     QString output = QString(array);
-    return output.section(QLatin1Char('='), 1, 1).toInt();
+
+    if (Device::getModel() == Device::KPW2) {
+        return output.toInt();
+    } else {
+        return output.section(QLatin1Char('='), 1, 1).toInt();
+    }
 }
 
 int BrightnessControl::getSmoothLevel()

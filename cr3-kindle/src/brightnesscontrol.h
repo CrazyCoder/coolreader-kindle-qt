@@ -6,8 +6,10 @@
 #include <QFile>
 #include <QProcess>
 #include <QDebug>
+#include <device.h>
 
-#define INTENSITY_DEVICE "/sys/devices/system/fl_tps6116x/fl_tps6116x0/fl_intensity"
+#define INTENSITY_DEVICE     "/sys/devices/system/fl_tps6116x/fl_tps6116x0/fl_intensity"
+#define INTENSITY_DEVICE_PW2 "/sys/class/backlight/max77696-bl/brightness"
 
 typedef QList<int> IntList;
 
@@ -23,8 +25,11 @@ public:
     explicit BrightnessControl(QWidget *parent = 0);
     ~BrightnessControl();
     static const IntList RAW_LEVELS;
+    static const IntList RAW_LEVELS_PW2;
+
     static int smoothToRaw(int level);
     static int rawToSmooth(int level);
+    static const IntList *getLevels();
 
     void setRawLevel(int level);
     void setSmoothLevel(int level);
@@ -46,6 +51,7 @@ private:
     Ui::BrightnessControl *ui;
     bool initDone, isActive;
     QFile *backlightFile;
+    QFile *getBackLightFile();
 
     void saveLevel();
 };
