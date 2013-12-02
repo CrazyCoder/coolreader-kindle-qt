@@ -1,4 +1,11 @@
 #!/bin/sh
-# full suspend
-/var/tmp/wmctrl -r blankBackground_WS -b add,fullscreen
-killall -STOP awesome
+rm -rf /var/tmp/crfswin.running
+/var/tmp/crfswin &
+# wait for the flag file
+x=0
+while [ "$x" -lt 50 -a ! -f /var/tmp/crfswin.running ]
+do
+  x=$((x+1))
+  /var/tmp/usleep 200000
+done
+/var/tmp/usleep 500000

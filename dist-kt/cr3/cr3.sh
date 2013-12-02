@@ -35,7 +35,7 @@ f_blanket_unload_module ad_screensaver_active
 f_blanket_load_module screensaver
 
 # copy scripts to temp folder so that they work when USB is connected and /mnt/us is unmounted
-cp -f ./ktsuspend.sh ./ktresume.sh ./wmctrl /var/tmp/
+cp -f ./usleep ./crfswin ./ktsuspend.sh ./ktresume.sh ./wmctrl /var/tmp/
 
 # hide Xorg windows
 /var/tmp/ktsuspend.sh 0
@@ -66,7 +66,9 @@ rm -f .running
 
 cd $SAVE_DIR
 
+eips -c
 # return to home, comment for returning back to runner if you have other commands there
 lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home
+sleep 1
 # restore Xorg windows
 /var/tmp/ktresume.sh 0
