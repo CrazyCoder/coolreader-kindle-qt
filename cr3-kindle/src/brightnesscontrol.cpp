@@ -2,7 +2,7 @@
 #include "ui_brightnesscontrol.h"
 
 // Kindle uses hardcoded table to convert from logarithmic scale to linear and vice versa.
-// Driver operates raw levels, user interface shows "smooth" scale (0 - 24).
+// Driver operates raw levels, user interface shows "smooth" scale (0 - 24 + Max. level on PW2).
 // Note that "0" value in Kindle UI corresponds to "1" raw driver value, hence no ability
 // to turn off the light completely in the original UI, but this control can do it.
 
@@ -16,7 +16,7 @@ const IntList BrightnessControl::RAW_LEVELS = IntList()
 const IntList BrightnessControl::RAW_LEVELS_PW2 = IntList()
         << 0  // Kindle returns 1 here and light remains, return 0 to turn it off
         << 2 << 3 << 4 << 6 << 14 << 28 << 49 << 78 << 120 << 167 << 245 << 336 << 465
-        << 607 << 775 << 969 << 1162 << 1382 << 1627 << 1898 << 2195 << 2531 << 2893 << 3280 // 24
+        << 607 << 775 << 969 << 1162 << 1382 << 1627 << 1898 << 2195 << 2531 << 2893 << 3280 << 4095 // MAX
         ;
 
 int BrightnessControl::smoothToRaw(int level)
