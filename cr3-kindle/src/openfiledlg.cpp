@@ -139,12 +139,18 @@ void OpenFileDlg::fillFileList()
     curFileList=Dir.entryList(filters, QDir::Name);
     dirCount=curFileList.count();
 
-    QStringList Filter;
-    Filter << "*.fb2" << "*.zip" << "*.epub" << "*.rtf" << "*.txt" \
+    QStringList filter;
+    filter << "*.fb2" << "*.zip" << "*.epub" << "*.rtf" << "*.txt" \
            << "*.html" << "*.htm" << "*.tcr" << "*.pdb" << "*.chm" << "*.mobi" << "*.doc" << "*.azw";
-    curFileList += Dir.entryList(Filter, QDir::Files, QDir::Name);
+    curFileList += Dir.entryList(filter, QDir::Files, QDir::Name);
 
     int rc = m_docview->rowCount*2;
+
+    // ensure .. is always first
+    if (curFileList.at(0) != ".." && curFileList.contains("..")) {
+        curFileList.removeAll("..");
+        curFileList.insert(0, "..");
+    }
 
     if (isUpdirOnEveryPage && curFileList.at(0) == "..") {
         // add updir entry on every page except first
