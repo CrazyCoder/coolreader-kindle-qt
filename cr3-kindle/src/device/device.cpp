@@ -119,7 +119,8 @@ void Device::suspendFramework(bool fast)
         sleep(1);
         QProcess::execute("killall -STOP cvm");
     } else {
-        QProcess::execute(QString("/bin/sh /var/tmp/ktsuspend.sh %1").arg(fast ? 1 : 0));
+        if (!fast) QProcess::execute(QString("/bin/sh /var/tmp/ktsuspend.sh"));
+        else sleep(1);
     }
     QWSServer::instance()->enablePainting(true);
 #endif
@@ -132,8 +133,8 @@ void Device::resumeFramework(bool fast)
     QWSServer::instance()->enablePainting(false);
     if (!isTouch()) {
         QProcess::execute("killall -CONT cvm");
-    } else {
-        QProcess::execute(QString("/bin/sh /var/tmp/ktresume.sh %1").arg(fast ? 1 : 0));
+    } else if (!fast) {
+        QProcess::execute(QString("/bin/sh /var/tmp/ktresume.sh"));
     }
 #endif
 }
