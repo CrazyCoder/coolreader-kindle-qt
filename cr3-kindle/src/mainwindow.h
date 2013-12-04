@@ -141,6 +141,7 @@ private slots:
     void on_actionAdjustBrightness_triggered();
     void disablePainting();
     void replaceScreensaver();
+    void fixLight();
 };
 
 class SolidFocusProxyStyle : public QProxyStyle {

@@ -144,9 +144,7 @@ void MainWindow::connectSystemBus() {
     QDBusConnection::systemBus().connect(QString(), QString(), "com.lab126.hal", "usbUnconfigured",this, SLOT(usbDriveDisconnected()));
 
     // system bus is connected on startup and when restoring minimized app, good place to fix the light level
-    if (Device::hasLight() && brDlg) {
-        brDlg->fixZeroLevel();
-    }
+    QTimer::singleShot(2000, this, SLOT(fixLight()));
 #endif
 }
 void MainWindow::disconnectSystemBus() {
@@ -193,6 +191,13 @@ void MainWindow::replaceScreensaver()
     QTimer::singleShot(3000, this, SLOT(disablePainting()));
 }
 
+void MainWindow::fixLight()
+{
+    if (Device::hasLight()) {
+        brDlg->fixZeroLevel();
+    }
+}
+
 void MainWindow::goingToScreenSaver()
 {
 #ifndef i386
@@ -218,9 +223,7 @@ void MainWindow::outOfScreenSaver()
     if (screenSaverMode && !usbDriveMode) {
         Device::suspendFramework(true);
 
-        if (Device::hasLight()) {
-            brDlg->fixZeroLevel();
-        }
+        QTimer::singleShot(2000, this, SLOT(fixLight()));
     }
 
     qDebug("screensaver off");
@@ -260,9 +263,7 @@ void MainWindow::usbDriveDisconnected()
         sleep(1);
         Device::suspendFramework(false);
 
-        if (Device::hasLight()) {
-            brDlg->fixZeroLevel();
-        }
+        QTimer::singleShot(2000, this, SLOT(fixLight()));
 
         Device::enableInput(true);
         QWSServer::instance()->refresh();
