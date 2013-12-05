@@ -1,7 +1,7 @@
 /.gradle/
 /build/
 /out/
-/gradle.properties
 .idea/
 *.iml
 *.iws
+Kindlet*.jar

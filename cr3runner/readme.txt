@@ -1,8 +1,7 @@
-1. Copy gradle.defaults to gradle.properties
-2. Edit gradle.properties
-3. Create conf/keystore/developer.keystore
-4. Run gradle
-5. Create Eclipse project by "gradle eclipse" or import in IntelliJ IDEA
-
-Note that you will need to use your own developer.keystore so that you know the password for the keys.
-See http://wiki.mobileread.com/wiki/Kindlet_Developer_HowTo for the instructions.
+1. Place Kindlet-1.3.jar from your Kindle into /lib
+2. Run "gradlew" to build
+3. Run "gradlew -P KindleRunner" to build generic Kindle Runner
+4. Kindle Runner uses commands.txt from /kindlerunner on Kindle
+5. Cool Reader runner can optionally use commands.txt from /cr3
+6. Place KindleRunner-2.7.azw2 and/or cr3runner-2.7.azw2 from /build/libs
+   into /documents on Kindle

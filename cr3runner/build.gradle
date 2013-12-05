@@ -2,6 +2,10 @@ defaultTasks 'kindle'
 
 apply plugin: 'java'
 
+repositories {
+  mavenCentral()
+}
+
 sourceCompatibility = 1.4
 targetCompatibility = 1.4
 
@@ -12,8 +16,8 @@ archivesBaseName = cr3? 'cr3runner' : 'KindleRunner'
 ext.title = cr3 ? 'Cool Reader' : 'Kindle Runner'
 
 dependencies {
-  compile files("$env_libDir/Kindlet-1.3.jar")
-  testCompile files(env_junit3jar)
+  compile files("lib/Kindlet-1.3.jar")
+  testCompile group: 'junit', name: 'junit', version: '3.+'
 }
 
 jar {
@@ -50,4 +54,8 @@ void signingJar(String keyPref) {
   ant.exec(dir: env_keystoreDir, executable: "jarsigner") {
     arg(line: "-keystore $key_keyStore -storepass $key_storePass $jar.archivePath $keyPref$key_keyAlias")
   }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.9'
 }

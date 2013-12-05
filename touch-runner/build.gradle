@@ -2,6 +2,10 @@ defaultTasks 'kindle'
 
 apply plugin: 'java'
 
+repositories {
+  mavenCentral()
+}
+
 sourceCompatibility = 1.4
 targetCompatibility = 1.4
 
@@ -12,9 +16,9 @@ archivesBaseName = cr3 ? 'cr3runner' : 'TouchRunner'
 ext.title = cr3 ? "Cool Reader" : "Touch Runner"
 
 dependencies {
-  compile files("$env_libDir/Kindlet-2.2.jar")
+  compile files("lib/Kindlet-2.2.jar")
   compile files("lib/jailbreak.jar")
-  testCompile files(env_junit3jar)
+  testCompile group: 'junit', name: 'junit', version: '3.+'
 }
 
 ext.depClasses = { files("lib/jailbreak.jar").collect { it.isDirectory() ? it : zipTree(it) } }
@@ -65,4 +69,8 @@ void signingJar(String keyPref) {
   ant.exec(dir: env_keystoreDir, executable: "jarsigner") {
     arg(line: "-keystore $key_keyStore -storepass $key_storePass $jar.archivePath $keyPref$key_keyAlias")
   }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.9'
 }
