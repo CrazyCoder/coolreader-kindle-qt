@@ -1,49 +1,53 @@
 defaultTasks 'kindle'
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 
 sourceCompatibility = 1.4
 targetCompatibility = 1.4
 
+ext.cr3 = !project.hasProperty("KindleRunner")
+
 version = '2.7'
-archivesBaseName = 'cr3runner'
-ext.title = "Cool Reader"
-eclipse.project.name = 'CR3Runner'
+archivesBaseName = cr3? 'cr3runner' : 'KindleRunner'
+ext.title = cr3 ? 'Cool Reader' : 'Kindle Runner'
 
 dependencies {
-    compile files("$env_libDir/Kindlet-1.3.jar")
-    testCompile files(env_junit3jar)
+  compile files("$env_libDir/Kindlet-1.3.jar")
+  testCompile files(env_junit3jar)
 }
 
 jar {
-   manifest {
-      attributes("Manifest-Version": "1.0", "Main-Class": "kz.pvnhome.cr3runner.CR3RunnerKindlet", "Implementation-Title": title, "Implementation-Version": version, "Implementation-Vendor": "CrazyCoder")
-   }
+  manifest {
+    attributes("Manifest-Version": "1.0",
+      "Main-Class": cr3 ? "kz.pvnhome.cr3runner.CR3RunnerKindlet" : "kz.pvnhome.cr3runner.KindleRunnerKindlet",
+      "Implementation-Title": title,
+      "Implementation-Version": version,
+      "Implementation-Vendor": "CrazyCoder")
+  }
 }
 
 task copyJarToTmp(dependsOn: jar, type: Copy) {
-   from(jar.archivePath)
-   into(jar.destinationDir)
-   rename '(.+)\\.jar', '$1.tmp'
+  from(jar.archivePath)
+  into(jar.destinationDir)
+  rename '(.+)\\.jar', '$1.tmp'
 }
 
 task signingJarTask(dependsOn: copyJarToTmp) << {
-   println "Signing: $jar.archivePath"
-   signingJar('dk')
-   signingJar('di')
-   signingJar('dn')
+  println "Signing: $jar.archivePath"
+  signingJar('dk')
+  signingJar('di')
+  signingJar('dn')
 }
 
 task kindle(dependsOn: signingJarTask, type: Copy) {
-   from(jar.archivePath)
-   into(jar.destinationDir)
-   rename '(.+)\\.jar', '$1.azw2'
+  from(jar.archivePath)
+  into(jar.destinationDir)
+  rename '(.+)\\.jar', '$1.azw2'
 }
 
 void signingJar(String keyPref) {
-   println "pref: $keyPref"
-   ant.exec(dir: env_keystoreDir, executable: "jarsigner") {
-      arg(line: "-keystore $key_keyStore -storepass $key_storePass $jar.archivePath $keyPref$key_keyAlias")
-   }
+  println "pref: $keyPref"
+  ant.exec(dir: env_keystoreDir, executable: "jarsigner") {
+    arg(line: "-keystore $key_keyStore -storepass $key_storePass $jar.archivePath $keyPref$key_keyAlias")
+  }
 }

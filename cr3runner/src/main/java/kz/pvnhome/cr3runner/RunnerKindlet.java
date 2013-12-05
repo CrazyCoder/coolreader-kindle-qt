@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Victor Pyankov
+ * Copyright (C) 2012 Victor Pyankov & Sergey Baranov
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,9 +21,10 @@ import com.amazon.kindle.kindlet.AbstractKindlet;
 import com.amazon.kindle.kindlet.KindletContext;
 import com.amazon.kindle.kindlet.ui.KButton;
 import com.amazon.kindle.kindlet.ui.KPanel;
-import com.amazon.kindle.kindlet.ui.KTextArea;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.List;
 
@@ -32,24 +33,16 @@ import java.util.List;
  *
  * @author Victor Pyankov & Serge Baranov
  */
-public class RunnerKindlet extends AbstractKindlet implements CommandExecuter {
-  private static final String CONFIG_DIR  = "/mnt/us/cr3";
-  private static final String CONFIG_FILE = "commands.txt";
-
+public abstract class RunnerKindlet extends AbstractKindlet implements CommandExecuter {
   private KindletContext ctx;
-  private Container      rootContainer;
-  private KTextArea      textArea;
 
   public void create(KindletContext context) {
     ctx = context;
   }
 
-  public void start() {
+  public void showUI(CommandLoader loader) {
+    Container rootContainer = ctx.getRootContainer();
     try {
-      rootContainer = ctx.getRootContainer();
-      textArea = new KTextArea("Waiting for command");
-
-      CommandLoader loader = new CommandLoader(CONFIG_DIR, CONFIG_FILE);
       List commands = loader.load();
 
       // default to CoolReader 3
@@ -62,42 +55,49 @@ public class RunnerKindlet extends AbstractKindlet implements CommandExecuter {
         return;
       }
 
-      rootContainer.add(textArea, BorderLayout.CENTER);
-
       KPanel btnPanel = new KPanel();
-      btnPanel.setLayout(new GridLayout(commands.size(), 1));
+      GridLayout layout = new GridLayout(commands.size(), 1);
+      layout.setVgap(2);
+      btnPanel.setLayout(layout);
 
       for (int i = 0; i < commands.size(); i++) {
         Command command = (Command) commands.get(i);
-        KButton btn = new KButton(command.getDescription());
+        final KButton btn = new KButton(command.getDescription());
+        btn.setFont(new Font(btn.getFont().getName(), Font.BOLD, btn.getFont().getSize() + 6));
         command.setExecuter(this);
         btn.addKeyListener(command);
+        // flash button
+        btn.addKeyListener(new KeyListener() {
+          public void keyTyped(KeyEvent e) {
+          }
+
+          public void keyPressed(KeyEvent e) {
+            btn.setBackground(Color.BLACK);
+            btn.repaint();
+          }
+
+          public void keyReleased(KeyEvent e) {
+            btn.setBackground(Color.WHITE);
+            btn.repaint();
+          }
+        });
         btnPanel.add(btn);
       }
 
       rootContainer.add(btnPanel, BorderLayout.NORTH);
 
     } catch (Throwable t) {
-      textArea.setText(t.getMessage());
       rootContainer.repaint();
     }
   }
 
   public void execute(Command command) {
-    textArea.setText("command: " + command.getDescription());
-    rootContainer.repaint();
-
     try {
       Runtime runtime = Runtime.getRuntime();
-      textArea.setText("runtime");
-      rootContainer.repaint();
 
       runtime.exec(new String[]{command.getPath() + File.separatorChar +
                                 command.getCommand(), command.getParam()}, null, new File(command.getPath()));
 
-    } catch (Throwable ex1) {
-      textArea.setText(ex1.getMessage());
-      rootContainer.repaint();
-    }
+    } catch (Throwable ignored) {}
   }
 }

@@ -24,7 +24,7 @@ package kz.pvnhome.cr3runner;
  * @noinspection UnusedDeclaration
  */
 public class KindleRunnerKindlet extends RunnerKindlet {
-  private static final String CONFIG_DIR  = "/mnt/us/cr3";
+  private static final String CONFIG_DIR  = "/mnt/us/kindlerunner";
   private static final String CONFIG_FILE = "commands.txt";
 
   public void start() {
