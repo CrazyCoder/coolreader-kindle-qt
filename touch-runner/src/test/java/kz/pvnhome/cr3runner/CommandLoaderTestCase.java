@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2012 Victor Pyankov
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 package kz.pvnhome.cr3runner;
 
@@ -32,7 +32,7 @@ public class CommandLoaderTestCase extends TestCase {
    * Test method for {@link kz.pvnhome.cr3runner.CommandLoader#load()}.
    */
   public void testLoad() {
-    CommandLoader loader = new CommandLoader("conf/cr3runner", "commands.txt");
+    CommandLoader loader = new CommandLoader("conf/touchrunner", "commands.txt");
 
     List commands = loader.load();
 
