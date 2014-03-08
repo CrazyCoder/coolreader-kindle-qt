@@ -42,14 +42,14 @@ public abstract class RunnerKindlet extends SuicidalKindlet implements CommandEx
         ctx.getRootContainer().removeAll();
         initCommandsUI(ctx);
       } else {
-        String title = "Kindlet Jailbreak Failed";
-        String error = "The Kindlet Jailbreak failed to obtain all required permissions. Please report this error.";
+        String title = "Mobileread Kindlet Kit Failed";
+        String error = "Mobileread Kindlet Kit failed to obtain all required permissions. Please report this error.";
         KOptionPane.showMessageDialog(ctx.getRootContainer(), error, title);
       }
     } else {
-      String title = "Kindlet Jailbreak Required";
+      String title = "Mobileread Kindlet Kit Required";
       String message =
-        "This application requires the Kindlet Jailbreak to be installed. This is an additional jailbreak that must be installed on top of the Device Jailbreak, in order to allow Kindlets to get the required permissions. Please install the Kindlet Jailbreak before using this application.";
+        "This application requires Mobileread Kindlet Kit to be installed. This is an additional jailbreak that must be installed on top of the Device Jailbreak, in order to allow Kindlets to get the required permissions. Please install Mobileread Kindlet Kit before using this application.";
       KOptionPane.showMessageDialog(ctx.getRootContainer(), message, title);
     }
   }

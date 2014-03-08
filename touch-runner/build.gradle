@@ -6,8 +6,8 @@ repositories {
   mavenCentral()
 }
 
-sourceCompatibility = 1.4
-targetCompatibility = 1.4
+sourceCompatibility = JavaVersion.VERSION_1_4
+targetCompatibility = JavaVersion.VERSION_1_4
 
 ext.cr3 = !project.hasProperty("TouchRunner")
 
@@ -51,11 +51,13 @@ task copyJarToTmp(dependsOn: jar, type: Copy) {
   rename '(.+)\\.jar', '$1.tmp'
 }
 
-task signingJarTask(dependsOn: copyJarToTmp) << {
-  println "Signing: $jar.archivePath"
-  signingJar('dk')
-  signingJar('di')
-  signingJar('dn')
+task signingJarTask(dependsOn: copyJarToTmp) {
+  doLast {
+    println "Signing: $jar.archivePath"
+    signingJar('dk')
+    signingJar('di')
+    signingJar('dn')
+  }
 }
 
 task kindle(dependsOn: signingJarTask, type: Copy) {
@@ -72,5 +74,5 @@ void signingJar(String keyPref) {
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '1.9'
+  gradleVersion = '1.11'
 }
