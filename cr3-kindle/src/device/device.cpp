@@ -89,10 +89,11 @@ Device::Device()
         case 0xB0D4:
         case 0xB0D5:
         case 0xB0D6:
+        case 0x90D7:
         case 0xB0D7:
         case 0xB0D8:
-        case 0xB05A:
         case 0x905A:
+        case 0xB05A:
         case 0xB0F2:
             m_model = KPW2;
             break;
