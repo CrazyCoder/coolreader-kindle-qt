@@ -87,6 +87,7 @@ Device::Device()
             break;
         case 0x90D4:
         case 0xB0D4:
+        case 0x90D5:
         case 0xB0D5:
         case 0xB0D6:
         case 0x90D7:
