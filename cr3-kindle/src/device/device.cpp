@@ -85,6 +85,8 @@ Device::Device()
         case 0xB024:
             m_model = KPW;
             break;
+        case 0xB017:
+        case 0x9017:
         case 0x90D4:
         case 0xB0D4:
         case 0x90D5:
