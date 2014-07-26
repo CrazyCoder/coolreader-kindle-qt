@@ -89,6 +89,8 @@ Device::Device()
         case 0x9017:
         case 0xB060:
         case 0x9060:
+        case 0xB062:
+        case 0x9062:
         case 0x90D4:
         case 0xB0D4:
         case 0x90D5:
